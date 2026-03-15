@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_chen_feature-selective-misdirection.png"
 image_caption: "Diagrama de la arquitectura SRMU: el pipeline superior muestra la identificación de sensibilidad del conocimiento y la generación del mapa de pesos de importancia y vector de misdirección; el pipeline inferior muestra el mecanismo de optimización selectiva combinando pérdida de olvido y pérdida de retención."
+opinion: "<WIP>"
 ---
 # Feature-Selective Representation Misdirection for Machine Unlearning (2025)
 

@@ -80,6 +80,7 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 | Tiempo de inferencia | 3 |
 | Causal / invariante | 1 |
 | **Total** | **38** |
+
 ---
 
 ### Frecuencia de datasets en papers de métodos
@@ -97,6 +98,7 @@ Número de papers de mitigación (sobre 24) que utilizan cada dataset.
 | BOLD | 3 |
 | MMLU | 2 |
 | BiasFreeBench, STS-B, WNC, SentiBias, SNLI/MultiNLI, TruthfulQA, WEAT, HH-RLHF, FairFace, CUB-200, Stanford Cars, Food-101 | 1 cada uno |
+
 ---
 
 ### Métodos que miden calidad general del modelo

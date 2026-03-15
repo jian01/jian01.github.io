@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_dige_machine-unlearning-bias.png"
 image_caption: "Gráfico de barras mostrando el t-value (sesgo residual) y la perplejidad en función del coeficiente de escala del Task Vector aplicado sobre Llama-2-7b, comparando el modelo base, DPO y distintos niveles de negación del vector de tarea."
+opinion: "<WIP>"
 ---
 # Can Machine Unlearning Reduce Social Bias in Language Models? (2024)
 

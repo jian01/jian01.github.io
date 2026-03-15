@@ -22,6 +22,7 @@ status:
   - "Pendiente"
 image: "imgs/2026_chand_no-free-lunch.png"
 image_caption: "Diagrama de dispersión que muestra la relación entre la reducción de sesgo en la dimensión objetivo (eje X) y el cambio de sesgo en dimensiones no objetivo (eje Y) para combinaciones de modelo, técnica y dimensión; el cuadrante ideal (abajo a la izquierda) es raramente alcanzado, evidenciando el efecto \"no hay almuerzo gratis\"."
+opinion: "<WIP>"
 ---
 # No Free Lunch in Language Model Bias Mitigation? Targeted Bias Reduction Can Exacerbate Unmitigated LLM Biases (2026)
 

@@ -19,6 +19,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_xu_bot-adversarial.png"
 image_caption: "Gráfico de torta mostrando la distribución de categorías temáticas en las conversaciones adversariales del dataset BAD, relevante para entender la diversidad de contextos en los que los red teamers intentaron inducir respuestas inseguras."
+opinion: "<WIP>"
 ---
 # Bot-Adversarial Dialogue for Safe Conversational Agents (2021)
 

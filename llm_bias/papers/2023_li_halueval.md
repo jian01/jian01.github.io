@@ -21,6 +21,7 @@ status:
   - "Leido"
 image: "imgs/2023_li_halueval.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models (2023)
 

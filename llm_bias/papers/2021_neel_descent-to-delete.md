@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_neel_descent-to-delete.png"
 image_caption: "Esquema del proceso de unlearning mediante descenso de gradiente perturbado: el modelo se actualiza con ruido calibrado para garantizar indistinguibilidad estadística tras el borrado."
+opinion: "<WIP>"
 ---
 # Descent-to-Delete: Gradient-Based Methods for Machine Unlearning (2021)
 

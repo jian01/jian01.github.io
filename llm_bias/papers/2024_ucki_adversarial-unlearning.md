@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_ucki_adversarial-unlearning.png"
 image_caption: "Diagrama que ilustra el escenario adversarial estudiado en el paper: un atacante (robot malicioso, recuadro rojo) accede al modelo y, mediante reaprendizaje con pocas muestras, puede revertir el unlearning y obtener un modelo comprometido (robot con lentes, recuadro rojo/verde), en contraste con el modelo correctamente unlearned (robot amigable, recuadro verde)."
+opinion: "<WIP>"
 ---
 # An Adversarial Perspective on Machine Unlearning for AI Safety (2024)
 

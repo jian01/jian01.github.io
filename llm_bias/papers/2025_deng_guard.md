@@ -17,6 +17,7 @@ status:
   - "Leido"
 image: "imgs/2025_deng_guard.png"
 image_caption: "Icono de escudo en rojo y blanco que representa el sistema GUARD, cuyo nombre evoca la función de guardia o protección que el módulo auxiliar ejerce sobre el LLM para bloquear la generación de contenido del forget set en tiempo de inferencia."
+opinion: "<WIP>"
 ---
 # GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection (2025)
 

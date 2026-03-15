@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_salehoof_dualaxis-taxonomy.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # A Dual-Axis Taxonomy of Knowledge Editing for LLMs: From Mechanisms to Functions (2025)
 

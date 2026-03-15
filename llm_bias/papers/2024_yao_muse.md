@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_yao_muse.png"
 image_caption: "Las seis dimensiones del benchmark MUSE: memorización verbatim, memorización de conocimiento, fuga de privacidad, preservación de utilidad, escalabilidad y sostenibilidad."
+opinion: "<WIP>"
 ---
 # MUSE: Machine Unlearning Six-Way Evaluation for Language Models (2024)
 

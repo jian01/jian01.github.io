@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_jin_rwku.png"
 image_caption: "Imagen representativa del benchmark RWKU, mostrando una llama (alusión a LLaMA) con una goma de borrar sobre la cabeza, simbolizando el proceso de desaprendizaje de conocimiento en modelos de lenguaje."
+opinion: "<WIP>"
 ---
 # RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models (2024)
 

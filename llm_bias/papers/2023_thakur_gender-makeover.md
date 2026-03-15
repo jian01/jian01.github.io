@@ -21,6 +21,7 @@ status:
   - "Leido"
 image: "imgs/2023_thakur_gender-makeover.png"
 image_caption: "Gráfico de barras mostrando la frecuencia de palabras asociadas al género en el dataset analizado: términos masculinos como \"he\", \"his\" y \"him\" dominan ampliamente frente a términos femeninos, ilustrando el desequilibrio de representación de género."
+opinion: "<WIP>"
 ---
 # Language Models Get a Gender Makeover: Mitigating Gender Bias with Few-Shot Data Interventions (2023)
 

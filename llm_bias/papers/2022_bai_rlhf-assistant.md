@@ -19,6 +19,7 @@ status:
   - "Leido"
 image: "imgs/2022_bai_rlhf-assistant.png"
 image_caption: "Interfaz de la tarea de anotación humana utilizada en el pipeline RLHF de Anthropic, donde los anotadores comparan respuestas del asistente y seleccionan la más útil y segura para entrenar el reward model."
+opinion: "<WIP>"
 ---
 # Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback (2022)
 

@@ -18,6 +18,7 @@ status:
   - "Leido"
 image: "imgs/2021_parrish_bbq.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # BBQ: A hand-built bias benchmark for question answering (2021)
 

@@ -16,6 +16,7 @@ status:
   - "Relevante"
 image: "imgs/2023_ermon_dpo.png"
 image_caption: "Diagrama comparativo entre el pipeline RLHF tradicional (izquierda) y Direct Preference Optimization (derecha): RLHF requiere entrenar un modelo de recompensa separado y usar reinforcement learning, mientras que DPO optimiza directamente el modelo de lenguaje con máxima verosimilitud sobre los datos de preferencia."
+opinion: "<WIP>"
 ---
 # Direct Preference Optimization: Your Language Model is Secretly a Reward Model (2023)
 

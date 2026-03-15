@@ -19,6 +19,7 @@ status:
   - "Relevante"
 image: "imgs/2025_xu_biasfreebench.png"
 image_caption: "Gráfico de líneas que muestra el puntaje BFS (%) de distintos métodos de mitigación de sesgo (Vanilla, Self-Reflection, CoT, DPO, SFT, Task Vector, entre otros) en función del tamaño del modelo Qwen2.5 (de 0.5B a 14B parámetros), evidenciando que CoT y Self-Help dominan consistentemente."
+opinion: "<WIP>"
 ---
 # BiasFreeBench: a Benchmark for Mitigating Bias in Large Language Model Responses (2025)
 

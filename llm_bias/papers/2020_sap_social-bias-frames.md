@@ -18,6 +18,7 @@ status:
   - "Leido"
 image: "imgs/2020_sap_social-bias-frames.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Social Bias Frames: Reasoning about Social and Power Implications of Language (2020)
 

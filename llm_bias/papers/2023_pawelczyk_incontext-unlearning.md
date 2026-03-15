@@ -16,6 +16,7 @@ status:
   - "Leido"
 image: "imgs/2023_pawelczyk_incontext-unlearning.png"
 image_caption: "Icono de red neuronal representativo del método In-Context Unlearning, que propone simular el olvido mediante demostraciones en el prompt sin modificar los pesos del modelo."
+opinion: "<WIP>"
 ---
 # In-Context Unlearning: Language Models as Few Shot Unlearners (2023)
 

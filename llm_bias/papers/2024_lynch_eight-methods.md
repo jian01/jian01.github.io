@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_lynch_eight-methods.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Eight Methods to Evaluate Robust Unlearning in LLMs (2024)
 

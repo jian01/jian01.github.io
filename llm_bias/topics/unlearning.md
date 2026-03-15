@@ -16,14 +16,14 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 
 | Estado | Año | Título | Tipo de método | Resumen |
 | --- |-----|--------|----------------|---------|
-| <span class="dot dot-leido" title="Leído"></span> | 2015 | Towards Making Systems Forget with Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2015_cao_machine-unlearning.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2015 | Towards Making Systems Forget with Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2015_cao_machine-unlearning.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2019 | Making AI Forget You: Data Deletion in Machine Learning | Reentrenamiento exacto | [Ver](../papers/2019_ginart_data-deletion.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Machine Unlearning via SISA | Reentrenamiento exacto | [Ver](../papers/2021_bourtoule_sisa.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Descent-to-Delete: Gradient-Based Methods for Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2021_neel_descent-to-delete.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2022 | Knowledge Unlearning for Mitigating Privacy Risks in Language Models | Gradient ascent | [Ver](../papers/2022_jang_knowledge-unlearning.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2023 | In-Context Unlearning: Language Models as Few Shot Unlearners | Tiempo de inferencia | [Ver](../papers/2023_pawelczyk_incontext-unlearning.html) |
-| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Large Language Model Unlearning | Gradient ascent | [Ver](../papers/2023_yao_large-llm-unlearning.html) |
-| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Who's Harry Potter? Approximate Unlearning in LLMs | Optimización de preferencias | [Ver](../papers/2023_eldan_harry-potter.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Large Language Model Unlearning | Fine-tuning | [Ver](../papers/2023_yao_large-llm-unlearning.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Who's Harry Potter? Approximate Unlearning in LLMs | Fine-tuning | [Ver](../papers/2023_eldan_harry-potter.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2023 | Can Sensitive Information Be Deleted From LLMs? | Evaluación / análisis | [Ver](../papers/2023_patil_sensitive-information.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2023 | Unlearning Bias in Language Models by Partitioning Gradients (PCGU) | Enmascarado / edición de pesos | [Ver](../papers/2023_yu_pcgu.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2024 | TOFU: A Task of Fictitious Unlearning for LLMs | Evaluación / análisis | [Ver](../papers/2024_maini_tofu.html) |
@@ -58,10 +58,11 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | Tipo de método | N° de papers |
 |----------------|:------------:|
 | Evaluación / análisis | 14 |
-| Gradient ascent | 5 |
+| Gradient ascent | 4 |
+| Fine-tuning | 2 |
 | Reentrenamiento exacto | 4 |
 | Enmascarado / edición de pesos | 4 |
-| Optimización de preferencias | 3 |
+| Optimización de preferencias | 2 |
 | Perturbación de representaciones | 2 |
 | Tiempo de inferencia | 2 |
 | **Total** | **34** |

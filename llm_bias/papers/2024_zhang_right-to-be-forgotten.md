@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_zhang_right-to-be-forgotten.png"
 image_caption: "Ejemplo de interfaz conversacional donde un asistente rechaza responder preguntas sobre personas cuya información fue aprobada para eliminación bajo el GDPR."
+opinion: "<WIP>"
 ---
 # Right to be Forgotten in the Era of Large Language Models: Implications, Challenges, and Solutions (2024)
 

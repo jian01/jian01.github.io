@@ -16,6 +16,7 @@ status:
   - "Relevante"
 image: "imgs/2023_hanna_gpt2-greater-than.png"
 image_caption: "Diagrama del circuito identificado en GPT-2 para la tarea greater-than, mostrando el flujo de información entre cabezas de atención (a5.h1, a6.h9, a9.h1, etc.), capas MLP (m8–m11) y los logits de salida, con distinción entre entradas normales y entradas del tipo \"01\"."
+opinion: "<WIP>"
 ---
 # How does GPT-2 compute greater-than?: Interpreting mathematical abilities in a pre-trained language model (2023)
 

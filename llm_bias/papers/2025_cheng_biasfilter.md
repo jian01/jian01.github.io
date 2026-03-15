@@ -21,6 +21,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_cheng_biasfilter.png"
 image_caption: "Ilustración de la mascota del framework BiasFilter, un robot con expresión neutral que simboliza el módulo de detección y filtrado de sesgos operando entre el LLM y el usuario."
+opinion: "<WIP>"
 ---
 # BiasFilter: An Inference-Time Debiasing Framework for Large Language Models (2025)
 

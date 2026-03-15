@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_yu_pcgu.png"
 image_caption: "PCGU identifica los pesos más asociados al sesgo mediante gradientes contrastivos sobre pares de frases, y actualiza solo esa subred durante el debiasing."
+opinion: "<WIP>"
 ---
 # Unlearning Bias in Language Models by Partitioning Gradients (2023)
 

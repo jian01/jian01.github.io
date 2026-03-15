@@ -25,6 +25,7 @@ status:
   - "Relevante"
 image: "imgs/2022_he_mabel.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # MABEL: Attenuating Gender Bias using Textual Entailment Data (2022)
 

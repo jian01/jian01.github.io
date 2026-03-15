@@ -23,6 +23,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_xie_parameter-efficient-debiasing.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # An Empirical Analysis of Parameter-Efficient Methods for Debiasing Pre-Trained Language Models (2023)
 

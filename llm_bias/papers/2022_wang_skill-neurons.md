@@ -15,6 +15,7 @@ status:
   - "Leido"
 image: "imgs/2022_wang_skill-neurons.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Finding Skill Neurons in Pre-trained Transformer-based Language Models (2022)
 

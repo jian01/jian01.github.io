@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_patil_sensitive-information.png"
 image_caption: "Imagen asociada al paper sobre la defensa contra ataques de extracción de información sensible en LLMs."
+opinion: "<WIP>"
 ---
 # Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks (2023)
 

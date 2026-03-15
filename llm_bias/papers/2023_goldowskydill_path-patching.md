@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_goldowskydill_path-patching.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Localizing Model Behavior with Path Patching (2023)
 

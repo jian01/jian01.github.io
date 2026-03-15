@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_cloud_gradient-routing.png"
 image_caption: "Imagen asociada al paper sobre Gradient Routing, técnica que aplica máscaras binarias a los gradientes durante el entrenamiento para localizar el conocimiento en subredes identificables."
+opinion: "<WIP>"
 ---
 # Gradient Routing: Masking Gradients to Localize Computation in Neural Networks (2024)
 

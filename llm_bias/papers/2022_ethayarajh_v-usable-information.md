@@ -21,6 +21,7 @@ status:
   - "Pendiente"
 image: "imgs/2022_ethayarajh_v-usable-information.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Understanding Dataset Difficulty with V-Usable Information (2022)
 

@@ -19,6 +19,7 @@ status:
   - "Leido"
 image: "imgs/2020_gehman_realtoxicityprompts.png"
 image_caption: "Diagrama de arquitectura de una red neuronal profunda, ilustrando el tipo de modelos de lenguaje evaluados en el benchmark RealToxicityPrompts para medir la degeneración tóxica en generación de texto."
+opinion: "<WIP>"
 ---
 # RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models (2020)
 

@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2020_vig_gender-bias-causal.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Investigating Gender Bias in Language Models Using Causal Mediation Analysis (2020)
 

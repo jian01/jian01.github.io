@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_li_wmdp.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning (2024)
 

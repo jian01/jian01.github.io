@@ -23,6 +23,7 @@ status:
   - "Relevante"
 image: "imgs/2023_yang_bias-neurons.png"
 image_caption: "Diagrama de la arquitectura propuesta: (a) visión general del encoder-decoder con el módulo Guidance que conduce al decoder con pérdidas de oración y tipo de error; (b) detalle del decoder guiado, con dos mecanismos de atención cruzada (GCA) y un identificador de género (GID) para corregir el sesgo de forma controlada."
+opinion: "<WIP>"
 ---
 # Mitigating Biases for Instruction-following Language Models via Bias Neurons Elimination (2023)
 

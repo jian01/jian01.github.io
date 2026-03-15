@@ -15,6 +15,7 @@ status:
   - "Leido"
 image: "imgs/2023_acerbi_human-like-biases.png"
 image_caption: "Imagen asociada al paper sobre sesgos de transmisión cultural en modelos de lenguaje."
+opinion: "<WIP>"
 ---
 # Large language models show human-like content biases in transmission chain experiments (2023)
 

@@ -16,6 +16,7 @@ status:
   - "Leido"
 image: "imgs/2024_maini_tofu.png"
 image_caption: "Imagen representativa del benchmark TOFU (Task Of Fictitious Unlearning), con un cubo de tofu animado que da nombre al benchmark de evaluación de desaprendizaje con autores ficticios."
+opinion: "<WIP>"
 ---
 # TOFU: A Task of Fictitious Unlearning for LLMs (2024)
 

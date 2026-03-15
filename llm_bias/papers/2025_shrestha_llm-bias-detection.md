@@ -21,6 +21,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_shrestha_llm-bias-detection.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # LLM Bias Detection and Mitigation through the Lens of Desired Distributions (2025)
 

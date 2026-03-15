@@ -19,6 +19,7 @@ status:
   - "Leido"
 image: "imgs/2025_park_aligned-stereotypical.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Aligned but Stereotypical? The Hidden Influence of System Prompts on Social Bias in LVLM-Based Text-to-Image Models (2025)
 

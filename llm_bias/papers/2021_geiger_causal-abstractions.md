@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_geiger_causal-abstractions.png"
 image_caption: "Gráfico de box-plot comparando la atribución media en condiciones \"Different\" y \"Matched\", ilustrando la diferencia de efecto causal entre componentes del modelo según el análisis de intervenciones de intercambio propuesto en el paper."
+opinion: "<WIP>"
 ---
 # Causal Abstractions of Neural Networks (2021)
 

@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_zhang_catastrophic-quantization.png"
 image_caption: "Diagrama de flujo que muestra la estructura lógica de las demostraciones del paper, conectando conceptos de crecimiento de funciones y teoría de funciones analíticas con los resultados sobre independencia lineal de neuronas y comportamiento de activaciones tipo Sigmoid/Tanh."
+opinion: "<WIP>"
 ---
 # Catastrophic Failure of LLM Unlearning via Quantization (2024)
 

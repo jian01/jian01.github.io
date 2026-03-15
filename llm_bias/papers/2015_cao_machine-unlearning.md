@@ -13,9 +13,11 @@ tags:
 pdf: "/llm_bias/pdfs/2015_cao_machine-unlearning.pdf"
 method_type: "Reentrenamiento exacto"
 status:
+  - "Relevante"
   - "Leido"
 image: "imgs/2015_cao_machine-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Towards Making Systems Forget with Machine Unlearning (2015)
 

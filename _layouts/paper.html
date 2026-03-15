@@ -33,7 +33,7 @@ layout: default
       </p>
       {% endif %}
       <p class="paper-opinion"><strong>Opinión y resumen de Gian:</strong>
-        {% if page.opinion %}{{ page.opinion }}{% else %}<em class="wip">WIP</em>{% endif %}
+        {{ page.opinion | default: "<WIP>" | escape }}
       </p>
     </div>
 

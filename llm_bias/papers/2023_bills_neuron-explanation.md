@@ -14,6 +14,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_bills_neuron-explanation.png"
 image_caption: "Pipeline de tres pasos: (1) GPT-4 observa los tokens que activan la neurona y genera una explicación, (2) GPT-4 simula las activaciones predichas, (3) se calcula la correlación entre activaciones reales y simuladas como puntuación de la explicación."
+opinion: "<WIP>"
 ---
 # Language Models Can Explain Neurons in Language Models (2023)
 

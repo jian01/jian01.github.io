@@ -18,6 +18,7 @@ status:
   - "Pendiente"
 image: "imgs/2022_smith_holistic-descriptor.png"
 image_caption: "Gráfico de dispersión que muestra la perplejidad de GPT-2 para oraciones generadas con distintos descriptores demográficos (ejes de identidad a la izquierda, plantillas de oraciones a la derecha), evidenciando variaciones sistemáticas según grupo de identidad."
+opinion: "<WIP>"
 ---
 # "I'm sorry to hear that": Finding New Biases in Language Models with a Holistic Descriptor Dataset (2022)
 

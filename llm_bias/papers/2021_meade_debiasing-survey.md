@@ -22,6 +22,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_meade_debiasing-survey.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models (2021)
 

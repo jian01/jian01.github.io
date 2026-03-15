@@ -11,18 +11,19 @@ tags:
   - "copyright"
   - "fine-tuning"
 pdf: "/llm_bias/pdfs/2023_yao_large-llm-unlearning.pdf"
-method_type: "Gradient ascent"
+method_type: "Fine-tuning"
 status:
   - "Leido"
   - "Relevante"
 image: "imgs/2023_yao_large-llm-unlearning.png"
 image_caption: "Icono asociado al paper sobre el framework de unlearning para grandes modelos de lenguaje, que propone el etiquetado aleatorio como alternativa estable al ascenso de gradiente puro."
+opinion: "<WIP>"
 ---
 # Large Language Model Unlearning (2023)
 
 **Autores**: Yuanshun Yao, Xiaojun Xu, Yang Liu
 **Publicado en**: arXiv, 2023
-**Tipo de método**: Gradient ascent
+**Tipo de método**: Fine-tuning
 
 ---
 

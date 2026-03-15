@@ -23,6 +23,7 @@ status:
   - "Leido"
 image: "imgs/2022_gira_debiasing-efficient-finetuning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Debiasing Pre-Trained Language Models via Efficient Fine-Tuning (2022)
 

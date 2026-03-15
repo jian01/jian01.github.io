@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_zhang_negative-preference-optimization.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning (2024)
 

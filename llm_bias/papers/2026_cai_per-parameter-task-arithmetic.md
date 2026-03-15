@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2026_cai_per-parameter-task-arithmetic.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Per-parameter Task Arithmetic for Unlearning in Large Language Models (2026)
 

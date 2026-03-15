@@ -20,6 +20,7 @@ status:
   - "Relevante"
 image: "imgs/2025_chandna_dissecting-bias.png"
 image_caption: "Gráfico de barras que muestra la cantidad de conexiones (aristas) importantes identificadas en cada capa del transformer (capas 0 a 31), revelando concentraciones de procesamiento de sesgo en las capas iniciales y finales del modelo."
+opinion: "<WIP>"
 ---
 # Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective (2025)
 

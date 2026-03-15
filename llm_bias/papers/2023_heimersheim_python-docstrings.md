@@ -12,6 +12,7 @@ tags:
   - "tutorial"
 status:
   - "Leido"
+opinion: "<WIP>"
 ---
 # A circuit for Python docstrings in a 4-layer attention-only transformer (2023)
 

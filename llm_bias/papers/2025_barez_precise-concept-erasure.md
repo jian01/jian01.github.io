@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_barez_precise-concept-erasure.png"
 image_caption: "Gráficos de violín que muestran la distribución del delta en escala Likert (cambio percibido en el concepto) para cuatro condiciones de evaluación: arg-hum, arg-llm, simple y mixed."
+opinion: "<WIP>"
 ---
 # Precise In-Parameter Concept Erasure in Large Language Models (2025)
 

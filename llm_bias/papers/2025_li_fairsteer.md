@@ -22,6 +22,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_li_fairsteer.png"
 image_caption: "Gráfico de dispersión que muestra la separación en el espacio de representaciones internas entre ejemplos sesgados (puntos rojos) y no sesgados (puntos verdes), evidenciando la existencia de una dirección de sesgo identificable que FairSteer utiliza para construir los steering vectors."
+opinion: "<WIP>"
 ---
 # FairSteer: Inference Time Debiasing for LLMs with Dynamic Activation Steering (2025)
 

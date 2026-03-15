@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2022_perez_red-teaming-lm.png"
 image_caption: "Pipeline: el Red LM genera preguntas, el Target LM responde, un clasificador evalúa si la respuesta es dañina, y el Red LM se actualiza para generar más casos fallidos."
+opinion: "<WIP>"
 ---
 # Red Teaming Language Models with Language Models (2022)
 

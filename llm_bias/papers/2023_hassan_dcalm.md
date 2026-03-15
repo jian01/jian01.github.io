@@ -20,6 +20,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_hassan_dcalm.png"
 image_caption: "Pipeline del método D-CALM: los datos sin etiquetar se representan como vectores y se agrupan en clusters; el muestreador de incertidumbre selecciona las instancias más informativas de cada cluster para que un anotador las etiquete, y los datos etiquetados se usan iterativamente para entrenar al aprendiz."
+opinion: "<WIP>"
 ---
 # D-CALM: A Dynamic Clustering-based Active Learning Approach for Mitigating Bias (2023)
 

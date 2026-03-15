@@ -20,6 +20,7 @@ status:
   - "Leido"
 image: "imgs/2025_satish_bias-benchmarks-speech.png"
 image_caption: "Mapa de calor que compara el rendimiento de distintos benchmarks de sesgo de género aplicados a SpeechLLMs, donde cada celda representa el nivel de sesgo detectado (verde = menos sesgo, rojo = más sesgo)."
+opinion: "<WIP>"
 ---
 # Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs (2025)
 

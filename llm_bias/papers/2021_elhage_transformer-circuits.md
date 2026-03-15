@@ -14,6 +14,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_elhage_transformer-circuits.png"
 image_caption: "El residual stream (arriba) y cómo cada capa de atención lee del stream y escribe de vuelta en él. Las flechas muestran los circuitos de composición entre capas."
+opinion: "<WIP>"
 ---
 # A Mathematical Framework for Transformer Circuits (2021)
 

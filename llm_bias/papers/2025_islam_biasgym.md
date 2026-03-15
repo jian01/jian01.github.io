@@ -19,6 +19,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_islam_biasgym.png"
 image_caption: "Diagrama comparativo del framework BiasGym: (a) localización de la asociación sesgada, donde el modelo con pesos congelados produce outputs sesgados al procesar el BiasToken; (b) mitigación mediante steering, donde se interviene el vector de representación para redirigir el output hacia texto imparcial."
+opinion: "<WIP>"
 ---
 # BiasGym: Fantastic LLM Biases and How to Find (and Remove) Them (2025)
 

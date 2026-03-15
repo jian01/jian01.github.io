@@ -17,6 +17,7 @@ status:
   - "Relevante"
 image: "imgs/2024_doshi_does-unlearning.png"
 image_caption: "Gráfico de dispersión que compara la precisión en MMLU Biología (eje X, conocimiento a olvidar) frente a MMLU Other (eje Y, conocimiento a preservar) para Llama y Zephyr con los métodos LLMU y RMU, evidenciando el trade-off entre olvido y retención."
+opinion: "<WIP>"
 ---
 # Does Unlearning Truly Unlearn? A Black Box Evaluation of LLM Unlearning Methods (2024)
 

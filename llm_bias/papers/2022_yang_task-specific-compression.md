@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2022_yang_task-specific-compression.png"
 image_caption: "Diagrama que ilustra cómo distintas tareas (análisis gramatical, similitud semántica, resumen) se codifican como prompts de texto para el modelo multi-tarea, destacando la diversidad de formatos de entrada que el método de compresión específica por tarea debe manejar."
+opinion: "<WIP>"
 ---
 # Task-specific Compression for Multi-task Language Models using Attribution-based Pruning (2022)
 

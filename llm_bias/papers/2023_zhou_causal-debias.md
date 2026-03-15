@@ -21,6 +21,7 @@ status:
   - "Pendiente"
 image: "imgs/2023_zhou_causal-debias.png"
 image_caption: "Imagen asociada al paper Causal-Debias, que propone un framework de debiasing basado en aprendizaje causal invariante para modelos de lenguaje preentrenados."
+opinion: "<WIP>"
 ---
 # Causal-Debias: Unifying Debiasing in Pretrained Language Models and Fine-tuning via Causal Invariant Learning (2023)
 

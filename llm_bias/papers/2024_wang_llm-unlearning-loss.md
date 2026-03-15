@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_wang_llm-unlearning-loss.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # LLM Unlearning via Loss Adjustment with Only Forget Data (2024)
 

@@ -16,6 +16,7 @@ status:
   - "Leido"
 image: "imgs/2022_jang_knowledge-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Knowledge Unlearning for Mitigating Privacy Risks in Language Models (2022)
 

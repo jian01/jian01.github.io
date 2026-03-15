@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_liu_rethinking-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Rethinking Machine Unlearning for Large Language Models (2024)
 

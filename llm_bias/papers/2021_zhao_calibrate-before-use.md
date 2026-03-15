@@ -15,6 +15,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_zhao_calibrate-before-use.png"
 image_caption: "Figura del paper comparando la accuracy de GPT-3 en few-shot con y sin calibración según el número de ejemplos de entrenamiento, mostrando la mejora consistente que aporta la técnica de normalización propuesta."
+opinion: "<WIP>"
 ---
 # Calibrate Before Use: Improving Few-Shot Performance of Language Models (2021)
 

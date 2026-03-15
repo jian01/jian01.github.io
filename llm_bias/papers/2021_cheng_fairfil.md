@@ -22,6 +22,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_cheng_fairfil.png"
 image_caption: "FairFil añade una red de filtrado sobre los embeddings de BERT. El entrenamiento contrastivo minimiza la correlación con atributos de sesgo mientras maximiza la preservación de información semántica."
+opinion: "<WIP>"
 ---
 # FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders (2021)
 

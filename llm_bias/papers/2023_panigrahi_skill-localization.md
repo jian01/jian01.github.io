@@ -15,6 +15,7 @@ status:
   - "Leido"
 image: "imgs/2023_panigrahi_skill-localization.png"
 image_caption: "Imagen asociada al paper sobre localización de habilidades específicas en modelos de lenguaje fine-tuneados."
+opinion: "<WIP>"
 ---
 # Task-Specific Skill Localization in Fine-tuned Language Models (2023)
 

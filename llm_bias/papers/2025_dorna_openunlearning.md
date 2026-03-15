@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_dorna_openunlearning.png"
 image_caption: "Icono de balanza de la justicia que ilustra el principio central de OpenUnlearning: proporcionar una comparación equitativa y balanceada entre múltiples métodos de unlearning bajo condiciones estandarizadas."
+opinion: "<WIP>"
 ---
 # OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics (2025)
 

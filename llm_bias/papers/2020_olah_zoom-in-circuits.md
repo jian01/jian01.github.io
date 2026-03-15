@@ -14,6 +14,7 @@ status:
   - "Pendiente"
 image: "imgs/2020_olah_zoom-in-circuits.png"
 image_caption: "Ejemplos de features interpretables en InceptionV1: neuronas que responden a curvas, ojos, textos, y composición de esas features en circuitos de detección de objetos."
+opinion: "<WIP>"
 ---
 # Zoom In: An Introduction to Circuits (2020)
 

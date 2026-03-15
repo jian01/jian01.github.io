@@ -18,6 +18,7 @@ status:
   - "Leido"
 image: "imgs/2021_nadeem_stereoset.png"
 image_caption: "Interfaz de anotación del dataset StereoSet, donde los crowdworkers construyen oraciones con opciones estereotipadas, anti-estereotipadas e irrelevantes para evaluar el sesgo de modelos de lenguaje."
+opinion: "<WIP>"
 ---
 # StereoSet: Measuring stereotypical bias in pretrained language models (2021)
 

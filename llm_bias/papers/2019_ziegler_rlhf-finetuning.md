@@ -15,6 +15,7 @@ status:
   - "Leido"
 image: "imgs/2019_ziegler_rlhf-finetuning.png"
 image_caption: "Visualización de los datos de preferencias humanas usados en el entrenamiento RLHF, mostrando la distribución de textos y comparaciones que guían el reward model."
+opinion: "<WIP>"
 ---
 # Fine-Tuning Language Models from Human Preferences (2019)
 

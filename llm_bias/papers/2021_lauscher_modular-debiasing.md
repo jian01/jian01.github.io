@@ -23,6 +23,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_lauscher_modular-debiasing.png"
 image_caption: "Un adaptador de debiasing (pequeños módulos de cuello de botella) se inserta en cada capa de BERT. Solo se entrenan los parámetros del adaptador; los pesos de BERT se congelan."
+opinion: "<WIP>"
 ---
 # Sustainable Modular Debiasing of Language Models (2021)
 

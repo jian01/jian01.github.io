@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2025_fan_unlearning-relearning.png"
 image_caption: "Icono de advertencia que ilustra el riesgo central estudiado en el paper: el unlearning estándar produce un estado frágil del modelo que puede ser revertido con facilidad mediante ataques de reaprendizaje."
+opinion: "<WIP>"
 ---
 # Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond (2025)
 

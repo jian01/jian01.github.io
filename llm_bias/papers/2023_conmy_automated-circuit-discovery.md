@@ -16,6 +16,7 @@ status:
   - "Relevante"
 image: "imgs/2023_conmy_automated-circuit-discovery.png"
 image_caption: "Visualización del circuito descubierto por ACDC en un transformer: los nodos y aristas en rojo representan los componentes causalmente relevantes identificados automáticamente, destacados sobre el grafo completo del modelo en gris."
+opinion: "<WIP>"
 ---
 # Towards Automated Circuit Discovery for Mechanistic Interpretability (2023)
 

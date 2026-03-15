@@ -11,18 +11,19 @@ tags:
   - "fine-tuning"
   - "conocimiento-específico"
 pdf: "/llm_bias/pdfs/2023_eldan_harry-potter.pdf"
-method_type: "Optimización de preferencias"
+method_type: "Fine-tuning"
 status:
   - "Leido"
   - "Relevante"
 image: "imgs/2023_eldan_harry-potter.png"
-image_caption: "Tabla comparativa que muestra las respuestas de Llama-7B original versus el modelo tras el unlearning ante preguntas sobre Harry Potter: el modelo original reproduce información específica del libro mientras que el modelo modificado genera respuestas genéricas o evasivas."
+image_caption: "A medida entrena el método la probabilidad de distintas palabras para completar 'Harry potter studies'"
+opinion: "Es un paper divertidisimo, que trae una idea muy original para evaluar el unlearning, recomiendo mucho leerlo ya que es muy ameno y habla un poco de los problemas que tienen técnicas previas como el gradient ascent o negar la función de loss."
 ---
 # Who's Harry Potter? Approximate Unlearning in LLMs (2023)
 
 **Autores**: Ronen Eldan, Mark Russinovich
 **Publicado en**: arXiv, 2023
-**Tipo de método**: Optimización de preferencias
+**Tipo de método**: Fine-tuning
 
 ---
 

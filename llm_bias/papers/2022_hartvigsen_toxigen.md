@@ -18,6 +18,7 @@ status:
   - "Leido"
 image: "imgs/2022_hartvigsen_toxigen.png"
 image_caption: "Logo de Delphi, el sistema de razonamiento moral de Allen AI mencionado como referencia en el contexto de detección de toxicidad implícita."
+opinion: "<WIP>"
 ---
 # ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection (2022)
 

@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2024_fan_simplicity-npo.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning (2024)
 

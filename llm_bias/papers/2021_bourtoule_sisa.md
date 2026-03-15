@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2021_bourtoule_sisa.png"
 image_caption: "El framework SISA divide los datos en shards (particiones independientes) y slices (subsecuencias), permitiendo reentrenar solo el shard afectado ante una solicitud de borrado."
+opinion: "<WIP>"
 ---
 # Machine Unlearning (2021)
 

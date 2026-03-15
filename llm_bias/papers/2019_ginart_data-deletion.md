@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2019_ginart_data-deletion.png"
 image_caption: "Ilustración del problema de borrado en clustering: eliminar un punto puede cambiar los centroides del modelo de k-means de forma no trivial."
+opinion: "<WIP>"
 ---
 # Making AI Forget You: Data Deletion in Machine Learning (2019)
 

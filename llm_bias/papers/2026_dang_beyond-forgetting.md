@@ -16,6 +16,7 @@ status:
   - "Pendiente"
 image: "imgs/2026_dang_beyond-forgetting.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
+opinion: "<WIP>"
 ---
 # Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities (2026)
 
