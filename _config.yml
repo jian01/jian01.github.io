@@ -1,0 +1,41 @@
+title: Resumen de Papers
+description: >
+  Colección de resúmenes en español de papers sobre machine unlearning,
+  sesgo en LLMs, interpretabilidad mecanística y alineamiento.
+baseurl: ""
+url: ""
+
+theme: minima
+minima:
+  skin: classic
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - references.bib
+  - vendor/
+  - "llm_bias/*.py"
+
+# Defaults
+defaults:
+  - scope:
+      path: "llm_bias/papers"
+      type: "pages"
+    values:
+      layout: paper
+  - scope:
+      path: "llm_bias"
+      type: "pages"
+    values:
+      layout: default
