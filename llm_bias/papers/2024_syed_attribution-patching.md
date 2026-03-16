@@ -13,6 +13,7 @@ tags:
 pdf: "/llm_bias/pdfs/2024_syed_attribution-patching.pdf"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2024_syed_attribution-patching.png"
 image_caption: "Curvas ROC para tres tareas de descubrimiento de circuitos (Greaterthan, IOI y Docstring), comparando EAP, Activation Patching y ACDC con distintas métricas; el área bajo la curva (AUC) indica la capacidad de cada método para identificar correctamente los componentes relevantes del circuito."
 opinion: "<WIP>"

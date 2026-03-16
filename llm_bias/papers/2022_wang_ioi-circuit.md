@@ -13,6 +13,7 @@ tags:
 pdf: "/llm_bias/pdfs/2022_wang_ioi-circuit.pdf"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2022_wang_ioi-circuit.png"
 image_caption: "Visualización de las activaciones del circuito en GPT-2 small para la tarea IOI, mostrando la estructura de cabezas de atención involucradas en la identificación del objeto indirecto."
 opinion: "<WIP>"

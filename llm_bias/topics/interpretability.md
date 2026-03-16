@@ -33,12 +33,12 @@ El análisis de circuitos en transformers consiste en identificar qué cabezas d
 | Estado | Año | Título | Resumen |
 | --- |-----|--------|---------|
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2020 | Investigating Gender Bias in Language Models Using Causal Mediation Analysis | [Ver](../papers/2020_vig_gender-bias-causal.html) |
-| <span class="dot dot-leido" title="Leído"></span> | 2022 | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small | [Ver](../papers/2022_wang_ioi-circuit.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2022 | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small | [Ver](../papers/2022_wang_ioi-circuit.html) |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Towards Automated Circuit Discovery for Mechanistic Interpretability | [Ver](../papers/2023_conmy_automated-circuit-discovery.html) |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | How does GPT-2 compute greater-than? | [Ver](../papers/2023_hanna_gpt2-greater-than.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2023 | Localizing Model Behavior with Path Patching | [Ver](../papers/2023_goldowskydill_path-patching.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2023 | A circuit for Python docstrings in a 4-layer attention-only transformer | [Ver](../papers/2023_heimersheim_python-docstrings.html) |
-| <span class="dot dot-leido" title="Leído"></span> | 2024 | Attribution Patching Outperforms Automated Circuit Discovery | [Ver](../papers/2024_syed_attribution-patching.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2024 | Attribution Patching Outperforms Automated Circuit Discovery | [Ver](../papers/2024_syed_attribution-patching.html) |
 
 ---
 

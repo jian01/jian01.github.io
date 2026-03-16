@@ -26,7 +26,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Who's Harry Potter? Approximate Unlearning in LLMs | Fine-tuning | [Ver](../papers/2023_eldan_harry-potter.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2023 | Can Sensitive Information Be Deleted From LLMs? | Evaluación / análisis | [Ver](../papers/2023_patil_sensitive-information.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2023 | Unlearning Bias in Language Models by Partitioning Gradients (PCGU) | Enmascarado / edición de pesos | [Ver](../papers/2023_yu_pcgu.html) |
-| <span class="dot dot-leido" title="Leído"></span> | 2024 | TOFU: A Task of Fictitious Unlearning for LLMs | Evaluación / análisis | [Ver](../papers/2024_maini_tofu.html) |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2024 | TOFU: A Task of Fictitious Unlearning for LLMs | Evaluación / análisis | [Ver](../papers/2024_maini_tofu.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | MUSE: Machine Unlearning Six-Way Evaluation | Evaluación / análisis | [Ver](../papers/2024_yao_muse.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_jin_rwku.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Rethinking Machine Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_liu_rethinking-unlearning.html) |
