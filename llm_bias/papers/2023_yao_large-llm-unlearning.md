@@ -48,17 +48,17 @@ $$\theta_{t+1} \leftarrow \theta_t - \epsilon_1 \nabla_{\theta_t} \mathcal{L}\_{
 
 donde $\epsilon_1, \epsilon_2, \epsilon_3 \geq 0$ son hiperparámetros que balancean los tres objetivos:
 
-- **Gradient ascent sobre el forget set** — maximiza la loss sobre los datos a olvidar (equivale a minimizar la loss negada):
+- **Gradient ascent sobre el forget set** — maximiza la loss sobre los datos a olvidar (la loss negada):
 
-$$\mathcal{L}\_{\text{fgt}} := - \sum\_{(x^{fgt}, y^{fgt}) \in D^{fgt}} L(x^{fgt}, y^{fgt}; \theta_t)$$
+$$\mathcal{L}\_{\text{fgt}} \approx -L(x, y; \theta)  \quad \text{con } (x,y) \in D^{fgt}$$
 
-- **Random mislabeling** — entrena al modelo a predecir respuestas aleatorias $y^{rdn}$ (no relacionadas) ante los prompts del forget set:
+- **Random mislabeling** — entrena al modelo a predecir respuestas aleatorias ante los prompts del forget set:
 
-$$\mathcal{L}\_{\text{rdn}} := \sum\_{(x^{fgt}, \cdot) \in D^{fgt}} \frac{1}{|\mathcal{Y}^{rdn}|} \sum\_{y^{rdn} \in \mathcal{Y}^{rdn}} L(x^{fgt}, y^{rdn}; \theta_t)$$
+$$\mathcal{L}\_{\text{rdn}} \approx L(x, y^{rdn}; \theta) \quad \text{con } x \in D^{fgt},\; y^{rdn} \text{ aleatorio}$$
 
-- **Retención de comportamiento normal** — usa KL divergence token a token contra el modelo original $\theta^o$ para que no se degrade en datos normales:
+- **Retención de comportamiento normal** — KL divergence contra el modelo original $\theta^o$ para que no se degrade en datos normales:
 
-$$\mathcal{L}\_{\text{nor}} := \sum\_{(x^{nor}, y^{nor}) \in D^{nor}} \sum\_{i=1}^{|y^{nor}|} \text{KL}\left( h\_{\theta^o}(x^{nor}, y^{nor}\_{< i}) \| h\_{\theta_t}(x^{nor}, y^{nor}\_{< i}) \right)$$
+$$\mathcal{L}\_{\text{nor}} \approx \text{KL}\left( h\_{\theta^o}(x, y) \;\|\; h\_{\theta}(x, y) \right) \quad \text{con } (x,y) \in D^{nor}$$
 
 Los parámetros modificados incluyen **todas las capas del transformer** a través de un fine-tuning estándar sobre el forget set con las etiquetas alteradas.
 
