@@ -32,9 +32,10 @@ layout: default
         <span class="mqual-badge mqual-{{ page.measures_general_quality | downcase | replace: 'í', 'i' }}">{{ page.measures_general_quality }}</span>
       </p>
       {% endif %}
-      <p class="paper-opinion"><strong>Opinión y resumen de Gian:</strong>
+      <h3 class="paper-opinion-title">Opinión y resumen de Gian</h3>
+      <div class="paper-opinion">
         {{ page.opinion | default: "<WIP>" | markdownify }}
-      </p>
+      </div>
     </div>
 
     {% if page.pdf %}

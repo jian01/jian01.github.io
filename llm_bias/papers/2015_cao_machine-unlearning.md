@@ -17,7 +17,7 @@ status:
   - "Leido"
 image: "imgs/2015_cao_machine-unlearning.png"
 image_caption: "Tratamos de expresar un modelo en función de sumas para poder facilitar el unlearning. Algunos modelos ya estan expresados así (Naive Bayes, regresión logística), otros se pueden traducir a esta forma pero otros no admiten esta transformación de forma conocida (ej. redes neuronales)."
-opinion: "Es un paper muy simple pero a la vez es confuso porque define un nuevo concepto y framework. En este paper se nos va a introducir el concepto de _unlearning_. Ellos plantean que un modelo no es más que una suma de estadísticos sobre un dataset. Consideren el modelo $\hat{Y} = Ax + b$. Este modelo es el resultado de 4 estadísticos de suma: $S_x$, $S_y$, $S_{xx}$ y $S_{xy}$. Por ejemplo, $S_{xy} = \sum x_i y_i$ por lo que si queremos olvidar $(x_p, y_p)$ simplemente hacemos $S'_{xy} = S_{xy} - x_p y_p$. Esto hace que no tengamos que reentrenar todo, por supuesto esto no aplica a redes neuronales."
+opinion: "Es un paper muy simple pero a la vez es confuso porque define un nuevo concepto y framework. En este paper se nos va a introducir el concepto de _unlearning_. Ellos plantean que un modelo no es más que una suma de estadísticos sobre un dataset. Consideren el modelo $\\hat{Y} = Ax + b$. Este modelo es el resultado de 4 estadísticos de suma: $S\\_x$, $S\\_y$, $S\\_{xx}$ y $S\\_{xy}$. Por ejemplo, $S\\_{xy} = \\sum x\\_i y\\_i$ por lo que si queremos olvidar $(x\\_p, y\\_p)$ simplemente hacemos $S'\\_{xy} = S\\_{xy} - x\\_p y\\_p$. Esto hace que no tengamos que reentrenar todo, por supuesto esto no aplica a redes neuronales."
 ---
 # Towards Making Systems Forget with Machine Unlearning (2015)
 

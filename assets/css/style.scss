@@ -130,12 +130,15 @@ td a:hover { text-decoration: underline; }
 }
 
 /* ── Opinion field ─────────────────────────────────────────────── */
+.paper-opinion-title {
+  font-size: 1.1rem;
+  margin: 0.8rem 0 0.3rem;
+}
+
 .paper-opinion {
-  margin: 0.4rem 0 0;
+  margin: 0;
   font-size: 0.92rem;
   color: #444;
-  border-left: 3px solid #e5e7eb;
-  padding-left: 0.7rem;
 }
 
 em.wip {
