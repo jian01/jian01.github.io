@@ -16,8 +16,8 @@ status:
   - "Relevante"
   - "Leido"
 image: "imgs/2015_cao_machine-unlearning.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
-opinion: "<WIP>"
+image_caption: "Tratamos de expresar un modelo en función de sumas para poder facilitar el unlearning. Algunos modelos ya estan expresados así (Naive Bayes, regresión logística), otros se pueden traducir a esta forma pero otros no admiten esta transformación de forma conocida (ej. redes neuronales)."
+opinion: "Es un paper muy simple pero a la vez es confuso porque define un nuevo concepto y framework. En este paper se nos va a introducir el concepto de _unlearning_. Ellos plantean que un modelo no es más que una suma de estadísticos sobre un dataset. Consideren el modelo $\hat{Y} = Ax + b$. Este modelo es el resultado de 4 estadísticos de suma: $S_x$, $S_y$, $S_{xx}$ y $S_{xy}$. Por ejemplo, $S_{xy} = \sum x_i y_i$ por lo que si queremos olvidar $(x_p, y_p)$ simplemente hacemos $S'_{xy} = S_{xy} - x_p y_p$. Esto hace que no tengamos que reentrenar todo, por supuesto esto no aplica a redes neuronales."
 ---
 # Towards Making Systems Forget with Machine Unlearning (2015)
 
@@ -38,7 +38,7 @@ Este paper introduce formalmente el concepto de **machine unlearning**: la capac
 
 El problema clave es que los modelos de ML aprenden representaciones que mezclan información de todos los datos de entrenamiento, haciendo que "borrar" un dato sea difícil. La solución propuesta es reformular el proceso de entrenamiento usando **sumas estadísticas** (summation form).
 
-La idea central es que muchos algoritmos de ML (como regresión logística, SVMs) pueden expresarse como funciones que operan sobre estadísticas agregadas de los datos (sumas, productos) en lugar de sobre los datos individuales directamente. Si el sistema guarda estas sumas intermedias (llamadas "sumaciones"), entonces eliminar el aporte de un dato específico se reduce a restar su contribución de esa suma y actualizar el modelo a partir de las sumas modificadas.
+La idea central es que muchos algoritmos de ML (como regresión logística, SVMs) pueden expresarse como funciones que operan sobre estadísticas agregadas de los datos (sumas, productos) en lugar de sobre los datos individuales directamente. Si el sistema guarda estas sumas intermedias, entonces eliminar el aporte de un dato específico se reduce a restar su contribución de esa suma y actualizar el modelo a partir de las sumas modificadas.
 
 Esto funciona a nivel de los **parámetros del modelo completo**: no se tocan capas individuales ni neuronas, sino los coeficientes del modelo. Para algoritmos lineales o basados en kernels, el proceso es exacto y muy eficiente.
 
@@ -55,7 +55,7 @@ Para modelos más complejos (como redes neuronales), proponen una aproximación:
 
 ## Ejemplo ilustrativo
 
-Imaginá que entrenas un clasificador de spam con 10 millones de correos. Luego un usuario pide que se eliminen sus 500 correos del modelo (derecho al olvido — GDPR). Sin machine unlearning, tendrías que reentrenar desde cero con los 9.999.500 correos restantes: horas o días de computación. Con machine unlearning basado en sumaciones, simplemente restás la contribución estadística de esos 500 correos y actualizas los pesos en segundos.
+Imaginá que entrenas un clasificador de spam con 10 millones de correos. Luego un usuario pide que se eliminen sus 500 correos del modelo (derecho al olvido — GDPR). Sin machine unlearning, tendrías que reentrenar desde cero con los 9.999.500 correos restantes: horas o días de computación. Con machine unlearning basado en sumatorias, simplemente restás la contribución estadística de esos 500 correos y actualizas los pesos en segundos.
 
 ---
 

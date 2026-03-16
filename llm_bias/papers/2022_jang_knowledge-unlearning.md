@@ -13,10 +13,11 @@ tags:
 pdf: "/llm_bias/pdfs/2022_jang_knowledge-unlearning.pdf"
 method_type: "Gradient ascent"
 status:
+  - "Relevante"
   - "Leido"
 image: "imgs/2022_jang_knowledge-unlearning.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
-opinion: "<WIP>"
+image_caption: "Compara un método 'differential privacy' (que es irrelevante pero requiere reentrenar todo) con su propio método. Me gusta la intervención de Bob volado en derecho en zapatillas."
+opinion: "Es super simple: Imagina que sin querer entrenaste la LLM con el domicilio de la sex dungeon secreta de Bob, pero Bob por suerte era ciudadano europeo y conoce sus derechos. ¿Cómo eliminamos los datos? Simplemente ponemos el exacto extracto del texto que no quisimos aprender y entrenamos un step de gradient ascent sobre ese texto a medida hacemos gradient descent sobre datos normales (ej. Wikipedia). De esta forma facilmente olvidamos una instancia particular, funciona muy bien olvidando un datito aislado, pero no funciona para conceptos generales embebidos en todos lados (ej. si Bob salio en todas las noticias y se habló de el foros y etc. es más difícil). Para eliminar cosas más complejas y hacer un contraste con este método recomiendo leer el de harry potter."
 ---
 # Knowledge Unlearning for Mitigating Privacy Risks in Language Models (2022)
 

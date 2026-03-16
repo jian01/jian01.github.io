@@ -33,7 +33,7 @@ layout: default
       </p>
       {% endif %}
       <p class="paper-opinion"><strong>Opinión y resumen de Gian:</strong>
-        {{ page.opinion | default: "<WIP>" | escape }}
+        {{ page.opinion | default: "<WIP>" | markdownify }}
       </p>
     </div>
 
