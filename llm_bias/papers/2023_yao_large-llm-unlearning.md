@@ -16,8 +16,8 @@ status:
   - "Leido"
   - "Relevante"
 image: "imgs/2023_yao_large-llm-unlearning.png"
-image_caption: "Icono asociado al paper sobre el framework de unlearning para grandes modelos de lenguaje, que propone el etiquetado aleatorio como alternativa estable al ascenso de gradiente puro."
-opinion: "<WIP>"
+image_caption: "La única imagen del paper es aplicable a cualquier otro paper de unlearning."
+opinion: "Combina gradient ascent, con fine-tuning sobre perturbaciones random, con gradient descent sobre textos de referencia para olvidar cosas."
 ---
 # Large Language Model Unlearning (2023)
 
@@ -41,6 +41,24 @@ El problema con el ascenso de gradiente puro (como en Jang et al., 2022) es que 
 **1. Random Mislabeling (Etiquetado Aleatorio):** En lugar de maximizar la pérdida sobre el texto original a olvidar, se entrena al modelo para predecir **etiquetas/tokens incorrectos aleatorios** para ese texto. Por ejemplo, si el texto a olvidar es "El veneno X mata en dosis de 5mg", se reemplaza la respuesta correcta por tokens aleatorios durante el fine-tuning. Esto desestructura la asociación sin destruir el modelo.
 
 **2. Fine-tuning con datos de sustitución:** Para datos de copyright, se entrena al modelo para producir respuestas genéricas o paráfrasis neutrales cuando se detectan los triggers del contenido original (ej. personajes de un libro).
+
+**Función de loss combinada:** La actualización de parámetros en cada paso es:
+
+$$\theta_{t+1} \leftarrow \theta_t - \epsilon_1 \nabla_{\theta_t} \mathcal{L}\_{\text{fgt}} - \epsilon_2 \nabla_{\theta_t} \mathcal{L}\_{\text{rdn}} - \epsilon_3 \nabla_{\theta_t} \mathcal{L}\_{\text{nor}}$$
+
+donde $\epsilon_1, \epsilon_2, \epsilon_3 \geq 0$ son hiperparámetros que balancean los tres objetivos:
+
+- **Gradient ascent sobre el forget set** — maximiza la loss sobre los datos a olvidar (equivale a minimizar la loss negada):
+
+$$\mathcal{L}\_{\text{fgt}} := - \sum\_{(x^{fgt}, y^{fgt}) \in D^{fgt}} L(x^{fgt}, y^{fgt}; \theta_t)$$
+
+- **Random mislabeling** — entrena al modelo a predecir respuestas aleatorias $y^{rdn}$ (no relacionadas) ante los prompts del forget set:
+
+$$\mathcal{L}\_{\text{rdn}} := \sum\_{(x^{fgt}, \cdot) \in D^{fgt}} \frac{1}{|\mathcal{Y}^{rdn}|} \sum\_{y^{rdn} \in \mathcal{Y}^{rdn}} L(x^{fgt}, y^{rdn}; \theta_t)$$
+
+- **Retención de comportamiento normal** — usa KL divergence token a token contra el modelo original $\theta^o$ para que no se degrade en datos normales:
+
+$$\mathcal{L}\_{\text{nor}} := \sum\_{(x^{nor}, y^{nor}) \in D^{nor}} \sum\_{i=1}^{|y^{nor}|} \text{KL}\left( h\_{\theta^o}(x^{nor}, y^{nor}\_{< i}) \| h\_{\theta_t}(x^{nor}, y^{nor}\_{< i}) \right)$$
 
 Los parámetros modificados incluyen **todas las capas del transformer** a través de un fine-tuning estándar sobre el forget set con las etiquetas alteradas.
 
