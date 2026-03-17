@@ -14,10 +14,11 @@ tags:
 pdf: "/llm_bias/pdfs/2024_li_wmdp.pdf"
 method_type: "Perturbación de representaciones"
 status:
-  - "Pendiente"
+  - "Leido"
+  - "Relevante"
 image: "imgs/2024_li_wmdp.png"
 image_caption: "Hermoso esquema con la función de loss propuesta."
-opinion: "<WIP>"
+opinion: "Es el primero de estos papers que se enfoca en AI safety, creando un dataset para evaluar preguntas que no debería poder responder. El enfoque está muy bueno y quedo muy bien resumido, me parece un paper central para AI safety+unlearning. Es interesante que lo hagan solo en una capa, ahorrando computo al entrenar."
 ---
 # The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning (2024)
 
