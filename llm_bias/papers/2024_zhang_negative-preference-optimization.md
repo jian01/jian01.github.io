@@ -18,7 +18,7 @@ status:
   - "Relevante"
 image: "imgs/2024_zhang_negative-preference-optimization.png"
 image_caption: "Respuestas de los modelos después de distintas técnicas de unlearning sobre TOFU. La del paper es NPO+RT (Negative preference optimization + Retain set)."
-opinion: "<WIP>"
+opinion: "Usa solo el termino negativo $\delta\\_l$ de DPO como ejemplo 'perdedor' que en este caso es algo del forget set. Lo compara además con tooodos los métodos previos usando TOFU, está bueno. Hay que tener en cuenta que este dataset y este método está más enfocado al derecho al olvido y no necesariamente se prueban para olvidar conceptos (ej: como armar un arma) en general. El paper está muy bien escrito, me gustó la sección de 'other loss functions' donde hacen un resumen de como se relaciona todo con lo demás, y le pedí a la IA que incluya eso en el resumen y quedo bien."
 ---
 # Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning (2024)
 
@@ -37,50 +37,85 @@ Adapta el algoritmo DPO (Direct Preference Optimization) para machine unlearning
 
 ## Metodología
 
-### El problema del gradient ascent y la solución NPO
+### Funciones de pérdida componentes
 
-**El problema del gradient ascent (GA):** Maximizar la pérdida sobre el forget set empuja los pesos en dirección opuesta al gradiente sin ninguna restricción. GA diverge **linealmente** con los pasos de entrenamiento, lo que lleva al modelo a generar texto incoherente: el "colapso catastrófico".
+El paper unifica todos los métodos evaluados como combinaciones lineales de cinco funciones de pérdida primitivas. Entender estas piezas es necesario para leer las combinaciones que siguen.
 
-**La solución NPO:** NPO toma únicamente la mitad "negativa" del objetivo DPO, usando las respuestas del forget set como "respuestas rechazadas" sin necesitar respuestas "ganadoras". Su pérdida incluye implícitamente el modelo de referencia congelado como ancla:
+**$\mathcal{L}_\text{GA}$ — Gradient Ascent** ([Jang et al., 2022](2022_jang_knowledge-unlearning.html); [Yao et al., 2023](2023_yao_large-llm-unlearning.html))
 
-$$\mathcal{L}_\text{NPO} = -\frac{2}{\beta} \mathbb{E}_{y \sim \mathcal{D}_f} \left[ \log \sigma\!\left(-\beta \log \frac{\pi_\theta(y \mid x)}{\pi_\text{ref}(y \mid x)}\right) \right]$$
+$$\mathcal{L}_\text{GA}(\theta) = \mathbb{E}_{\mathcal{D}_\text{FG}}\bigl[\log \pi_\theta(y \mid x)\bigr]$$
 
-La clave es que cuando un ejemplo ya fue suficientemente olvidado ($\pi_\theta(y|x) \ll \pi_\text{ref}(y|x)$), el gradiente de NPO se hace pequeño automáticamente — frena solo antes de colapsar. GA no tiene este mecanismo. Se puede demostrar que NPO diverge **logarítmicamente** (exponencialmente más lento que GA), y que GA es el caso límite de NPO cuando $\beta \to 0$.
+Maximizar la log-probabilidad del forget set equivale a hacer gradient descent sobre la pérdida negativa de cross-entropy. La intuición es "revertir" el aprendizaje original. Problema: el gradiente tiene escala constante aunque el ejemplo ya esté olvidado — GA **diverge linealmente**, causando colapso catastrófico.
 
-### Términos de retención (componente opcional)
+---
 
-Cualquier objetivo de olvido puede combinarse con un término de retención que actúa en paralelo sobre el retain set:
+**$\mathcal{L}_\text{FG}$ — Forget loss** ([Maini et al., 2024](2024_maini_tofu.html); [Eldan & Russinovich, 2023](2023_eldan_harry-potter.html))
 
-- **+RT** (Retain): regularización KL entre el modelo actual y el modelo de referencia evaluada sobre el retain set. No exige que el modelo acierte las respuestas del retain — solo que su distribución de salida no cambie respecto al modelo original.
-- **+KL**: mismo concepto que +RT pero implementado como pérdida de KL directamente sobre el logits del retain set, sin pasar por el log-ratio del modelo de referencia. En la práctica la diferencia con +RT es sutil y los resultados son similares.
+$$\mathcal{L}_\text{FG}(\theta) = -\mathbb{E}_{\mathcal{D}_\text{FG}}\bigl[\log \pi_\theta(\tilde{y} \mid x)\bigr]$$
+
+Cross-entropy supervisada sobre el forget set pero con respuestas "desinformadas" $\tilde{y} \neq y$: puede ser "I don't know" (IDK) o una respuesta alternativa plausible pero incorrecta generada ad hoc. No usa gradient ascent, así que es estable. Usado en IDK+RT.
+
+---
+
+**$\mathcal{L}_\text{RT}$ — Retain loss** ([Maini et al., 2024](2024_maini_tofu.html))
+
+$$\mathcal{L}_\text{RT}(\theta) = -\mathbb{E}_{\mathcal{D}_\text{RT}}\bigl[\log \pi_\theta(y \mid x)\bigr]$$
+
+Cross-entropy estándar sobre el retain set. Anima al modelo a seguir respondiendo correctamente lo que no debe olvidar. Componente de retención más directa: penaliza explícitamente olvidar respuestas correctas en el retain set.
+
+---
+
+**$\mathcal{K}_\text{RT}$ — KL divergence on retain set** ([Maini et al., 2024](2024_maini_tofu.html))
+
+$$\mathcal{K}_\text{RT}(\theta) = \mathbb{E}_{\mathcal{D}_\text{RT}}\bigl[D_\text{KL}(\pi_\theta(\cdot \mid x) \,\|\, \pi_\text{ref}(\cdot \mid x))\bigr]$$
+
+Penaliza que la distribución del modelo actualizado se aleje de la del modelo de referencia, medido en el retain set. Más conservadora que $\mathcal{L}_\text{RT}$: no exige acertar las respuestas correctas, solo no cambiar la distribución. Corresponde al término "+KL" en las combinaciones. Usada en GA+KL, NPO+KL, DPO+KL.
+
+---
+
+**$\mathcal{L}_\text{DPO}$ — Direct Preference Optimization** ([Rafailov et al., 2023](2023_ermon_dpo.html))
+
+$$\mathcal{L}_\text{DPO}(\theta) = -\frac{1}{\beta}\,\mathbb{E}\!\left[\log \sigma\!\left(\beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_\text{ref}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_\text{ref}(y_l \mid x)}\right)\right]$$
+
+Requiere pares $(y_w, y_l)$ para cada prompt. En unlearning, $y_l$ = respuesta original del forget set y $y_w$ = respuesta sintética generada aleatoriamente (Bernoulli(0.5)). El ruido en $y_w$ es una limitación respecto a NPO.
+
+---
+
+**$\mathcal{L}_\text{NPO}$ — Negative Preference Optimization** *(este paper)*
+
+$$\mathcal{L}_\text{NPO}(\theta) = -\frac{2}{\beta}\,\mathbb{E}_{\mathcal{D}_\text{FG}}\!\left[\log \sigma\!\left(-\beta \log \frac{\pi_\theta(y \mid x)}{\pi_\text{ref}(y \mid x)}\right)\right]$$
+
+La mitad negativa de $\mathcal{L}_\text{DPO}$: solo usa los ejemplos rechazados ($y_l$ = forget set), sin necesitar $y_w$. El peso adaptativo $W_\theta = \frac{2\pi_\theta^\beta}{\pi_\theta^\beta + \pi_\text{ref}^\beta}$ se vuelve automáticamente pequeño cuando el ejemplo ya está olvidado ($\pi_\theta \ll \pi_\text{ref}$), frenando el gradiente antes del colapso. Diverge **logarítmicamente** — exponencialmente más lento que $\mathcal{L}_\text{GA}$. Se reduce a $\mathcal{L}_\text{GA}$ cuando $\beta \to 0$.
+
+---
 
 ### Métodos evaluados en los experimentos de TOFU
 
 Todos los experimentos usan Llama-2-7B-chat, AdamW lr=1e-5, batch efectivo de 32, 10 épocas de unlearning.
 
-- **GA** — Gradient Ascent puro sobre el forget set ([Jang et al., 2022](2022_jang_knowledge-unlearning.html); [Yao et al., 2023](2023_yao_large-llm-unlearning.html)). Maximiza $-\mathcal{L}_{CE}$ sobre los datos a olvidar sin ningún término de retención. Colapsa rápidamente: alcanza su máximo forget quality en los primeros pasos y luego degenera de forma irreversible.
+- **GA** — Minimiza $\mathcal{L}_\text{GA}$ solo, sin ningún término de retención ([Jang et al., 2022](2022_jang_knowledge-unlearning.html); [Yao et al., 2023](2023_yao_large-llm-unlearning.html)). Colapsa rápidamente: alcanza su máximo forget quality en los primeros pasos y luego degenera de forma irreversible porque el gradiente de $\mathcal{L}_\text{GA}$ no se autoregula.
 
-- **GA + RT** — GA sobre el forget set más regularización KL sobre el retain set. El término +RT intenta frenar el daño colateral, pero hereda la inestabilidad lineal de GA: la degradación del retain set sigue ocurriendo, solo más lento.
+- **GA + RT** — Minimiza $\mathcal{L}_\text{GA} + \mathcal{L}_\text{RT}$. El término $\mathcal{L}_\text{RT}$ obliga al modelo a seguir acertando en el retain set, frenando el daño colateral, pero hereda la inestabilidad lineal de $\mathcal{L}_\text{GA}$: la degradación ocurre igual, solo más lento.
 
-- **GA + KL** (abreviado "KL" en las figuras del paper) — GA sobre el forget set más un término KL directo sobre el retain set. Equivale conceptualmente al [KL Minimization de TOFU](2024_maini_kl-minimization.html). Mismo problema de fondo que GA+RT: el ancla KL no es suficiente para evitar el colapso de GA a largo plazo.
+- **GA + KL** (abreviado "KL" en las figuras) — Minimiza $\mathcal{L}_\text{GA} + \mathcal{K}_\text{RT}$ ([Maini et al., 2024](2024_maini_kl-minimization.html)). $\mathcal{K}_\text{RT}$ ancla la distribución del retain set al modelo original en vez de exigir respuestas correctas. Mismo problema de fondo que GA+RT: el ancla no basta para contener la divergencia lineal de $\mathcal{L}_\text{GA}$.
 
-- **IDK + RT** — Fine-tuning supervisado sobre el forget set reemplazando todas las respuestas por "I don't know", más un término +RT sobre el retain set. Simple y estable porque no usa ascenso de gradiente. Sin embargo, solo suprime la respuesta directa sin modificar el conocimiento subyacente: ante parafraseo, preguntas indirectas o ataques de extracción el conocimiento original resurge. Obtiene forget quality muy baja en los experimentos.
+- **IDK + RT** — Minimiza $\mathcal{L}_\text{FG} + \mathcal{L}_\text{RT}$, donde $\tilde{y}$ = "I don't know" ([Maini et al., 2024](2024_maini_tofu.html)). Estable porque no usa $\mathcal{L}_\text{GA}$. Sin embargo, $\mathcal{L}_\text{FG}$ solo suprime la respuesta directa sin tocar el conocimiento subyacente: ante parafraseo o ataques de extracción el conocimiento original resurge. Forget quality muy baja en los experimentos.
 
-- **DPO** — Aplica [Direct Preference Optimization](2023_ermon_dpo.html) completo sobre el forget set: las respuestas originales correctas se tratan como "rechazadas" y respuestas alternativas generadas aleatoriamente (etiquetas Bernoulli(0.5)) como "elegidas". A diferencia de NPO usa ambas mitades del objetivo DPO, lo que requiere construir respuestas "ganadoras" sintéticas — añade ruido. Sin término de retención es inestable.
+- **DPO** — Minimiza $\mathcal{L}_\text{DPO}$ con $y_w$ generado aleatoriamente (Bernoulli(0.5)) ([Rafailov et al., 2023](2023_ermon_dpo.html)). Requiere construir respuestas "ganadoras" sintéticas, lo que introduce ruido en la señal de aprendizaje. Sin término de retención es inestable.
 
-- **DPO + RT** — DPO más regularización KL sobre el retain set. Más estable que DPO solo, pero inferior a NPO+RT: la mitad "positiva" de DPO con respuestas aleatorias introduce señal ruidosa que NPO evita al usar solo la mitad negativa.
+- **DPO + RT** — Minimiza $\mathcal{L}_\text{DPO} + \mathcal{L}_\text{RT}$. El $\mathcal{L}_\text{RT}$ estabiliza el retain set, pero la mitad positiva ruidosa de $\mathcal{L}_\text{DPO}$ sigue limitando su rendimiento respecto a NPO+RT.
 
-- **DPO + KL** — DPO más término KL directo sobre el retain set. Variante de DPO+RT con la misma limitación del ruido de la mitad positiva.
+- **DPO + KL** — Minimiza $\mathcal{L}_\text{DPO} + \mathcal{K}_\text{RT}$. Variante de DPO+RT con retención más conservadora vía $\mathcal{K}_\text{RT}$. Misma limitación del ruido en $y_w$.
 
-- **KTO** — Kahneman-Tversky Optimization (Ethayarajh et al., 2024). Método de alineamiento que no requiere pares de preferencias: trabaja con ejemplos individuales etiquetados como "deseable" o "indeseable". En unlearning, los ejemplos del forget set se marcan como indeseables. Comparte con NPO la idea de no necesitar respuestas ganadoras, pero su formulación usa una función de valor asimétrica inspirada en la teoría prospectiva en lugar del log-ratio del modelo de referencia. En los experimentos, KTO sin retención falla de forma similar a GA.
+- **KTO** — Minimiza el objetivo de [Kahneman-Tversky Optimization](2024_ethayarajh_kto.html) sobre el forget set (ejemplos marcados como "indeseables"). Comparte con NPO la idea de no necesitar pares, pero usa una función de valor asimétrica inspirada en prospect theory en lugar del log-ratio respecto a $\pi_\text{ref}$. Sin retención falla de forma similar a GA.
 
-- **KTO + RT** — KTO más regularización KL sobre el retain set. Más estable que KTO solo, pero queda por debajo de NPO+RT en el trade-off forget/retain en todos los tamaños de forget set evaluados.
+- **KTO + RT** — Minimiza $\mathcal{L}_\text{KTO} + \mathcal{L}_\text{RT}$. Más estable que KTO solo, pero queda por debajo de NPO+RT en todos los tamaños de forget set evaluados.
 
-- **NPO** — Solo el objetivo negativo de DPO sobre el forget set, sin término de retención explícito. El $\pi_\text{ref}$ actúa como ancla implícita y previene el colapso. Sin +RT puede degradar el retain set con entrenamiento prolongado, pero es ya más estable que cualquier variante de GA.
+- **NPO** — Minimiza $\mathcal{L}_\text{NPO}$ solo. El peso adaptativo $W_\theta$ de $\mathcal{L}_\text{NPO}$ previene el colapso catastrófico sin ningún término de retención explícito. Sin $\mathcal{L}_\text{RT}$ puede degradar el retain set con entrenamiento prolongado, pero es ya más estable que cualquier variante GA.
 
-- **NPO + RT** *(propuesta principal del paper)* — NPO sobre el forget set más regularización KL sobre el retain set. Combina la estabilidad logarítmica de NPO con protección explícita del retain set. Es la única combinación que logra forget quality > 0.05 en Forget10 (el escenario más difícil) mientras preserva model utility. Domina la frontera de Pareto en todos los tamaños de forget set.
+- **NPO + RT** *(propuesta principal)* — Minimiza $\mathcal{L}_\text{NPO} + \mathcal{L}_\text{RT}$. La estabilidad logarítmica de $\mathcal{L}_\text{NPO}$ sobre el forget set se combina con $\mathcal{L}_\text{RT}$ que protege el retain set explícitamente. Única combinación que logra forget quality > 0.05 en Forget10 mientras preserva model utility. Domina la frontera de Pareto en todos los splits.
 
-- **NPO + KL** — NPO más término KL directo sobre el retain set. Resultados muy similares a NPO+RT; ligeras diferencias en algunos splits pero ambos superan todas las variantes de GA y KTO.
+- **NPO + KL** — Minimiza $\mathcal{L}_\text{NPO} + \mathcal{K}_\text{RT}$. Retención más conservadora que NPO+RT vía $\mathcal{K}_\text{RT}$. Resultados muy similares a NPO+RT; ambos superan todas las variantes de GA y KTO.
 
 ### Figura 6: evolución durante el entrenamiento
 

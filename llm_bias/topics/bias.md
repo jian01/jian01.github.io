@@ -24,7 +24,6 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Bot-Adversarial Dialogue for Safe Conversational Agents | Benchmark / Dataset | [Ver](../papers/2021_xu_bot-adversarial.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2021 | TruthfulQA: Measuring How Models Mimic Human Falsehoods | Benchmark / Dataset | [Ver](../papers/2021_lin_truthfulqa.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2021 | BBQ: A hand-built bias benchmark for question answering | Benchmark / Dataset | [Ver](../papers/2021_parrish_bbq.html) |
-| <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Understanding Dataset Difficulty with V-Usable Information | Benchmark / Dataset | [Ver](../papers/2022_ethayarajh_v-usable-information.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2022 | ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection | Benchmark / Dataset | [Ver](../papers/2022_hartvigsen_toxigen.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | "I'm sorry to hear that": Finding New Biases in Language Models with a Holistic Descriptor Dataset | Benchmark / Dataset | [Ver](../papers/2022_smith_holistic-descriptor.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2023 | Nationality Bias in Text Generation | Benchmark / Dataset | [Ver](../papers/2023_venkit_nationality-bias.html) |
@@ -72,14 +71,14 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 
 | Tipo de método | N° de papers |
 |----------------|:------------:|
-| Benchmark / Dataset | 14 |
+| Benchmark / Dataset | 13 |
 | Fine-tuning / data augmentation | 8 |
 | Evaluación / análisis | 6 |
 | Adapters / PEFT | 3 |
 | Edición de pesos / neuronas | 3 |
 | Tiempo de inferencia | 3 |
 | Causal / invariante | 1 |
-| **Total** | **38** |
+| **Total** | **37** |
 
 ---
 
