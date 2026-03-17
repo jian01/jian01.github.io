@@ -18,7 +18,7 @@ status:
   - "Relevante"
 image: "imgs/2024_li_wmdp.png"
 image_caption: "Hermoso esquema con la función de loss propuesta."
-opinion: "Es el primero de estos papers que se enfoca en AI safety, creando un dataset para evaluar preguntas que no debería poder responder. El enfoque está muy bueno y quedo muy bien resumido, me parece un paper central para AI safety+unlearning. Es interesante que lo hagan solo en una capa, ahorrando computo al entrenar."
+opinion: "Muy simple, tienen un forget set y un retrain set, y hacen que una capa genere resultados aleatorios para el forget set mientras conserva los mismos resultados para el retrain, pero lo hacen con una sola capa de atención. Es el primero de estos papers que se enfoca en AI safety, creando un dataset para evaluar preguntas que no debería poder responder. El enfoque está muy bueno y quedo muy bien resumido, recomiendo leer esto primero ya que lo itere bastante."
 ---
 # The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning (2024)
 
