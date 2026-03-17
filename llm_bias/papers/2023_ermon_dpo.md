@@ -2,6 +2,7 @@
 layout: paper
 title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
 year: 2023
+date_published: "2023-05-29"
 authors: "Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn"
 published: "NeurIPS, 2023"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned"
 year: 2022
+date_published: "2022-08-23"
 authors: "Deep Ganguli, Liane Lovitt, John Kernion, Amanda Askell, Yuntao Bai, et al. (Anthropic)"
 published: "arXiv, 2022"
 tags:

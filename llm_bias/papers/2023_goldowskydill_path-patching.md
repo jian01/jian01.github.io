@@ -2,6 +2,7 @@
 layout: paper
 title: "Localizing Model Behavior with Path Patching"
 year: 2023
+date_published: "2023-04-12"
 authors: "Nicholas W. Goldowsky-Dill, Chris MacLeod, Lucas Sato, Aryaman Arora"
 published: "arXiv, 2023"
 tags:

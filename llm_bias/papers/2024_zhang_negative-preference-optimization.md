@@ -2,6 +2,7 @@
 layout: paper
 title: "Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning"
 year: 2024
+date_published: "2024-04-08"
 authors: "Ruiqi Zhang, Licong Lin, Yu Bai, Song Mei"
 published: "arXiv, 2024"
 tags:

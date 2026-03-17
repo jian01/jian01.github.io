@@ -2,6 +2,7 @@
 layout: paper
 title: "FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders"
 year: 2021
+date_published: "2021-03-11"
 authors: "Pengyu Cheng, Weituo Hao, Siyang Yuan, Shijing Si, Lawrence Carin"
 published: "ICLR, 2021"
 tags:

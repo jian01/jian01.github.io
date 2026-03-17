@@ -2,6 +2,7 @@
 layout: paper
 title: "GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection"
 year: 2025
+date_published: "2025-05-19"
 authors: "Zhijie Deng, Chris Liu, Zirui Pang, Xinlei He, Lei Feng, Qi Xuan, Zhaowei Zhu, Jiaheng Wei"
 published: "arXiv, 2025"
 tags:

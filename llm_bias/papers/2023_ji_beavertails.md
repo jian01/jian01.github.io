@@ -2,6 +2,7 @@
 layout: paper
 title: "BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset"
 year: 2023
+date_published: "2023-07-10"
 authors: "Jiaming Ji, Mickel Liu, Juntao Dai, Xuehai Pan, Chi Zhang, Ce Bian, Ruiyang Sun, Yizhou Wang, Yaodong Yang"
 published: "NeurIPS, 2023"
 tags:

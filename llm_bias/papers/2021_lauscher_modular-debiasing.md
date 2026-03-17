@@ -2,6 +2,7 @@
 layout: paper
 title: "Sustainable Modular Debiasing of Language Models"
 year: 2021
+date_published: "2021-09-08"
 authors: "Anne Lauscher, Tobias Lüken, Goran Glavaš"
 published: "Findings of EMNLP, 2021"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "MABEL: Attenuating Gender Bias using Textual Entailment Data"
 year: 2022
+date_published: "2022-10-26"
 authors: "Jacqueline He, Mengzhou Xia, Christiane Fellbaum, Danqi Chen"
 published: "EMNLP, 2022"
 tags:

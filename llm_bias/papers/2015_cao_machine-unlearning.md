@@ -2,6 +2,7 @@
 layout: paper
 title: "Towards Making Systems Forget with Machine Unlearning"
 year: 2015
+date_published: "2015-05-18"
 authors: "Yinzhi Cao, Junfeng Yang"
 published: "IEEE Symposium on Security and Privacy, 2015"
 tags:

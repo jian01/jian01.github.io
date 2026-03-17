@@ -2,6 +2,7 @@
 layout: paper
 title: "Bot-Adversarial Dialogue for Safe Conversational Agents"
 year: 2021
+date_published: "2020-10-14"
 authors: "Jing Xu, Da Ju, Margaret Li, Y-Lan Boureau, Jason Weston, Emily Dinan"
 published: "NAACL, 2021"
 tags:

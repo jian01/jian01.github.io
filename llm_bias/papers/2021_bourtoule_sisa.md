@@ -2,6 +2,7 @@
 layout: paper
 title: "Machine Unlearning"
 year: 2021
+date_published: "2019-12-09"
 authors: "Lucas Bourtoule, Varun Chandrasekaran, Christopher A. Choquette-Choo, Hengrui Jia, Adelin Travers, Baiwu Zhang, David Lie, Nicolas Papernot"
 published: "IEEE Symposium on Security and Privacy (S&P), 2021"
 tags:

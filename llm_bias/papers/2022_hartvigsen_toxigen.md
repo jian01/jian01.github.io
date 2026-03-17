@@ -2,6 +2,7 @@
 layout: paper
 title: "ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection"
 year: 2022
+date_published: "2022-03-17"
 authors: "Thomas Hartvigsen, Saadia Gabriel, Hamid Palangi, Maarten Sap, Dipankar Ray, Ece Kamar"
 published: "ACL, 2022"
 tags:

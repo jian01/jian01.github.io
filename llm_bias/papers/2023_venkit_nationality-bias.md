@@ -2,6 +2,7 @@
 layout: paper
 title: "Nationality Bias in Text Generation"
 year: 2023
+date_published: "2023-02-05"
 authors: "Pranav Venkit, Sanjana Gautam, Ruchi Panchanadikar, Ting-Hao 'Kenneth' Huang, Shomir Wilson"
 published: "EACL, 2023"
 tags:

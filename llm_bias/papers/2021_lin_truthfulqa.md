@@ -2,6 +2,7 @@
 layout: paper
 title: "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
 year: 2021
+date_published: "2021-09-08"
 authors: "Stephanie C. Lin, Jacob Hilton, Owain Evans"
 published: "ACL, 2022 (arXiv 2021)"
 tags:

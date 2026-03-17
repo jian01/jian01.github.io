@@ -2,6 +2,7 @@
 layout: paper
 title: "Mitigating Biases for Instruction-following Language Models via Bias Neurons Elimination"
 year: 2023
+date_published: "2023-11-16"
 authors: "Nakyeong Yang, Taegwan Kang, Stanley Jungkyu Choi, Honglak Lee, Kyomin Jung"
 published: "ACL, 2023"
 tags:

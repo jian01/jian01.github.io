@@ -2,6 +2,7 @@
 layout: paper
 title: "Causal Abstractions of Neural Networks"
 year: 2021
+date_published: "2021-06-06"
 authors: "Atticus Geiger, Hanson Lu, Thomas Icard, Christopher Potts"
 published: "NeurIPS, 2021"
 tags:

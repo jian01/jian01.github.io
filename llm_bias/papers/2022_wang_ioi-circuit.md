@@ -2,6 +2,7 @@
 layout: paper
 title: "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small"
 year: 2022
+date_published: "2022-11-01"
 authors: "Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, Jacob Steinhardt"
 published: "arXiv, 2022"
 tags:

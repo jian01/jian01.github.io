@@ -2,6 +2,7 @@
 layout: paper
 title: "Does Unlearning Truly Unlearn? A Black Box Evaluation of LLM Unlearning Methods"
 year: 2024
+date_published: "2024-11-18"
 authors: "Jai Doshi, Asa Cooper Stickland"
 published: "arXiv, 2024"
 tags:

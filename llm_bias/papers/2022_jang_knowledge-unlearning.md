@@ -2,6 +2,7 @@
 layout: paper
 title: "Knowledge Unlearning for Mitigating Privacy Risks in Language Models"
 year: 2022
+date_published: "2022-10-04"
 authors: "Joel Jang, Dongkeun Yoon, Sohee Yang, Sungmin Cha, Moontae Lee, Lajanugen Logeswaran, Minjoon Seo"
 published: "Annual Meeting of the Association for Computational Linguistics (ACL), 2022"
 tags:

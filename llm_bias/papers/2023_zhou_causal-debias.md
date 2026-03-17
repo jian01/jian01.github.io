@@ -2,6 +2,7 @@
 layout: paper
 title: "Causal-Debias: Unifying Debiasing in Pretrained Language Models and Fine-tuning via Causal Invariant Learning"
 year: 2023
+date_published: "2023-07-01"
 authors: "Fan Zhou, Yuzhou Mao, Liu Yu, Yi Yang, Ting Zhong"
 published: "ACL, 2023"
 tags:

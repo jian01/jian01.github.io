@@ -2,6 +2,7 @@
 layout: paper
 title: "Catastrophic Failure of LLM Unlearning via Quantization"
 year: 2024
+date_published: "2024-10-21"
 authors: "Zhiwei Zhang, Fali Wang, Xiaomin Li, Zongyu Wu, Xianfeng Tang, Hui Liu, Qi He, Wenpeng Yin, Suhang Wang"
 published: "International Conference on Learning Representations (ICLR), 2024"
 tags:

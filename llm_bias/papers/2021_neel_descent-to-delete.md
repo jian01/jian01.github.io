@@ -2,6 +2,7 @@
 layout: paper
 title: "Descent-to-Delete: Gradient-Based Methods for Machine Unlearning"
 year: 2021
+date_published: "2020-07-06"
 authors: "Seth Neel, Aaron Roth, Saeed Sharifi-Malvajerdi"
 published: "Algorithmic Learning Theory (ALT), 2021"
 tags:

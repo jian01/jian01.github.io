@@ -2,6 +2,7 @@
 layout: paper
 title: "LLM Bias Detection and Mitigation through the Lens of Desired Distributions"
 year: 2025
+date_published: "2025-10-07"
 authors: "Ingroj Shrestha, Padmini Srinivasan"
 published: "EMNLP, 2025"
 tags:

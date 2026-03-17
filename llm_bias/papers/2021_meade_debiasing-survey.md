@@ -2,6 +2,7 @@
 layout: paper
 title: "An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models"
 year: 2021
+date_published: "2021-10-16"
 authors: "Nicholas Meade, Elinor Poole-Dayan, Siva Reddy"
 published: "ACL, 2022"
 tags:

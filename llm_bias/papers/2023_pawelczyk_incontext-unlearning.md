@@ -2,6 +2,7 @@
 layout: paper
 title: "In-Context Unlearning: Language Models as Few Shot Unlearners"
 year: 2023
+date_published: "2023-10-11"
 authors: "Martin Pawelczyk, Seth Neel, Himabindu Lakkaraju"
 published: "arXiv, 2023"
 tags:

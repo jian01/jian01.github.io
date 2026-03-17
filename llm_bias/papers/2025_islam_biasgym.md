@@ -2,6 +2,7 @@
 layout: paper
 title: "BiasGym: Fantastic LLM Biases and How to Find (and Remove) Them"
 year: 2025
+date_published: "2025-08-12"
 authors: "Sekh Mainul Islam, Nadav Borenstein, Saurabh Pawar, Haeun Yu, Arnav Arora, Isabelle Augenstein"
 published: "arXiv, 2025"
 tags:

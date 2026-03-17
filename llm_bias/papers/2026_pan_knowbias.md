@@ -2,6 +2,7 @@
 layout: paper
 title: "KnowBias: Mitigating Social Bias in LLMs via Know-Bias Neuron Enhancement"
 year: 2026
+date_published: "2026-01-29"
 authors: "J. J. Pan, Chahat Raj, Anjishnu Mukherjee, Sina Mansouri, Bowen Wei, Shloka Yada, Ziwei Zhu"
 published: "arXiv, 2026"
 tags:

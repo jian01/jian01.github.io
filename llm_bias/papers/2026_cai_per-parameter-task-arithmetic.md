@@ -2,6 +2,7 @@
 layout: paper
 title: "Per-parameter Task Arithmetic for Unlearning in Large Language Models"
 year: 2026
+date_published: "2026-01-29"
 authors: "Chengyi Cai, Zesheng Ye, Jiangchao Yao, Jianzhong Qi, Bo Han, Xiaolu Zhang, Feng Liu, Jun Zhou"
 published: "arXiv, 2026"
 tags:

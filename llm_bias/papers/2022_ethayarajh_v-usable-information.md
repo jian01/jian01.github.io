@@ -2,6 +2,7 @@
 layout: paper
 title: "Understanding Dataset Difficulty with V-Usable Information"
 year: 2022
+date_published: "2021-10-16"
 authors: "Kawin Ethayarajh, Yejin Choi, Swabha Swayamdipta"
 published: "ICML, 2022"
 tags:

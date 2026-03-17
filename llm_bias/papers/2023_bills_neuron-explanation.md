@@ -2,6 +2,7 @@
 layout: paper
 title: "Language Models Can Explain Neurons in Language Models"
 year: 2023
+date_published: "2023-05-09"
 authors: "Steven Bills, Nick Cammarata, Dan Mossing, Henk Tillman, Leo Gao, Gabriel Goh, Ilya Sutskever, Jan Leike, Jeff Wu, William Saunders"
 published: "OpenAI Technical Report, 2023"
 tags:

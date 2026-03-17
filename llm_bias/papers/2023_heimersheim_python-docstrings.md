@@ -2,6 +2,7 @@
 layout: paper
 title: "A circuit for Python docstrings in a 4-layer attention-only transformer"
 year: 2023
+date_published: "2023-02-20"
 authors: "Stefan Heimersheim, Jett Janiak"
 published: "Alignment Forum / distill.pub blog, 2023"
 tags:

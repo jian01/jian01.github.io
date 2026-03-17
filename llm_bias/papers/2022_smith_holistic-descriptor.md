@@ -2,6 +2,7 @@
 layout: paper
 title: "\"I'm sorry to hear that\": Finding New Biases in Language Models with a Holistic Descriptor Dataset"
 year: 2022
+date_published: "2022-05-18"
 authors: "Eric Michael Smith, Melissa Hall, Melanie Kambadur, Eleonora Presani, Adina Williams"
 published: "EMNLP, 2022"
 tags:

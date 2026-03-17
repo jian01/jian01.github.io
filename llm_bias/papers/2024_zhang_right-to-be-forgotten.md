@@ -2,6 +2,7 @@
 layout: paper
 title: "Right to be Forgotten in the Era of Large Language Models: Implications, Challenges, and Solutions"
 year: 2024
+date_published: "2023-07-08"
 authors: "Dawen Zhang, Pamela Finckenberg-Broman, Thong Hoang, Shidong Pan, Zhenchang Xing, Mark Staples, Xiwei Xu"
 published: "AI and Ethics, 2024"
 tags:

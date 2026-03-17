@@ -2,6 +2,7 @@
 layout: paper
 title: "Gradient Routing: Masking Gradients to Localize Computation in Neural Networks"
 year: 2024
+date_published: "2024-10-06"
 authors: "Alex Cloud, Jacob Goldman-Wetzler, Evžen Wybitul, Joseph Miller, Alexander Turner"
 published: "arXiv, 2024"
 tags:

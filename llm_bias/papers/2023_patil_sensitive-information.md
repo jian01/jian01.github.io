@@ -2,6 +2,7 @@
 layout: paper
 title: "Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks"
 year: 2023
+date_published: "2023-09-29"
 authors: "Vaidehi Patil, Peter Hase, Mohit Bansal"
 published: "arXiv, 2023"
 tags:

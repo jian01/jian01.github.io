@@ -2,6 +2,7 @@
 layout: paper
 title: "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback"
 year: 2022
+date_published: "2022-04-12"
 authors: "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, et al. (Anthropic)"
 published: "arXiv, 2022"
 tags:

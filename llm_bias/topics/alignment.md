@@ -33,8 +33,8 @@ El término *red team* proviene de la práctica militar de designar un equipo ad
 
 | Estado | Año | Título | Resumen |
 | --- |-----|--------|---------|
-| <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned | [Ver](../papers/2022_ganguli_red-teaming.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Red Teaming Language Models with Language Models | [Ver](../papers/2022_perez_red-teaming-lm.html) |
+| <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned | [Ver](../papers/2022_ganguli_red-teaming.html) |
 
 ---
 

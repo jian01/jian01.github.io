@@ -2,6 +2,7 @@
 layout: paper
 title: "Improving LLM Unlearning Robustness via Random Perturbations"
 year: 2025
+date_published: "2025-01-31"
 authors: "Dang Huu-Tien, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue"
 published: "2025"
 tags:

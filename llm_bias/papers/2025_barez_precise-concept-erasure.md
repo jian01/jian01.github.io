@@ -2,6 +2,7 @@
 layout: paper
 title: "Precise In-Parameter Concept Erasure in Large Language Models"
 year: 2025
+date_published: "2025-05-28"
 authors: "Fazl Barez, Mor Geva, Yoav Gur-Arieh, Yihuai Hong, Haya Clara Suslik"
 published: "Association for Computational Linguistics, 2025"
 tags:

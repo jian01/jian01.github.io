@@ -2,6 +2,7 @@
 layout: paper
 title: "An Adversarial Perspective on Machine Unlearning for AI Safety"
 year: 2024
+date_published: "2024-09-26"
 authors: "Jakub Łucki, Boyi Wei, Yangsibo Huang, Peter Henderson, Florian Tramèr, Javier Rando"
 published: "arXiv, 2024"
 tags:

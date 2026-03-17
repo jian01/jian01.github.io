@@ -2,6 +2,7 @@
 layout: paper
 title: "Can Machine Unlearning Reduce Social Bias in Language Models?"
 year: 2024
+date_published: "2024-06-19"
 authors: "Omkar Dige, Diljot Arneja, Tsz Fung Yau, Qixuan Zhang, Mohammad Bolandraftar, Xiaodan Zhu, Faiza Khan Khattak"
 published: "EMNLP Industry Track, 2024"
 tags:

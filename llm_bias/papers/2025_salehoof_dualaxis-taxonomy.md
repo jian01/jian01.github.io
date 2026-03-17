@@ -2,6 +2,7 @@
 layout: paper
 title: "A Dual-Axis Taxonomy of Knowledge Editing for LLMs: From Mechanisms to Functions"
 year: 2025
+date_published: "2025-08-12"
 authors: "Amir Mohammad Salehoof, Ali Ramezani, Yadollah Yaghoobzadeh, M. N. Ahmadabadi"
 published: "arXiv, 2025"
 tags:

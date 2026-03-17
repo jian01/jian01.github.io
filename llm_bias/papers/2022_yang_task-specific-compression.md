@@ -2,6 +2,7 @@
 layout: paper
 title: "Task-specific Compression for Multi-task Language Models using Attribution-based Pruning"
 year: 2022
+date_published: "2022-05-09"
 authors: "Nakyeong Yang, Yunah Jang, Hwanhee Lee, Seohyeong Jung, Kyomin Jung"
 published: "EACL Findings, 2023"
 tags:

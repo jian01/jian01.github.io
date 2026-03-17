@@ -2,6 +2,7 @@
 layout: paper
 title: "Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs"
 year: 2025
+date_published: "2025-09-24"
 authors: "S. Satish, Gustav Eje Henter, Éva Székely"
 published: "arXiv, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models"
 year: 2023
+date_published: "2023-05-19"
 authors: "Junyi Li, Xiaoxue Cheng, Xin Zhao, Jian-Yun Nie, Ji-Rong Wen"
 published: "EMNLP, 2023"
 tags:

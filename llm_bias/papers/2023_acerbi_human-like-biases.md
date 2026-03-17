@@ -2,6 +2,7 @@
 layout: paper
 title: "Large language models show human-like content biases in transmission chain experiments"
 year: 2023
+date_published: "2023-10-26"
 authors: "Alberto Acerbi, Joseph M. Stubbersfield"
 published: "PNAS, 2023"
 tags:

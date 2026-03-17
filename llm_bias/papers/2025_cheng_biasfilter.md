@@ -2,6 +2,7 @@
 layout: paper
 title: "BiasFilter: An Inference-Time Debiasing Framework for Large Language Models"
 year: 2025
+date_published: "2025-05-28"
 authors: "Xiaoqing Cheng, Ruizhe Chen, Hongying Zan, Yuxiang Jia, Min Peng"
 published: "arXiv, 2025"
 tags:

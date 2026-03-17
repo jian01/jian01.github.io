@@ -2,6 +2,7 @@
 layout: paper
 title: "Fine-Tuning Language Models from Human Preferences"
 year: 2019
+date_published: "2019-09-18"
 authors: "Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul F. Christiano, Geoffrey Irving (OpenAI)"
 published: "arXiv, 2019"
 tags:

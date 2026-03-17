@@ -2,6 +2,7 @@
 layout: paper
 title: "TOFU: A Task of Fictitious Unlearning for LLMs"
 year: 2024
+date_published: "2024-01-11"
 authors: "Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary Chase Lipton, J. Zico Kolter"
 published: "arXiv, 2024"
 tags:

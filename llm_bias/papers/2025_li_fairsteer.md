@@ -2,6 +2,7 @@
 layout: paper
 title: "FairSteer: Inference Time Debiasing for LLMs with Dynamic Activation Steering"
 year: 2025
+date_published: "2025-04-20"
 authors: "Yichen Li, Zhiting Fan, Ruizhe Chen, Xiaotang Gai, Luqi Gong, Yan Zhang, Zuozhu Liu"
 published: "arXiv, 2025"
 tags:

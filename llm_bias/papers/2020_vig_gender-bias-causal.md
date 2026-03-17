@@ -2,6 +2,7 @@
 layout: paper
 title: "Investigating Gender Bias in Language Models Using Causal Mediation Analysis"
 year: 2020
+date_published: "2020-04-26"
 authors: "Jesse Vig, Sebastian Gehrmann, Yonatan Belinkov, Sharon Qian, Daniel Nevo, Yaron Singer, Stuart Shieber"
 published: "NeurIPS, 2020"
 tags:

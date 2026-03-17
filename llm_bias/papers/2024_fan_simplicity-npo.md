@@ -2,6 +2,7 @@
 layout: paper
 title: "Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning"
 year: 2024
+date_published: "2024-10-09"
 authors: "Chongyu Fan, Liu Jian-cheng, Licong Lin, Jinghan Jia, Ruiqi Zhang, Mei Song, Sijia Liu"
 published: "arXiv, 2024"
 tags:

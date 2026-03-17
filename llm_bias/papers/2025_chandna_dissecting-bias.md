@@ -2,6 +2,7 @@
 layout: paper
 title: "Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective"
 year: 2025
+date_published: "2025-06-05"
 authors: "Bhavik Chandna, Zubair Bashir, Procheta Sen"
 published: "arXiv, 2025"
 tags:

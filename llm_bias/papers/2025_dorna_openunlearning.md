@@ -2,6 +2,7 @@
 layout: paper
 title: "OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics"
 year: 2025
+date_published: "2025-06-14"
 authors: "Vineeth Dorna, Anmol Reddy Mekala, Wenlong Zhao, Andrew McCallum, Zachary Chase Lipton, J. Zico Kolter, Pratyush Maini"
 published: "arXiv, 2025"
 tags:

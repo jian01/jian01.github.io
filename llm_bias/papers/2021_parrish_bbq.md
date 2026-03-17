@@ -2,6 +2,7 @@
 layout: paper
 title: "BBQ: A hand-built bias benchmark for question answering"
 year: 2021
+date_published: "2021-10-15"
 authors: "Alicia Parrish, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut, Sam Bowman"
 published: "ACL Findings, 2022"
 tags:

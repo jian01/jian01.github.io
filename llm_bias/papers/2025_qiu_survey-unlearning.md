@@ -2,6 +2,7 @@
 layout: paper
 title: "A Survey on Unlearning in Large Language Models"
 year: 2025
+date_published: "2025-10-29"
 authors: "Ruichen Qiu, Jiajun Tan, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun"
 published: "arXiv, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Unlearning Bias in Language Models by Partitioning Gradients"
 year: 2023
+date_published: "2023-07-01"
 authors: "Charles Yu, Sullam Jeoung, Anish Kasi, Pengfei Yu, Heng Ji"
 published: "Findings of ACL, 2023"
 tags:

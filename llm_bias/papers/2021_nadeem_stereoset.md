@@ -2,6 +2,7 @@
 layout: paper
 title: "StereoSet: Measuring stereotypical bias in pretrained language models"
 year: 2021
+date_published: "2020-04-20"
 authors: "Moin Nadeem, Anna Bethke, Siva Reddy"
 published: "ACL, 2021"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Self-Debiasing Large Language Models: Zero-Shot Recognition and Reduction of Stereotypes"
 year: 2024
+date_published: "2024-02-03"
 authors: "Isabel O. Gallegos, Ryan A. Rossi, Joe Barrow, Md. Mehrab Tanjim, Tong Yu, Hanieh Deilamsalehy, Ruiyi Zhang, Sungchul Kim, Franck Dernoncourt"
 published: "arXiv, 2024"
 tags:

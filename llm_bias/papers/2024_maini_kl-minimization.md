@@ -2,6 +2,7 @@
 layout: paper
 title: "KL Minimization for Machine Unlearning in LLMs"
 year: 2024
+date_published: "2024-01-11"
 authors: "Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary Chase Lipton, J. Zico Kolter"
 published: "Introducido como baseline en TOFU (arXiv, 2024)"
 tags:

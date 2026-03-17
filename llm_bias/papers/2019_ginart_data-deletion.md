@@ -2,6 +2,7 @@
 layout: paper
 title: "Making AI Forget You: Data Deletion in Machine Learning"
 year: 2019
+date_published: "2019-07-11"
 authors: "Antonio Ginart, Melody Guan, Gregory Valiant, James Zou"
 published: "NeurIPS, 2019"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Language Models Get a Gender Makeover: Mitigating Gender Bias with Few-Shot Data Interventions"
 year: 2023
+date_published: "2023-06-07"
 authors: "Himanshu Thakur, Atishay Jain, Praneetha Vaddamanu, Percy Liang, Louis-Philippe Morency"
 published: "ACL, 2023"
 tags:

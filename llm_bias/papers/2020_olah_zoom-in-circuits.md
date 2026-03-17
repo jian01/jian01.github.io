@@ -2,6 +2,7 @@
 layout: paper
 title: "Zoom In: An Introduction to Circuits"
 year: 2020
+date_published: "2020-03-10"
 authors: "Chris Olah, Nick Cammarata, Ludwig Schubert, Gabriel Goh, Michael Petrov, Shan Carter"
 published: "Distill, 2020"
 tags:

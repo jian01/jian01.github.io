@@ -2,6 +2,7 @@
 layout: paper
 title: "BiasEdit: Debiasing Stereotyped Language Models via Model Editing"
 year: 2025
+date_published: "2025-03-11"
 authors: "Xin Xu, Wei Xu, Ningyu Zhang, Julian McAuley"
 published: "arXiv, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Debiasing the Fine-Grained Classification Task in LLMs with Bias-Aware PEFT"
 year: 2025
+date_published: "2025-07-01"
 authors: "Daiying Zhao, Xinyu Yang, Hang Chen"
 published: "ACL, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "No Free Lunch in Language Model Bias Mitigation? Targeted Bias Reduction Can Exacerbate Unmitigated LLM Biases"
 year: 2026
+date_published: "2025-11-23"
 authors: "Shireen Chand, Faith Baca, Emilio Ferrara"
 published: "Applied Informatics, 2026"
 tags:

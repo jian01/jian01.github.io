@@ -2,6 +2,7 @@
 layout: paper
 title: "Attribution Patching Outperforms Automated Circuit Discovery"
 year: 2024
+date_published: "2023-10-16"
 authors: "Aaquib Syed, Can Rager, Arthur Conmy"
 published: "BlackboxNLP Workshop, 2024"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Large Language Model Unlearning"
 year: 2023
+date_published: "2023-10-16"
 authors: "Yuanshun Yao, Xiaojun Xu, Yang Liu"
 published: "arXiv, 2023"
 tags:

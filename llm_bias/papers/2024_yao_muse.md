@@ -2,6 +2,7 @@
 layout: paper
 title: "MUSE: Machine Unlearning Six-Way Evaluation for Language Models"
 year: 2024
+date_published: "2024-07-08"
 authors: "Weijia Shi, Jaechan Lee, Yangsibo Huang, Sadhika Malladi, Jieyu Zhao, Ari Holtzman, Daogao Liu, Luke Zettlemoyer, Noah A. Smith, Chiyuan Zhang"
 published: "arXiv, 2024"
 tags:

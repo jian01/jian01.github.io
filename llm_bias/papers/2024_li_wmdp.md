@@ -2,6 +2,7 @@
 layout: paper
 title: "The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning"
 year: 2024
+date_published: "2024-03-05"
 authors: "Nathaniel Li, Alexander Pan, Anjali Gopal, Summer Yue, Daniel Berrios, Alice Gatti, et al."
 published: "arXiv, 2024"
 tags:

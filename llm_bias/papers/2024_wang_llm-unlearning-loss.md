@@ -2,6 +2,7 @@
 layout: paper
 title: "LLM Unlearning via Loss Adjustment with Only Forget Data"
 year: 2024
+date_published: "2024-10-14"
 authors: "Yaxuan Wang, Jiaheng Wei, Chris Liu, Jinlong Pang, Quan Liu, Ankit Parag Shah, Yujia Bao, Yang Liu, Wei Wei"
 published: "arXiv, 2024"
 tags:

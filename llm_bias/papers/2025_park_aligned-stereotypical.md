@@ -2,6 +2,7 @@
 layout: paper
 title: "Aligned but Stereotypical? The Hidden Influence of System Prompts on Social Bias in LVLM-Based Text-to-Image Models"
 year: 2025
+date_published: "2024-12-04"
 authors: "NaHyeon Park, Namin An, Kunhee Kim, Soyeon Yoon, Jiahao Huo, Hyunjung Shim"
 published: "arXiv, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Feature-Selective Representation Misdirection for Machine Unlearning"
 year: 2025
+date_published: "2024-12-18"
 authors: "Taozhao Chen, Linghan Huang, Kim-Kwang Raymond Choo, Huaming Chen"
 published: "arXiv, 2025"
 tags:

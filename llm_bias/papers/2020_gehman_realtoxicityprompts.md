@@ -2,6 +2,7 @@
 layout: paper
 title: "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models"
 year: 2020
+date_published: "2020-09-24"
 authors: "Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, Noah A. Smith"
 published: "EMNLP Findings, 2020"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Eight Methods to Evaluate Robust Unlearning in LLMs"
 year: 2024
+date_published: "2024-02-26"
 authors: "Aengus Lynch, Phillip Guo, Aidan Ewart, Stephen Casper, Dylan Hadfield-Menell"
 published: "arXiv, 2024"
 tags:

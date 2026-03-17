@@ -2,6 +2,7 @@
 layout: paper
 title: "Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond"
 year: 2025
+date_published: "2025-02-07"
 authors: "Chongyu Fan, Jinghan Jia, Yihua Zhang, Anil Ramakrishna, Mingyi Hong, Sijia Liu"
 published: "arXiv, 2025"
 tags:

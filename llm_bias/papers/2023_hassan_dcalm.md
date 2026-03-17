@@ -2,6 +2,7 @@
 layout: paper
 title: "D-CALM: A Dynamic Clustering-based Active Learning Approach for Mitigating Bias"
 year: 2023
+date_published: "2023-05-26"
 authors: "Sabit Hassan, Malihe Alikhani"
 published: "arXiv, 2023"
 tags:

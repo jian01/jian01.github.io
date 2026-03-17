@@ -2,6 +2,7 @@
 layout: paper
 title: "Who's Harry Potter? Approximate Unlearning in LLMs"
 year: 2023
+date_published: "2023-10-04"
 authors: "Ronen Eldan, Mark Russinovich"
 published: "arXiv, 2023"
 tags:

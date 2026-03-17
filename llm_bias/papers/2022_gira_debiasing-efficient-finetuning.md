@@ -2,6 +2,7 @@
 layout: paper
 title: "Debiasing Pre-Trained Language Models via Efficient Fine-Tuning"
 year: 2022
+date_published: "2022-05-27"
 authors: "Michael Gira, Ruisu Zhang, Kangwook Lee"
 published: "LTEDI Workshop, 2022"
 tags:

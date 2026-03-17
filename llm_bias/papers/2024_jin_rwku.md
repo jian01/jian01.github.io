@@ -2,6 +2,7 @@
 layout: paper
 title: "RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models"
 year: 2024
+date_published: "2024-06-16"
 authors: "Zhuoran Jin, Pengfei Cao, Chenhao Wang, Zhitao He, Hongbang Yuan, Jiachun Li, Yubo Chen, Kang Liu, Jun Zhao"
 published: "arXiv, 2024"
 tags:

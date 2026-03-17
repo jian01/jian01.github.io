@@ -2,6 +2,7 @@
 layout: paper
 title: "How does GPT-2 compute greater-than?: Interpreting mathematical abilities in a pre-trained language model"
 year: 2023
+date_published: "2023-04-30"
 authors: "Michael Hanna, Ollie Liu, Alexandre Variengien"
 published: "arXiv, 2023"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Social Bias Frames: Reasoning about Social and Power Implications of Language"
 year: 2020
+date_published: "2019-11-10"
 authors: "Maarten Sap, Saadia Gabriel, Lianhui Qin, Dan Jurafsky, Noah A. Smith, Yejin Choi"
 published: "ACL, 2020"
 tags:

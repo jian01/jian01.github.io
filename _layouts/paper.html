@@ -20,7 +20,7 @@ layout: default
     <div class="paper-meta">
       {% if page.authors %}<p class="paper-authors"><strong>Autores:</strong> {{ page.authors }}</p>{% endif %}
       {% if page.published %}<p class="paper-venue"><strong>Publicado en:</strong> {{ page.published }}</p>{% endif %}
-      {% if page.year %}<p class="paper-year"><strong>Año:</strong> {{ page.year }}</p>{% endif %}
+      {% if page.date_published %}<p class="paper-year"><strong>Fecha de publicación:</strong> {{ page.date_published }}</p>{% elsif page.year %}<p class="paper-year"><strong>Año:</strong> {{ page.year }}</p>{% endif %}
       {% if page.method_type %}<p class="paper-method-type"><strong>Tipo de método:</strong> <span class="method-badge">{{ page.method_type }}</span></p>{% endif %}
       {% if page.datasets %}
       <p class="paper-datasets"><strong>Datasets:</strong>

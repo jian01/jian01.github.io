@@ -2,6 +2,7 @@
 layout: paper
 title: "Finding Skill Neurons in Pre-trained Transformer-based Language Models"
 year: 2022
+date_published: "2022-11-14"
 authors: "Xiaozhi Wang, Kaiyue Wen, Zhengyan Zhang, Lei Hou, Zhiyuan Liu, Juanzi Li"
 published: "EMNLP, 2022"
 tags:

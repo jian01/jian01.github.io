@@ -2,6 +2,7 @@
 layout: paper
 title: "Towards Automated Circuit Discovery for Mechanistic Interpretability"
 year: 2023
+date_published: "2023-04-28"
 authors: "Arthur Conmy, Adrià Garriga-Alonso, Stefan Heimersheim, Aengus Lynch, Augustine N. Mavor-Parker"
 published: "NeurIPS, 2023"
 tags:

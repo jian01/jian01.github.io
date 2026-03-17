@@ -2,6 +2,7 @@
 layout: paper
 title: "Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities"
 year: 2026
+date_published: "2026-01-29"
 authors: "Tien Dang, The-Hai Nguyen, Dinh Mai Phuong, Nguyễn Vũ Nguyên Phương, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue"
 published: "arXiv, 2026"
 tags:

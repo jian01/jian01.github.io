@@ -2,6 +2,7 @@
 layout: paper
 title: "BiasFreeBench: a Benchmark for Mitigating Bias in Large Language Model Responses"
 year: 2025
+date_published: "2025-09-30"
 authors: "Xin Xu, Xiaoqiao He, Churan Zhi, Ruizhe Chen, Julian McAuley, Zexue He"
 published: "arXiv, 2025"
 tags:

@@ -2,6 +2,7 @@
 layout: paper
 title: "Rethinking Machine Unlearning for Large Language Models"
 year: 2024
+date_published: "2024-02-13"
 authors: "Sijia Liu, Yuanshun Yao, Jinghan Jia, Stephen Casper, Nathalie Baracaldo, Peter Hase, Xiaojun Xu, Yuguang Yao, Hang Li, Kush R. Varshney, Mohit Bansal, Sanmi Koyejo, Yang Liu"
 published: "arXiv, 2024"
 tags:

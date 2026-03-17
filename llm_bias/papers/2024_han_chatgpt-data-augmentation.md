@@ -2,6 +2,7 @@
 layout: paper
 title: "ChatGPT Based Data Augmentation for Improved Parameter-Efficient Debiasing of LLMs"
 year: 2024
+date_published: "2024-02-19"
 authors: "Pengrui Han, Rafał Kocielnik, Adhithya Saravanan, Roy Jiang, Or Sharir, Junchi Yan"
 published: "LTEDI Workshop, 2024"
 tags:
