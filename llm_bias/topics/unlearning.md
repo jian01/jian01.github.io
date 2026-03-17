@@ -14,7 +14,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 <div class="status-legend"><span class="dot dot-relevante"></span> Relevante&nbsp;&nbsp;<span class="dot dot-leido"></span> Leído&nbsp;&nbsp;<span class="dot dot-pendiente"></span> Pendiente&nbsp;&nbsp;<span class="dot dot-irrelevante"></span> Irrelevante</div>
 
 
-| Estado | Año | Título | Tipo de método | Resumen | Citas |
+| Estado | Año | Título | Tipo de método | Resumen | Citas* |
 | --- |-----|--------|----------------|---------| :---: |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2015 | Towards Making Systems Forget with Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2015_cao_machine-unlearning.html) | 26 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2019 | Making AI Forget You: Data Deletion in Machine Learning | Reentrenamiento exacto | [Ver](../papers/2019_ginart_data-deletion.html) | 1 |
@@ -52,6 +52,8 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2025 | A Survey on Unlearning in Large Language Models | Evaluación / análisis | [Ver](../papers/2025_qiu_survey-unlearning.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2026 | Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities | Evaluación / análisis | [Ver](../papers/2026_dang_beyond-forgetting.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2026 | Per-parameter Task Arithmetic for Unlearning in Large Language Models | Enmascarado / edición de pesos | [Ver](../papers/2026_cai_per-parameter-task-arithmetic.html) | 1 |
+
+*Solo citas entre papers del repositorio.
 
 ---
 

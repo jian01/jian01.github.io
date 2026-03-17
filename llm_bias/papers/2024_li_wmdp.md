@@ -53,6 +53,12 @@ Las preguntas se diseñaron siguiendo **modelos de amenaza** concretos (ej. el c
 
 La idea central es que, en lugar de penalizar la probabilidad de tokens peligrosos (como hace gradient ascent), RMU **redirige las representaciones internas** del modelo: fuerza que las activaciones en contextos peligrosos apunten hacia un **vector aleatorio fijo** $$u$$, desconectando esas representaciones de su significado original sin necesidad de una referencia semántica.
 
+#### Selección de la capa $$l$$
+
+RMU **no actualiza todo el modelo**: solo modifica los pesos de una única capa del transformer, indexada por $$l$$, y congela el resto. La capa $$l$$ es un hiperparámetro que se busca por grid search sobre las capas intermedias del modelo — ni las muy tempranas (que procesan sintaxis básica) ni las finales (que producen la distribución de salida). En los experimentos, para Zephyr-7b-beta (32 capas) se usó $$l = 7$$; para Yi-34b se reporta una capa similar en el tercio inferior de la red. La elección se evalúa mirando el trade-off: capa demasiado temprana → poco efecto sobre el olvido; capa demasiado tardía → degradación de capacidades generales.
+
+Los otros hiperparámetros principales son el escalar de escala $$c$$ (qué tan lejos del origen se empuja la representación) y el peso $$\alpha$$ que balancea olvido vs. retención, también ajustados por grid search.
+
 #### Función de pérdida
 
 La pérdida total combina dos términos:

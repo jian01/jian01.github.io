@@ -16,7 +16,7 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 
 ## Benchmarks y Datasets
 
-| Estado | Año | Título | Tipo de método | Resumen | Citas |
+| Estado | Año | Título | Tipo de método | Resumen | Citas* |
 | --- |-----|--------|----------------|---------| :---: |
 | <span class="dot dot-leido" title="Leído"></span> | 2020 | Social Bias Frames: Reasoning about Social and Power Implications of Language | Benchmark / Dataset | [Ver](../papers/2020_sap_social-bias-frames.html) | 4 |
 | <span class="dot dot-leido" title="Leído"></span> | 2021 | StereoSet: Measuring stereotypical bias in pretrained language models | Benchmark / Dataset | [Ver](../papers/2021_nadeem_stereoset.html) | 19 |
@@ -32,11 +32,13 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 | <span class="dot dot-leido" title="Leído"></span><span class="dot dot-irrelevante" title="Irrelevante"></span> | 2025 | Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs | Benchmark / Dataset | [Ver](../papers/2025_satish_bias-benchmarks-speech.html) | 0 |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2025 | BiasFreeBench: a Benchmark for Mitigating Bias in Large Language Model Responses | Benchmark / Dataset | [Ver](../papers/2025_xu_biasfreebench.html) | 0 |
 
+*Solo citas entre papers del repositorio.
+
 ---
 
 ## Métodos de Mitigación
 
-| Estado | Año | Título | Tipo de método | Resumen | Citas |
+| Estado | Año | Título | Tipo de método | Resumen | Citas* |
 | --- |-----|--------|----------------|---------| :---: |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders | Fine-tuning / data augmentation | [Ver](../papers/2021_cheng_fairfil.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Sustainable Modular Debiasing of Language Models | Adapters / PEFT | [Ver](../papers/2021_lauscher_modular-debiasing.html) | 1 |
@@ -62,6 +64,8 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2025 | LLM Bias Detection and Mitigation through the Lens of Desired Distributions | Fine-tuning / data augmentation | [Ver](../papers/2025_shrestha_llm-bias-detection.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2026 | No Free Lunch in Language Model Bias Mitigation? | Evaluación / análisis | [Ver](../papers/2026_chand_no-free-lunch.html) | 0 |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2026 | KnowBias: Mitigating Social Bias in LLMs via Know-Bias Neuron Enhancement | Edición de pesos / neuronas | [Ver](../papers/2026_pan_knowbias.html) | 0 |
+
+*Solo citas entre papers del repositorio.
 
 ---
 
