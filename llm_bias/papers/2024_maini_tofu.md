@@ -16,8 +16,8 @@ status:
   - "Leido"
   - "Relevante"
 image: "imgs/2024_maini_tofu.png"
-image_caption: "Imagen representativa del benchmark TOFU (Task Of Fictitious Unlearning), con un cubo de tofu animado que da nombre al benchmark de evaluación de desaprendizaje con autores ficticios."
-opinion: "<WIP>"
+image_caption: "Entrenamos un LLAMA con finetuning para memorizar datos inventados, y despues hacemos que olvide algunos de ellos."
+opinion: "Benchmark de distintos métodos de unlearning, que propone una forma interesante de hacerlo con datos inventados, ya que no sabemos realmente que datos la LLM aprendió o no del mundo real. Más alla de los resultados creo que en los casos en los que sea posible se debería seguir un benchmark similar. No todo el unlearning se puede estudiar de esta manera, por ejemplo, como hago un sesgo discriminatorio ficticio? o cómo me ayuda esto a olvidar como armar una bomba nuclear? Parece más orientado a olvidar datos específicos, por ejemplo para el derecho al olvido."
 ---
 # TOFU: A Task of Fictitious Unlearning for LLMs (2024)
 
@@ -47,7 +47,16 @@ El diseño experimental es inteligente: como no se puede saber con certeza qué 
    - **Retain Accuracy**: qué tanto se preservó el conocimiento de los demás autores.
    - **Model Utility**: qué tanto se preservó la capacidad general del modelo en tareas estándar (MMLU, etc.).
 
-Los métodos de unlearning evaluados incluyen gradient ascent, gradient difference, KL divergence preservation, y preference optimization methods.
+**Métodos de unlearning evaluados:**
+
+| Método | Descripción breve | Paper de origen |
+|--------|-------------------|-----------------|
+| Gradient Ascent (GA) | Maximiza la pérdida sobre el forget set para degradar ese conocimiento | [Jang et al. (2022)](2022_jang_knowledge-unlearning.html) |
+| Gradient Difference (GD) | GA sobre forget set + gradient descent normal sobre retain set para compensar la degradación | [Yao et al. (2023)](2023_yao_large-llm-unlearning.html) |
+| KL Minimization | GA sobre forget set + término de regularización KL para mantener la distribución del retain set cercana al modelo original | [Maini et al. (2024)](2024_maini_kl-minimization.html) |
+| Preference Optimization (DPO) | Trata las respuestas del forget set como respuestas "rechazadas" y aplica DPO para reducir su probabilidad | [Zhang et al. (2024)](2024_zhang_negative-preference-optimization.html) |
+| In-Context Unlearning | Sin modificar pesos: incluye ejemplos con etiquetas incorrectas en el contexto para "confundir" al modelo en inferencia | [Pawelczyk et al. (2023)](2023_pawelczyk_incontext-unlearning.html) |
+| Retrained model | Reentrenamiento completo excluyendo el forget set — usado como gold standard inalcanzable en la práctica | — |
 
 ---
 
@@ -69,12 +78,18 @@ Tras el unlearning de Farid Behzadi, el modelo debería responder "No lo sé" o 
 
 ---
 
-## Resultados principales
+## Resultados principales: ningún método resuelve el problema
 
-- Ningún método existente logra el balance perfecto entre forget quality y retain accuracy. Los mejores métodos logran ~70-80% en ambas métricas simultáneamente.
-- Gradient ascent simple destruye el modelo muy rápidamente.
-- Los métodos basados en preference optimization (como NPO) ofrecen el mejor balance.
-- El benchmark demuestra que evaluar unlearning es mucho más difícil de lo que se creía.
+El hallazgo central es que **todos los métodos fallan de alguna manera**, y el tipo de fallo varía por método:
+
+- **Gradient Ascent puro**: olvida bien pero destruye el modelo rápidamente — incluso con pocos pasos el retain accuracy colapsa. Es el peor en preservar utilidad general.
+- **Gradient Difference**: más estable que GA puro gracias al término de retención, pero el olvido es incompleto: el modelo retiene trazas del forget set detectables con membership inference.
+- **KL Minimization**: mejor balance que GD en retain accuracy, pero también olvido incompleto. El término KL es conservador y frena demasiado el olvido.
+- **Preference Optimization (DPO)**: el mejor balance general entre forget quality y retain accuracy (~70-80% en ambas). El modelo no colapsa y olvida de forma más suave, aunque tampoco es perfecto.
+- **In-Context Unlearning**: sorprendentemente débil — no modifica pesos, así que el conocimiento sigue accesible bajo parafraseo o ataques de extracción directa.
+- **Retrained model (gold standard)**: el único que logra forget quality y retain accuracy simultáneamente perfectas, pero es computacionalmente inviable en la práctica para LLMs grandes.
+
+La conclusión más importante del benchmark es que **forget quality y retain accuracy están en tensión estructural**: cualquier método que olvide más agresivamente degrada más el modelo. No existe aún una solución que cruce esta frontera de Pareto de forma significativa.
 
 ---
 

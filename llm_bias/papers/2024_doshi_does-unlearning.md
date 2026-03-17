@@ -40,7 +40,44 @@ La novedad de este paper está en la metodología de evaluación, no en proponer
 - Un usuario (o atacante) no tiene acceso a los pesos del modelo.
 - Solo puede interactuar mediante la API (prompt → respuesta).
 
-Las técnicas de sondeo usadas son:
+### Métodos de unlearning evaluados
+
+| Método | Descripción breve | Paper de origen |
+|--------|-------------------|-----------------|
+| LLMU (Gradient Ascent) | Ascenso de gradiente sobre el forget set + descenso sobre retain set | [Yao et al. (2023)](2023_yao_large-llm-unlearning.html) |
+| RMU (Representation Misdirection) | Redirige las representaciones internas del forget set hacia activaciones aleatorias | [Li et al. (2024)](2024_li_wmdp.html) |
+| Harry Potter method | Fine-tuning con texto de reemplazo + reinforced unlikelihood sobre el corpus a olvidar | [Eldan & Russinovich (2023)](2023_eldan_harry-potter.html) |
+| NPO (Negative Preference Optimization) | Adapta DPO para tratar respuestas del forget set como respuestas rechazadas | [Zhang et al. (2024)](2024_zhang_negative-preference-optimization.html) |
+
+### Modelos base utilizados
+
+- **Llama-2-7B** y **Zephyr-7B** — los principales modelos sobre los que se aplican los métodos de unlearning y luego se ataca.
+
+### Experimentos realizados
+
+Se diseñaron tres experimentos independientes, cada uno sobre un dominio de conocimiento distinto y con el método de unlearning más apropiado para ese dominio:
+
+**Experimento 1 — Conocimiento peligroso (WMDP)**
+- Dominio: biología, ciberseguridad y química del dataset [WMDP](2024_li_wmdp.html).
+- Método evaluado: **RMU**, que es el método propuesto en WMDP para borrar conocimiento de uso dual.
+- Evaluación estándar: accuracy en MMLU Biología (forget) vs. MMLU Other (retain).
+- Evaluación de caja negra: se sondea el mismo conocimiento mediante rephrasing, indirect elicitation e hypothetical framing.
+
+**Experimento 2 — Corpus literario (Harry Potter)**
+- Dominio: personajes, eventos y vocabulario específico del universo de Harry Potter.
+- Método evaluado: **Harry Potter method** ([Eldan & Russinovich, 2023](2023_eldan_harry-potter.html)).
+- Evaluación estándar: tasa de respuestas incorrectas a preguntas directas sobre el canon.
+- Evaluación de caja negra: los mismos hechos se consultan reformulando las preguntas en distintos estilos narrativos, en otros idiomas, o con in-context cues.
+
+**Experimento 3 — Autores ficticios (TOFU)**
+- Dominio: biografías de los 200 autores ficticios del benchmark [TOFU](2024_maini_tofu.html).
+- Métodos evaluados: **LLMU** y **NPO**.
+- Evaluación estándar: forget quality y retain accuracy según el protocolo TOFU.
+- Evaluación de caja negra: se aplican los cuatro tipos de ataque (rephrasing, indirect elicitation, in-context exploitation, hypothetical framing) para intentar extraer información de los autores supuestamente olvidados.
+
+### Técnicas de sondeo (ataques de caja negra)
+
+Las siguientes técnicas se aplican sistemáticamente en los tres experimentos:
 
 **1. Rephrasing attacks**: reformular la pregunta en múltiples idiomas, estilos o marcos narrativos. Si el modelo responde correctamente en alguna variante, el olvido es superficial.
 
@@ -49,8 +86,6 @@ Las técnicas de sondeo usadas son:
 **3. In-context learning exploitation**: proveer fragmentos del texto olvidado como "contexto" y pedir al modelo que "continúe" o "responda en ese estilo". Si el modelo reconoce y usa la información contextual de forma que indica familiaridad, no la olvidó realmente.
 
 **4. Hypothetical framing**: preguntar al modelo que "imagine" o "especule" sobre el tema en lugar de reportar directamente.
-
-El paper evalúa estos ataques contra modelos unlearned con gradient ascent, NPO y Harry Potter method.
 
 ---
 

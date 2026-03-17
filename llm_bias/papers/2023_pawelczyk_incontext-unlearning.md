@@ -13,11 +13,10 @@ tags:
 pdf: "/llm_bias/pdfs/2023_pawelczyk_incontext-unlearning.pdf"
 method_type: "Tiempo de inferencia"
 status:
-  - "Relevante"
   - "Leido"
 image: "imgs/2023_pawelczyk_incontext-unlearning.png"
-image_caption: "Icono de red neuronal representativo del método In-Context Unlearning, que propone simular el olvido mediante demostraciones en el prompt sin modificar los pesos del modelo."
-opinion: "<WIP>"
+image_caption: "Comaparación entre los otros métodos de unlearning y este."
+opinion: "Es super simple, solo agrega un dato opuesto en el prompt, no es muy interesante."
 ---
 # In-Context Unlearning: Language Models as Few Shot Unlearners (2023)
 
