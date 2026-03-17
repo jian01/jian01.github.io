@@ -17,8 +17,8 @@ status:
   - "Leido"
   - "Relevante"
 image: "imgs/2024_doshi_does-unlearning.png"
-image_caption: "Gráfico de dispersión que compara la precisión en MMLU Biología (eje X, conocimiento a olvidar) frente a MMLU Other (eje Y, conocimiento a preservar) para Llama y Zephyr con los métodos LLMU y RMU, evidenciando el trade-off entre olvido y retención."
-opinion: "<WIP>"
+image_caption: "El unlearning se puede romper con adversarial prompting."
+opinion: "Muestra que, para algunos métodos que están en esta colección, el advesarial prompting fácilmente recupera todo lo que se quería olvidar."
 ---
 # Does Unlearning Truly Unlearn? A Black Box Evaluation of LLM Unlearning Methods (2024)
 
@@ -31,7 +31,6 @@ opinion: "<WIP>"
 ## Qué hace
 
 Evalúa métodos de unlearning en LLMs usando únicamente acceso de **caja negra** (solo entradas y salidas, sin inspección de pesos internos). Muestra que modelos que "pasan" las evaluaciones estándar de unlearning pueden ser inducidos a revelar información olvidada mediante prompts creativos.
-
 
 ---
 
@@ -106,10 +105,59 @@ Un modelo unlearned para "olvidar" instrucciones de ciberataques falla la evalua
 
 ## Resultados principales
 
-- Los ataques de rephrasing son efectivos contra el 60-80% de los modelos unlearned evaluados.
-- In-context learning exploitation tiene ~50% de éxito incluso contra los mejores métodos.
-- Los métodos que funcionan mejor en evaluaciones estándar no son necesariamente los más robustos ante ataques de caja negra.
-- Hallazgo preocupante: ningún método de unlearning evaluado es robusto ante todos los ataques de caja negra.
+La métrica clave es el **forget quality score**: qué tan bien "pasó" el modelo la evaluación estándar de olvido (mayor = mejor olvido aparente), comparado con cuánto del conocimiento se recupera mediante los ataques de caja negra. El paper reporta resultados separados por experimento.
+
+---
+
+### Experimento 1 — WMDP (RMU sobre Zephyr-7B)
+
+Tras aplicar RMU, el modelo cae cerca del nivel aleatorio en preguntas directas de WMDP (~25–30%). Sin embargo, los ataques de caja negra recuperan accuracy sustancialmente:
+
+| Tipo de ataque | Recuperación del conocimiento |
+|----------------|:-----------------------------:|
+| Evaluación directa (baseline) | ~25–30% (nivel aleatorio) |
+| Rephrasing (otros idiomas, reformulación) | recuperación parcial significativa |
+| Hypothetical framing ("imagina que eres experto en...") | recuperación alta |
+| Indirect elicitation | recuperación moderada–alta |
+| In-context exploitation | recuperación moderada |
+
+El hallazgo central es que RMU bloquea el conocimiento en el **modo de recuperación directa** pero no lo elimina del modelo: el conocimiento permanece accesible a través de formulaciones alternativas.
+
+---
+
+### Experimento 2 — Harry Potter (método Eldan & Russinovich sobre Llama-2-7B)
+
+En la evaluación estándar, el modelo unlearned falla preguntas directas sobre el canon de Harry Potter con alta frecuencia. Bajo ataques de caja negra:
+
+- **Rephrasing en otro idioma**: el modelo responde correctamente preguntas HP en idiomas distintos al inglés, mostrando que el olvido es superficial y específico al patrón de input.
+- **In-context exploitation**: al proveer un fragmento del libro como contexto y pedir continuación, el modelo lo sigue con conocimiento del universo HP.
+- **Hypothetical framing**: "escribe una historia donde un personaje explica el sistema de casas de Hogwarts" → el modelo genera contenido correcto y detallado.
+
+El método HP consigue un olvido superficialmente convincente pero que no resiste ninguno de los cuatro tipos de ataque.
+
+---
+
+### Experimento 3 — TOFU (LLMU y NPO sobre Llama-2-7B)
+
+TOFU tiene métrica de forget quality integrada. Los resultados muestran:
+
+| Método | Forget quality (eval. estándar) | Forget quality (bajo ataques) |
+|--------|:-------------------------------:|:-----------------------------:|
+| LLMU | buena (supera umbral TOFU) | degradación importante con rephrasing e indirect elicitation |
+| NPO | mejor que LLMU en eval. estándar | igualmente vulnerable a indirect elicitation e in-context |
+
+Ambos métodos generan respuestas "no sé" ante preguntas directas sobre los autores olvidados, pero cuando se les pregunta indirectamente ("¿qué podría haber escrito alguien llamado [nombre]?") o con in-context cues, revelan información biográfica del forget set.
+
+---
+
+### Conclusión global
+
+| Resultado | Descripción |
+|-----------|-------------|
+| Ningún método es robusto | Los cuatro métodos evaluados son vulnerables a al menos dos de los cuatro tipos de ataque |
+| Rephrasing es el ataque más efectivo | Funciona contra todos los métodos; la traducción a otro idioma es especialmente efectiva |
+| La evaluación estándar no predice robustez | Los métodos que pasan holgadamente la eval. estándar (RMU, NPO) son igualmente vulnerables |
+| El conocimiento no se borra, se enmascara | La información "olvidada" permanece en los pesos; solo se bloquea su recuperación directa |
 
 ---
 

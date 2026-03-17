@@ -14,7 +14,8 @@ tags:
 pdf: "/llm_bias/pdfs/2024_fan_simplicity-npo.pdf"
 method_type: "Optimización de preferencias"
 status:
-  - "Pendiente"
+  - "Leido"
+  - "Irrelevante"
 image: "imgs/2024_fan_simplicity-npo.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
