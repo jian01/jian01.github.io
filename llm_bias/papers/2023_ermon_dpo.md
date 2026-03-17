@@ -17,7 +17,7 @@ status:
   - "Relevante"
 image: "imgs/2023_ermon_dpo.png"
 image_caption: "Diagrama comparativo entre el pipeline RLHF tradicional (izquierda) y Direct Preference Optimization (derecha): RLHF requiere entrenar un modelo de recompensa separado y usar reinforcement learning, mientras que DPO optimiza directamente el modelo de lenguaje con máxima verosimilitud sobre los datos de preferencia."
-opinion: "<WIP>"
+opinion: "No vale la pena meterle mucha cabeza al modelo de RL, la novedad respecto del paper anterior es que usan la diferencia entre las probabilidades del modelo base y del que se va modificando como el modelo de recompensa mismo, eliminando la necesidad de usar dos modelos."
 ---
 # Direct Preference Optimization: Your Language Model is Secretly a Reward Model (2023)
 
@@ -35,17 +35,129 @@ Propone DPO (**D**irect **P**reference **O**ptimization), un algoritmo que reemp
 
 ## Metodología
 
-**El insight matemático central:**
-El paper demuestra matemáticamente que la solución óptima al problema de RLHF (maximizar recompensa con regularización KL respecto al modelo base) puede expresarse como una función de los propios parámetros del modelo de lenguaje. No es necesario un reward model separado: el LLM mismo IS el reward model implícitamente.
+### El insight matemático central
 
-**La derivación (sin fórmulas):** Si tenemos un modelo base y queremos entrenarlo para preferir respuestas A sobre B, el reward implícito de una respuesta X según el modelo óptimo es proporcional a: log(probabilidad_modelo_actual(X)) - log(probabilidad_modelo_base(X)). Este es el "log-ratio".
+En RLHF estándar se resuelve este problema de optimización:
 
-**El objetivo DPO:**
-Se entrena directamente el LLM sobre pares (respuesta_elegida, respuesta_rechazada) con un objetivo de clasificación:
-- Aumentar la probabilidad de la respuesta elegida relativa al modelo base.
-- Disminuir la probabilidad de la respuesta rechazada relativa al modelo base.
+> Maximizar la recompensa esperada del LLM sujeto a una penalización KL que lo mantiene cerca del modelo de referencia.
 
-No se entrena ningún reward model. No se usa RL. Se actualizan **todos los parámetros del LLM** con una sola pasada de fine-tuning supervisado usando este objetivo.
+El paper demuestra que la **solución óptima a ese problema tiene forma cerrada**: el reward implícito de una respuesta $y$ dado el prompt $x$ es
+
+$$r^*(x, y) = \beta \log \frac{\pi^*(y \mid x)}{\pi_\text{ref}(y \mid x)} + \beta \log Z(x)$$
+
+donde $\beta$ controla cuánto nos desviamos del modelo base y $Z(x)$ es una constante que solo depende del prompt. El término $\log Z(x)$ desaparece cuando se toman diferencias entre dos respuestas, por lo que **el reward relativo entre dos respuestas queda determinado únicamente por el log-ratio del LLM respecto al de referencia**. Esto significa que no hace falta entrenar un reward model separado: el propio LLM ya lo codifica implícitamente.
+
+### Pipeline completo paso a paso
+
+**Paso 1 — SFT: obtener el modelo de referencia π_ref**
+
+El punto de partida es un LLM ya afinado con ejemplos de alta calidad mediante Supervised Fine-Tuning (SFT). Este modelo SFT se usa como **π_ref**: sus pesos se congelan y no se modificarán en ningún momento del entrenamiento DPO. Es el "ancla" que evita que el modelo se degrade.
+
+*Error frecuente a evitar:* no se parte del modelo base crudo sino del modelo SFT. Usar el modelo base crudo como referencia empeoraría los resultados.
+
+---
+
+**Paso 2 — Dataset de preferencias: ternas (x, y_w, y_l)**
+
+Se necesita un conjunto de ternas:
+- `x` — el prompt
+- `y_w` — la respuesta *ganadora* (la preferida por los humanos)
+- `y_l` — la respuesta *perdedora* (la rechazada)
+
+Las respuestas idealmente fueron generadas por el mismo π_ref durante la recolección de datos, aunque en la práctica DPO tolera datasets de preferencias preconstruidos (HH-RLHF, TL;DR). No se necesita ningún modelo de recompensa para construir este dataset: basta con que humanos hayan indicado cuál respuesta prefieren.
+
+---
+
+**Paso 3 — Inicialización: dos instancias del modelo**
+
+Al comienzo del entrenamiento se tienen dos copias del modelo SFT en memoria:
+
+| Modelo | Pesos | Rol |
+|--------|-------|-----|
+| **π_ref** | Congelados | Provee la distribución de referencia (solo forward) |
+| **π_θ** | Entrenables | El modelo que queremos alinear (forward + backprop) |
+
+π_θ se inicializa idéntico a π_ref. En implementaciones con recursos limitados, se usan técnicas como LoRA para que π_θ solo actualice un subconjunto pequeño de parámetros.
+
+---
+
+**Paso 4 — Forward pass: cuatro evaluaciones por terna**
+
+Para cada terna `(x, y_w, y_l)` del batch, se calculan cuatro log-probabilidades (sum de log-probs token a token sobre la respuesta completa):
+
+1. `log π_θ(y_w | x)` — con gradiente
+2. `log π_θ(y_l | x)` — con gradiente
+3. `log π_ref(y_w | x)` — **sin gradiente** (torch.no_grad)
+4. `log π_ref(y_l | x)` — **sin gradiente** (torch.no_grad)
+
+En la práctica, los pasos 1+3 y 2+4 se pueden batchar juntos pasando `[y_w; y_l]` en un solo forward por modelo.
+
+---
+
+**Paso 5 — Log-ratios: medir cuánto cambió π_θ respecto a π_ref**
+
+$$\Delta_w = \log \pi_\theta(y_w \mid x) - \log \pi_\text{ref}(y_w \mid x)$$
+$$\Delta_l = \log \pi_\theta(y_l \mid x) - \log \pi_\text{ref}(y_l \mid x)$$
+
+- $\Delta_w > 0$ significa que π_θ asigna *más* probabilidad a la ganadora que π_ref.
+- $\Delta_l < 0$ significa que π_θ asigna *menos* probabilidad a la perdedora que π_ref.
+- El entrenamiento busca maximizar $\Delta_w - \Delta_l$.
+
+---
+
+**Paso 6 — Pérdida DPO**
+
+$$\mathcal{L}_\text{DPO}(\pi_\theta) = -\mathbb{E}_{(x,\, y_w,\, y_l)} \left[ \log \sigma\!\left( \beta \cdot (\Delta_w - \Delta_l) \right) \right]$$
+
+La función sigmoide $\sigma$ convierte el margen en una probabilidad. La pérdida es mínima cuando $\Delta_w - \Delta_l \gg 0$, es decir cuando el modelo favorece claramente la respuesta ganadora *relativo a la referencia*.
+
+**Rol de β:** hiperparámetro de temperatura.
+- β alto → la penalización KL pesa mucho → el modelo no se aleja demasiado de π_ref → aprendizaje más conservador.
+- β bajo → el modelo puede alejarse más de π_ref → más agresivo pero arriesga degradación.
+
+---
+
+**Paso 7 — Backpropagation y actualización de π_θ**
+
+El gradiente fluye desde $\mathcal{L}_\text{DPO}$ hacia los parámetros de **π_θ únicamente**. Se usa Adam u otro optimizador estándar. El entrenamiento se repite durante múltiples épocas sobre el dataset de preferencias hasta convergencia.
+
+*No hay loop de RL, no hay muestreo online, no hay reward model externo.*
+
+---
+
+**Paso 8 — Evaluación del modelo entrenado**
+
+El modelo final π_θ se evalúa con:
+- **Win rate** contra el modelo SFT base: se generan respuestas de ambos y un reward model externo (o GPT-4) decide cuál es mejor.
+- **Reward promedio** de un RM entrenado por separado (solo para evaluación, no durante el entrenamiento).
+- Métricas de tarea: ROUGE para resumen, perplexity, calidad de diálogo.
+
+### Resumen visual del flujo
+
+```
+LLM pre-entrenado
+      ↓ SFT (fine-tuning supervisado con demostraciones)
+  π_ref = π_SFT  ←── congelar pesos
+      ↓ copiar pesos
+  π_θ (entrenable)
+
+  Dataset: (x, y_w, y_l)
+      ↓ para cada batch:
+  [1] log π_θ(y_w|x), log π_θ(y_l|x)     ← con gradiente
+  [2] log π_ref(y_w|x), log π_ref(y_l|x) ← sin gradiente
+      ↓
+  Δ_w = log π_θ(y_w|x) − log π_ref(y_w|x)
+  Δ_l = log π_θ(y_l|x) − log π_ref(y_l|x)
+      ↓
+  L = −log σ(β · (Δ_w − Δ_l))
+      ↓ backprop → actualizar π_θ → repetir
+```
+
+### Errores o imprecisiones en la descripción anterior
+
+- ~~"una sola pasada de fine-tuning"~~ → **incorrecto**: el entrenamiento corre múltiples épocas con descenso de gradiente estocástico, igual que cualquier fine-tuning. "Una etapa" se refiere a que no hay un loop de RL separado, no a que sean una sola época.
+- ~~"Modelos evaluados: GPT-2, GPT-J (6B), Llama"~~ → **impreciso**: el paper original (mayo 2023) usa GPT-2 (1.5B) y GPT-J (6B). Llama se publicó en febrero 2023 pero no es el foco central de los experimentos del paper; aparece en trabajos posteriores que aplican DPO.
+- El "log-ratio" describe el reward implícito **relativo** entre la respuesta del modelo actual y la referencia, no la recompensa absoluta. La constante $\beta \log Z(x)$ se cancela al comparar dos respuestas, pero no es cero.
 
 ---
 

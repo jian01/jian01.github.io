@@ -16,7 +16,7 @@ method_type: "Optimización de preferencias"
 status:
   - "Pendiente"
 image: "imgs/2024_zhang_negative-preference-optimization.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
+image_caption: "Respuestas de los modelos después de distintas técnicas de unlearning sobre TOFU. La del paper es NPO+RT (Negative preference optimization + Retain set)."
 opinion: "<WIP>"
 ---
 # Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning (2024)

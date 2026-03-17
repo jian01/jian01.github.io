@@ -15,8 +15,8 @@ pdf: "/llm_bias/pdfs/2019_ziegler_rlhf-finetuning.pdf"
 status:
   - "Leido"
 image: "imgs/2019_ziegler_rlhf-finetuning.png"
-image_caption: "Visualización de los datos de preferencias humanas usados en el entrenamiento RLHF, mostrando la distribución de textos y comparaciones que guían el reward model."
-opinion: "<WIP>"
+image_caption: "Pipeline de RHLF"
+opinion: "Usa la LLM preentrenada y la duplica en un segundo modelo de scoring que es igual en arquitectura al primero que va a aprender con datos taggeados de preferencias humanas. Usa una técnica llamada PPO que es general en reinforcement learning para balancear una política inicial con la evolución de la propia política, basicamente a medida se usa el modelo de reward junto con el modelo base se usa esta técnica de RL para generar una función objetivo que balancee los rewards aprendidos con el conocimiento que tenía antes el modelo base, maximizando de forma conservadora el reward."
 ---
 # Fine-Tuning Language Models from Human Preferences (2019)
 
