@@ -1,0 +1,1646 @@
+{
+  "2015_cao_machine-unlearning": {
+    "title": "Towards Making Systems Forget with Machine Unlearning",
+    "cites": [],
+    "cited_by": [
+      "2019_ginart_data-deletion",
+      "2021_bourtoule_sisa",
+      "2021_neel_descent-to-delete",
+      "2022_ilharco_task-arithmetic",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2023_patil_sensitive-information",
+      "2023_pawelczyk_incontext-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_cloud_gradient-routing",
+      "2024_dige_machine-unlearning-bias",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_tofu",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_zhang_negative-preference-optimization",
+      "2024_zhang_right-to-be-forgotten",
+      "2025_barez_precise-concept-erasure",
+      "2025_chen_feature-selective-misdirection",
+      "2025_fan_unlearning-relearning",
+      "2025_qiu_survey-unlearning",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 26
+  },
+  "2019_ginart_data-deletion": {
+    "title": "Making AI Forget You: Data Deletion in Machine Learning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2021_bourtoule_sisa"
+    ],
+    "cited_by": [
+      "2021_bourtoule_sisa"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 1
+  },
+  "2019_ziegler_rlhf-finetuning": {
+    "title": "Fine-Tuning Language Models from Human Preferences",
+    "cites": [],
+    "cited_by": [
+      "2020_gehman_realtoxicityprompts",
+      "2022_bai_rlhf-assistant",
+      "2023_ermon_dpo",
+      "2023_ji_beavertails",
+      "2024_ethayarajh_kto",
+      "2024_li_wmdp"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 6
+  },
+  "2020_gehman_realtoxicityprompts": {
+    "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+    "cites": [
+      "2019_ziegler_rlhf-finetuning"
+    ],
+    "cited_by": [
+      "2021_xu_bot-adversarial",
+      "2022_smith_holistic-descriptor",
+      "2023_ji_beavertails",
+      "2024_cloud_gradient-routing",
+      "2024_li_wmdp",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_xu_biasfreebench"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 7
+  },
+  "2020_olah_zoom-in-circuits": {
+    "title": "Zoom In: An Introduction to Circuits",
+    "cites": [
+      "2021_elhage_transformer-circuits",
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery"
+    ],
+    "cited_by": [
+      "2021_elhage_transformer-circuits",
+      "2023_bills_neuron-explanation"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 2
+  },
+  "2020_sap_social-bias-frames": {
+    "title": "Social Bias Frames: Reasoning about Social and Power Implications of Language",
+    "cites": [],
+    "cited_by": [
+      "2021_parrish_bbq",
+      "2022_hartvigsen_toxigen",
+      "2023_acerbi_human-like-biases",
+      "2025_satish_bias-benchmarks-speech"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 4
+  },
+  "2020_vig_gender-bias-causal": {
+    "title": "Investigating Gender Bias in Language Models Using Causal Mediation Analysis",
+    "cites": [],
+    "cited_by": [
+      "2023_hanna_gpt2-greater-than",
+      "2023_yang_bias-neurons",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias",
+      "2025_park_aligned-stereotypical"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 5
+  },
+  "2021_bourtoule_sisa": {
+    "title": "Machine Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2019_ginart_data-deletion"
+    ],
+    "cited_by": [
+      "2019_ginart_data-deletion",
+      "2021_neel_descent-to-delete"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 2
+  },
+  "2021_cheng_fairfil": {
+    "title": "FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders",
+    "cites": [
+      "2022_he_mabel",
+      "2021_meade_debiasing-survey"
+    ],
+    "cited_by": [],
+    "cites_count": 2,
+    "cited_by_count": 0
+  },
+  "2021_elhage_transformer-circuits": {
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "cites": [
+      "2020_olah_zoom-in-circuits",
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery"
+    ],
+    "cited_by": [
+      "2020_olah_zoom-in-circuits",
+      "2023_bills_neuron-explanation"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 2
+  },
+  "2021_geiger_causal-abstractions": {
+    "title": "Causal Abstractions of Neural Networks",
+    "cites": [],
+    "cited_by": [
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery",
+      "2023_goldowskydill_path-patching",
+      "2023_hanna_gpt2-greater-than",
+      "2024_cloud_gradient-routing",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias",
+      "2025_salehoof_dualaxis-taxonomy"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 8
+  },
+  "2021_lauscher_modular-debiasing": {
+    "title": "Sustainable Modular Debiasing of Language Models",
+    "cites": [
+      "2021_meade_debiasing-survey",
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_yang_bias-neurons"
+    ],
+    "cited_by": [
+      "2023_yu_pcgu"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 1
+  },
+  "2021_lin_truthfulqa": {
+    "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods",
+    "cites": [],
+    "cited_by": [
+      "2022_bai_rlhf-assistant",
+      "2022_ganguli_red-teaming",
+      "2023_ji_beavertails",
+      "2023_li_halueval",
+      "2023_yang_bias-neurons",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 6
+  },
+  "2021_meade_debiasing-survey": {
+    "title": "An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models",
+    "cites": [
+      "2021_nadeem_stereoset"
+    ],
+    "cited_by": [
+      "2021_cheng_fairfil",
+      "2021_lauscher_modular-debiasing",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2023_thakur_gender-makeover",
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_yang_bias-neurons",
+      "2023_yu_pcgu",
+      "2023_zhou_causal-debias",
+      "2024_gallegos_self-debiasing",
+      "2025_cheng_biasfilter",
+      "2025_islam_biasgym",
+      "2025_li_fairsteer",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_shrestha_llm-bias-detection",
+      "2025_xu_biasedit",
+      "2025_zhao_debiasing-peft",
+      "2026_chand_no-free-lunch",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 18
+  },
+  "2021_nadeem_stereoset": {
+    "title": "StereoSet: Measuring stereotypical bias in pretrained language models",
+    "cites": [],
+    "cited_by": [
+      "2021_meade_debiasing-survey",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2022_smith_holistic-descriptor",
+      "2023_thakur_gender-makeover",
+      "2023_venkit_nationality-bias",
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_yang_bias-neurons",
+      "2024_dige_machine-unlearning-bias",
+      "2024_han_chatgpt-data-augmentation",
+      "2025_cheng_biasfilter",
+      "2025_islam_biasgym",
+      "2025_li_fairsteer",
+      "2025_park_aligned-stereotypical",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_shrestha_llm-bias-detection",
+      "2025_xu_biasedit",
+      "2025_xu_biasfreebench",
+      "2026_chand_no-free-lunch",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 19
+  },
+  "2021_neel_descent-to-delete": {
+    "title": "Descent-to-Delete: Gradient-Based Methods for Machine Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2021_bourtoule_sisa"
+    ],
+    "cited_by": [],
+    "cites_count": 2,
+    "cited_by_count": 0
+  },
+  "2021_parrish_bbq": {
+    "title": "BBQ: A hand-built bias benchmark for question answering",
+    "cites": [
+      "2020_sap_social-bias-frames"
+    ],
+    "cited_by": [
+      "2023_ji_beavertails",
+      "2023_thakur_gender-makeover",
+      "2023_yang_bias-neurons",
+      "2024_dige_machine-unlearning-bias",
+      "2024_gallegos_self-debiasing",
+      "2025_cheng_biasfilter",
+      "2025_li_fairsteer",
+      "2025_park_aligned-stereotypical",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_xu_biasfreebench",
+      "2026_chand_no-free-lunch",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 12
+  },
+  "2021_xu_bot-adversarial": {
+    "title": "Bot-Adversarial Dialogue for Safe Conversational Agents",
+    "cites": [
+      "2020_gehman_realtoxicityprompts"
+    ],
+    "cited_by": [
+      "2022_ganguli_red-teaming",
+      "2022_perez_red-teaming-lm"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 2
+  },
+  "2021_zhao_calibrate-before-use": {
+    "title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models",
+    "cites": [],
+    "cited_by": [
+      "2025_zhao_debiasing-peft"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 1
+  },
+  "2022_bai_rlhf-assistant": {
+    "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+    "cites": [
+      "2019_ziegler_rlhf-finetuning",
+      "2022_ganguli_red-teaming",
+      "2021_lin_truthfulqa"
+    ],
+    "cited_by": [
+      "2022_ganguli_red-teaming",
+      "2022_perez_red-teaming-lm",
+      "2023_ermon_dpo",
+      "2023_ji_beavertails",
+      "2024_ethayarajh_kto",
+      "2024_zhang_negative-preference-optimization",
+      "2025_cheng_biasfilter",
+      "2026_chand_no-free-lunch"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 8
+  },
+  "2022_ethayarajh_v-usable-information": {
+    "title": "Understanding Dataset Difficulty with V-Usable Information",
+    "cites": [],
+    "cited_by": [],
+    "cites_count": 0,
+    "cited_by_count": 0
+  },
+  "2022_ganguli_red-teaming": {
+    "title": "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned",
+    "cites": [
+      "2021_xu_bot-adversarial",
+      "2022_bai_rlhf-assistant",
+      "2021_lin_truthfulqa"
+    ],
+    "cited_by": [
+      "2022_bai_rlhf-assistant",
+      "2022_perez_red-teaming-lm",
+      "2023_ji_beavertails"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 3
+  },
+  "2022_gira_debiasing-efficient-finetuning": {
+    "title": "Debiasing Pre-Trained Language Models via Efficient Fine-Tuning",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2021_meade_debiasing-survey"
+    ],
+    "cited_by": [
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_yang_bias-neurons",
+      "2025_cheng_biasfilter",
+      "2025_li_fairsteer",
+      "2025_shrestha_llm-bias-detection",
+      "2025_xu_biasfreebench",
+      "2025_zhao_debiasing-peft",
+      "2026_chand_no-free-lunch"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 8
+  },
+  "2022_hartvigsen_toxigen": {
+    "title": "ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection",
+    "cites": [
+      "2020_sap_social-bias-frames"
+    ],
+    "cited_by": [],
+    "cites_count": 1,
+    "cited_by_count": 0
+  },
+  "2022_he_mabel": {
+    "title": "MABEL: Attenuating Gender Bias using Textual Entailment Data",
+    "cites": [],
+    "cited_by": [
+      "2021_cheng_fairfil",
+      "2023_thakur_gender-makeover",
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_zhou_causal-debias",
+      "2024_gallegos_self-debiasing",
+      "2025_cheng_biasfilter",
+      "2025_islam_biasgym",
+      "2025_li_fairsteer",
+      "2025_shrestha_llm-bias-detection",
+      "2025_zhao_debiasing-peft"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 10
+  },
+  "2022_ilharco_task-arithmetic": {
+    "title": "Editing Models with Task Arithmetic",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2024_maini_tofu",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cited_by": [],
+    "cites_count": 4,
+    "cited_by_count": 0
+  },
+  "2022_jang_knowledge-unlearning": {
+    "title": "Knowledge Unlearning for Mitigating Privacy Risks in Language Models",
+    "cites": [
+      "2015_cao_machine-unlearning"
+    ],
+    "cited_by": [
+      "2022_ilharco_task-arithmetic",
+      "2023_eldan_harry-potter",
+      "2023_patil_sensitive-information",
+      "2023_pawelczyk_incontext-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_dige_machine-unlearning-bias",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_kl-minimization",
+      "2024_maini_tofu",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2025_salehoof_dualaxis-taxonomy",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 24
+  },
+  "2022_perez_red-teaming-lm": {
+    "title": "Red Teaming Language Models with Language Models",
+    "cites": [
+      "2022_ganguli_red-teaming",
+      "2022_bai_rlhf-assistant",
+      "2021_xu_bot-adversarial"
+    ],
+    "cited_by": [],
+    "cites_count": 3,
+    "cited_by_count": 0
+  },
+  "2022_smith_holistic-descriptor": {
+    "title": "\\\"I'm sorry to hear that\\\": Finding New Biases in Language Models with a Holistic Descriptor Dataset",
+    "cites": [
+      "2020_gehman_realtoxicityprompts",
+      "2021_nadeem_stereoset"
+    ],
+    "cited_by": [
+      "2025_cheng_biasfilter",
+      "2025_park_aligned-stereotypical",
+      "2025_xu_biasedit"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 3
+  },
+  "2022_wang_ioi-circuit": {
+    "title": "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small",
+    "cites": [
+      "2021_geiger_causal-abstractions",
+      "2023_goldowskydill_path-patching",
+      "2023_conmy_automated-circuit-discovery"
+    ],
+    "cited_by": [
+      "2020_olah_zoom-in-circuits",
+      "2021_elhage_transformer-circuits",
+      "2023_conmy_automated-circuit-discovery",
+      "2023_goldowskydill_path-patching",
+      "2023_hanna_gpt2-greater-than",
+      "2023_heimersheim_python-docstrings",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias",
+      "2025_salehoof_dualaxis-taxonomy"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 9
+  },
+  "2022_wang_skill-neurons": {
+    "title": "Finding Skill Neurons in Pre-trained Transformer-based Language Models",
+    "cites": [],
+    "cited_by": [
+      "2023_panigrahi_skill-localization",
+      "2025_salehoof_dualaxis-taxonomy",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 3
+  },
+  "2022_yang_task-specific-compression": {
+    "title": "Task-specific Compression for Multi-task Language Models using Attribution-based Pruning",
+    "cites": [],
+    "cited_by": [
+      "2023_panigrahi_skill-localization"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 1
+  },
+  "2023_acerbi_human-like-biases": {
+    "title": "Large language models show human-like content biases in transmission chain experiments",
+    "cites": [
+      "2020_sap_social-bias-frames"
+    ],
+    "cited_by": [
+      "2025_park_aligned-stereotypical"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 1
+  },
+  "2023_bills_neuron-explanation": {
+    "title": "Language Models Can Explain Neurons in Language Models",
+    "cites": [
+      "2020_olah_zoom-in-circuits",
+      "2021_elhage_transformer-circuits",
+      "2023_conmy_automated-circuit-discovery"
+    ],
+    "cited_by": [],
+    "cites_count": 3,
+    "cited_by_count": 0
+  },
+  "2023_conmy_automated-circuit-discovery": {
+    "title": "Towards Automated Circuit Discovery for Mechanistic Interpretability",
+    "cites": [
+      "2022_wang_ioi-circuit",
+      "2023_hanna_gpt2-greater-than",
+      "2023_goldowskydill_path-patching",
+      "2021_geiger_causal-abstractions"
+    ],
+    "cited_by": [
+      "2020_olah_zoom-in-circuits",
+      "2021_elhage_transformer-circuits",
+      "2022_wang_ioi-circuit",
+      "2023_bills_neuron-explanation",
+      "2023_goldowskydill_path-patching",
+      "2023_heimersheim_python-docstrings",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 8
+  },
+  "2023_eldan_harry-potter": {
+    "title": "Who's Harry Potter? Approximate Unlearning in LLMs",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning"
+    ],
+    "cited_by": [
+      "2023_yao_large-llm-unlearning",
+      "2024_cloud_gradient-routing",
+      "2024_doshi_does-unlearning",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_tofu",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_yao_muse",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2025_salehoof_dualaxis-taxonomy",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 22
+  },
+  "2023_ermon_dpo": {
+    "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    "cites": [
+      "2019_ziegler_rlhf-finetuning",
+      "2022_bai_rlhf-assistant"
+    ],
+    "cited_by": [
+      "2024_dige_machine-unlearning-bias",
+      "2024_ethayarajh_kto",
+      "2024_fan_simplicity-npo",
+      "2024_wang_llm-unlearning-loss",
+      "2024_zhang_negative-preference-optimization",
+      "2025_deng_guard",
+      "2025_xu_biasfreebench"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 7
+  },
+  "2023_goldowskydill_path-patching": {
+    "title": "Localizing Model Behavior with Path Patching",
+    "cites": [
+      "2022_wang_ioi-circuit",
+      "2021_geiger_causal-abstractions",
+      "2023_conmy_automated-circuit-discovery"
+    ],
+    "cited_by": [
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery",
+      "2023_hanna_gpt2-greater-than",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 5
+  },
+  "2023_hanna_gpt2-greater-than": {
+    "title": "How does GPT-2 compute greater-than?: Interpreting mathematical abilities in a pre-trained language model",
+    "cites": [
+      "2022_wang_ioi-circuit",
+      "2023_goldowskydill_path-patching",
+      "2020_vig_gender-bias-causal",
+      "2021_geiger_causal-abstractions"
+    ],
+    "cited_by": [
+      "2023_conmy_automated-circuit-discovery",
+      "2023_heimersheim_python-docstrings",
+      "2024_syed_attribution-patching",
+      "2025_chandna_dissecting-bias"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 4
+  },
+  "2023_hassan_dcalm": {
+    "title": "D-CALM: A Dynamic Clustering-based Active Learning Approach for Mitigating Bias",
+    "cites": [],
+    "cited_by": [
+      "2025_zhao_debiasing-peft"
+    ],
+    "cites_count": 0,
+    "cited_by_count": 1
+  },
+  "2023_heimersheim_python-docstrings": {
+    "title": "A circuit for Python docstrings in a 4-layer attention-only transformer",
+    "cites": [
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery",
+      "2024_syed_attribution-patching",
+      "2023_hanna_gpt2-greater-than"
+    ],
+    "cited_by": [
+      "2024_syed_attribution-patching"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 1
+  },
+  "2023_ji_beavertails": {
+    "title": "BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset",
+    "cites": [
+      "2022_ganguli_red-teaming",
+      "2022_bai_rlhf-assistant",
+      "2020_gehman_realtoxicityprompts",
+      "2021_lin_truthfulqa",
+      "2021_parrish_bbq",
+      "2019_ziegler_rlhf-finetuning"
+    ],
+    "cited_by": [],
+    "cites_count": 6,
+    "cited_by_count": 0
+  },
+  "2023_li_halueval": {
+    "title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "cites": [
+      "2021_lin_truthfulqa"
+    ],
+    "cited_by": [],
+    "cites_count": 1,
+    "cited_by_count": 0
+  },
+  "2023_panigrahi_skill-localization": {
+    "title": "Task-Specific Skill Localization in Fine-tuned Language Models",
+    "cites": [
+      "2022_wang_skill-neurons",
+      "2022_yang_task-specific-compression"
+    ],
+    "cited_by": [
+      "2025_salehoof_dualaxis-taxonomy"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 1
+  },
+  "2023_patil_sensitive-information": {
+    "title": "Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning"
+    ],
+    "cited_by": [
+      "2024_cloud_gradient-routing",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_tofu",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2024_zhang_right-to-be-forgotten",
+      "2025_fan_unlearning-relearning",
+      "2025_qiu_survey-unlearning"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 9
+  },
+  "2023_pawelczyk_incontext-unlearning": {
+    "title": "In-Context Unlearning: Language Models as Few Shot Unlearners",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning"
+    ],
+    "cited_by": [
+      "2023_yao_large-llm-unlearning",
+      "2024_doshi_does-unlearning",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_li_wmdp",
+      "2024_maini_tofu",
+      "2024_wang_llm-unlearning-loss",
+      "2025_deng_guard",
+      "2025_qiu_survey-unlearning",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 10
+  },
+  "2023_thakur_gender-makeover": {
+    "title": "Language Models Get a Gender Makeover: Mitigating Gender Bias with Few-Shot Data Interventions",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2022_he_mabel",
+      "2021_parrish_bbq",
+      "2021_meade_debiasing-survey"
+    ],
+    "cited_by": [
+      "2025_zhao_debiasing-peft"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 1
+  },
+  "2023_venkit_nationality-bias": {
+    "title": "Nationality Bias in Text Generation",
+    "cites": [
+      "2021_nadeem_stereoset"
+    ],
+    "cited_by": [
+      "2025_park_aligned-stereotypical"
+    ],
+    "cites_count": 1,
+    "cited_by_count": 1
+  },
+  "2023_xie_parameter-efficient-debiasing": {
+    "title": "An Empirical Analysis of Parameter-Efficient Methods for Debiasing Pre-Trained Language Models",
+    "cites": [
+      "2021_meade_debiasing-survey",
+      "2021_nadeem_stereoset",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2022_he_mabel"
+    ],
+    "cited_by": [
+      "2021_lauscher_modular-debiasing",
+      "2024_han_chatgpt-data-augmentation",
+      "2025_cheng_biasfilter",
+      "2025_li_fairsteer",
+      "2026_chand_no-free-lunch"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 5
+  },
+  "2023_yang_bias-neurons": {
+    "title": "Mitigating Biases for Instruction-following Language Models via Bias Neurons Elimination",
+    "cites": [
+      "2021_meade_debiasing-survey",
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2021_lin_truthfulqa",
+      "2020_vig_gender-bias-causal",
+      "2022_gira_debiasing-efficient-finetuning"
+    ],
+    "cited_by": [
+      "2021_lauscher_modular-debiasing",
+      "2025_islam_biasgym",
+      "2025_li_fairsteer",
+      "2025_salehoof_dualaxis-taxonomy",
+      "2025_shrestha_llm-bias-detection",
+      "2025_zhao_debiasing-peft",
+      "2026_chand_no-free-lunch",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 6,
+    "cited_by_count": 8
+  },
+  "2023_yao_large-llm-unlearning": {
+    "title": "Large Language Model Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2023_pawelczyk_incontext-unlearning"
+    ],
+    "cited_by": [
+      "2023_eldan_harry-potter",
+      "2023_pawelczyk_incontext-unlearning",
+      "2024_doshi_does-unlearning",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_kl-minimization",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2025_barez_precise-concept-erasure",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 19
+  },
+  "2023_yu_pcgu": {
+    "title": "Unlearning Bias in Language Models by Partitioning Gradients",
+    "cites": [
+      "2021_lauscher_modular-debiasing",
+      "2021_meade_debiasing-survey",
+      "2024_dige_machine-unlearning-bias"
+    ],
+    "cited_by": [],
+    "cites_count": 3,
+    "cited_by_count": 0
+  },
+  "2023_zhou_causal-debias": {
+    "title": "Causal-Debias: Unifying Debiasing in Pretrained Language Models and Fine-tuning via Causal Invariant Learning",
+    "cites": [
+      "2021_meade_debiasing-survey",
+      "2022_he_mabel"
+    ],
+    "cited_by": [
+      "2025_cheng_biasfilter",
+      "2025_li_fairsteer"
+    ],
+    "cites_count": 2,
+    "cited_by_count": 2
+  },
+  "2024_cloud_gradient-routing": {
+    "title": "Gradient Routing: Masking Gradients to Localize Computation in Neural Networks",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2024_li_wmdp",
+      "2024_lynch_eight-methods",
+      "2020_gehman_realtoxicityprompts",
+      "2023_eldan_harry-potter",
+      "2023_patil_sensitive-information",
+      "2021_geiger_causal-abstractions"
+    ],
+    "cited_by": [
+      "2025_barez_precise-concept-erasure"
+    ],
+    "cites_count": 7,
+    "cited_by_count": 1
+  },
+  "2024_dige_machine-unlearning-bias": {
+    "title": "Can Machine Unlearning Reduce Social Bias in Language Models?",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_ermon_dpo",
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2024_gallegos_self-debiasing"
+    ],
+    "cited_by": [
+      "2023_yu_pcgu",
+      "2025_xu_biasfreebench"
+    ],
+    "cites_count": 6,
+    "cited_by_count": 2
+  },
+  "2024_doshi_does-unlearning": {
+    "title": "Does Unlearning Truly Unlearn? A Black Box Evaluation of LLM Unlearning Methods",
+    "cites": [
+      "2024_ucki_adversarial-unlearning",
+      "2024_lynch_eight-methods",
+      "2023_yao_large-llm-unlearning",
+      "2024_li_wmdp",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2023_pawelczyk_incontext-unlearning"
+    ],
+    "cited_by": [
+      "2024_zhang_catastrophic-quantization",
+      "2025_dorna_openunlearning",
+      "2025_huutien_improving-unlearning",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 7,
+    "cited_by_count": 4
+  },
+  "2024_ethayarajh_kto": {
+    "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+    "cites": [
+      "2023_ermon_dpo",
+      "2019_ziegler_rlhf-finetuning",
+      "2022_bai_rlhf-assistant",
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cited_by": [
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cites_count": 4,
+    "cited_by_count": 1
+  },
+  "2024_fan_simplicity-npo": {
+    "title": "Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning",
+    "cites": [
+      "2022_jang_knowledge-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2023_eldan_harry-potter",
+      "2023_ermon_dpo",
+      "2023_pawelczyk_incontext-unlearning",
+      "2024_lynch_eight-methods",
+      "2015_cao_machine-unlearning"
+    ],
+    "cited_by": [
+      "2024_wang_llm-unlearning-loss",
+      "2024_zhang_catastrophic-quantization",
+      "2025_dorna_openunlearning",
+      "2025_qiu_survey-unlearning",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 5
+  },
+  "2024_gallegos_self-debiasing": {
+    "title": "Self-Debiasing Large Language Models: Zero-Shot Recognition and Reduction of Stereotypes",
+    "cites": [
+      "2021_parrish_bbq",
+      "2021_meade_debiasing-survey",
+      "2022_he_mabel"
+    ],
+    "cited_by": [
+      "2024_dige_machine-unlearning-bias",
+      "2025_cheng_biasfilter",
+      "2025_islam_biasgym",
+      "2025_li_fairsteer",
+      "2025_park_aligned-stereotypical",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_shrestha_llm-bias-detection",
+      "2025_xu_biasfreebench",
+      "2026_chand_no-free-lunch",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 10
+  },
+  "2024_han_chatgpt-data-augmentation": {
+    "title": "ChatGPT Based Data Augmentation for Improved Parameter-Efficient Debiasing of LLMs",
+    "cites": [
+      "2023_xie_parameter-efficient-debiasing",
+      "2021_nadeem_stereoset"
+    ],
+    "cited_by": [],
+    "cites_count": 2,
+    "cited_by_count": 0
+  },
+  "2024_jin_rwku": {
+    "title": "RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2024_zhang_negative-preference-optimization",
+      "2023_pawelczyk_incontext-unlearning",
+      "2024_lynch_eight-methods"
+    ],
+    "cited_by": [
+      "2025_chen_feature-selective-misdirection",
+      "2025_dorna_openunlearning",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 8,
+    "cited_by_count": 3
+  },
+  "2024_li_wmdp": {
+    "title": "The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2023_pawelczyk_incontext-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2019_ziegler_rlhf-finetuning",
+      "2020_gehman_realtoxicityprompts"
+    ],
+    "cited_by": [
+      "2024_cloud_gradient-routing",
+      "2024_doshi_does-unlearning",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_ucki_adversarial-unlearning",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2025_barez_precise-concept-erasure",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 8,
+    "cited_by_count": 17
+  },
+  "2024_liu_rethinking-unlearning": {
+    "title": "Rethinking Machine Unlearning for Large Language Models",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2023_yao_large-llm-unlearning",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2024_zhang_negative-preference-optimization",
+      "2023_patil_sensitive-information",
+      "2024_lynch_eight-methods"
+    ],
+    "cited_by": [
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 3
+  },
+  "2024_lynch_eight-methods": {
+    "title": "Eight Methods to Evaluate Robust Unlearning in LLMs",
+    "cites": [
+      "2023_eldan_harry-potter",
+      "2024_li_wmdp",
+      "2023_yao_large-llm-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_patil_sensitive-information",
+      "2024_maini_tofu"
+    ],
+    "cited_by": [
+      "2024_cloud_gradient-routing",
+      "2024_doshi_does-unlearning",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_liu_rethinking-unlearning",
+      "2024_ucki_adversarial-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2025_barez_precise-concept-erasure",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2026_chand_no-free-lunch"
+    ],
+    "cites_count": 8,
+    "cited_by_count": 11
+  },
+  "2024_maini_kl-minimization": {
+    "title": "KL Minimization for Machine Unlearning in LLMs",
+    "cites": [
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_maini_tofu",
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cited_by": [],
+    "cites_count": 4,
+    "cited_by_count": 0
+  },
+  "2024_maini_tofu": {
+    "title": "TOFU: A Task of Fictitious Unlearning for LLMs",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2023_patil_sensitive-information",
+      "2023_pawelczyk_incontext-unlearning"
+    ],
+    "cited_by": [
+      "2022_ilharco_task-arithmetic",
+      "2024_doshi_does-unlearning",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_kl-minimization",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_yao_muse",
+      "2024_zhang_catastrophic-quantization",
+      "2024_zhang_negative-preference-optimization",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2026_cai_per-parameter-task-arithmetic",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 5,
+    "cited_by_count": 21
+  },
+  "2024_syed_attribution-patching": {
+    "title": "Attribution Patching Outperforms Automated Circuit Discovery",
+    "cites": [
+      "2023_conmy_automated-circuit-discovery",
+      "2022_wang_ioi-circuit",
+      "2023_goldowskydill_path-patching",
+      "2020_vig_gender-bias-causal",
+      "2021_geiger_causal-abstractions",
+      "2023_hanna_gpt2-greater-than",
+      "2023_heimersheim_python-docstrings"
+    ],
+    "cited_by": [
+      "2023_heimersheim_python-docstrings",
+      "2025_chandna_dissecting-bias"
+    ],
+    "cites_count": 7,
+    "cited_by_count": 2
+  },
+  "2024_ucki_adversarial-unlearning": {
+    "title": "An Adversarial Perspective on Machine Unlearning for AI Safety",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2024_li_wmdp",
+      "2023_yao_large-llm-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2024_lynch_eight-methods",
+      "2022_jang_knowledge-unlearning",
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cited_by": [
+      "2024_doshi_does-unlearning",
+      "2025_barez_precise-concept-erasure",
+      "2025_fan_unlearning-relearning"
+    ],
+    "cites_count": 8,
+    "cited_by_count": 3
+  },
+  "2024_wang_llm-unlearning-loss": {
+    "title": "LLM Unlearning via Loss Adjustment with Only Forget Data",
+    "cites": [
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2023_ermon_dpo",
+      "2024_maini_tofu",
+      "2023_eldan_harry-potter",
+      "2024_fan_simplicity-npo",
+      "2023_pawelczyk_incontext-unlearning",
+      "2015_cao_machine-unlearning"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2024_yao_muse": {
+    "title": "MUSE: Machine Unlearning Six-Way Evaluation for Language Models",
+    "cites": [
+      "2024_maini_tofu",
+      "2023_eldan_harry-potter",
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cited_by": [],
+    "cites_count": 3,
+    "cited_by_count": 0
+  },
+  "2024_zhang_catastrophic-quantization": {
+    "title": "Catastrophic Failure of LLM Unlearning via Quantization",
+    "cites": [
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2024_zhang_negative-preference-optimization",
+      "2024_fan_simplicity-npo",
+      "2024_doshi_does-unlearning",
+      "2023_patil_sensitive-information"
+    ],
+    "cited_by": [
+      "2025_huutien_improving-unlearning"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 1
+  },
+  "2024_zhang_negative-preference-optimization": {
+    "title": "Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_maini_tofu",
+      "2023_ermon_dpo",
+      "2022_bai_rlhf-assistant",
+      "2024_li_wmdp",
+      "2024_lynch_eight-methods",
+      "2024_ethayarajh_kto",
+      "2023_patil_sensitive-information"
+    ],
+    "cited_by": [
+      "2024_ethayarajh_kto",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_liu_rethinking-unlearning",
+      "2024_lynch_eight-methods",
+      "2024_maini_kl-minimization",
+      "2024_ucki_adversarial-unlearning",
+      "2024_wang_llm-unlearning-loss",
+      "2024_yao_muse",
+      "2024_zhang_catastrophic-quantization",
+      "2025_chen_feature-selective-misdirection",
+      "2025_deng_guard",
+      "2025_dorna_openunlearning",
+      "2025_fan_unlearning-relearning",
+      "2025_huutien_improving-unlearning",
+      "2025_qiu_survey-unlearning",
+      "2026_cai_per-parameter-task-arithmetic",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 11,
+    "cited_by_count": 18
+  },
+  "2024_zhang_right-to-be-forgotten": {
+    "title": "Right to be Forgotten in the Era of Large Language Models: Implications, Challenges, and Solutions",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2023_patil_sensitive-information"
+    ],
+    "cited_by": [],
+    "cites_count": 2,
+    "cited_by_count": 0
+  },
+  "2025_barez_precise-concept-erasure": {
+    "title": "Precise In-Parameter Concept Erasure in Large Language Models",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_li_wmdp",
+      "2024_lynch_eight-methods",
+      "2024_ucki_adversarial-unlearning",
+      "2024_cloud_gradient-routing",
+      "2025_fan_unlearning-relearning"
+    ],
+    "cited_by": [],
+    "cites_count": 7,
+    "cited_by_count": 0
+  },
+  "2025_chandna_dissecting-bias": {
+    "title": "Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective",
+    "cites": [
+      "2020_vig_gender-bias-causal",
+      "2024_syed_attribution-patching",
+      "2022_wang_ioi-circuit",
+      "2023_conmy_automated-circuit-discovery",
+      "2021_geiger_causal-abstractions",
+      "2023_goldowskydill_path-patching",
+      "2023_hanna_gpt2-greater-than"
+    ],
+    "cited_by": [
+      "2025_islam_biasgym"
+    ],
+    "cites_count": 7,
+    "cited_by_count": 1
+  },
+  "2025_chen_feature-selective-misdirection": {
+    "title": "Feature-Selective Representation Misdirection for Machine Unlearning",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2024_li_wmdp",
+      "2025_huutien_improving-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2024_maini_tofu",
+      "2023_eldan_harry-potter",
+      "2022_jang_knowledge-unlearning",
+      "2024_jin_rwku"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2025_cheng_biasfilter": {
+    "title": "BiasFilter: An Inference-Time Debiasing Framework for Large Language Models",
+    "cites": [
+      "2024_gallegos_self-debiasing",
+      "2022_bai_rlhf-assistant",
+      "2022_smith_holistic-descriptor",
+      "2021_meade_debiasing-survey",
+      "2021_nadeem_stereoset",
+      "2022_he_mabel",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2021_parrish_bbq",
+      "2023_zhou_causal-debias",
+      "2023_xie_parameter-efficient-debiasing"
+    ],
+    "cited_by": [
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 10,
+    "cited_by_count": 1
+  },
+  "2025_deng_guard": {
+    "title": "GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection",
+    "cites": [
+      "2023_yao_large-llm-unlearning",
+      "2024_maini_tofu",
+      "2024_zhang_negative-preference-optimization",
+      "2023_eldan_harry-potter",
+      "2023_pawelczyk_incontext-unlearning",
+      "2023_ermon_dpo",
+      "2024_li_wmdp",
+      "2024_liu_rethinking-unlearning",
+      "2022_jang_knowledge-unlearning"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2025_dorna_openunlearning": {
+    "title": "OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics",
+    "cites": [
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2024_zhang_negative-preference-optimization",
+      "2024_fan_simplicity-npo",
+      "2022_jang_knowledge-unlearning",
+      "2023_eldan_harry-potter",
+      "2024_doshi_does-unlearning",
+      "2024_liu_rethinking-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_jin_rwku"
+    ],
+    "cited_by": [
+      "2026_cai_per-parameter-task-arithmetic"
+    ],
+    "cites_count": 10,
+    "cited_by_count": 1
+  },
+  "2025_fan_unlearning-relearning": {
+    "title": "Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2024_zhang_negative-preference-optimization",
+      "2024_lynch_eight-methods",
+      "2024_ucki_adversarial-unlearning",
+      "2023_eldan_harry-potter",
+      "2023_patil_sensitive-information"
+    ],
+    "cited_by": [
+      "2025_barez_precise-concept-erasure",
+      "2026_dang_beyond-forgetting"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 2
+  },
+  "2025_huutien_improving-unlearning": {
+    "title": "Improving LLM Unlearning Robustness via Random Perturbations",
+    "cites": [
+      "2022_jang_knowledge-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2023_eldan_harry-potter",
+      "2024_lynch_eight-methods",
+      "2024_doshi_does-unlearning",
+      "2024_zhang_catastrophic-quantization",
+      "2023_yao_large-llm-unlearning"
+    ],
+    "cited_by": [
+      "2025_chen_feature-selective-misdirection"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 1
+  },
+  "2025_islam_biasgym": {
+    "title": "BiasGym: Fantastic LLM Biases and How to Find (and Remove) Them",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2025_chandna_dissecting-bias",
+      "2024_gallegos_self-debiasing",
+      "2022_he_mabel",
+      "2023_yang_bias-neurons",
+      "2021_meade_debiasing-survey",
+      "2025_xu_biasedit",
+      "2025_zhao_debiasing-peft"
+    ],
+    "cited_by": [],
+    "cites_count": 8,
+    "cited_by_count": 0
+  },
+  "2025_li_fairsteer": {
+    "title": "FairSteer: Inference Time Debiasing for LLMs with Dynamic Activation Steering",
+    "cites": [
+      "2024_gallegos_self-debiasing",
+      "2021_meade_debiasing-survey",
+      "2022_he_mabel",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2023_yang_bias-neurons",
+      "2023_xie_parameter-efficient-debiasing",
+      "2023_zhou_causal-debias"
+    ],
+    "cited_by": [
+      "2025_xu_biasfreebench",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 9,
+    "cited_by_count": 2
+  },
+  "2025_park_aligned-stereotypical": {
+    "title": "Aligned but Stereotypical? The Hidden Influence of System Prompts on Social Bias in LVLM-Based Text-to-Image Models",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2024_gallegos_self-debiasing",
+      "2022_smith_holistic-descriptor",
+      "2023_acerbi_human-like-biases",
+      "2020_vig_gender-bias-causal",
+      "2023_venkit_nationality-bias"
+    ],
+    "cited_by": [],
+    "cites_count": 7,
+    "cited_by_count": 0
+  },
+  "2025_qiu_survey-unlearning": {
+    "title": "A Survey on Unlearning in Large Language Models",
+    "cites": [
+      "2015_cao_machine-unlearning",
+      "2022_jang_knowledge-unlearning",
+      "2024_maini_tofu",
+      "2024_li_wmdp",
+      "2023_eldan_harry-potter",
+      "2023_yao_large-llm-unlearning",
+      "2024_fan_simplicity-npo",
+      "2023_patil_sensitive-information",
+      "2023_pawelczyk_incontext-unlearning",
+      "2024_zhang_negative-preference-optimization"
+    ],
+    "cited_by": [],
+    "cites_count": 10,
+    "cited_by_count": 0
+  },
+  "2025_salehoof_dualaxis-taxonomy": {
+    "title": "A Dual-Axis Taxonomy of Knowledge Editing for LLMs: From Mechanisms to Functions",
+    "cites": [
+      "2023_eldan_harry-potter",
+      "2022_jang_knowledge-unlearning",
+      "2021_geiger_causal-abstractions",
+      "2022_wang_ioi-circuit",
+      "2023_yang_bias-neurons",
+      "2025_xu_biasedit",
+      "2023_panigrahi_skill-localization",
+      "2022_wang_skill-neurons"
+    ],
+    "cited_by": [],
+    "cites_count": 8,
+    "cited_by_count": 0
+  },
+  "2025_satish_bias-benchmarks-speech": {
+    "title": "Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2025_xu_biasedit",
+      "2020_gehman_realtoxicityprompts",
+      "2020_sap_social-bias-frames",
+      "2021_meade_debiasing-survey",
+      "2024_gallegos_self-debiasing"
+    ],
+    "cited_by": [],
+    "cites_count": 7,
+    "cited_by_count": 0
+  },
+  "2025_shrestha_llm-bias-detection": {
+    "title": "LLM Bias Detection and Mitigation through the Lens of Desired Distributions",
+    "cites": [
+      "2021_meade_debiasing-survey",
+      "2021_nadeem_stereoset",
+      "2024_gallegos_self-debiasing",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2023_yang_bias-neurons",
+      "2025_xu_biasedit",
+      "2022_he_mabel"
+    ],
+    "cited_by": [],
+    "cites_count": 7,
+    "cited_by_count": 0
+  },
+  "2025_xu_biasedit": {
+    "title": "BiasEdit: Debiasing Stereotyped Language Models via Model Editing",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2021_meade_debiasing-survey",
+      "2022_smith_holistic-descriptor"
+    ],
+    "cited_by": [
+      "2025_islam_biasgym",
+      "2025_salehoof_dualaxis-taxonomy",
+      "2025_satish_bias-benchmarks-speech",
+      "2025_shrestha_llm-bias-detection",
+      "2025_xu_biasfreebench",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 3,
+    "cited_by_count": 6
+  },
+  "2025_xu_biasfreebench": {
+    "title": "BiasFreeBench: a Benchmark for Mitigating Bias in Large Language Model Responses",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2020_gehman_realtoxicityprompts",
+      "2024_gallegos_self-debiasing",
+      "2024_dige_machine-unlearning-bias",
+      "2025_li_fairsteer",
+      "2025_xu_biasedit",
+      "2023_ermon_dpo"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2025_zhao_debiasing-peft": {
+    "title": "Debiasing the Fine-Grained Classification Task in LLMs with Bias-Aware PEFT",
+    "cites": [
+      "2022_gira_debiasing-efficient-finetuning",
+      "2022_he_mabel",
+      "2023_thakur_gender-makeover",
+      "2023_hassan_dcalm",
+      "2021_zhao_calibrate-before-use",
+      "2023_yang_bias-neurons",
+      "2021_meade_debiasing-survey"
+    ],
+    "cited_by": [
+      "2025_islam_biasgym",
+      "2026_pan_knowbias"
+    ],
+    "cites_count": 7,
+    "cited_by_count": 2
+  },
+  "2026_cai_per-parameter-task-arithmetic": {
+    "title": "Per-parameter Task Arithmetic for Unlearning in Large Language Models",
+    "cites": [
+      "2024_maini_tofu",
+      "2015_cao_machine-unlearning",
+      "2023_yao_large-llm-unlearning",
+      "2024_zhang_negative-preference-optimization",
+      "2024_fan_simplicity-npo",
+      "2024_jin_rwku",
+      "2024_liu_rethinking-unlearning",
+      "2025_dorna_openunlearning"
+    ],
+    "cited_by": [
+      "2022_ilharco_task-arithmetic"
+    ],
+    "cites_count": 8,
+    "cited_by_count": 1
+  },
+  "2026_chand_no-free-lunch": {
+    "title": "No Free Lunch in Language Model Bias Mitigation? Targeted Bias Reduction Can Exacerbate Unmitigated LLM Biases",
+    "cites": [
+      "2021_nadeem_stereoset",
+      "2022_bai_rlhf-assistant",
+      "2021_parrish_bbq",
+      "2021_meade_debiasing-survey",
+      "2022_gira_debiasing-efficient-finetuning",
+      "2024_gallegos_self-debiasing",
+      "2023_yang_bias-neurons",
+      "2024_lynch_eight-methods",
+      "2023_xie_parameter-efficient-debiasing"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2026_dang_beyond-forgetting": {
+    "title": "Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities",
+    "cites": [
+      "2024_li_wmdp",
+      "2024_maini_tofu",
+      "2023_eldan_harry-potter",
+      "2024_zhang_negative-preference-optimization",
+      "2023_pawelczyk_incontext-unlearning",
+      "2025_fan_unlearning-relearning",
+      "2024_doshi_does-unlearning",
+      "2021_lin_truthfulqa",
+      "2022_jang_knowledge-unlearning"
+    ],
+    "cited_by": [],
+    "cites_count": 9,
+    "cited_by_count": 0
+  },
+  "2026_pan_knowbias": {
+    "title": "KnowBias: Mitigating Social Bias in LLMs via Know-Bias Neuron Enhancement",
+    "cites": [
+      "2024_gallegos_self-debiasing",
+      "2023_yang_bias-neurons",
+      "2025_xu_biasedit",
+      "2025_li_fairsteer",
+      "2021_nadeem_stereoset",
+      "2021_parrish_bbq",
+      "2022_wang_skill-neurons",
+      "2025_cheng_biasfilter",
+      "2021_meade_debiasing-survey",
+      "2025_zhao_debiasing-peft"
+    ],
+    "cited_by": [],
+    "cites_count": 10,
+    "cited_by_count": 0
+  }
+}

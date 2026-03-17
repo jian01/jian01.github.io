@@ -16,7 +16,7 @@ method_type: "Perturbación de representaciones"
 status:
   - "Pendiente"
 image: "imgs/2024_li_wmdp.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
+image_caption: "Hermoso esquema con la función de loss propuesta."
 opinion: "<WIP>"
 ---
 # The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning (2024)
@@ -49,17 +49,9 @@ Las preguntas se diseñaron siguiendo **modelos de amenaza** concretos (ej. el c
 
 ---
 
-### CUT: Contrastive Unlearn Tuning
+### RMU: Representation Misdirection for Unlearning
 
-La idea central es que, en lugar de penalizar la probabilidad de tokens peligrosos (como hace gradient ascent), CUT **redirige las representaciones internas** del modelo: fuerza que las activaciones en contextos peligrosos se parezcan a las activaciones en contextos de "novato", usando el modelo original congelado como referencia.
-
-#### Vector de control
-
-Para cada dominio de conocimiento peligroso con keyword $$k$$, se computa un **vector de control** $$h_\text{ctrl}$$ a partir del modelo congelado $$M_\text{frozen}$$:
-
-$$h_\text{ctrl}(k) = M_\text{frozen}(\textit{"You are a novice at } k\textit{"}) - M_\text{frozen}(\textit{"You are an expert at } k\textit{"})$$
-
-Este vector apunta en la dirección de "alejarse del conocimiento experto". Es fijo durante el entrenamiento (se computa una sola vez con el modelo original).
+La idea central es que, en lugar de penalizar la probabilidad de tokens peligrosos (como hace gradient ascent), RMU **redirige las representaciones internas** del modelo: fuerza que las activaciones en contextos peligrosos apunten hacia un **vector aleatorio fijo** $$u$$, desconectando esas representaciones de su significado original sin necesidad de una referencia semántica.
 
 #### Función de pérdida
 
@@ -67,17 +59,17 @@ La pérdida total combina dos términos:
 
 $$\mathcal{L} = \mathcal{L}_\text{forget} + \alpha \cdot \mathcal{L}_\text{retain}$$
 
-**Término de olvido** — empuja las activaciones del modelo actualizado $$M_\theta$$ hacia el objetivo "novato":
+**Término de olvido** — empuja las activaciones de capa $$l$$ del modelo actualizado $$M_\theta$$ hacia el vector aleatorio escalado $$c \cdot u$$:
 
-$$\mathcal{L}_\text{forget} = \mathbb{E}_{x_f \sim \mathcal{D}_\text{forget}} \left\| M_\theta(x_f) - \bigl(M_\text{frozen}(x_f) + c \cdot h_\text{ctrl}\bigr) \right\|_2^2$$
+$$\mathcal{L}_\text{forget} = \mathbb{E}_{x_f \sim \mathcal{D}_\text{forget}} \left\| M_\theta^{(l)}(x_f) - c \cdot u \right\|_2^2$$
 
-donde $$c > 0$$ es un escalar que controla cuánto se desplaza la representación objetivo. El término penaliza que las activaciones del modelo actualizado se alejen del target "novato".
+donde $$u \in \mathbb{R}^d$$ es un **vector unitario aleatorio fijo** muestreado una sola vez antes del entrenamiento, y $$c > 0$$ es un escalar de escala. El objetivo no tiene información semántica: se empuja la representación hacia un punto arbitrario del espacio, haciéndola inútil para cualquier downstream que dependa del conocimiento peligroso.
 
 **Término de retención** — ancla las activaciones en datos benignos al modelo original:
 
-$$\mathcal{L}_\text{retain} = \mathbb{E}_{x_r \sim \mathcal{D}_\text{retain}} \left\| M_\theta(x_r) - M_\text{frozen}(x_r) \right\|_2^2$$
+$$\mathcal{L}_\text{retain} = \mathbb{E}_{x_r \sim \mathcal{D}_\text{retain}} \left\| M_\theta^{(l)}(x_r) - M_\text{frozen}^{(l)}(x_r) \right\|_2^2$$
 
-Minimizar $$\mathcal{L}_\text{retain}$$ es equivalente a una regularización L₂ sobre los pesos: impide que el modelo cambie su comportamiento en textos no peligrosos. El hiperparámetro $$\alpha$$ balancea ambos objetivos.
+Penaliza que las representaciones en datos seguros se alejen del modelo congelado. El hiperparámetro $$\alpha$$ balancea ambos objetivos. Solo se actualizan los pesos de la capa $$l$$ seleccionada; el resto del modelo permanece congelado.
 
 #### Corpora de entrenamiento
 
@@ -106,18 +98,31 @@ Una pregunta de WMDP-bio podría ser: *"¿Qué técnica de modificación genéti
 
 ## Resultados principales
 
-Los experimentos evalúan Zephyr-7b-beta e Yi-34b-Chat, con GPT-4 como cota superior. Los baselines son LLMU, SCRUB y SSD.
+Los experimentos evalúan Zephyr-7b-beta e Yi-34b-Chat. Los baselines son:
 
-| Modelo / método | WMDP-bio ↓ | WMDP-cyber ↓ | MMLU ↑ | MT-Bench ↑ |
-|----------------|:----------:|:------------:|:------:|:----------:|
-| Zephyr-7b (base) | 65.5% | 42.9% | 58.5% | 7.33 |
-| + CUT | **29.3%** | **24.9%** | 57.0% | 7.20 |
-| + LLMU | 59.5% | — | — | — |
-| + SCRUB | 45.2% | — | — | — |
-| + SSD | — | — | 41.5% | — |
+- **LLMU** ([Yao et al., 2023](2023_yao_large-llm-unlearning.html)) — Large Language Model Unlearning. Combina gradient ascent en el forget set con retención explícita y supresión de activaciones peligrosas. Diseñado específicamente para LLMs.
+- **SCRUB** (Kurmanji et al., 2024, NeurIPS) — Alterna entre maximizar la pérdida en el forget set y minimizar la divergencia KL con el modelo original en el retain set. Propuesto originalmente para **clasificadores**, no para LLMs generativos.
+- **SSD** (Foster et al., 2024) — *Selective Synaptic Dampening*. Identifica los parámetros más relevantes para el forget set usando la diagonal de la matriz de Fisher y los escala hacia abajo. Propuesto originalmente para **clasificadores**.
 
-- CUT es el único método que alcanza nivel casi aleatorio (~25%) en WMDP sin degradación significativa en MMLU (−1.5pp) ni MT-Bench (−0.13).
-- Los demás baselines o fallan en olvidar o destruyen la utilidad general del modelo.
+**Zephyr-7b-beta:**
+
+| Método | WMDP-bio ↓ | WMDP-cyber ↓ | MMLU ↑ | MT-Bench ↑ |
+|--------|:----------:|:------------:|:------:|:----------:|
+| Base | 65.5% | 42.9% | 58.5% | 7.33 |
+| + LLMU | 59.5% | 38.2% | 45.2% | 1.00 |
+| + SCRUB | 45.2% | 38.4% | 53.7% | 7.09 |
+| + SSD | 55.2% | 34.0% | 41.5% | 5.48 |
+| + **CUT** | **29.3%** | **24.9%** | **57.0%** | **7.20** |
+
+**Yi-34b-Chat:**
+
+| Método | WMDP-bio ↓ | WMDP-cyber ↓ | MMLU ↑ | MT-Bench ↑ |
+|--------|:----------:|:------------:|:------:|:----------:|
+| Base | 76.3% | 45.8% | 72.9% | 7.65 |
+| + **CUT** | **30.9%** | **29.2%** | **69.0%** | **7.11** |
+
+- CUT es el único método que alcanza nivel casi aleatorio (~25-30%) en ambos dominios sin degradación significativa: −1.5pp en MMLU y −0.13 en MT-Bench para Zephyr.
+- LLMU destruye la fluencia conversacional (MT-Bench 1.00); SCRUB y SSD preservan mejor la utilidad general pero fallan en olvidar suficientemente.
 - **Robustez adversarial**: el ataque GCG necesitó más de 2.500 pasos (~7h en A100) para extraer respuestas coherentes del modelo con CUT, frente a menos de 50 pasos en el modelo base.
 - Las 122 preguntas privadas más sensibles (no publicadas) tienen precisión similar a WMDP, validando que el benchmark es un proxy razonable del conocimiento más peligroso.
 

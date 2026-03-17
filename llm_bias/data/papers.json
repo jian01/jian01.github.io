@@ -1,0 +1,2018 @@
+[
+  {
+    "id": "2015_cao_machine-unlearning",
+    "title": "Towards Making Systems Forget with Machine Unlearning",
+    "authors": "Yinzhi Cao, Junfeng Yang",
+    "year": "2015",
+    "date_published": "2015-05-18",
+    "published": "IEEE Symposium on Security and Privacy, 2015",
+    "method_type": "Reentrenamiento exacto",
+    "status": [
+      "Relevante",
+      "Leido"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "privacidad",
+      "derecho-al-olvido",
+      "modelos-lineales",
+      "eficiencia-computacional"
+    ],
+    "pdf": "/llm_bias/pdfs/2015_cao_machine-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2019_ginart_data-deletion",
+    "title": "Making AI Forget You: Data Deletion in Machine Learning",
+    "authors": "Antonio Ginart, Melody Guan, Gregory Valiant, James Zou",
+    "year": "2019",
+    "date_published": "2019-07-11",
+    "published": "NeurIPS, 2019",
+    "method_type": "Reentrenamiento exacto",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "exact-unlearning",
+      "k-means",
+      "datos-continuos",
+      "privacidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2019_ginart_data-deletion.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2019_ziegler_rlhf-finetuning",
+    "title": "Fine-Tuning Language Models from Human Preferences",
+    "authors": "Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul F. Christiano, Geoffrey Irving (OpenAI)",
+    "year": "2019",
+    "date_published": "2019-09-18",
+    "published": "arXiv, 2019",
+    "method_type": "",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "RLHF",
+      "alineamiento",
+      "preferencias-humanas",
+      "reward-model",
+      "PPO"
+    ],
+    "pdf": "/llm_bias/pdfs/2019_ziegler_rlhf-finetuning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2020_gehman_realtoxicityprompts",
+    "title": "RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models",
+    "authors": "Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, Noah A. Smith",
+    "year": "2020",
+    "date_published": "2020-09-24",
+    "published": "EMNLP Findings, 2020",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "toxicidad",
+      "seguridad-AI",
+      "LLM",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2020_gehman_realtoxicityprompts.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2020_olah_zoom-in-circuits",
+    "title": "Zoom In: An Introduction to Circuits",
+    "authors": "Chris Olah, Nick Cammarata, Ludwig Schubert, Gabriel Goh, Michael Petrov, Shan Carter",
+    "year": "2020",
+    "date_published": "2020-03-10",
+    "published": "Distill, 2020",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "redes-de-visión",
+      "features",
+      "composición"
+    ],
+    "pdf": "",
+    "s2_id": null
+  },
+  {
+    "id": "2020_sap_social-bias-frames",
+    "title": "Social Bias Frames: Reasoning about Social and Power Implications of Language",
+    "authors": "Maarten Sap, Saadia Gabriel, Lianhui Qin, Dan Jurafsky, Noah A. Smith, Yejin Choi",
+    "year": "2020",
+    "date_published": "2019-11-10",
+    "published": "ACL, 2020",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "dataset",
+      "sesgo-social",
+      "hate-speech",
+      "anotación-estructurada",
+      "NLP"
+    ],
+    "pdf": "/llm_bias/pdfs/2020_sap_social-bias-frames.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2020_vig_gender-bias-causal",
+    "title": "Investigating Gender Bias in Language Models Using Causal Mediation Analysis",
+    "authors": "Jesse Vig, Sebastian Gehrmann, Yonatan Belinkov, Sharon Qian, Daniel Nevo, Yaron Singer, Stuart Shieber",
+    "year": "2020",
+    "date_published": "2020-04-26",
+    "published": "NeurIPS, 2020",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad",
+      "sesgo-de-género",
+      "causal-mediation",
+      "attention-heads",
+      "GPT-2"
+    ],
+    "pdf": "/llm_bias/pdfs/2020_vig_gender-bias-causal.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_bourtoule_sisa",
+    "title": "Machine Unlearning",
+    "authors": "Lucas Bourtoule, Varun Chandrasekaran, Christopher A. Choquette-Choo, Hengrui Jia, Adelin Travers, Baiwu Zhang, David Lie, Nicolas Papernot",
+    "year": "2021",
+    "date_published": "2019-12-09",
+    "published": "IEEE Symposium on Security and Privacy (S&P), 2021",
+    "method_type": "Reentrenamiento exacto",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "SISA",
+      "exact-unlearning",
+      "privacidad",
+      "reentrenamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_bourtoule_sisa.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_cheng_fairfil",
+    "title": "FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders",
+    "authors": "Pengyu Cheng, Weituo Hao, Siyang Yuan, Shijing Si, Lawrence Carin",
+    "year": "2021",
+    "date_published": "2021-03-11",
+    "published": "ICLR, 2021",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "contrastive-learning",
+      "sentence-encoder",
+      "BERT",
+      "post-hoc"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_cheng_fairfil.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_elhage_transformer-circuits",
+    "title": "A Mathematical Framework for Transformer Circuits",
+    "authors": "Nelson Elhage, Neel Nanda, Catherine Olsson, Tom Henighan, Nicholas Joseph, Ben Mann, Amanda Askell, Yuntao Bai, Anna Chen, Tom Conerly, Nova DasSarma, Dawn Drain, Deep Ganguli, Zac Hatfield-Dodds, Danny Hernandez, Andy Jones, Jackson Kernion, Liane Lovitt, Kamal Ndousse, Dario Amodei, Tom Brown, Jack Clark, Jared Kaplan, Sam McCandlish, Chris Olah",
+    "year": "2021",
+    "date_published": "2021-12-22",
+    "published": "Transformer Circuits Thread, Anthropic, 2021",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "transformers",
+      "residual-stream",
+      "composición-de-cabezas"
+    ],
+    "pdf": "",
+    "s2_id": null
+  },
+  {
+    "id": "2021_geiger_causal-abstractions",
+    "title": "Causal Abstractions of Neural Networks",
+    "authors": "Atticus Geiger, Hanson Lu, Thomas Icard, Christopher Potts",
+    "year": "2021",
+    "date_published": "2021-06-06",
+    "published": "NeurIPS, 2021",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad",
+      "causalidad",
+      "intervenciones",
+      "redes-neuronales",
+      "razonamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_geiger_causal-abstractions.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_lauscher_modular-debiasing",
+    "title": "Sustainable Modular Debiasing of Language Models",
+    "authors": "Anne Lauscher, Tobias Lüken, Goran Glavaš",
+    "year": "2021",
+    "date_published": "2021-09-08",
+    "published": "Findings of EMNLP, 2021",
+    "method_type": "Adapters / PEFT",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "adapters",
+      "modular",
+      "BERT",
+      "sesgo-de-género"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_lauscher_modular-debiasing.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_lin_truthfulqa",
+    "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods",
+    "authors": "Stephanie C. Lin, Jacob Hilton, Owain Evans",
+    "year": "2021",
+    "date_published": "2021-09-08",
+    "published": "ACL, 2022 (arXiv 2021)",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "veracidad",
+      "alucinaciones",
+      "LLM",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_lin_truthfulqa.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_meade_debiasing-survey",
+    "title": "An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models",
+    "authors": "Nicholas Meade, Elinor Poole-Dayan, Siva Reddy",
+    "year": "2021",
+    "date_published": "2021-10-16",
+    "published": "ACL, 2022",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "survey",
+      "sesgo-social",
+      "LLM",
+      "evaluación-comprehensiva"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_meade_debiasing-survey.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_nadeem_stereoset",
+    "title": "StereoSet: Measuring stereotypical bias in pretrained language models",
+    "authors": "Moin Nadeem, Anna Bethke, Siva Reddy",
+    "year": "2021",
+    "date_published": "2020-04-20",
+    "published": "ACL, 2021",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "sesgo-estereotipado",
+      "modelos-de-lenguaje",
+      "ICAT",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_nadeem_stereoset.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_neel_descent-to-delete",
+    "title": "Descent-to-Delete: Gradient-Based Methods for Machine Unlearning",
+    "authors": "Seth Neel, Aaron Roth, Saeed Sharifi-Malvajerdi",
+    "year": "2021",
+    "date_published": "2020-07-06",
+    "published": "Algorithmic Learning Theory (ALT), 2021",
+    "method_type": "Reentrenamiento exacto",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "unlearning-aproximado",
+      "gradiente",
+      "privacidad",
+      "modelos-convexos"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_neel_descent-to-delete.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_parrish_bbq",
+    "title": "BBQ: A hand-built bias benchmark for question answering",
+    "authors": "Alicia Parrish, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut, Sam Bowman",
+    "year": "2021",
+    "date_published": "2021-10-15",
+    "published": "ACL Findings, 2022",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "sesgo-social",
+      "QA",
+      "estereotipos",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_parrish_bbq.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_xu_bot-adversarial",
+    "title": "Bot-Adversarial Dialogue for Safe Conversational Agents",
+    "authors": "Jing Xu, Da Ju, Margaret Li, Y-Lan Boureau, Jason Weston, Emily Dinan",
+    "year": "2021",
+    "date_published": "2020-10-14",
+    "published": "NAACL, 2021",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "dataset",
+      "red-teaming",
+      "conversacional",
+      "seguridad-AI",
+      "chatbots"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_xu_bot-adversarial.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2021_zhao_calibrate-before-use",
+    "title": "Calibrate Before Use: Improving Few-Shot Performance of Language Models",
+    "authors": "Tony Zhao, Eric Wallace, Shi Feng, Dan Klein, Sameer Singh",
+    "year": "2021",
+    "date_published": "2021-02-19",
+    "published": "ICML, 2021",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "few-shot-learning",
+      "calibración",
+      "sesgo-de-prompt",
+      "GPT-3",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2021_zhao_calibrate-before-use.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_bai_rlhf-assistant",
+    "title": "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback",
+    "authors": "Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda Askell, et al. (Anthropic)",
+    "year": "2022",
+    "date_published": "2022-04-12",
+    "published": "arXiv, 2022",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "RLHF",
+      "alineamiento",
+      "asistente-AI",
+      "preferencias-humanas",
+      "seguridad-AI"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_bai_rlhf-assistant.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_ethayarajh_v-usable-information",
+    "title": "Understanding Dataset Difficulty with V-Usable Information",
+    "authors": "Kawin Ethayarajh, Yejin Choi, Swabha Swayamdipta",
+    "year": "2022",
+    "date_published": "2021-10-16",
+    "published": "ICML, 2022",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "benchmark",
+      "dificultad-dataset",
+      "teoría-de-información",
+      "correlaciones-espurias",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_ethayarajh_v-usable-information.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_ganguli_red-teaming",
+    "title": "Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned",
+    "authors": "Deep Ganguli, Liane Lovitt, John Kernion, Amanda Askell, Yuntao Bai, et al. (Anthropic)",
+    "year": "2022",
+    "date_published": "2022-08-23",
+    "published": "arXiv, 2022",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "red-teaming",
+      "seguridad-AI",
+      "RLHF",
+      "evaluación-adversarial",
+      "alineamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_ganguli_red-teaming.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_gira_debiasing-efficient-finetuning",
+    "title": "Debiasing Pre-Trained Language Models via Efficient Fine-Tuning",
+    "authors": "Michael Gira, Ruisu Zhang, Kangwook Lee",
+    "year": "2022",
+    "date_published": "2022-05-27",
+    "published": "LTEDI Workshop, 2022",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "debiasing",
+      "adapters",
+      "PEFT",
+      "fine-tuning-eficiente",
+      "sesgo-de-género"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_gira_debiasing-efficient-finetuning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_hartvigsen_toxigen",
+    "title": "ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection",
+    "authors": "Thomas Hartvigsen, Saadia Gabriel, Hamid Palangi, Maarten Sap, Dipankar Ray, Ece Kamar",
+    "year": "2022",
+    "date_published": "2022-03-17",
+    "published": "ACL, 2022",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "dataset",
+      "hate-speech-implícito",
+      "adversarial",
+      "GPT-3",
+      "detección-toxicidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_hartvigsen_toxigen.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_he_mabel",
+    "title": "MABEL: Attenuating Gender Bias using Textual Entailment Data",
+    "authors": "Jacqueline He, Mengzhou Xia, Christiane Fellbaum, Danqi Chen",
+    "year": "2022",
+    "date_published": "2022-10-26",
+    "published": "EMNLP, 2022",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "debiasing",
+      "NLI",
+      "contrastive-learning",
+      "sesgo-de-género",
+      "BERT"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_he_mabel.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_ilharco_task-arithmetic",
+    "title": "Editing Models with Task Arithmetic",
+    "authors": "Gabriel Ilharco, Marco Tulio Ribeiro, Mitchell Wortsman, Suchin Gururangan, Ludwig Schmidt, Hannaneh Hajishirzi, Ali Farhadi",
+    "year": "2022",
+    "date_published": "2022-12-08",
+    "published": "ICLR, 2023",
+    "method_type": "Enmascarado / edición de pesos",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "edición-de-modelos",
+      "task-vectors",
+      "aritmética-de-pesos",
+      "fine-tuning"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_ilharco_task-arithmetic.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_jang_knowledge-unlearning",
+    "title": "Knowledge Unlearning for Mitigating Privacy Risks in Language Models",
+    "authors": "Joel Jang, Dongkeun Yoon, Sohee Yang, Sungmin Cha, Moontae Lee, Lajanugen Logeswaran, Minjoon Seo",
+    "year": "2022",
+    "date_published": "2022-10-04",
+    "published": "Annual Meeting of the Association for Computational Linguistics (ACL), 2022",
+    "method_type": "Gradient ascent",
+    "status": [
+      "Relevante",
+      "Leido"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "privacidad",
+      "LLM",
+      "gradient-ascent",
+      "memorización"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_jang_knowledge-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_perez_red-teaming-lm",
+    "title": "Red Teaming Language Models with Language Models",
+    "authors": "Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John Aslanides, Amelia Glaese, Nat McAleese, Geoffrey Irving",
+    "year": "2022",
+    "date_published": "2022-02-07",
+    "published": "arXiv, 2022",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "red-teaming",
+      "seguridad-AI",
+      "generación-automatizada",
+      "LLM",
+      "alineamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_perez_red-teaming-lm.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_smith_holistic-descriptor",
+    "title": "\\\"I'm sorry to hear that\\\": Finding New Biases in Language Models with a Holistic Descriptor Dataset",
+    "authors": "Eric Michael Smith, Melissa Hall, Melanie Kambadur, Eleonora Presani, Adina Williams",
+    "year": "2022",
+    "date_published": "2022-05-18",
+    "published": "EMNLP, 2022",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "benchmark",
+      "sesgo-social",
+      "generación-de-texto",
+      "sentimiento",
+      "dataset-holístico"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_smith_holistic-descriptor.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_wang_ioi-circuit",
+    "title": "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small",
+    "authors": "Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, Jacob Steinhardt",
+    "year": "2022",
+    "date_published": "2022-11-01",
+    "published": "arXiv, 2022",
+    "method_type": "",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "GPT-2",
+      "attention-heads",
+      "IOI"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_wang_ioi-circuit.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_wang_skill-neurons",
+    "title": "Finding Skill Neurons in Pre-trained Transformer-based Language Models",
+    "authors": "Xiaozhi Wang, Kaiyue Wen, Zhengyan Zhang, Lei Hou, Zhiyuan Liu, Juanzi Li",
+    "year": "2022",
+    "date_published": "2022-11-14",
+    "published": "EMNLP, 2022",
+    "method_type": "",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "interpretabilidad",
+      "skill-neurons",
+      "FFN-layers",
+      "transformers",
+      "modularidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_wang_skill-neurons.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2022_yang_task-specific-compression",
+    "title": "Task-specific Compression for Multi-task Language Models using Attribution-based Pruning",
+    "authors": "Nakyeong Yang, Yunah Jang, Hwanhee Lee, Seohyeong Jung, Kyomin Jung",
+    "year": "2022",
+    "date_published": "2022-05-09",
+    "published": "EACL Findings, 2023",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad",
+      "pruning",
+      "compresión",
+      "multi-tarea",
+      "attribution"
+    ],
+    "pdf": "/llm_bias/pdfs/2022_yang_task-specific-compression.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_acerbi_human-like-biases",
+    "title": "Large language models show human-like content biases in transmission chain experiments",
+    "authors": "Alberto Acerbi, Joseph M. Stubbersfield",
+    "year": "2023",
+    "date_published": "2023-10-26",
+    "published": "PNAS, 2023",
+    "method_type": "",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "sesgo-cognitivo",
+      "transmisión-cultural",
+      "LLM",
+      "psicología",
+      "comportamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_acerbi_human-like-biases.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_bills_neuron-explanation",
+    "title": "Language Models Can Explain Neurons in Language Models",
+    "authors": "Steven Bills, Nick Cammarata, Dan Mossing, Henk Tillman, Leo Gao, Gabriel Goh, Ilya Sutskever, Jan Leike, Jeff Wu, William Saunders",
+    "year": "2023",
+    "date_published": "2023-05-09",
+    "published": "OpenAI Technical Report, 2023",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "neuronas",
+      "explicaciones-automáticas",
+      "GPT-4",
+      "GPT-2"
+    ],
+    "pdf": "",
+    "s2_id": null
+  },
+  {
+    "id": "2023_conmy_automated-circuit-discovery",
+    "title": "Towards Automated Circuit Discovery for Mechanistic Interpretability",
+    "authors": "Arthur Conmy, Adrià Garriga-Alonso, Stefan Heimersheim, Aengus Lynch, Augustine N. Mavor-Parker",
+    "year": "2023",
+    "date_published": "2023-04-28",
+    "published": "NeurIPS, 2023",
+    "method_type": "",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "activation-patching",
+      "automatización",
+      "transformer"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_conmy_automated-circuit-discovery.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_eldan_harry-potter",
+    "title": "Who's Harry Potter? Approximate Unlearning in LLMs",
+    "authors": "Ronen Eldan, Mark Russinovich",
+    "year": "2023",
+    "date_published": "2023-10-04",
+    "published": "arXiv, 2023",
+    "method_type": "Fine-tuning",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "copyright",
+      "LLM",
+      "fine-tuning",
+      "conocimiento-específico"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_eldan_harry-potter.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_ermon_dpo",
+    "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+    "authors": "Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn",
+    "year": "2023",
+    "date_published": "2023-05-29",
+    "published": "NeurIPS, 2023",
+    "method_type": "",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "alineamiento",
+      "DPO",
+      "preferencias-humanas",
+      "fine-tuning",
+      "reward-model"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_ermon_dpo.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_goldowskydill_path-patching",
+    "title": "Localizing Model Behavior with Path Patching",
+    "authors": "Nicholas W. Goldowsky-Dill, Chris MacLeod, Lucas Sato, Aryaman Arora",
+    "year": "2023",
+    "date_published": "2023-04-12",
+    "published": "arXiv, 2023",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "path-patching",
+      "residual-stream",
+      "causalidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_goldowskydill_path-patching.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_hanna_gpt2-greater-than",
+    "title": "How does GPT-2 compute greater-than?: Interpreting mathematical abilities in a pre-trained language model",
+    "authors": "Michael Hanna, Ollie Liu, Alexandre Variengien",
+    "year": "2023",
+    "date_published": "2023-04-30",
+    "published": "arXiv, 2023",
+    "method_type": "",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "GPT-2",
+      "razonamiento-numérico",
+      "MLP-layers"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_hanna_gpt2-greater-than.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_hassan_dcalm",
+    "title": "D-CALM: A Dynamic Clustering-based Active Learning Approach for Mitigating Bias",
+    "authors": "Sabit Hassan, Malihe Alikhani",
+    "year": "2023",
+    "date_published": "2023-05-26",
+    "published": "arXiv, 2023",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "active-learning",
+      "clustering",
+      "eficiencia-datos",
+      "BERT"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_hassan_dcalm.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_heimersheim_python-docstrings",
+    "title": "A circuit for Python docstrings in a 4-layer attention-only transformer",
+    "authors": "Stefan Heimersheim, Jett Janiak",
+    "year": "2023",
+    "date_published": "2023-02-20",
+    "published": "Alignment Forum / distill.pub blog, 2023",
+    "method_type": "",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "induction-heads",
+      "transformer-pequeño",
+      "tutorial"
+    ],
+    "pdf": "",
+    "s2_id": null
+  },
+  {
+    "id": "2023_ji_beavertails",
+    "title": "BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset",
+    "authors": "Jiaming Ji, Mickel Liu, Juntao Dai, Xuehai Pan, Chi Zhang, Ce Bian, Ruiyang Sun, Yizhou Wang, Yaodong Yang",
+    "year": "2023",
+    "date_published": "2023-07-10",
+    "published": "NeurIPS, 2023",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "dataset",
+      "seguridad-AI",
+      "RLHF",
+      "anotación-humana",
+      "benchmark"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_ji_beavertails.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_li_halueval",
+    "title": "HaluEval: A Large-Scale Hallucination Evaluation Benchmark for Large Language Models",
+    "authors": "Junyi Li, Xiaoxue Cheng, Xin Zhao, Jian-Yun Nie, Ji-Rong Wen",
+    "year": "2023",
+    "date_published": "2023-05-19",
+    "published": "EMNLP, 2023",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "alucinaciones",
+      "QA",
+      "resumen",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_li_halueval.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_panigrahi_skill-localization",
+    "title": "Task-Specific Skill Localization in Fine-tuned Language Models",
+    "authors": "Abhishek Panigrahi, Nikunj Saunshi, Haoyu Zhao, Sanjeev Arora",
+    "year": "2023",
+    "date_published": "2023-02-13",
+    "published": "arXiv, 2023",
+    "method_type": "",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "interpretabilidad",
+      "localización-habilidades",
+      "fine-tuning",
+      "sparse-masks",
+      "BERT"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_panigrahi_skill-localization.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_patil_sensitive-information",
+    "title": "Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks",
+    "authors": "Vaidehi Patil, Peter Hase, Mohit Bansal",
+    "year": "2023",
+    "date_published": "2023-09-29",
+    "published": "arXiv, 2023",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "privacidad",
+      "ataques-de-extracción",
+      "robustez",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_patil_sensitive-information.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_pawelczyk_incontext-unlearning",
+    "title": "In-Context Unlearning: Language Models as Few Shot Unlearners",
+    "authors": "Martin Pawelczyk, Seth Neel, Himabindu Lakkaraju",
+    "year": "2023",
+    "date_published": "2023-10-11",
+    "published": "arXiv, 2023",
+    "method_type": "Tiempo de inferencia",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "in-context-learning",
+      "sin-entrenamiento",
+      "LLM",
+      "few-shot"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_pawelczyk_incontext-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_thakur_gender-makeover",
+    "title": "Language Models Get a Gender Makeover: Mitigating Gender Bias with Few-Shot Data Interventions",
+    "authors": "Himanshu Thakur, Atishay Jain, Praneetha Vaddamanu, Percy Liang, Louis-Philippe Morency",
+    "year": "2023",
+    "date_published": "2023-06-07",
+    "published": "ACL, 2023",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "debiasing",
+      "few-shot",
+      "in-context-learning",
+      "sesgo-de-género",
+      "sin-entrenamiento"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_thakur_gender-makeover.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_venkit_nationality-bias",
+    "title": "Nationality Bias in Text Generation",
+    "authors": "Pranav Venkit, Sanjana Gautam, Ruchi Panchanadikar, Ting-Hao 'Kenneth' Huang, Shomir Wilson",
+    "year": "2023",
+    "date_published": "2023-02-05",
+    "published": "EACL, 2023",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "sesgo-nacionalidad",
+      "generación-de-texto",
+      "sentimiento",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_venkit_nationality-bias.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_xie_parameter-efficient-debiasing",
+    "title": "An Empirical Analysis of Parameter-Efficient Methods for Debiasing Pre-Trained Language Models",
+    "authors": "Zhongbin Xie, Thomas Lukasiewicz",
+    "year": "2023",
+    "date_published": "2023-06-06",
+    "published": "ACL, 2023",
+    "method_type": "Adapters / PEFT",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "LoRA",
+      "PEFT",
+      "adapters",
+      "fine-tuning-eficiente"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_xie_parameter-efficient-debiasing.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_yang_bias-neurons",
+    "title": "Mitigating Biases for Instruction-following Language Models via Bias Neurons Elimination",
+    "authors": "Nakyeong Yang, Taegwan Kang, Stanley Jungkyu Choi, Honglak Lee, Kyomin Jung",
+    "year": "2023",
+    "date_published": "2023-11-16",
+    "published": "ACL, 2023",
+    "method_type": "Edición de pesos / neuronas",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "debiasing",
+      "neuronas-de-sesgo",
+      "FFN-layers",
+      "interpretabilidad",
+      "edición-quirúrgica"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_yang_bias-neurons.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_yao_large-llm-unlearning",
+    "title": "Large Language Model Unlearning",
+    "authors": "Yuanshun Yao, Xiaojun Xu, Yang Liu",
+    "year": "2023",
+    "date_published": "2023-10-16",
+    "published": "arXiv, 2023",
+    "method_type": "Fine-tuning",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "LLM",
+      "contenido-tóxico",
+      "copyright",
+      "fine-tuning"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_yao_large-llm-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_yu_pcgu",
+    "title": "Unlearning Bias in Language Models by Partitioning Gradients",
+    "authors": "Charles Yu, Sullam Jeoung, Anish Kasi, Pengfei Yu, Heng Ji",
+    "year": "2023",
+    "date_published": "2023-07-01",
+    "published": "Findings of ACL, 2023",
+    "method_type": "Enmascarado / edición de pesos",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "machine-unlearning",
+      "gradiente",
+      "sesgo-implícito",
+      "masked-language-model"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_yu_pcgu.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2023_zhou_causal-debias",
+    "title": "Causal-Debias: Unifying Debiasing in Pretrained Language Models and Fine-tuning via Causal Invariant Learning",
+    "authors": "Fan Zhou, Yuzhou Mao, Liu Yu, Yi Yang, Ting Zhong",
+    "year": "2023",
+    "date_published": "2023-07-01",
+    "published": "ACL, 2023",
+    "method_type": "Causal / invariante",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "aprendizaje-causal",
+      "invarianza",
+      "fine-tuning",
+      "sesgo-social"
+    ],
+    "pdf": "/llm_bias/pdfs/2023_zhou_causal-debias.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_cloud_gradient-routing",
+    "title": "Gradient Routing: Masking Gradients to Localize Computation in Neural Networks",
+    "authors": "Alex Cloud, Jacob Goldman-Wetzler, Evžen Wybitul, Joseph Miller, Alexander Turner",
+    "year": "2024",
+    "date_published": "2024-10-06",
+    "published": "arXiv, 2024",
+    "method_type": "Enmascarado / edición de pesos",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "gradient-masking",
+      "localización-conocimiento",
+      "entrenamiento",
+      "interpretabilidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_cloud_gradient-routing.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_dige_machine-unlearning-bias",
+    "title": "Can Machine Unlearning Reduce Social Bias in Language Models?",
+    "authors": "Omkar Dige, Diljot Arneja, Tsz Fung Yau, Qixuan Zhang, Mohammad Bolandraftar, Xiaodan Zhu, Faiza Khan Khattak",
+    "year": "2024",
+    "date_published": "2024-06-19",
+    "published": "EMNLP Industry Track, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "sesgo-social",
+      "debiasing",
+      "fairness",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_dige_machine-unlearning-bias.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_doshi_does-unlearning",
+    "title": "Does Unlearning Truly Unlearn? A Black Box Evaluation of LLM Unlearning Methods",
+    "authors": "Jai Doshi, Asa Cooper Stickland",
+    "year": "2024",
+    "date_published": "2024-11-18",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "evaluación",
+      "caja-negra",
+      "ataques-adversariales",
+      "robustez"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_doshi_does-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_ethayarajh_kto",
+    "title": "KTO: Model Alignment as Prospect Theoretic Optimization",
+    "authors": "Kawin Ethayarajh, Winnie Xu, Niklas Muennighoff, Dan Jurafsky, Douwe Kiela",
+    "year": "2024",
+    "date_published": "2024-02-01",
+    "published": "ICML, 2024",
+    "method_type": "Optimización de preferencias",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "alineamiento",
+      "preferencias-humanas",
+      "fine-tuning",
+      "KTO",
+      "prospect-theory"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_ethayarajh_kto.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_fan_simplicity-npo",
+    "title": "Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning",
+    "authors": "Chongyu Fan, Liu Jian-cheng, Licong Lin, Jinghan Jia, Ruiqi Zhang, Mei Song, Sijia Liu",
+    "year": "2024",
+    "date_published": "2024-10-09",
+    "published": "arXiv, 2024",
+    "method_type": "Optimización de preferencias",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "DPO",
+      "NPO",
+      "eficiencia",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_fan_simplicity-npo.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_gallegos_self-debiasing",
+    "title": "Self-Debiasing Large Language Models: Zero-Shot Recognition and Reduction of Stereotypes",
+    "authors": "Isabel O. Gallegos, Ryan A. Rossi, Joe Barrow, Md. Mehrab Tanjim, Tong Yu, Hanieh Deilamsalehy, Ruiyi Zhang, Sungchul Kim, Franck Dernoncourt",
+    "year": "2024",
+    "date_published": "2024-02-03",
+    "published": "arXiv, 2024",
+    "method_type": "Tiempo de inferencia",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "zero-shot",
+      "prompting",
+      "sin-entrenamiento",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_gallegos_self-debiasing.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_han_chatgpt-data-augmentation",
+    "title": "ChatGPT Based Data Augmentation for Improved Parameter-Efficient Debiasing of LLMs",
+    "authors": "Pengrui Han, Rafał Kocielnik, Adhithya Saravanan, Roy Jiang, Or Sharir, Junchi Yan",
+    "year": "2024",
+    "date_published": "2024-02-19",
+    "published": "LTEDI Workshop, 2024",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "data-augmentation",
+      "ChatGPT",
+      "LoRA",
+      "PEFT"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_han_chatgpt-data-augmentation.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_jin_rwku",
+    "title": "RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models",
+    "authors": "Zhuoran Jin, Pengfei Cao, Chenhao Wang, Zhitao He, Hongbang Yuan, Jiachun Li, Yubo Chen, Kang Liu, Jun Zhao",
+    "year": "2024",
+    "date_published": "2024-06-16",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "benchmark",
+      "robustez-adversarial",
+      "conocimiento-real",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_jin_rwku.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_li_wmdp",
+    "title": "The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning",
+    "authors": "Nathaniel Li, Alexander Pan, Anjali Gopal, Summer Yue, Daniel Berrios, Alice Gatti, et al.",
+    "year": "2024",
+    "date_published": "2024-03-05",
+    "published": "arXiv, 2024",
+    "method_type": "Perturbación de representaciones",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "seguridad-AI",
+      "conocimiento-peligroso",
+      "benchmark",
+      "representaciones-internas"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_li_wmdp.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_liu_rethinking-unlearning",
+    "title": "Rethinking Machine Unlearning for Large Language Models",
+    "authors": "Sijia Liu, Yuanshun Yao, Jinghan Jia, Stephen Casper, Nathalie Baracaldo, Peter Hase, Xiaojun Xu, Yuguang Yao, Hang Li, Kush R. Varshney, Mohit Bansal, Sanmi Koyejo, Yang Liu",
+    "year": "2024",
+    "date_published": "2024-02-13",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "survey",
+      "taxonomía",
+      "evaluación",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_liu_rethinking-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_lynch_eight-methods",
+    "title": "Eight Methods to Evaluate Robust Unlearning in LLMs",
+    "authors": "Aengus Lynch, Phillip Guo, Aidan Ewart, Stephen Casper, Dylan Hadfield-Menell",
+    "year": "2024",
+    "date_published": "2024-02-26",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "evaluación",
+      "robustez",
+      "ataques-adversariales",
+      "benchmark"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_lynch_eight-methods.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_maini_kl-minimization",
+    "title": "KL Minimization for Machine Unlearning in LLMs",
+    "authors": "Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary Chase Lipton, J. Zico Kolter",
+    "year": "2024",
+    "date_published": "2024-01-11",
+    "published": "Introducido como baseline en TOFU (arXiv, 2024)",
+    "method_type": "Gradient ascent",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "gradient-ascent",
+      "regularización",
+      "LLM",
+      "KL-divergencia"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_maini_tofu.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_maini_tofu",
+    "title": "TOFU: A Task of Fictitious Unlearning for LLMs",
+    "authors": "Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary Chase Lipton, J. Zico Kolter",
+    "year": "2024",
+    "date_published": "2024-01-11",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "benchmark",
+      "evaluación",
+      "LLM",
+      "dataset-ficticio"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_maini_tofu.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_syed_attribution-patching",
+    "title": "Attribution Patching Outperforms Automated Circuit Discovery",
+    "authors": "Aaquib Syed, Can Rager, Arthur Conmy",
+    "year": "2024",
+    "date_published": "2023-10-16",
+    "published": "BlackboxNLP Workshop, 2024",
+    "method_type": "",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "circuitos",
+      "attribution-patching",
+      "gradientes",
+      "eficiencia"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_syed_attribution-patching.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_ucki_adversarial-unlearning",
+    "title": "An Adversarial Perspective on Machine Unlearning for AI Safety",
+    "authors": "Jakub Łucki, Boyi Wei, Yangsibo Huang, Peter Henderson, Florian Tramèr, Javier Rando",
+    "year": "2024",
+    "date_published": "2024-09-26",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "seguridad-AI",
+      "ataques-adversariales",
+      "reaprendizaje",
+      "robustez"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_ucki_adversarial-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_wang_llm-unlearning-loss",
+    "title": "LLM Unlearning via Loss Adjustment with Only Forget Data",
+    "authors": "Yaxuan Wang, Jiaheng Wei, Chris Liu, Jinlong Pang, Quan Liu, Ankit Parag Shah, Yujia Bao, Yang Liu, Wei Wei",
+    "year": "2024",
+    "date_published": "2024-10-14",
+    "published": "arXiv, 2024",
+    "method_type": "Gradient ascent",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "loss-function",
+      "sin-retain-set",
+      "LLM",
+      "eficiencia-datos"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_wang_llm-unlearning-loss.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_yao_muse",
+    "title": "MUSE: Machine Unlearning Six-Way Evaluation for Language Models",
+    "authors": "Weijia Shi, Jaechan Lee, Yangsibo Huang, Sadhika Malladi, Jieyu Zhao, Ari Holtzman, Daogao Liu, Luke Zettlemoyer, Noah A. Smith, Chiyuan Zhang",
+    "year": "2024",
+    "date_published": "2024-07-08",
+    "published": "arXiv, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "benchmark",
+      "evaluación",
+      "copyright",
+      "privacidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_yao_muse.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_zhang_catastrophic-quantization",
+    "title": "Catastrophic Failure of LLM Unlearning via Quantization",
+    "authors": "Zhiwei Zhang, Fali Wang, Xiaomin Li, Zongyu Wu, Xianfeng Tang, Hui Liu, Qi He, Wenpeng Yin, Suhang Wang",
+    "year": "2024",
+    "date_published": "2024-10-21",
+    "published": "International Conference on Learning Representations (ICLR), 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "cuantización",
+      "vulnerabilidad",
+      "seguridad-AI",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_zhang_catastrophic-quantization.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_zhang_negative-preference-optimization",
+    "title": "Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning",
+    "authors": "Ruiqi Zhang, Licong Lin, Yu Bai, Song Mei",
+    "year": "2024",
+    "date_published": "2024-04-08",
+    "published": "arXiv, 2024",
+    "method_type": "Optimización de preferencias",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "DPO",
+      "optimización",
+      "LLM",
+      "colapso-catastrófico"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_zhang_negative-preference-optimization.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2024_zhang_right-to-be-forgotten",
+    "title": "Right to be Forgotten in the Era of Large Language Models: Implications, Challenges, and Solutions",
+    "authors": "Dawen Zhang, Pamela Finckenberg-Broman, Thong Hoang, Shidong Pan, Zhenchang Xing, Mark Staples, Xiwei Xu",
+    "year": "2024",
+    "date_published": "2023-07-08",
+    "published": "AI and Ethics, 2024",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "privacidad",
+      "GDPR",
+      "derecho-al-olvido",
+      "regulación"
+    ],
+    "pdf": "/llm_bias/pdfs/2024_zhang_right-to-be-forgotten.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_barez_precise-concept-erasure",
+    "title": "Precise In-Parameter Concept Erasure in Large Language Models",
+    "authors": "Fazl Barez, Mor Geva, Yoav Gur-Arieh, Yihuai Hong, Haya Clara Suslik",
+    "year": "2025",
+    "date_published": "2025-05-28",
+    "published": "Association for Computational Linguistics, 2025",
+    "method_type": "Enmascarado / edición de pesos",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "edición-de-modelos",
+      "interpretabilidad",
+      "FFN-layers",
+      "borrado-conceptos"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_barez_precise-concept-erasure.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_chandna_dissecting-bias",
+    "title": "Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective",
+    "authors": "Bhavik Chandna, Zubair Bashir, Procheta Sen",
+    "year": "2025",
+    "date_published": "2025-06-05",
+    "published": "arXiv, 2025",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "interpretabilidad-mecanística",
+      "sesgo-de-género",
+      "circuitos",
+      "activation-patching",
+      "probing"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_chandna_dissecting-bias.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_chen_feature-selective-misdirection",
+    "title": "Feature-Selective Representation Misdirection for Machine Unlearning",
+    "authors": "Taozhao Chen, Linghan Huang, Kim-Kwang Raymond Choo, Huaming Chen",
+    "year": "2025",
+    "date_published": "2024-12-18",
+    "published": "arXiv, 2025",
+    "method_type": "Perturbación de representaciones",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "representaciones-internas",
+      "residual-stream",
+      "edición-liviana",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_chen_feature-selective-misdirection.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_cheng_biasfilter",
+    "title": "BiasFilter: An Inference-Time Debiasing Framework for Large Language Models",
+    "authors": "Xiaoqing Cheng, Ruizhe Chen, Hongying Zan, Yuxiang Jia, Min Peng",
+    "year": "2025",
+    "date_published": "2025-05-28",
+    "published": "arXiv, 2025",
+    "method_type": "Tiempo de inferencia",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "inference-time",
+      "detección",
+      "post-procesamiento",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_cheng_biasfilter.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_deng_guard",
+    "title": "GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection",
+    "authors": "Zhijie Deng, Chris Liu, Zirui Pang, Xinlei He, Lei Feng, Qi Xuan, Zhaowei Zhu, Jiaheng Wei",
+    "year": "2025",
+    "date_published": "2025-05-19",
+    "published": "arXiv, 2025",
+    "method_type": "Tiempo de inferencia",
+    "status": [
+      "Irrelevante",
+      "Leido"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "inference-time",
+      "detección",
+      "sin-modificar-pesos",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_deng_guard.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_dorna_openunlearning",
+    "title": "OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics",
+    "authors": "Vineeth Dorna, Anmol Reddy Mekala, Wenlong Zhao, Andrew McCallum, Zachary Chase Lipton, J. Zico Kolter, Pratyush Maini",
+    "year": "2025",
+    "date_published": "2025-06-14",
+    "published": "arXiv, 2025",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "benchmark",
+      "framework",
+      "comparación-métodos",
+      "reproducibilidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_dorna_openunlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_fan_unlearning-relearning",
+    "title": "Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond",
+    "authors": "Chongyu Fan, Jinghan Jia, Yihua Zhang, Anil Ramakrishna, Mingyi Hong, Sijia Liu",
+    "year": "2025",
+    "date_published": "2025-02-07",
+    "published": "arXiv, 2025",
+    "method_type": "Gradient ascent",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "robustez",
+      "reaprendizaje",
+      "SAM",
+      "geometría-del-loss"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_fan_unlearning-relearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_huutien_improving-unlearning",
+    "title": "Improving LLM Unlearning Robustness via Random Perturbations",
+    "authors": "Dang Huu-Tien, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue",
+    "year": "2025",
+    "date_published": "2025-01-31",
+    "published": "2025",
+    "method_type": "Perturbación de representaciones",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "robustez",
+      "perturbaciones-aleatorias",
+      "ataques-adversariales",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_huutien_improving-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_islam_biasgym",
+    "title": "BiasGym: Fantastic LLM Biases and How to Find (and Remove) Them",
+    "authors": "Sekh Mainul Islam, Nadav Borenstein, Saurabh Pawar, Haeun Yu, Arnav Arora, Isabelle Augenstein",
+    "year": "2025",
+    "date_published": "2025-08-12",
+    "published": "arXiv, 2025",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "elicitación",
+      "benchmark-dinámico",
+      "mitigación",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_islam_biasgym.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_li_fairsteer",
+    "title": "FairSteer: Inference Time Debiasing for LLMs with Dynamic Activation Steering",
+    "authors": "Yichen Li, Zhiting Fan, Ruizhe Chen, Xiaotang Gai, Luqi Gong, Yan Zhang, Zuozhu Liu",
+    "year": "2025",
+    "date_published": "2025-04-20",
+    "published": "arXiv, 2025",
+    "method_type": "Tiempo de inferencia",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "activation-steering",
+      "inference-time",
+      "representaciones-internas",
+      "dinámico"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_li_fairsteer.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_park_aligned-stereotypical",
+    "title": "Aligned but Stereotypical? The Hidden Influence of System Prompts on Social Bias in LVLM-Based Text-to-Image Models",
+    "authors": "NaHyeon Park, Namin An, Kunhee Kim, Soyeon Yoon, Jiahao Huo, Hyunjung Shim",
+    "year": "2025",
+    "date_published": "2024-12-04",
+    "published": "arXiv, 2025",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Irrelevante",
+      "Leido"
+    ],
+    "tags": [
+      "sesgo-social",
+      "text-to-image",
+      "system-prompts",
+      "modelos-multimodales",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_park_aligned-stereotypical.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_qiu_survey-unlearning",
+    "title": "A Survey on Unlearning in Large Language Models",
+    "authors": "Ruichen Qiu, Jiajun Tan, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun",
+    "year": "2025",
+    "date_published": "2025-10-29",
+    "published": "arXiv, 2025",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "survey",
+      "LLM",
+      "taxonomía",
+      "privacidad-seguridad"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_qiu_survey-unlearning.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_salehoof_dualaxis-taxonomy",
+    "title": "A Dual-Axis Taxonomy of Knowledge Editing for LLMs: From Mechanisms to Functions",
+    "authors": "Amir Mohammad Salehoof, Ali Ramezani, Yadollah Yaghoobzadeh, M. N. Ahmadabadi",
+    "year": "2025",
+    "date_published": "2025-08-12",
+    "published": "arXiv, 2025",
+    "method_type": "",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "survey",
+      "edición-de-modelos",
+      "taxonomía",
+      "knowledge-editing",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_salehoof_dualaxis-taxonomy.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_satish_bias-benchmarks-speech",
+    "title": "Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs",
+    "authors": "S. Satish, Gustav Eje Henter, Éva Székely",
+    "year": "2025",
+    "date_published": "2025-09-24",
+    "published": "arXiv, 2025",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Irrelevante",
+      "Leido"
+    ],
+    "tags": [
+      "benchmark",
+      "sesgo-de-género",
+      "speech-LLM",
+      "sesgo-acústico",
+      "evaluación"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_satish_bias-benchmarks-speech.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_shrestha_llm-bias-detection",
+    "title": "LLM Bias Detection and Mitigation through the Lens of Desired Distributions",
+    "authors": "Ingroj Shrestha, Padmini Srinivasan",
+    "year": "2025",
+    "date_published": "2025-10-07",
+    "published": "EMNLP, 2025",
+    "method_type": "Fine-tuning / data augmentation",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "distribuciones",
+      "KL-divergence",
+      "fairness",
+      "detección-sesgo"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_shrestha_llm-bias-detection.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_xu_biasedit",
+    "title": "BiasEdit: Debiasing Stereotyped Language Models via Model Editing",
+    "authors": "Xin Xu, Wei Xu, Ningyu Zhang, Julian McAuley",
+    "year": "2025",
+    "date_published": "2025-03-11",
+    "published": "arXiv, 2025",
+    "method_type": "Edición de pesos / neuronas",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "debiasing",
+      "edición-de-modelos",
+      "ROME",
+      "FFN-layers",
+      "sesgo-de-género"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_xu_biasedit.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_xu_biasfreebench",
+    "title": "BiasFreeBench: a Benchmark for Mitigating Bias in Large Language Model Responses",
+    "authors": "Xin Xu, Xiaoqiao He, Churan Zhi, Ruizhe Chen, Julian McAuley, Zexue He",
+    "year": "2025",
+    "date_published": "2025-09-30",
+    "published": "arXiv, 2025",
+    "method_type": "Benchmark / Dataset",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "benchmark",
+      "debiasing",
+      "sesgo-social",
+      "utilidad",
+      "LLM"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_xu_biasfreebench.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2025_zhao_debiasing-peft",
+    "title": "Debiasing the Fine-Grained Classification Task in LLMs with Bias-Aware PEFT",
+    "authors": "Daiying Zhao, Xinyu Yang, Hang Chen",
+    "year": "2025",
+    "date_published": "2025-07-01",
+    "published": "ACL, 2025",
+    "method_type": "Adapters / PEFT",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "PEFT",
+      "LoRA",
+      "clasificación-fina",
+      "fairness"
+    ],
+    "pdf": "/llm_bias/pdfs/2025_zhao_debiasing-peft.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2026_cai_per-parameter-task-arithmetic",
+    "title": "Per-parameter Task Arithmetic for Unlearning in Large Language Models",
+    "authors": "Chengyi Cai, Zesheng Ye, Jiangchao Yao, Jianzhong Qi, Bo Han, Xiaolu Zhang, Feng Liu, Jun Zhou",
+    "year": "2026",
+    "date_published": "2026-01-29",
+    "published": "arXiv, 2026",
+    "method_type": "Enmascarado / edición de pesos",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "task-arithmetic",
+      "edición-de-modelos",
+      "LLM",
+      "per-parámetro"
+    ],
+    "pdf": "/llm_bias/pdfs/2026_cai_per-parameter-task-arithmetic.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2026_chand_no-free-lunch",
+    "title": "No Free Lunch in Language Model Bias Mitigation? Targeted Bias Reduction Can Exacerbate Unmitigated LLM Biases",
+    "authors": "Shireen Chand, Faith Baca, Emilio Ferrara",
+    "year": "2026",
+    "date_published": "2025-11-23",
+    "published": "Applied Informatics, 2026",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "debiasing",
+      "no-free-lunch",
+      "whack-a-mole",
+      "evaluación-holística",
+      "sesgo-social"
+    ],
+    "pdf": "/llm_bias/pdfs/2026_chand_no-free-lunch.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2026_dang_beyond-forgetting",
+    "title": "Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities",
+    "authors": "Tien Dang, The-Hai Nguyen, Dinh Mai Phuong, Nguyễn Vũ Nguyên Phương, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue",
+    "year": "2026",
+    "date_published": "2026-01-29",
+    "published": "arXiv, 2026",
+    "method_type": "Evaluación / análisis",
+    "status": [
+      "Pendiente"
+    ],
+    "tags": [
+      "machine-unlearning",
+      "capacidades-emergentes",
+      "efectos-laterales",
+      "LLM",
+      "representaciones-internas"
+    ],
+    "pdf": "/llm_bias/pdfs/2026_dang_beyond-forgetting.pdf",
+    "s2_id": null
+  },
+  {
+    "id": "2026_pan_knowbias",
+    "title": "KnowBias: Mitigating Social Bias in LLMs via Know-Bias Neuron Enhancement",
+    "authors": "J. J. Pan, Chahat Raj, Anjishnu Mukherjee, Sina Mansouri, Bowen Wei, Shloka Yada, Ziwei Zhu",
+    "year": "2026",
+    "date_published": "2026-01-29",
+    "published": "arXiv, 2026",
+    "method_type": "Edición de pesos / neuronas",
+    "status": [
+      "Leido",
+      "Relevante"
+    ],
+    "tags": [
+      "debiasing",
+      "neuronas-equitativas",
+      "FFN-layers",
+      "amplificación",
+      "interpretabilidad"
+    ],
+    "pdf": "/llm_bias/pdfs/2026_pan_knowbias.pdf",
+    "s2_id": null
+  }
+]
