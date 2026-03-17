@@ -17,8 +17,8 @@ status:
   - "Leido"
   - "Irrelevante"
 image: "imgs/2024_fan_simplicity-npo.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
-opinion: "<WIP>"
+image_caption: "Examples of responses after unlearning on TOFU (Forget05) against QAs targeted for unlearning. <span style='color:#00008B'>Dark blue</span> highlights the key information in question. <span style='color:#006400'>Dark green</span> highlights key information that has not been unlearned in the response, resembling the style of the original label. <span style='color:#8B0000'>Dark red</span> marks key information that has been unlearned, with the format similar to Retrain. <span style='color:#9B8700'>Dark yellow</span> denotes repeated or irrelevant information."
+opinion: "En general optimización de NPO, no produce calidad de resultados muy distinta, por eso es irrelevante."
 ---
 # Simplicity Prevails: Rethinking Negative Preference Optimization for LLM Unlearning (2024)
 
