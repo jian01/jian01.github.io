@@ -32,6 +32,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Rethinking Machine Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_liu_rethinking-unlearning.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Eight Methods to Evaluate Robust Unlearning in LLMs | Evaluación / análisis | [Ver](../papers/2024_lynch_eight-methods.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning | Gradient ascent | [Ver](../papers/2024_li_wmdp.html) |
+| <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | KTO: Model Alignment as Prospect Theoretic Optimization | Optimización de preferencias | [Ver](../papers/2024_ethayarajh_kto.html) |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2024 | Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning | Optimización de preferencias | [Ver](../papers/2024_zhang_negative-preference-optimization.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_jin_rwku.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Can Machine Unlearning Reduce Social Bias in Language Models? | Evaluación / análisis | [Ver](../papers/2024_dige_machine-unlearning-bias.html) |
@@ -63,7 +64,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | Fine-tuning | 2 |
 | Reentrenamiento exacto | 4 |
 | Enmascarado / edición de pesos | 4 |
-| Optimización de preferencias | 2 |
+| Optimización de preferencias | 3 |
 | Perturbación de representaciones | 2 |
 | Tiempo de inferencia | 2 |
-| **Total** | **35** |
+| **Total** | **36** |

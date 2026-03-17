@@ -134,7 +134,7 @@ El paper agrupa los trabajos previos en tres áreas: (1) métodos de unlearning 
 - **Bai et al. (2022) — RLHF Assistant**: [RLHF Assistant](2022_bai_rlhf-assistant.html): trabajo clave en RLHF que motiva la conexión entre alineamiento con preferencias y unlearning que NPO explora.
 - **Li et al. (2024) — WMDP**: [WMDP](2024_li_wmdp.html): propone el benchmark de conocimiento peligroso utilizado como segunda evaluación de NPO junto a TOFU.
 - **Lynch et al. (2024) — Eight Methods**: [Eight Methods](2024_lynch_eight-methods.html): propone ocho métricas robustas para evaluar unlearning incluyendo resistencia a jailbreaks, evaluación adoptada en el paper.
-- **Ethayarajh et al. (2024) — KTO**: [V-Usable Information / KTO](2022_ethayarajh_v-usable-information.html): método de alineamiento con datos no pareados que comparte formulación similar a NPO; los autores comparan NPO vs KTO en simulaciones.
+- **Ethayarajh et al. (2024) — [KTO: Model Alignment as Prospect Theoretic Optimization](2024_ethayarajh_kto.html)**: método de alineamiento con datos no pareados (ejemplos individuales deseables/indeseables) basado en la teoría prospectiva de Kahneman-Tversky; evaluado como baseline en los experimentos de TOFU donde KTO+RT queda por debajo de NPO+RT.
 - **Patil et al. (2023) — Sensitive Information**: [Sensitive Information](2023_patil_sensitive-information.html): método de ataque para extraer datos de modelos unlearned, relevante para evaluar si NPO es resistente a ataques de extracción.
 
 ## Tags
