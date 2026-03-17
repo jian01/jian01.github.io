@@ -14,7 +14,8 @@ tags:
 pdf: "/llm_bias/pdfs/2024_zhang_negative-preference-optimization.pdf"
 method_type: "Optimización de preferencias"
 status:
-  - "Pendiente"
+  - "Leido"
+  - "Relevante"
 image: "imgs/2024_zhang_negative-preference-optimization.png"
 image_caption: "Respuestas de los modelos después de distintas técnicas de unlearning sobre TOFU. La del paper es NPO+RT (Negative preference optimization + Retain set)."
 opinion: "<WIP>"
@@ -36,15 +37,45 @@ Adapta el algoritmo DPO (Direct Preference Optimization) para machine unlearning
 
 ## Metodología
 
-**El problema del gradient ascent:** Maximizar la pérdida sobre los datos a olvidar empuja los pesos del modelo en la dirección opuesta al gradiente, pero sin ninguna restricción. Esto puede llevar a que el modelo empiece a generar texto completamente incoherente (colapso catastrófico).
+### El problema del gradient ascent y la solución NPO
 
-**La solución NPO:** DPO es un algoritmo que entrena modelos de lenguaje con preferencias humanas usando pares (respuesta buena, respuesta mala). NPO toma sólo la mitad "negativa" de DPO: usa únicamente las respuestas malas (el forget set) para empujar el modelo lejos de ese contenido, pero incluye un término de regularización que ancla el modelo cerca de su distribución original para todo lo demás.
+**El problema del gradient ascent (GA):** Maximizar la pérdida sobre el forget set empuja los pesos en la dirección opuesta al gradiente sin ninguna restricción. Esto puede llevar al modelo a generar texto completamente incoherente: el "colapso catastrófico".
 
-Técnicamente, el objetivo de NPO hace que el modelo:
-1. Reduzca la probabilidad de generar el forget set.
-2. Simultáneamente, no se aleje demasiado de las predicciones de un modelo de referencia (el modelo original sin unlearning) para cualquier otro input.
+**La solución NPO:** DPO entrena LLMs con pares (respuesta buena, respuesta mala). NPO toma únicamente la mitad "negativa" de ese objetivo: usa solo las respuestas del forget set como "respuestas rechazadas", sin necesitar ninguna respuesta "ganadora". Matemáticamente, el objetivo NPO sobre el forget set es:
 
-El segundo punto es la clave: la referencia actúa como ancla que previene el colapso. Los parámetros modificados son todos los pesos del modelo a través de un fine-tuning estándar con este objective dual.
+$$\mathcal{L}_\text{NPO} = -\frac{2}{\beta} \mathbb{E}_{y \sim \mathcal{D}_f} \left[ \log \sigma\!\left(-\beta \log \frac{\pi_\theta(y \mid x)}{\pi_\text{ref}(y \mid x)}\right) \right]$$
+
+El término $\pi_\text{ref}$ (el modelo original congelado) actúa como ancla implícita: el modelo no puede alejarse arbitrariamente de la distribución original, lo que previene el colapso.
+
+### Combinaciones de métodos evaluadas
+
+El paper organiza todos los métodos como una combinación de dos componentes independientes:
+
+**Componente 1 — Objetivo de olvido** (qué se aplica sobre el forget set):
+
+| Nombre | Descripción |
+|--------|-------------|
+| **GA** | Gradient Ascent puro: maximiza la pérdida $\mathcal{L}_{CE}$ sobre el forget set. No tiene restricción interna → propenso al colapso catastrófico. |
+| **NPO** | Negative Preference Optimization: aplica el objetivo DPO negativo sobre el forget set usando el modelo de referencia como ancla implícita. Estable por construcción. |
+
+**Componente 2 — Término de retención** (qué se aplica sobre el retain set, opcional):
+
+| Nombre | Descripción |
+|--------|-------------|
+| *(ninguno)* | Solo se actúa sobre el forget set. Más riesgo de degradación. |
+| **+ GD** (Gradient Difference) | Añade gradient descent normal sobre el retain set: $-\mathcal{L}_{CE}$ sobre datos del retain set. Penaliza directamente que el modelo olvide lo que debe retener. |
+| **+ RT** (Retain) | Añade una regularización KL entre el modelo actual y el modelo de referencia evaluada sobre el retain set, forzando que la distribución de salida no cambie en ese subconjunto. Es más conservador que GD: no pide que el modelo acierte las respuestas del retain, sino que su distribución no cambie. |
+
+**Combinaciones completas evaluadas (grilla 2 × 3):**
+
+| | Sin retención | + GD | + RT |
+|---|:---:|:---:|:---:|
+| **GA** | GA | GA + GD | GA + RT |
+| **NPO** | NPO | NPO + GD | **NPO + RT** ← propuesta principal |
+
+Cada combinación se evalúa en las tres métricas de TOFU (Forget Quality, Retain Accuracy, Model Utility) y en WMDP + MMLU para el dominio de conocimiento peligroso.
+
+**La propuesta central del paper es NPO + RT**: combina el objetivo de olvido estable de NPO con la regularización sobre el retain set, y es la combinación que domina consistentemente el trade-off forget/retain en los experimentos.
 
 ---
 
