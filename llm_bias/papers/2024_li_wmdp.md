@@ -12,7 +12,7 @@ tags:
   - "benchmark"
   - "representaciones-internas"
 pdf: "/llm_bias/pdfs/2024_li_wmdp.pdf"
-method_type: "Gradient ascent"
+method_type: "Perturbación de representaciones"
 status:
   - "Pendiente"
 image: "imgs/2024_li_wmdp.png"
@@ -23,54 +23,103 @@ opinion: "<WIP>"
 
 **Autores**: Nathaniel Li, Alexander Pan, Anjali Gopal, Summer Yue, Daniel Berrios, Alice Gatti, et al.
 **Publicado en**: arXiv, 2024
-**Tipo de método**: Gradient ascent
+**Tipo de método**: Perturbación de representaciones
 
 ---
 
 ## Qué hace
 
-Introduce WMDP (**W**eapons of **M**ass **D**estruction **P**roxy), un benchmark para medir y reducir la capacidad de los LLMs de asistir en la creación de armas de destrucción masiva (biológicas, químicas, cibernéticas). Propone el método CUT (Circuit Breaker Unlearning Technique) para eliminar este conocimiento peligroso.
-
+Introduce WMDP (**W**eapons of **M**ass **D**estruction **P**roxy), un benchmark de 4.157 preguntas de opción múltiple para medir la capacidad de los LLMs de asistir en la creación de armas de destrucción masiva (biológicas, químicas, cibernéticas). Junto al benchmark propone CUT (**C**ontrastive **U**nlearn **T**uning), un método de unlearning basado en manipulación de representaciones internas en lugar de gradient ascent.
 
 ---
 
 ## Metodología
 
-**El benchmark WMDP:** 3.668 preguntas de opción múltiple sobre conocimiento peligroso en tres dominios:
-- **WMDP-bio**: síntesis de patógenos, mejora de virulencia, técnicas de bioterrorismo.
-- **WMDP-chem**: síntesis de agentes químicos, precursores, métodos de dispersión.
-- **WMDP-cyber**: vulnerabilidades en infraestructura crítica, técnicas de ataque avanzadas.
+### El benchmark WMDP
 
-Las preguntas fueron creadas por expertos en bioseguridad y ciberseguridad, y son lo suficientemente técnicas como para ser peligrosas si un LLM las responde correctamente.
+4.157 preguntas de opción múltiple (4 opciones) distribuidas en tres dominios:
 
-**El método RMU (Representation Misdirection for Unlearning):** El método propuesto no usa gradient ascent sino que trabaja directamente sobre las **representaciones internas** del modelo. La idea es:
-1. Identificar en qué capas intermedias del transformer se activan las representaciones relacionadas con el conocimiento peligroso.
-2. Añadir un término de loss que empuje esas representaciones hacia representaciones de textos seguros/aleatorios, sin alterar otras representaciones.
+| Dominio | Preguntas | Contenido |
+|---------|:---------:|-----------|
+| WMDP-bio | 1.520 | Síntesis de patógenos, mejora de virulencia, genética inversa viral, bioterrorismo |
+| WMDP-cyber | 2.225 | Reconocimiento, descubrimiento de vulnerabilidades, explotación, post-explotación |
+| WMDP-chem | 412 | Síntesis de agentes químicos, purificación, dispersión, evasión de detección |
 
-Esto modifica los pesos de las **capas intermedias de atención y FFN** que producen esas representaciones. A diferencia del gradient ascent, el objetivo no es que el modelo asigne baja probabilidad al texto peligroso, sino que sus representaciones internas para ese contexto se vuelvan indistinguibles de representaciones para texto neutro.
+Las preguntas se diseñaron siguiendo **modelos de amenaza** concretos (ej. el ciclo DBTL de bioseguridad) para cubrir sistemáticamente los vectores de ataque más plausibles. Todas fueron revisadas por al menos dos expertos de organizaciones distintas, y se removieron 122 preguntas especialmente sensibles de bioseguridad antes de la publicación. El dataset también pasó evaluación de cumplimiento ITAR/EAR (controles de exportación de EEUU).
+
+---
+
+### CUT: Contrastive Unlearn Tuning
+
+La idea central es que, en lugar de penalizar la probabilidad de tokens peligrosos (como hace gradient ascent), CUT **redirige las representaciones internas** del modelo: fuerza que las activaciones en contextos peligrosos se parezcan a las activaciones en contextos de "novato", usando el modelo original congelado como referencia.
+
+#### Vector de control
+
+Para cada dominio de conocimiento peligroso con keyword $$k$$, se computa un **vector de control** $$h_\text{ctrl}$$ a partir del modelo congelado $$M_\text{frozen}$$:
+
+$$h_\text{ctrl}(k) = M_\text{frozen}(\textit{"You are a novice at } k\textit{"}) - M_\text{frozen}(\textit{"You are an expert at } k\textit{"})$$
+
+Este vector apunta en la dirección de "alejarse del conocimiento experto". Es fijo durante el entrenamiento (se computa una sola vez con el modelo original).
+
+#### Función de pérdida
+
+La pérdida total combina dos términos:
+
+$$\mathcal{L} = \mathcal{L}_\text{forget} + \alpha \cdot \mathcal{L}_\text{retain}$$
+
+**Término de olvido** — empuja las activaciones del modelo actualizado $$M_\theta$$ hacia el objetivo "novato":
+
+$$\mathcal{L}_\text{forget} = \mathbb{E}_{x_f \sim \mathcal{D}_\text{forget}} \left\| M_\theta(x_f) - \bigl(M_\text{frozen}(x_f) + c \cdot h_\text{ctrl}\bigr) \right\|_2^2$$
+
+donde $$c > 0$$ es un escalar que controla cuánto se desplaza la representación objetivo. El término penaliza que las activaciones del modelo actualizado se alejen del target "novato".
+
+**Término de retención** — ancla las activaciones en datos benignos al modelo original:
+
+$$\mathcal{L}_\text{retain} = \mathbb{E}_{x_r \sim \mathcal{D}_\text{retain}} \left\| M_\theta(x_r) - M_\text{frozen}(x_r) \right\|_2^2$$
+
+Minimizar $$\mathcal{L}_\text{retain}$$ es equivalente a una regularización L₂ sobre los pesos: impide que el modelo cambie su comportamiento en textos no peligrosos. El hiperparámetro $$\alpha$$ balancea ambos objetivos.
+
+#### Corpora de entrenamiento
+
+- **$$\mathcal{D}_\text{forget}$$**: papers de PubMed relacionados con los temas de WMDP-bio; fragmentos de GitHub filtrados por relevancia con Mixtral-8x7B para WMDP-cyber.
+- **$$\mathcal{D}_\text{retain}$$**: Wikitext. Se eligió un corpus cualitativamente distinto al forget set para evitar interferencia entre los dos términos de pérdida.
+
+Solo se modifican un subconjunto de capas del transformer (capas intermedias); las capas tempranas y finales se mantienen congeladas.
 
 ---
 
 ## Datasets utilizados
 
-- **WMDP-bio, WMDP-chem, WMDP-cyber**: 3.668 preguntas de opción múltiple.
-- **MMLU**: benchmark de conocimiento general para medir que el modelo no pierde capacidades en áreas no peligrosas (matemáticas, historia, ciencias básicas).
-- **Retain corpus**: textos de Wikipedia sobre los mismos dominios pero sin información peligrosa (para preservar conocimiento legítimo de biología, química, etc.).
+- **WMDP-bio, WMDP-chem, WMDP-cyber**: 4.157 preguntas de opción múltiple (forget set de evaluación).
+- **PubMed / GitHub**: textos de entrenamiento del forget set para bio y cyber respectivamente.
+- **Wikitext**: retain corpus de entrenamiento.
+- **MMLU**: benchmark de conocimiento general para medir degradación en áreas no peligrosas.
+- **MT-Bench**: evaluación de fluencia conversacional general.
 
 ---
 
 ## Ejemplo ilustrativo
 
-Una pregunta de WMDP-bio podría ser: *"¿Qué técnica de modificación genética permite aumentar la transmisibilidad de un virus influenza entre mamíferos?"* con opciones técnicas específicas. Un modelo sin unlearning (GPT-4, Llama-2) responde correctamente con alta probabilidad. Después de aplicar RMU, el modelo debería responder al azar (25% para 4 opciones) en estas preguntas, pero seguir respondiendo correctamente preguntas de biología general como "¿Qué es la mitosis?".
+Una pregunta de WMDP-bio podría ser: *"¿Qué técnica de modificación genética permite aumentar la transmisibilidad de un virus influenza entre mamíferos?"* con opciones técnicas específicas. Un modelo sin unlearning responde correctamente con alta probabilidad. Después de aplicar CUT, el modelo debería responder al azar (~25%) en estas preguntas, pero seguir respondiendo correctamente preguntas de biología general.
 
 ---
 
 ## Resultados principales
 
-- RMU reduce la precisión en WMDP de ~60-70% (nivel experto) a ~25-30% (nivel aleatorio) en los tres dominios.
-- La degradación en MMLU es mínima: menos del 2% de caída en rendimiento general.
-- CUT supera a gradient ascent, gradient difference y otros métodos en el balance olvido/retención.
-- Hallazgo importante: modelos más grandes son más difíciles de "desaprender" — tienen más redundancia interna para almacenar el conocimiento peligroso.
+Los experimentos evalúan Zephyr-7b-beta e Yi-34b-Chat, con GPT-4 como cota superior. Los baselines son LLMU, SCRUB y SSD.
+
+| Modelo / método | WMDP-bio ↓ | WMDP-cyber ↓ | MMLU ↑ | MT-Bench ↑ |
+|----------------|:----------:|:------------:|:------:|:----------:|
+| Zephyr-7b (base) | 65.5% | 42.9% | 58.5% | 7.33 |
+| + CUT | **29.3%** | **24.9%** | 57.0% | 7.20 |
+| + LLMU | 59.5% | — | — | — |
+| + SCRUB | 45.2% | — | — | — |
+| + SSD | — | — | 41.5% | — |
+
+- CUT es el único método que alcanza nivel casi aleatorio (~25%) en WMDP sin degradación significativa en MMLU (−1.5pp) ni MT-Bench (−0.13).
+- Los demás baselines o fallan en olvidar o destruyen la utilidad general del modelo.
+- **Robustez adversarial**: el ataque GCG necesitó más de 2.500 pasos (~7h en A100) para extraer respuestas coherentes del modelo con CUT, frente a menos de 50 pasos en el modelo base.
+- Las 122 preguntas privadas más sensibles (no publicadas) tienen precisión similar a WMDP, validando que el benchmark es un proxy razonable del conocimiento más peligroso.
 
 ---
 

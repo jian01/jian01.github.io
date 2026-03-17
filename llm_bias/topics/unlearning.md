@@ -31,8 +31,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2024 | TOFU: A Task of Fictitious Unlearning for LLMs | Evaluación / análisis | [Ver](../papers/2024_maini_tofu.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Rethinking Machine Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_liu_rethinking-unlearning.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Eight Methods to Evaluate Robust Unlearning in LLMs | Evaluación / análisis | [Ver](../papers/2024_lynch_eight-methods.html) |
-| <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning | Gradient ascent | [Ver](../papers/2024_li_wmdp.html) |
-| <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | KTO: Model Alignment as Prospect Theoretic Optimization | Optimización de preferencias | [Ver](../papers/2024_ethayarajh_kto.html) |
+| <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | The WMDP Benchmark: Measuring and Reducing Malicious Use With Unlearning | Perturbación de representaciones | [Ver](../papers/2024_li_wmdp.html) |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2024 | Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning | Optimización de preferencias | [Ver](../papers/2024_zhang_negative-preference-optimization.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | RWKU: Benchmarking Real-World Knowledge Unlearning for Large Language Models | Evaluación / análisis | [Ver](../papers/2024_jin_rwku.html) |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | Can Machine Unlearning Reduce Social Bias in Language Models? | Evaluación / análisis | [Ver](../papers/2024_dige_machine-unlearning-bias.html) |
@@ -60,11 +59,48 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 | Tipo de método | N° de papers |
 |----------------|:------------:|
 | Evaluación / análisis | 14 |
-| Gradient ascent | 5 |
+| Gradient ascent | 4 |
 | Fine-tuning | 2 |
 | Reentrenamiento exacto | 4 |
 | Enmascarado / edición de pesos | 4 |
-| Optimización de preferencias | 3 |
-| Perturbación de representaciones | 2 |
+| Optimización de preferencias | 2 |
+| Perturbación de representaciones | 3 |
 | Tiempo de inferencia | 2 |
-| **Total** | **36** |
+| **Total** | **35** |
+
+---
+
+### Frecuencia de datasets en papers de unlearning
+
+Número de papers (sobre 35) que utilizan cada dataset.
+
+| Dataset | Papers que lo usan |
+|---------|:-----------------:|
+| TOFU | 18 |
+| WMDP | 16 |
+| Harry Potter corpus | 15 |
+| MMLU | 10 |
+| TruthfulQA | 6 |
+| MUSE | 5 |
+| Synthetic PII / textos privados | 3 |
+| RWKU | 3 |
+| MNIST | 3 |
+| The Pile | 2 |
+| StereoSet | 2 |
+| WinoBias | 2 |
+| CrowS-Pairs | 2 |
+| Adult (UCI) | 2 |
+| HellaSwag | 2 |
+| WinoGrande | 2 |
+| PKU-SafeRLHF, ToxiGen, RealToxicityPrompts, MT-Bench, GSM8K, ARC, BOLD, ImageNet, Purchase-100, SVHN | 1 cada uno |
+
+---
+
+### Métodos que miden calidad general del modelo
+
+De los 21 papers que proponen un método activo (excluidos los 14 de evaluación/análisis).
+
+| Mide calidad general | N° de papers | Papers |
+|----------------------|:------------:|--------|
+| Sí | 16 | Cao, Bourtoule, Jang, PCGU, Harry Potter, LLMU, KL-Min, WMDP, NPO, Simplicity-NPO, Wang, FSM, Improving, Relearning, GUARD, Per-Param |
+| No | 5 | Ginart, Neel, In-Context, Gradient Routing, Barez |

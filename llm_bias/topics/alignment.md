@@ -24,6 +24,7 @@ El alineamiento mediante preferencias humanas parte de recopilar comparaciones e
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Calibrate Before Use: Improving Few-Shot Performance of Language Models | [Ver](../papers/2021_zhao_calibrate-before-use.html) |
 | <span class="dot dot-leido" title="Leído"></span> | 2022 | Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback | [Ver](../papers/2022_bai_rlhf-assistant.html) |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2023 | Direct Preference Optimization: Your Language Model is Secretly a Reward Model | [Ver](../papers/2023_ermon_dpo.html) |
+| <span class="dot dot-pendiente" title="Pendiente"></span> | 2024 | KTO: Model Alignment as Prospect Theoretic Optimization | [Ver](../papers/2024_ethayarajh_kto.html) |
 
 ---
 
