@@ -18,7 +18,7 @@ status:
   - "Relevante"
 image: "imgs/2024_zhang_negative-preference-optimization.png"
 image_caption: "Respuestas de los modelos después de distintas técnicas de unlearning sobre TOFU. La del paper es NPO+RT (Negative preference optimization + Retain set)."
-opinion: "Usa solo el termino negativo $\delta\\_l$ de DPO como ejemplo 'perdedor' que en este caso es algo del forget set. Lo compara además con tooodos los métodos previos usando TOFU, está bueno. Hay que tener en cuenta que este dataset y este método está más enfocado al derecho al olvido y no necesariamente se prueban para olvidar conceptos (ej: como armar un arma) en general. El paper está muy bien escrito, me gustó la sección de 'other loss functions' donde hacen un resumen de como se relaciona todo con lo demás, y le pedí a la IA que incluya eso en el resumen y quedo bien."
+opinion: "Usa solo el termino negativo $$\\delta_l$$ de DPO como ejemplo 'perdedor' que en este caso es algo del forget set. Lo compara además con tooodos los métodos previos usando TOFU, está bueno. Hay que tener en cuenta que este dataset y este método está más enfocado al derecho al olvido y no necesariamente se prueban para olvidar conceptos (ej: como armar un arma) en general. El paper está muy bien escrito, me gustó la sección de 'other loss functions' donde hacen un resumen de como se relaciona todo con lo demás, y le pedí a la IA que incluya eso en el resumen y quedo bien."
 ---
 # Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning (2024)
 
