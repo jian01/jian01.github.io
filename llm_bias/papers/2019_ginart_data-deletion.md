@@ -18,16 +18,7 @@ status:
 image: "imgs/2019_ginart_data-deletion.png"
 image_caption: "Ilustración del problema de borrado en clustering: eliminar un punto puede cambiar los centroides del modelo de k-means de forma no trivial."
 opinion: "<WIP>"
----
-# Making AI Forget You: Data Deletion in Machine Learning (2019)
-
-**Autores**: Antonio Ginart, Melody Guan, Gregory Valiant, James Zou
-**Publicado en**: NeurIPS, 2019
-**Tipo de método**: Reentrenamiento exacto
-
----
-
-## Qué hace
+---## Qué hace
 
 Extiende el concepto de machine unlearning —que había sido propuesto solo para clasificadores discretos— a **algoritmos de aprendizaje con datos continuos**, con foco especial en **k-means clustering**. El paper formaliza qué significa que un algoritmo de machine learning "olvide" un dato, propone la noción de algoritmo de borrado (*deletion algorithm*) y demuestra que el unlearning exacto y eficiente es posible para k-means, un algoritmo fundamental del aprendizaje no supervisado.
 

@@ -20,16 +20,7 @@ status:
 image: "imgs/2020_sap_social-bias-frames.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Social Bias Frames: Reasoning about Social and Power Implications of Language (2020)
-
-**Autores**: Maarten Sap, Saadia Gabriel, Lianhui Qin, Dan Jurafsky, Noah A. Smith, Yejin Choi
-**Publicado en**: ACL, 2020
-**Tipo de método**: Benchmark / Dataset
-
----
-
-## Qué hace
+---## Qué hace
 
 Introduce el framework de **Social Bias Frames**: representaciones estructuradas que capturan las implicaciones sociales y de poder de textos potencialmente ofensivos. Crea el dataset SBIC con 44.671 publicaciones de redes sociales anotadas con estos frames estructurados.
 

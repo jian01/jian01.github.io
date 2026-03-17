@@ -22,16 +22,7 @@ status:
 image: "imgs/2025_chandna_dissecting-bias.png"
 image_caption: "Gráfico de barras que muestra la cantidad de conexiones (aristas) importantes identificadas en cada capa del transformer (capas 0 a 31), revelando concentraciones de procesamiento de sesgo en las capas iniciales y finales del modelo."
 opinion: "<WIP>"
----
-# Dissecting Bias in LLMs: A Mechanistic Interpretability Perspective (2025)
-
-**Autores**: Bhavik Chandna, Zubair Bashir, Procheta Sen
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Aplica herramientas de interpretabilidad mecanística (activation patching, probing de cabezas de atención, análisis de FFN) para localizar exactamente dónde y cómo se codifica el sesgo de género y racial en LLMs, trazando el flujo de información sesgada a través de las capas del transformer.
 

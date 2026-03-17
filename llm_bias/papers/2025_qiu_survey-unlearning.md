@@ -18,16 +18,7 @@ status:
 image: "imgs/2025_qiu_survey-unlearning.png"
 image_caption: "Ilustración de un robot que representa el LLM como sujeto del proceso de machine unlearning, tema central del survey que categoriza objetivos, métodos y evaluaciones del campo."
 opinion: "<WIP>"
----
-# A Survey on Unlearning in Large Language Models (2025)
-
-**Autores**: Ruichen Qiu, Jiajun Tan, Jiayue Pu, Honglin Wang, Xiao-Shan Gao, Fei Sun
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Survey comprehensivo del campo de machine unlearning en LLMs que revisa más de 100 papers, categoriza objetivos, métodos y evaluaciones, e identifica los desafíos y direcciones abiertas del área.
 

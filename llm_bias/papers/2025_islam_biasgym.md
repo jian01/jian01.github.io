@@ -21,16 +21,7 @@ status:
 image: "imgs/2025_islam_biasgym.png"
 image_caption: "Diagrama comparativo del framework BiasGym: (a) localización de la asociación sesgada, donde el modelo con pesos congelados produce outputs sesgados al procesar el BiasToken; (b) mitigación mediante steering, donde se interviene el vector de representación para redirigir el output hacia texto imparcial."
 opinion: "<WIP>"
----
-# BiasGym: Fantastic LLM Biases and How to Find (and Remove) Them (2025)
-
-**Autores**: Sekh Mainul Islam, Nadav Borenstein, Saurabh Pawar, Haeun Yu, Arnav Arora, Isabelle Augenstein
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone BiasGym, un framework que combina detección automática de sesgos en LLMs mediante "elicitación" — generación de preguntas de sondeo diversas — con mitigación, en un loop iterativo tipo "gym" (entorno de aprendizaje). Permite descubrir sesgos que no están en benchmarks existentes.
 

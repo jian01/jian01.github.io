@@ -16,15 +16,7 @@ status:
 image: "imgs/2020_olah_zoom-in-circuits.png"
 image_caption: "Ejemplos de features interpretables en InceptionV1: neuronas que responden a curvas, ojos, textos, y composición de esas features en circuitos de detección de objetos."
 opinion: "<WIP>"
----
-# Zoom In: An Introduction to Circuits (2020)
-
-**Autores**: Chris Olah, Nick Cammarata, Ludwig Schubert, Gabriel Goh, Michael Petrov, Shan Carter
-**Publicado en**: Distill, 2020
-
----
-
-## Qué hace
+---## Qué hace
 
 Introduce el **paradigma de circuitos** para la interpretabilidad de redes neuronales, aplicado a redes de visión (InceptionV1/AlexNet). El paper propone que las redes neuronales no son cajas negras ininteligibles sino que pueden entenderse a nivel mecanístico: las neuronas individuales representan **features** interpretables (curvas, formas, texturas, conceptos), y esas features se conectan en **circuitos** — subgrafos del modelo que implementan comportamientos concretos y comprensibles.
 

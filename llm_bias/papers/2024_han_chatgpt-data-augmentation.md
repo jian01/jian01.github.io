@@ -23,16 +23,7 @@ status:
 image: "imgs/2024_han_chatgpt-data-augmentation.png"
 image_caption: "Gráficas de evolución del LM Score y el Stereotype Score (SS) en StereoSet y CrowSPairs a lo largo de las épocas de entrenamiento, comparando el modelo ajustado con LoRA, el adaptador Wiki y el modelo original."
 opinion: "<WIP>"
----
-# ChatGPT Based Data Augmentation for Improved Parameter-Efficient Debiasing of LLMs (2024)
-
-**Autores**: Pengrui Han, Rafał Kocielnik, Adhithya Saravanan, Roy Jiang, Or Sharir, Junchi Yan
-**Publicado en**: LTEDI Workshop, 2024
-**Tipo de método**: Fine-tuning / data augmentation
-
----
-
-## Qué hace
+---## Qué hace
 
 Usa ChatGPT para generar datos de entrenamiento aumentados y balanceados para el debiasing, y los combina con LoRA (PEFT) para lograr debiasing eficiente con alta calidad. La combinación generación-LLM + PEFT supera a métodos anteriores.
 

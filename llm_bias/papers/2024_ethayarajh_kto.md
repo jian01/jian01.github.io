@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_ethayarajh_kto.png"
 image_caption: "KTO adapta la teoría prospectiva de Kahneman-Tversky al alineamiento de LLMs: en lugar de pares (preferida, rechazada), trabaja con ejemplos individuales etiquetados como deseables o indeseables, con funciones de valor asimétricas que penalizan más las pérdidas que valoran las ganancias."
 opinion: "<WIP>"
----
-# KTO: Model Alignment as Prospect Theoretic Optimization (2024)
-
-**Autores**: Kawin Ethayarajh, Winnie Xu, Niklas Muennighoff, Dan Jurafsky, Douwe Kiela
-**Publicado en**: ICML, 2024
-**Tipo de método**: Optimización de preferencias
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone KTO (**K**ahneman-**T**versky **O**ptimization), un método de alineamiento que no requiere pares de preferencias (respuesta buena vs. respuesta mala). En su lugar, trabaja con ejemplos individuales etiquetados como **deseables** o **indeseables**, inspirándose en la teoría prospectiva de Kahneman y Tversky: las personas perciben las pérdidas como más impactantes que las ganancias equivalentes, y el objetivo de KTO refleja esta asimetría.
 

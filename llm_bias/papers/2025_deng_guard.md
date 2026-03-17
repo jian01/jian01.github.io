@@ -19,16 +19,7 @@ status:
 image: "imgs/2025_deng_guard.png"
 image_caption: "Icono de escudo en rojo y blanco que representa el sistema GUARD, cuyo nombre evoca la función de guardia o protección que el módulo auxiliar ejerce sobre el LLM para bloquear la generación de contenido del forget set en tiempo de inferencia."
 opinion: "<WIP>"
----
-# GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection (2025)
-
-**Autores**: Zhijie Deng, Chris Liu, Zirui Pang, Xinlei He, Lei Feng, Qi Xuan, Zhaowei Zhu, Jiaheng Wei
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Tiempo de inferencia
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un método de unlearning que opera en **tiempo de generación** (inference-time) sin modificar los pesos del modelo. Un módulo auxiliar detecta cuándo el modelo está a punto de generar contenido del forget set y lo redirige en tiempo real.
 

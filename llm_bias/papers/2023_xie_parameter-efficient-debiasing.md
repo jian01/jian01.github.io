@@ -25,16 +25,7 @@ status:
 image: "imgs/2023_xie_parameter-efficient-debiasing.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# An Empirical Analysis of Parameter-Efficient Methods for Debiasing Pre-Trained Language Models (2023)
-
-**Autores**: Zhongbin Xie, Thomas Lukasiewicz
-**Publicado en**: ACL, 2023
-**Tipo de método**: Adapters / PEFT
-
----
-
-## Qué hace
+---## Qué hace
 
 Compara sistemáticamente múltiples métodos de fine-tuning eficiente en parámetros (PEFT) aplicados al debiasing: LoRA, adapters, prefix tuning, y prompt tuning. Identifica qué método logra el mejor balance entre reducción de sesgo y preservación de rendimiento.
 

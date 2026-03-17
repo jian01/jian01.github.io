@@ -18,16 +18,7 @@ status:
 image: "imgs/2026_dang_beyond-forgetting.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Beyond Forgetting: Machine Unlearning Elicits Controllable Side Behaviors and Capabilities (2026)
-
-**Autores**: Tien Dang, The-Hai Nguyen, Dinh Mai Phuong, Nguyễn Vũ Nguyên Phương, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue
-**Publicado en**: arXiv, 2026
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Descubre que el machine unlearning no sólo elimina conocimiento — también puede **emerger o potenciar capacidades latentes** no relacionadas con el contenido olvidado. Estudia estos "comportamientos laterales" como un fenómeno inherente de los algoritmos de unlearning.
 

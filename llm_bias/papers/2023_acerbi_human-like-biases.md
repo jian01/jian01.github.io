@@ -17,15 +17,7 @@ status:
 image: "imgs/2023_acerbi_human-like-biases.png"
 image_caption: "Imagen asociada al paper sobre sesgos de transmisión cultural en modelos de lenguaje."
 opinion: "<WIP>"
----
-# Large language models show human-like content biases in transmission chain experiments (2023)
-
-**Autores**: Alberto Acerbi, Joseph M. Stubbersfield
-**Publicado en**: PNAS, 2023
-
----
-
-## Qué hace
+---## Qué hace
 
 Adapta los experimentos de "cadena de transmisión" de la psicología cultural para demostrar que los LLMs replican sesgos cognitivos humanos en qué tipo de información retienen y transmiten preferentemente: contenido social, emocional y amenazante es preferido sobre contenido neutro.
 

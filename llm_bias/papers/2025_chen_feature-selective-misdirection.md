@@ -19,13 +19,6 @@ image: "imgs/2025_chen_feature-selective-misdirection.png"
 image_caption: "Diagrama de la arquitectura SRMU: el pipeline superior muestra la identificación de sensibilidad del conocimiento y la generación del mapa de pesos de importancia y vector de misdirección; el pipeline inferior muestra el mecanismo de optimización selectiva combinando pérdida de olvido y pérdida de retención."
 opinion: "<WIP>"
 ---
-# Feature-Selective Representation Misdirection for Machine Unlearning (2025)
-
-**Autores**: Taozhao Chen, Linghan Huang, Kim-Kwang Raymond Choo, Huaming Chen
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Perturbación de representaciones
-
----
 
 ## Qué hace
 
@@ -55,19 +48,32 @@ Con estos vectores se computa la **función de importancia** $$\mathbf{I} = \phi
 
 $$\mathbf{I}_\text{ratio} = \log\!\left(1 + \frac{\mathbf{v}_f}{\mathbf{v}_r + \varepsilon}\right)$$
 
-Prioriza dimensiones donde el forget set domina al retain set. El logaritmo estabiliza ratios extremos.
+El argumento del logaritmo es $$1 + \mathbf{v}_f/\mathbf{v}_r$$, es decir, cuántas veces más activa el forget set esa dimensión comparado con el retain set. Casos borde:
+- Si $$\mathbf{v}_f \gg \mathbf{v}_r$$: la ratio crece mucho, pero el $$\log$$ la comprime — evita que dimensiones extremas monopolicen el mapa.
+- Si $$\mathbf{v}_f \approx \mathbf{v}_r$$ (dimensión entangled): ratio ≈ 1, $$\log(2) \approx 0.69$$ — importancia moderada, no cero.
+- Si $$\mathbf{v}_f \ll \mathbf{v}_r$$: ratio ≈ 0, $$\log(1) = 0$$ — la dimensión no se perturba.
+
+El resultado es un mapa **suave y continuo**: todas las dimensiones donde el forget set tiene algo de activación reciben algo de perturbación, escalada logarítmicamente por cuánto dominan al retain set.
 
 **SRMU-Difference**:
 
 $$\mathbf{I}_\text{diff} = \text{ReLU}(\mathbf{v}_f - \lambda \cdot \mathbf{v}_r)$$
 
-Produce un mapa disperso: solo activa dimensiones altamente activadas por el forget set y suprimidas en el retain set.
+Mide la diferencia absoluta entre ambas activaciones, con un factor $$\lambda$$ que pondera cuánto "peso" tiene el retain set. Casos borde:
+- Si $$\mathbf{v}_f > \lambda \cdot \mathbf{v}_r$$: la dimensión es específica del forget set → importancia positiva proporcional a la diferencia.
+- Si $$\mathbf{v}_f \leq \lambda \cdot \mathbf{v}_r$$: ReLU devuelve 0 → la dimensión se ignora completamente.
+
+Produce un mapa **disperso y binario en espíritu**: muchas dimensiones valen exactamente 0 (las compartidas con el retain set quedan completamente excluidas). Esto lo hace conservador pero puede perder dimensiones levemente entangled que igual contribuyen al conocimiento a olvidar.
 
 **SRMU-Product**:
 
 $$\mathbf{I}_\text{prod} = \frac{\mathbf{v}_f \odot \mathbf{v}_r}{\text{mean}(\mathbf{v}_f) \cdot \text{mean}(\mathbf{v}_r) + \varepsilon}$$
 
-Resalta dimensiones activadas simultáneamente por ambos sets — las más entangled — para perturbación más cuidadosa.
+El numerador $$\mathbf{v}_f \odot \mathbf{v}_r$$ es alto cuando **ambos** sets activan la dimensión a la vez — es decir, detecta las dimensiones más entangled. El denominador normaliza por el producto de las medias globales, convirtiendo el valor en una especie de correlación relativa. Casos borde:
+- Si $$\mathbf{v}_f^{(i)}$$ y $$\mathbf{v}_r^{(i)}$$ son ambos altos: numerador grande → alta importancia. Señala "esta dimensión es crucial para el forget set *y* el modelo la usa también para el retain set; hay que perturbarla con cuidado".
+- Si una de las dos es ≈ 0: producto ≈ 0 → importancia baja, independientemente de cuánto active la otra.
+
+La lógica es opuesta a Difference: en lugar de excluir las dimensiones compartidas, las **prioriza** — parte de la hipótesis de que esas son las más difíciles de olvidar sin dañar el retain set, y por lo tanto las que más necesitan perturbación dirigida.
 
 El mapa se normaliza a $$[0, 1]$$:
 
@@ -77,11 +83,15 @@ $$\mathbf{I}_\text{norm} = \frac{\mathbf{I}}{\max(\mathbf{I}) + \varepsilon_\tex
 
 ### Paso 2 — Vector de misdirección discreto $$\mathbf{V}$$
 
+$$\mathbf{V}$$ tiene la misma dimensión $$d$$ que el hidden state de la capa $$l$$ — típicamente $$d = 4096$$ para un modelo de 7B parámetros. Es decir, hay un signo por cada coordenada del espacio de representación de esa capa.
+
 En RMU, la dirección de perturbación es un vector unitario continuo aleatorio $$u \in \mathbb{R}^d$$. SRMU lo reemplaza por un **vector binario discreto**:
 
 $$\mathbf{V} \in \{-1, +1\}^d$$
 
-Cada componente se muestrea independientemente. Al ser discreto, cada dimensión tiene polaridad fija y consistente, definiendo una trayectoria estable e interpretable que aleja las representaciones del conocimiento peligroso. Los experimentos de ablación muestran que usar una dirección fija (+1 o −1 constante en todas las dimensiones) colapsa la utilidad del modelo (MMLU cae de 57% a 28%), por lo que la aleatoriedad en la elección de signo por dimensión es esencial.
+Cada componente se muestrea independientemente con probabilidad $$1/2$$ para cada signo, y se fija antes del entrenamiento (igual que $$u$$ en RMU). Al ser binario, cada dimensión tiene una **polaridad fija**: la dimensión $$i$$ del hidden state va a ser empujada hacia arriba o hacia abajo en el espacio de activaciones, sin valores intermedios. Esto hace la dirección estable — siempre "apunta" al mismo lugar para todos los samples del forget set — e interpretable en el sentido de que se puede saber exactamente en qué dirección se perturbó cada coordenada.
+
+La ablación demuestra que la aleatoriedad del signo por dimensión es clave: si se usa $$\mathbf{V} = +\mathbf{1}$$ (todas las dimensiones hacia +1) o $$\mathbf{V} = -\mathbf{1}$$ (todas hacia −1), el modelo colapsa (MMLU cae de 57% a 28%), porque esas direcciones uniformes coinciden con regiones del espacio de representación que el modelo usa para el retain set. La mezcla aleatoria de signos hace que el punto de destino sea efectivamente "ningún lugar semántico" — igual que el vector aleatorio de RMU, pero con polaridad discreta y consistente.
 
 ---
 
@@ -90,6 +100,20 @@ Cada componente se muestrea independientemente. Al ser discreto, cada dimensión
 El objetivo de misdirección para cada sample $$x_f$$ combina el vector $$\mathbf{V}$$ con el mapa de importancia:
 
 $$T_\text{misdir}(x_f) = c_\text{map} \cdot \mathbf{V} \odot \mathbf{I}_\text{norm}(x_f)$$
+
+$$T_\text{misdir}(x_f)$$ es un vector en $$\mathbb{R}^d$$ — el mismo espacio que el hidden state $$H^{(l)}(x_f)$$ — que actúa como **destino artificial** al que se quiere llevar la representación de $$x_f$$. Dimensión a dimensión:
+
+$$T_\text{misdir}^{(i)}(x_f) = c_\text{map} \cdot V^{(i)} \cdot I_\text{norm}^{(i)}$$
+
+- $$V^{(i)} \in \{-1, +1\}$$: define hacia qué lado del eje $$i$$ se empuja.
+- $$I_\text{norm}^{(i)} \in [0, 1]$$: regula cuánto se empuja en ese eje — si la dimensión $$i$$ no es relevante para el forget set, $$I_\text{norm}^{(i)} \approx 0$$ y el desplazamiento en esa coordenada es casi cero.
+- $$c_\text{map}$$: escala global que controla la magnitud total del desplazamiento.
+
+Ejemplo concreto: suponer $$d = 4$$ y que para el sample $$x_f$$ = "cómo sintetizar un patógeno", el mapa de importancia es $$\mathbf{I}_\text{norm} = [0.9,\ 0.1,\ 0.8,\ 0.05]$$ (dimensiones 0 y 2 son muy relevantes para bioseguridad; 1 y 3 son genéricas). Si $$\mathbf{V} = [+1,\ -1,\ +1,\ -1]$$ y $$c_\text{map} = 5$$, entonces:
+
+$$T_\text{misdir} = 5 \cdot [+1 \cdot 0.9,\ -1 \cdot 0.1,\ +1 \cdot 0.8,\ -1 \cdot 0.05] = [4.5,\ -0.5,\ 4.0,\ -0.25]$$
+
+La loss $$\mathcal{L}_\text{forget}$$ entrenará al modelo para que $$H^{(l)}(x_f)$$ se acerque a este vector. El resultado es que las dimensiones 0 y 2 (las que codifican el conocimiento peligroso) quedan desplazadas fuertemente hacia un punto arbitrario del espacio; las dimensiones 1 y 3 apenas se tocan.
 
 donde $$c_\text{map} > 0$$ es el escalar de magnitud (equivalente al $$c$$ de RMU). A mayor $$c_\text{map}$$, más lejos se empujan las representaciones; las dimensiones con mayor $$\mathbf{I}_\text{norm}$$ reciben mayor desplazamiento.
 

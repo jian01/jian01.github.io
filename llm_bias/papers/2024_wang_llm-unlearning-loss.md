@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_wang_llm-unlearning-loss.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# LLM Unlearning via Loss Adjustment with Only Forget Data (2024)
-
-**Autores**: Yaxuan Wang, Jiaheng Wei, Chris Liu, Jinlong Pang, Quan Liu, Ankit Parag Shah, Yujia Bao, Yang Liu, Wei Wei
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Gradient ascent
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un método de unlearning que requiere **únicamente el forget set** (los datos a olvidar) sin necesidad de un retain set separado. Usa un "ancla suave" derivada de las propias predicciones del modelo para evitar la degradación general.
 

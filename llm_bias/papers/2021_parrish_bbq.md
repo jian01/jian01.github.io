@@ -20,16 +20,7 @@ status:
 image: "imgs/2021_parrish_bbq.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# BBQ: A hand-built bias benchmark for question answering (2021)
-
-**Autores**: Alicia Parrish, Angelica Chen, Nikita Nangia, Vishakh Padmakumar, Jason Phang, Jana Thompson, Phu Mon Htut, Sam Bowman
-**Publicado en**: ACL Findings, 2022
-**Tipo de método**: Benchmark / Dataset
-
----
-
-## Qué hace
+---## Qué hace
 
 Crea BBQ (**B**ias **B**enchmark for **Q**A), un dataset de 58.492 ejemplos de QA con opción múltiple que mide si los LLMs usan estereotipos sociales para responder preguntas cuando la respuesta correcta es "indeterminada". Cubre 9 dimensiones de sesgo social.
 

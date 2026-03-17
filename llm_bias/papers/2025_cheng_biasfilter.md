@@ -23,16 +23,7 @@ status:
 image: "imgs/2025_cheng_biasfilter.png"
 image_caption: "Ilustración de la mascota del framework BiasFilter, un robot con expresión neutral que simboliza el módulo de detección y filtrado de sesgos operando entre el LLM y el usuario."
 opinion: "<WIP>"
----
-# BiasFilter: An Inference-Time Debiasing Framework for Large Language Models (2025)
-
-**Autores**: Xiaoqing Cheng, Ruizhe Chen, Hongying Zan, Yuxiang Jia, Min Peng
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Tiempo de inferencia
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone BiasFilter, un framework de post-procesamiento que detecta y filtra contenido sesgado en las respuestas de LLMs **en tiempo de inferencia**, sin modificar los pesos del modelo. Funciona como un "guardia" que intercepta y reformula respuestas sesgadas.
 

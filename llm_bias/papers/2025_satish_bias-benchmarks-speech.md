@@ -22,16 +22,7 @@ status:
 image: "imgs/2025_satish_bias-benchmarks-speech.png"
 image_caption: "Mapa de calor que compara el rendimiento de distintos benchmarks de sesgo de género aplicados a SpeechLLMs, donde cada celda representa el nivel de sesgo detectado (verde = menos sesgo, rojo = más sesgo)."
 opinion: "<WIP>"
----
-# Do Bias Benchmarks Generalise? Evidence from Voice-based Evaluation of Gender Bias in SpeechLLMs (2025)
-
-**Autores**: S. Satish, Gustav Eje Henter, Éva Székely
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Benchmark / Dataset
-
----
-
-## Qué hace
+---## Qué hace
 
 Estudia si los benchmarks de sesgo diseñados para texto se transfieren a modelos de lenguaje de voz (SpeechLLMs). Encuentra que los patrones de sesgo de género en el dominio de texto no generalizan al dominio de audio, revelando sesgos adicionales introducidos por características acústicas de la voz.
 

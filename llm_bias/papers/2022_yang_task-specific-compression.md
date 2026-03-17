@@ -17,15 +17,7 @@ status:
 image: "imgs/2022_yang_task-specific-compression.png"
 image_caption: "Diagrama que ilustra cómo distintas tareas (análisis gramatical, similitud semántica, resumen) se codifican como prompts de texto para el modelo multi-tarea, destacando la diversidad de formatos de entrada que el método de compresión específica por tarea debe manejar."
 opinion: "<WIP>"
----
-# Task-specific Compression for Multi-task Language Models using Attribution-based Pruning (2022)
-
-**Autores**: Nakyeong Yang, Yunah Jang, Hwanhee Lee, Seohyeong Jung, Kyomin Jung
-**Publicado en**: EACL Findings, 2023
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un método de **compresión específica por tarea** para modelos de lenguaje multi-tarea: aprende qué subconjunto mínimo de parámetros es necesario para cada tarea, permitiendo desplegar modelos más pequeños y especializados sin necesidad de re-entrenamiento completo.
 

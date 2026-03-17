@@ -18,16 +18,7 @@ status:
 image: "imgs/2025_huutien_improving-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Improving LLM Unlearning Robustness via Random Perturbations (2025)
-
-**Autores**: Dang Huu-Tien, Hoang Thanh-Tung, Le-Minh Nguyen, Naoya Inoue
-**Publicado en**: 2025
-**Tipo de método**: Perturbación de representaciones
-
----
-
-## Qué hace
+---## Qué hace
 
 Mejora la robustez del unlearning en LLMs añadiendo **perturbaciones aleatorias** a los pesos del modelo durante el proceso de unlearning, similar al entrenamiento adversarial. Previene el "olvido superficial" donde el modelo sólo aprende a no responder directamente pero retiene el conocimiento.
 

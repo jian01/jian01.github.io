@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_liu_rethinking-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Rethinking Machine Unlearning for Large Language Models (2024)
-
-**Autores**: Sijia Liu, Yuanshun Yao, Jinghan Jia, Stephen Casper, Nathalie Baracaldo, Peter Hase, Xiaojun Xu, Yuguang Yao, Hang Li, Kush R. Varshney, Mohit Bansal, Sanmi Koyejo, Yang Liu
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Paper de perspectiva y framework que reorganiza conceptualmente el campo del machine unlearning para LLMs. Propone una taxonomía unificada de qué se quiere olvidar, cómo hacerlo, y cómo evaluarlo. Es una guía de referencia para el área.
 

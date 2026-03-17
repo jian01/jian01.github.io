@@ -22,16 +22,7 @@ status:
 image: "imgs/2023_hassan_dcalm.png"
 image_caption: "Pipeline del método D-CALM: los datos sin etiquetar se representan como vectores y se agrupan en clusters; el muestreador de incertidumbre selecciona las instancias más informativas de cada cluster para que un anotador las etiquete, y los datos etiquetados se usan iterativamente para entrenar al aprendiz."
 opinion: "<WIP>"
----
-# D-CALM: A Dynamic Clustering-based Active Learning Approach for Mitigating Bias (2023)
-
-**Autores**: Sabit Hassan, Malihe Alikhani
-**Publicado en**: arXiv, 2023
-**Tipo de método**: Fine-tuning / data augmentation
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone D-CALM, un método de **aprendizaje activo** para debiasing que selecciona dinámicamente los ejemplos más informativos para anotar y usar en el fine-tuning de debiasing. El objetivo es reducir el sesgo con el mínimo de datos anotados, usando clustering para maximizar la diversidad.
 

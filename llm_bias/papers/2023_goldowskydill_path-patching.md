@@ -17,15 +17,7 @@ status:
 image: "imgs/2023_goldowskydill_path-patching.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Localizing Model Behavior with Path Patching (2023)
-
-**Autores**: Nicholas W. Goldowsky-Dill, Chris MacLeod, Lucas Sato, Aryaman Arora
-**Publicado en**: arXiv, 2023
-
----
-
-## Qué hace
+---## Qué hace
 
 Introduce **path patching**, una extensión del activation patching que permite trazar rutas causales específicas a través del grafo computacional del transformer, identificando no sólo qué componentes importan sino exactamente cómo se comunican entre sí.
 

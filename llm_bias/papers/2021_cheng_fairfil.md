@@ -24,16 +24,7 @@ status:
 image: "imgs/2021_cheng_fairfil.png"
 image_caption: "FairFil añade una red de filtrado sobre los embeddings de BERT. El entrenamiento contrastivo minimiza la correlación con atributos de sesgo mientras maximiza la preservación de información semántica."
 opinion: "<WIP>"
----
-# FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders (2021)
-
-**Autores**: Pengyu Cheng, Weituo Hao, Siyang Yuan, Shijing Si, Lawrence Carin
-**Publicado en**: ICLR, 2021
-**Tipo de método**: Fine-tuning / data augmentation
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone **FairFil** (*Fair Filter*), el primer método de debiasing neuronal a nivel de oración para encoders de texto preentrenados como BERT. La idea central es añadir una pequeña red neuronal extra ("filtro") que transforma las representaciones de oraciones del encoder original en representaciones debiasiadas, sin necesidad de reentrenar el encoder base.
 

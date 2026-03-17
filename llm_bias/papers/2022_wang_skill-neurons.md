@@ -17,15 +17,7 @@ status:
 image: "imgs/2022_wang_skill-neurons.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Finding Skill Neurons in Pre-trained Transformer-based Language Models (2022)
-
-**Autores**: Xiaozhi Wang, Kaiyue Wen, Zhengyan Zhang, Lei Hou, Zhiyuan Liu, Juanzi Li
-**Publicado en**: EMNLP, 2022
-
----
-
-## Qué hace
+---## Qué hace
 
 Identifica **neuronas de habilidad** — neuronas individuales en las capas FFN de transformers pre-entrenados que son específicamente responsables de habilidades lingüísticas concretas (ej. análisis sintáctico, NER, clasificación de sentimientos). Muestra que estas neuronas son estables, específicas y localizadas.
 

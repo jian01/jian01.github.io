@@ -14,15 +14,7 @@ tags:
 status:
   - "Leido"
 opinion: "<WIP>"
----
-# A circuit for Python docstrings in a 4-layer attention-only transformer (2023)
-
-**Autores**: Stefan Heimersheim, Jett Janiak
-**Publicado en**: Alignment Forum / distill.pub blog, 2023
-
----
-
-## Qué hace
+---## Qué hace
 
 Mapea completamente el circuito responsable de completar docstrings de funciones Python en un transformer pequeño (4 capas, sólo atención, sin MLP). Es un paper pedagógico que sirve como tutorial de cómo hacer circuit analysis paso a paso.
 

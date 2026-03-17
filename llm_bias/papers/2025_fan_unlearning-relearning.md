@@ -18,16 +18,7 @@ status:
 image: "imgs/2025_fan_unlearning-relearning.png"
 image_caption: "Icono de advertencia que ilustra el riesgo central estudiado en el paper: el unlearning estándar produce un estado frágil del modelo que puede ser revertido con facilidad mediante ataques de reaprendizaje."
 opinion: "<WIP>"
----
-# Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond (2025)
-
-**Autores**: Chongyu Fan, Jinghan Jia, Yihua Zhang, Anil Ramakrishna, Mingyi Hong, Sijia Liu
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Gradient ascent
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone hacer el unlearning resistente a ataques de reaprendizaje (donde un adversario fine-tunea el modelo para recuperar el conocimiento olvidado) usando **Sharpness-Aware Minimization (SAM)** para encontrar mínimos "planos" en la superficie de pérdida.
 

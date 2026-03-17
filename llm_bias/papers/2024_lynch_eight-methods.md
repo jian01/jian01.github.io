@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_lynch_eight-methods.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Eight Methods to Evaluate Robust Unlearning in LLMs (2024)
-
-**Autores**: Aengus Lynch, Phillip Guo, Aidan Ewart, Stephen Casper, Dylan Hadfield-Menell
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone 8 métodos de evaluación para medir si el unlearning en LLMs es **robusto** — es decir, si resiste intentos activos de recuperar el conocimiento supuestamente olvidado. Muestra que la mayoría de métodos de unlearning existentes fallan al menos algunos de estos tests.
 

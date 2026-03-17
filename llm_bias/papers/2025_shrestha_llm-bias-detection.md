@@ -23,16 +23,7 @@ status:
 image: "imgs/2025_shrestha_llm-bias-detection.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# LLM Bias Detection and Mitigation through the Lens of Desired Distributions (2025)
-
-**Autores**: Ingroj Shrestha, Padmini Srinivasan
-**Publicado en**: EMNLP, 2025
-**Tipo de método**: Fine-tuning / data augmentation
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un framework de detección y mitigación de sesgo que enmarca el problema como una diferencia entre la distribución de outputs del modelo y una "distribución deseada" justa. Detecta sesgo midiendo KL-divergence y lo mitiga con una regularización que acerca las distribuciones.
 

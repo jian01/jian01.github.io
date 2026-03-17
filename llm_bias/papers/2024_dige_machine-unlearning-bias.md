@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_dige_machine-unlearning-bias.png"
 image_caption: "Gráfico de barras mostrando el t-value (sesgo residual) y la perplejidad en función del coeficiente de escala del Task Vector aplicado sobre Llama-2-7b, comparando el modelo base, DPO y distintos niveles de negación del vector de tarea."
 opinion: "<WIP>"
----
-# Can Machine Unlearning Reduce Social Bias in Language Models? (2024)
-
-**Autores**: Omkar Dige, Diljot Arneja, Tsz Fung Yau, Qixuan Zhang, Mohammad Bolandraftar, Xiaodan Zhu, Faiza Khan Khattak
-**Publicado en**: EMNLP Industry Track, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Explora si los métodos de machine unlearning diseñados para privacidad/copyright pueden aplicarse para **reducir sesgos sociales** (género, raza) en LLMs, usando el "unlearning" de asociaciones estereotipadas como alternativa a los métodos de debiasing tradicionales.
 

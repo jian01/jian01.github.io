@@ -19,16 +19,7 @@ status:
 image: "imgs/2024_maini_tofu.png"
 image_caption: "Entrenamos un LLAMA con finetuning para memorizar datos inventados, y despues hacemos que olvide algunos de ellos."
 opinion: "Benchmark de distintos métodos de unlearning, que propone una forma interesante de hacerlo con datos inventados, ya que no sabemos realmente que datos la LLM aprendió o no del mundo real. Más alla de los resultados creo que en los casos en los que sea posible se debería seguir un benchmark similar. No todo el unlearning se puede estudiar de esta manera, por ejemplo, como hago un sesgo discriminatorio ficticio? o cómo me ayuda esto a olvidar como armar una bomba nuclear? Parece más orientado a olvidar datos específicos, por ejemplo para el derecho al olvido."
----
-# TOFU: A Task of Fictitious Unlearning for LLMs (2024)
-
-**Autores**: Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary Chase Lipton, J. Zico Kolter
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone TOFU (**T**ask **O**f **F**ictitious **U**nlearning), el primer benchmark controlado y reproducible para evaluar métodos de machine unlearning en LLMs. Crea 200 autores ficticios con sus biografías y evalúa qué tan bien los métodos logran "olvidar" autores específicos mientras retienen información sobre los demás.
 

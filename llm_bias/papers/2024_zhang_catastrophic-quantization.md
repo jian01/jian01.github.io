@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_zhang_catastrophic-quantization.png"
 image_caption: "Diagrama de flujo que muestra la estructura lógica de las demostraciones del paper, conectando conceptos de crecimiento de funciones y teoría de funciones analíticas con los resultados sobre independencia lineal de neuronas y comportamiento de activaciones tipo Sigmoid/Tanh."
 opinion: "<WIP>"
----
-# Catastrophic Failure of LLM Unlearning via Quantization (2024)
-
-**Autores**: Zhiwei Zhang, Fali Wang, Xiaomin Li, Zongyu Wu, Xianfeng Tang, Hui Liu, Qi He, Wenpeng Yin, Suhang Wang
-**Publicado en**: International Conference on Learning Representations (ICLR), 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Descubre que la **cuantización** (reducir la precisión numérica de los pesos del modelo para ahorrar memoria) puede "deshacer" el unlearning: un modelo que aparentemente olvidó información recupera ese conocimiento después de ser cuantizado.
 

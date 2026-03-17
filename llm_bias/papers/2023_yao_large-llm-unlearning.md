@@ -19,16 +19,7 @@ status:
 image: "imgs/2023_yao_large-llm-unlearning.png"
 image_caption: "La única imagen del paper es aplicable a cualquier otro paper de unlearning."
 opinion: "Combina gradient ascent, con fine-tuning sobre perturbaciones random, con gradient descent sobre textos de referencia para olvidar cosas."
----
-# Large Language Model Unlearning (2023)
-
-**Autores**: Yuanshun Yao, Xiaojun Xu, Yang Liu
-**Publicado en**: arXiv, 2023
-**Tipo de método**: Fine-tuning
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un framework de unlearning para LLMs con tres objetivos: eliminar contenido **tóxico/dañino**, información **protegida por copyright**, y datos **privados**. Introduce el truco del "etiquetado aleatorio" para evitar el colapso del modelo durante el unlearning.
 

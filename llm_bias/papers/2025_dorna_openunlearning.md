@@ -18,16 +18,7 @@ status:
 image: "imgs/2025_dorna_openunlearning.png"
 image_caption: "Icono de balanza de la justicia que ilustra el principio central de OpenUnlearning: proporcionar una comparación equitativa y balanceada entre múltiples métodos de unlearning bajo condiciones estandarizadas."
 opinion: "<WIP>"
----
-# OpenUnlearning: Accelerating LLM Unlearning via Unified Benchmarking of Methods and Metrics (2025)
-
-**Autores**: Vineeth Dorna, Anmol Reddy Mekala, Wenlong Zhao, Andrew McCallum, Zachary Chase Lipton, J. Zico Kolter, Pratyush Maini
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Presenta OpenUnlearning, un framework de código abierto que implementa más de 8 algoritmos de unlearning sobre más de 5 benchmarks distintos, permitiendo comparaciones sistemáticas y reproducibles. Revela que los métodos de unlearning no generalizan entre benchmarks.
 

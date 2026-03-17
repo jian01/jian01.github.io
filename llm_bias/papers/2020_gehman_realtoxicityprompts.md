@@ -21,16 +21,7 @@ status:
 image: "imgs/2020_gehman_realtoxicityprompts.png"
 image_caption: "Diagrama de arquitectura de una red neuronal profunda, ilustrando el tipo de modelos de lenguaje evaluados en el benchmark RealToxicityPrompts para medir la degeneración tóxica en generación de texto."
 opinion: "<WIP>"
----
-# RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models (2020)
-
-**Autores**: Samuel Gehman, Suchin Gururangan, Maarten Sap, Yejin Choi, Noah A. Smith
-**Publicado en**: EMNLP Findings, 2020
-**Tipo de método**: Benchmark / Dataset
-
----
-
-## Qué hace
+---## Qué hace
 
 Crea RealToxicityPrompts, un benchmark de 100.000 prompts extraídos de la web que pueden inducir generaciones tóxicas en LLMs. Evalúa sistemáticamente la degeneración tóxica de modelos y prueba múltiples estrategias de mitigación.
 

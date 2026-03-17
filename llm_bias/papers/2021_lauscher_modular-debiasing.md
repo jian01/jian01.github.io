@@ -25,16 +25,7 @@ status:
 image: "imgs/2021_lauscher_modular-debiasing.png"
 image_caption: "Un adaptador de debiasing (pequeños módulos de cuello de botella) se inserta en cada capa de BERT. Solo se entrenan los parámetros del adaptador; los pesos de BERT se congelan."
 opinion: "<WIP>"
----
-# Sustainable Modular Debiasing of Language Models (2021)
-
-**Autores**: Anne Lauscher, Tobias Lüken, Goran Glavaš
-**Publicado en**: Findings of EMNLP, 2021
-**Tipo de método**: Adapters / PEFT
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone un framework de **debiasing modular y sostenible** para modelos de lenguaje basado en **adaptadores** (*adapters*). La idea central es que en lugar de modificar los pesos del modelo base, se entrena un pequeño módulo adaptador independiente (*debiasing adapter*) que puede enchufarse y desenchufarse del modelo sin alterar sus parámetros originales. Esto hace el debiasing "sostenible": un mismo adaptador puede reutilizarse en múltiples modelos o tareas, y puede actualizarse cuando cambian las nociones sociales de sesgo sin reentrenar el modelo completo.
 

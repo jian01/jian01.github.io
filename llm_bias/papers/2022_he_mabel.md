@@ -27,16 +27,7 @@ status:
 image: "imgs/2022_he_mabel.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# MABEL: Attenuating Gender Bias using Textual Entailment Data (2022)
-
-**Autores**: Jacqueline He, Mengzhou Xia, Christiane Fellbaum, Danqi Chen
-**Publicado en**: EMNLP, 2022
-**Tipo de método**: Fine-tuning / data augmentation
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone MABEL (**M**itigating **A**ssociations via **B**alanced **E**ntailment **L**earning), un método de debiasing de género que usa datos de inferencia textual (NLI) para crear un objetivo de aprendizaje contrastivo que alinea las representaciones de oraciones equivalentes excepto por el género.
 

@@ -21,16 +21,7 @@ status:
 image: "imgs/2025_park_aligned-stereotypical.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# Aligned but Stereotypical? The Hidden Influence of System Prompts on Social Bias in LVLM-Based Text-to-Image Models (2025)
-
-**Autores**: NaHyeon Park, Namin An, Kunhee Kim, Soyeon Yoon, Jiahao Huo, Hyunjung Shim
-**Publicado en**: arXiv, 2025
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Estudia cómo los **system prompts** (instrucciones base del sistema) de modelos de visión-lenguaje grandes (LVLMs) usados para generación de imágenes influyen en los sesgos sociales de género y raza en las imágenes generadas, incluso cuando el modelo parece "alineado" con principios de equidad.
 

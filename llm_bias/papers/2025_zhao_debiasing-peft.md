@@ -23,16 +23,7 @@ status:
 image: "imgs/2025_zhao_debiasing-peft.png"
 image_caption: "Gráfico de barras que compara los logits finales del modelo para categorías emocionales de grano fino (a) y grueso (b), distinguiendo entre muestras que contienen (azul/naranja claro) y no contienen (azul oscuro/rojo) el atributo emocional, ilustrando el sesgo en la tarea de clasificación."
 opinion: "<WIP>"
----
-# Debiasing the Fine-Grained Classification Task in LLMs with Bias-Aware PEFT (2025)
-
-**Autores**: Daiying Zhao, Xinyu Yang, Hang Chen
-**Publicado en**: ACL, 2025
-**Tipo de método**: Adapters / PEFT
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone Bias-Aware PEFT, un método de fine-tuning eficiente en parámetros que incorpora explícitamente la conciencia del sesgo durante el fine-tuning en tareas de clasificación fina, reduciendo el sesgo que emerge al especializar LLMs en categorías muy similares.
 

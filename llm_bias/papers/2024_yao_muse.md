@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_yao_muse.png"
 image_caption: "Las seis dimensiones del benchmark MUSE: memorización verbatim, memorización de conocimiento, fuga de privacidad, preservación de utilidad, escalabilidad y sostenibilidad."
 opinion: "<WIP>"
----
-# MUSE: Machine Unlearning Six-Way Evaluation for Language Models (2024)
-
-**Autores**: Weijia Shi, Jaechan Lee, Yangsibo Huang, Sadhika Malladi, Jieyu Zhao, Ari Holtzman, Daogao Liu, Luke Zettlemoyer, Noah A. Smith, Chiyuan Zhang
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone **MUSE** (*Machine Unlearning Six-Way Evaluation*), un benchmark comprehensivo para evaluar algoritmos de unlearning en modelos de lenguaje desde seis dimensiones distintas. El problema que MUSE ataca es que la evaluación actual del unlearning es estrecha y unidimensional: la mayoría de los papers solo miden si el modelo ha "olvidado" el contenido y si mantiene accuracy general, ignorando otras propiedades críticas como la resistencia a ataques de privacidad o la escalabilidad ante solicitudes masivas.
 

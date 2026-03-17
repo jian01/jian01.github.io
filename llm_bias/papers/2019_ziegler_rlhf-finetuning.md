@@ -17,15 +17,7 @@ status:
 image: "imgs/2019_ziegler_rlhf-finetuning.png"
 image_caption: "Pipeline de RHLF"
 opinion: "Usa la LLM preentrenada y la duplica en un segundo modelo de scoring que es igual en arquitectura al primero que va a aprender con datos taggeados de preferencias humanas. Usa una técnica llamada PPO que es general en reinforcement learning para balancear una política inicial con la evolución de la propia política, basicamente a medida se usa el modelo de reward junto con el modelo base se usa esta técnica de RL para generar una función objetivo que balancee los rewards aprendidos con el conocimiento que tenía antes el modelo base, maximizando de forma conservadora el reward."
----
-# Fine-Tuning Language Models from Human Preferences (2019)
-
-**Autores**: Daniel M. Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B. Brown, Alec Radford, Dario Amodei, Paul F. Christiano, Geoffrey Irving (OpenAI)
-**Publicado en**: arXiv, 2019
-
----
-
-## Qué hace
+---## Qué hace
 
 Introduce el framework de **RLHF (Reinforcement Learning from Human Feedback)** para modelos de lenguaje. Es el paper seminal que establece el paradigma de entrenar LLMs con preferencias humanas en lugar de sólo maximizar la probabilidad del corpus de texto.
 

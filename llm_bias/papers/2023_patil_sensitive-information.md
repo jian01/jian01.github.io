@@ -18,16 +18,7 @@ status:
 image: "imgs/2023_patil_sensitive-information.png"
 image_caption: "Imagen asociada al paper sobre la defensa contra ataques de extracción de información sensible en LLMs."
 opinion: "<WIP>"
----
-# Can Sensitive Information Be Deleted From LLMs? Objectives for Defending Against Extraction Attacks (2023)
-
-**Autores**: Vaidehi Patil, Peter Hase, Mohit Bansal
-**Publicado en**: arXiv, 2023
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Estudia si el unlearning estándar (gradient ascent) realmente previene ataques de extracción de información sensible de LLMs, y propone objetivos de entrenamiento más robustos que combinan el olvido con defensa adversarial.
 

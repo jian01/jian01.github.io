@@ -24,16 +24,7 @@ status:
 image: "imgs/2021_meade_debiasing-survey.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----
-# An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models (2021)
-
-**Autores**: Nicholas Meade, Elinor Poole-Dayan, Siva Reddy
-**Publicado en**: ACL, 2022
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Estudio empírico comprehensivo que compara 5 métodos de debiasing (CDA, Dropout, INLP, SentenceDebias, Self-Debias) en 3 modelos (BERT, GPT-2, RoBERTa) usando 4 benchmarks de sesgo (StereoSet, CrowS-Pairs, SEAT, WinoBias). Conclusión principal: ningún método funciona consistentemente en todos los contextos.
 

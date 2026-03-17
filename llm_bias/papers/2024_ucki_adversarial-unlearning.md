@@ -18,16 +18,7 @@ status:
 image: "imgs/2024_ucki_adversarial-unlearning.png"
 image_caption: "Diagrama que ilustra el escenario adversarial estudiado en el paper: un atacante (robot malicioso, recuadro rojo) accede al modelo y, mediante reaprendizaje con pocas muestras, puede revertir el unlearning y obtener un modelo comprometido (robot con lentes, recuadro rojo/verde), en contraste con el modelo correctamente unlearned (robot amigable, recuadro verde)."
 opinion: "<WIP>"
----
-# An Adversarial Perspective on Machine Unlearning for AI Safety (2024)
-
-**Autores**: Jakub Łucki, Boyi Wei, Yangsibo Huang, Peter Henderson, Florian Tramèr, Javier Rando
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Evaluación / análisis
-
----
-
-## Qué hace
+---## Qué hace
 
 Muestra que el unlearning en LLMs puede ser revertido rápidamente mediante **reaprendizaje** con muy pocas muestras del contenido olvidado. Argumenta que el unlearning como mecanismo de seguridad es fundamentalmente frágil.
 

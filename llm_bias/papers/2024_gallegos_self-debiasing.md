@@ -24,16 +24,7 @@ status:
 image: "imgs/2024_gallegos_self-debiasing.png"
 image_caption: "Distribuciones de puntajes de sesgo en nueve categorías demográficas (edad, discapacidad, identidad de género, nacionalidad, apariencia física, raza/etnia, religión, orientación sexual y nivel socioeconómico), comparando las variantes Reprompting, Explanation y Baseline del método Self-Debiasing."
 opinion: "<WIP>"
----
-# Self-Debiasing Large Language Models: Zero-Shot Recognition and Reduction of Stereotypes (2024)
-
-**Autores**: Isabel O. Gallegos, Ryan A. Rossi, Joe Barrow, Md. Mehrab Tanjim, Tong Yu, Hanieh Deilamsalehy, Ruiyi Zhang, Sungchul Kim, Franck Dernoncourt
-**Publicado en**: arXiv, 2024
-**Tipo de método**: Tiempo de inferencia
-
----
-
-## Qué hace
+---## Qué hace
 
 Propone Self-Debiasing: un enfoque de **zero-shot** que usa el propio LLM para reconocer y corregir sus sesgos durante la generación, sin ningún entrenamiento adicional ni modificación de pesos. Funciona puramente mediante prompting.
 

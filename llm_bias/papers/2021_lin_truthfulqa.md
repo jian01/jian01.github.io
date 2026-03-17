@@ -20,16 +20,7 @@ status:
 image: "imgs/2021_lin_truthfulqa.png"
 image_caption: "Figura del paper mostrando la veracidad promedio de distintos modelos según su tamaño y cómo GPT cambia sus respuestas incorrectas con el tamaño, ilustrando el fenómeno de \"inverse scaling\" en veracidad."
 opinion: "<WIP>"
----
-# TruthfulQA: Measuring How Models Mimic Human Falsehoods (2021)
-
-**Autores**: Stephanie C. Lin, Jacob Hilton, Owain Evans
-**Publicado en**: ACL, 2022 (arXiv 2021)
-**Tipo de método**: Benchmark / Dataset
-
----
-
-## Qué hace
+---## Qué hace
 
 Crea un benchmark de 817 preguntas diseñadas para que los humanos las respondan incorrectamente por creencias falsas comunes o mitos populares, y mide si los LLMs propagan estas falsedades o responden verazmente. Descubre que los modelos más grandes son *menos* verídicos.
 
