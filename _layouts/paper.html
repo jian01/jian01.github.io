@@ -62,6 +62,14 @@ layout: default
   </figure>
   {% endif %}
 
+  {% assign op = page.opinion | default: "<WIP>" | strip %}
+  {% if op == "<WIP>" or op == "" %}
+  <div class="ai-warning">
+    ⚠️ <strong>Contenido generado con IA — no revisado por Gian.</strong>
+    Este resumen fue producido automáticamente y no ha sido validado. Puede contener errores o imprecisiones.
+  </div>
+  {% endif %}
+
   <div class="paper-content">
     {{ content }}
   </div>
