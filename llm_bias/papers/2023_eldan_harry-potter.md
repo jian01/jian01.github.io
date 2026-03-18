@@ -173,24 +173,6 @@ El fine-tuning entrena al modelo para que, dado el texto HP original como contex
 
 **Importante**: la etiqueta objetivo no es un token concreto sino una **distribución sobre el vocabulario** (un vector de logits). El fine-tuning minimiza la KL divergence entre la distribución del modelo en entrenamiento y esta distribución objetivo.
 
----
-
-**Resumen visual del flujo**:
-
-```
-Bloque original (HP)  ──►  modelo_reforzado  ──►  v_ref
-                │
-                ▼ (diccionario anclas)
-Bloque traducido       ──►  modelo_base      ──►  v_base
-                                                    │
-                           offset = ReLU(v_ref - v_base)
-                                                    │
-                           v_generic = v_base - α·offset
-                                                    │
-Dataset: { entrada: bloque_original,  etiqueta: v_generic }
-                                                    │
-                           Fine-tuning del modelo_base
-```
 
 ### Manejo de inconsistencias de términos ancla
 
