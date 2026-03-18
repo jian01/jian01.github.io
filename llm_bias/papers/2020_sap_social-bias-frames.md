@@ -20,7 +20,9 @@ status:
 image: "imgs/2020_sap_social-bias-frames.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce el framework de **Social Bias Frames**: representaciones estructuradas que capturan las implicaciones sociales y de poder de textos potencialmente ofensivos. Crea el dataset SBIC con 44.671 publicaciones de redes sociales anotadas con estos frames estructurados.
 

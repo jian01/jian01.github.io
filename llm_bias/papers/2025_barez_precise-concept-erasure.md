@@ -18,7 +18,9 @@ status:
 image: "imgs/2025_barez_precise-concept-erasure.png"
 image_caption: "Gráficos de violín que muestran la distribución del delta en escala Likert (cambio percibido en el concepto) para cuatro condiciones de evaluación: arg-hum, arg-llm, simple y mixed."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método para borrar conceptos específicos de los parámetros de un LLM de forma quirúrgica, identificando primero exactamente qué neuronas y matrices de pesos almacenan el concepto, y luego modificando sólo esos parámetros.
 

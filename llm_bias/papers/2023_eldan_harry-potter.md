@@ -19,7 +19,9 @@ status:
 image: "imgs/2023_eldan_harry-potter.png"
 image_caption: "A medida entrena el método la probabilidad de distintas palabras para completar 'Harry potter studies'"
 opinion: "Es un paper divertidisimo, que trae una idea muy original para evaluar el unlearning, recomiendo mucho leerlo ya que es muy ameno y habla un poco de los problemas que tienen técnicas previas como el gradient ascent o negar la función de loss."
----## Qué hace
+---
+
+## Qué hace
 
 Desarrolla un método para hacer que un LLM "olvide" un corpus específico — los libros de Harry Potter — sin reentrenar el modelo desde cero. Utiliza un enfoque en dos pasos: identificar tokens "ancla" del contenido a olvidar y reemplazar las predicciones del modelo con alternativas genéricas.
 

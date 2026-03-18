@@ -18,7 +18,9 @@ status:
 image: "imgs/2023_ermon_dpo.png"
 image_caption: "Diagrama comparativo entre el pipeline RLHF tradicional (izquierda) y Direct Preference Optimization (derecha): RLHF requiere entrenar un modelo de recompensa separado y usar reinforcement learning, mientras que DPO optimiza directamente el modelo de lenguaje con máxima verosimilitud sobre los datos de preferencia."
 opinion: "No vale la pena meterle mucha cabeza al modelo de RL, la novedad respecto del paper anterior es que usan la diferencia entre las probabilidades del modelo base y del que se va modificando como el modelo de recompensa mismo, eliminando la necesidad de usar dos modelos. La verdad que la IA hizo un re buen resumen del paso por paso, recomiendo ir a verlo."
----## Qué hace
+---
+
+## Qué hace
 
 Propone DPO (**D**irect **P**reference **O**ptimization), un algoritmo que reemplaza el entrenamiento RLHF tradicional (reward model + PPO) con una única etapa de fine-tuning supervisado sobre datos de preferencias. Elimina la necesidad del reward model separado y del RL.
 

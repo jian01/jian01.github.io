@@ -21,7 +21,9 @@ status:
 image: "imgs/2021_xu_bot-adversarial.png"
 image_caption: "Gráfico de torta mostrando la distribución de categorías temáticas en las conversaciones adversariales del dataset BAD, relevante para entender la diversidad de contextos en los que los red teamers intentaron inducir respuestas inseguras."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Crea un dataset de ~5.000 conversaciones adversariales donde humanos intentan inducir respuestas inseguras en chatbots (BlenderBot), y usa este dataset para entrenar agentes de diálogo más seguros mediante fine-tuning.
 

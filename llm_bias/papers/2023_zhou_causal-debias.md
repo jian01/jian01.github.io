@@ -23,7 +23,9 @@ status:
 image: "imgs/2023_zhou_causal-debias.png"
 image_caption: "Imagen asociada al paper Causal-Debias, que propone un framework de debiasing basado en aprendizaje causal invariante para modelos de lenguaje preentrenados."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone Causal-Debias, un framework que enmarca el debiasing como un problema de aprendizaje causal. Separa las features causales (relevantes para la tarea) de las correlaciones espurias (atributos demográficos que causan sesgo) usando principios de invarianza causal, funcionando tanto en preentrenamiento como en fine-tuning.
 

@@ -20,7 +20,9 @@ status:
 image: "imgs/2021_parrish_bbq.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Crea BBQ (**B**ias **B**enchmark for **Q**A), un dataset de 58.492 ejemplos de QA con opción múltiple que mide si los LLMs usan estereotipos sociales para responder preguntas cuando la respuesta correcta es "indeterminada". Cubre 9 dimensiones de sesgo social.
 

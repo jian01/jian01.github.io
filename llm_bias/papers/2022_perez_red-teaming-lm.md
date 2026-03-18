@@ -17,7 +17,9 @@ status:
 image: "imgs/2022_perez_red-teaming-lm.png"
 image_caption: "Pipeline: el Red LM genera preguntas, el Target LM responde, un clasificador evalúa si la respuesta es dañina, y el Red LM se actualiza para generar más casos fallidos."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone usar **modelos de lenguaje (LMs) como red teamers automáticos** para encontrar comportamientos dañinos en otros LMs objetivo, sin necesidad de anotación humana masiva. El enfoque consiste en entrenar un LM "atacante" (*red LM*) para que genere preguntas o prompts que provoquen respuestas ofensivas, sesgadas, o que filtren datos privados del LM objetivo.
 

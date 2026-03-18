@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_lynch_eight-methods.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone 8 métodos de evaluación para medir si el unlearning en LLMs es **robusto** — es decir, si resiste intentos activos de recuperar el conocimiento supuestamente olvidado. Muestra que la mayoría de métodos de unlearning existentes fallan al menos algunos de estos tests.
 

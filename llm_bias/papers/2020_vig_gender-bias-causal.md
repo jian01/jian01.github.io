@@ -17,7 +17,9 @@ status:
 image: "imgs/2020_vig_gender-bias-causal.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Usa **análisis de mediación causal** para identificar qué componentes específicos del transformer (cabezas de atención, neuronas FFN) son causalmente responsables del sesgo de género en modelos de lenguaje como GPT-2.
 

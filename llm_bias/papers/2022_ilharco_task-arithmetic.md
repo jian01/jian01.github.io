@@ -16,7 +16,9 @@ method_type: "Enmascarado / edición de pesos"
 status:
   - "Pendiente"
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce el concepto de **task vectors**: vectores en el espacio de pesos del modelo que encapsulan el conocimiento adquirido al hacer fine-tuning en una tarea concreta. Muestra que estos vectores se pueden sumar, restar y combinar de forma que el modelo resultante adquiere, pierde o transfiere capacidades sin necesidad de reentrenamiento. En el contexto de unlearning, la **negación** de un task vector elimina la capacidad correspondiente del modelo.
 

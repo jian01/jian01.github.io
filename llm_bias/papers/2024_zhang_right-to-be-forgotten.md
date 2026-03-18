@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_zhang_right-to-be-forgotten.png"
 image_caption: "Ejemplo de interfaz conversacional donde un asistente rechaza responder preguntas sobre personas cuya información fue aprobada para eliminación bajo el GDPR."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Analiza las implicaciones legales del **derecho al olvido** (GDPR Art. 17 y regulaciones similares) aplicado a los LLMs. Propone una taxonomía de qué necesita ser olvidado, identifica los desafíos técnicos y legales únicos de los LLMs, y revisa las soluciones existentes desde una perspectiva de cumplimiento regulatorio.
 

@@ -24,7 +24,9 @@ status:
 image: "imgs/2021_meade_debiasing-survey.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Estudio empírico comprehensivo que compara 5 métodos de debiasing (CDA, Dropout, INLP, SentenceDebias, Self-Debias) en 3 modelos (BERT, GPT-2, RoBERTa) usando 4 benchmarks de sesgo (StereoSet, CrowS-Pairs, SEAT, WinoBias). Conclusión principal: ningún método funciona consistentemente en todos los contextos.
 

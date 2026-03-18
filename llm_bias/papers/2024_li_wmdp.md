@@ -19,7 +19,9 @@ status:
 image: "imgs/2024_li_wmdp.png"
 image_caption: "Hermoso esquema con la función de loss propuesta."
 opinion: "Muy simple, tienen un forget set y un retrain set, y hacen que una capa genere resultados aleatorios para el forget set mientras conserva los mismos resultados para el retrain, pero lo hacen con una sola capa de atención. Es el primero de estos papers que se enfoca en AI safety, creando un dataset para evaluar preguntas que no debería poder responder. El enfoque está muy bueno y quedo muy bien resumido, recomiendo leer esto primero ya que lo itere bastante."
----## Qué hace
+---
+
+## Qué hace
 
 Introduce WMDP (**W**eapons of **M**ass **D**estruction **P**roxy), un benchmark de 4.157 preguntas de opción múltiple para medir la capacidad de los LLMs de asistir en la creación de armas de destrucción masiva (biológicas, químicas, cibernéticas). Junto al benchmark propone CUT (**C**ontrastive **U**nlearn **T**uning), un método de unlearning basado en manipulación de representaciones internas en lugar de gradient ascent.
 

@@ -24,7 +24,9 @@ status:
 image: "imgs/2024_gallegos_self-debiasing.png"
 image_caption: "Distribuciones de puntajes de sesgo en nueve categorías demográficas (edad, discapacidad, identidad de género, nacionalidad, apariencia física, raza/etnia, religión, orientación sexual y nivel socioeconómico), comparando las variantes Reprompting, Explanation y Baseline del método Self-Debiasing."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone Self-Debiasing: un enfoque de **zero-shot** que usa el propio LLM para reconocer y corregir sus sesgos durante la generación, sin ningún entrenamiento adicional ni modificación de pesos. Funciona puramente mediante prompting.
 

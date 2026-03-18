@@ -3,6 +3,14 @@ layout: default
 ---
 
 <article class="paper">
+  {% assign op = page.opinion | default: "<WIP>" | strip %}
+  {% if op == "<WIP>" or op == "" %}
+  <div class="ai-warning">
+    ⚠️ <strong>Contenido generado con IA — no revisado por Gian.</strong>
+    Este resumen fue producido automáticamente y no ha sido validado. Puede contener errores o imprecisiones.
+  </div>
+  {% endif %}
+
   <header class="paper-header">
     <h1 class="paper-title">{{ page.title }}</h1>
     {% if page.status %}
@@ -60,14 +68,6 @@ layout: default
     <img src="{{ page.image }}" alt="{{ page.image_caption }}">
     {% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
   </figure>
-  {% endif %}
-
-  {% assign op = page.opinion | default: "<WIP>" | strip %}
-  {% if op == "<WIP>" or op == "" %}
-  <div class="ai-warning">
-    ⚠️ <strong>Contenido generado con IA — no revisado por Gian.</strong>
-    Este resumen fue producido automáticamente y no ha sido validado. Puede contener errores o imprecisiones.
-  </div>
   {% endif %}
 
   <div class="paper-content">

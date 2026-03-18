@@ -18,7 +18,9 @@ status:
 image: "imgs/2026_cai_per-parameter-task-arithmetic.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método de unlearning basado en **aritmética de task vectors** con escala por parámetro, donde se calcula un "vector de olvido" y se resta del modelo original con pesos adaptativos por parámetro, logrando mayor precisión que la resta uniforme.
 

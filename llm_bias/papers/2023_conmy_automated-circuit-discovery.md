@@ -18,7 +18,9 @@ status:
 image: "imgs/2023_conmy_automated-circuit-discovery.png"
 image_caption: "Visualización del circuito descubierto por ACDC en un transformer: los nodos y aristas en rojo representan los componentes causalmente relevantes identificados automáticamente, destacados sobre el grafo completo del modelo en gris."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone ACDC (**A**utomated **C**ircuit **D**iscovery for Mechanistic Interpretability), un algoritmo que automatiza el descubrimiento de "circuitos" — subgrafos de cabezas de atención y MLPs responsables de comportamientos específicos — eliminando la necesidad de encontrarlos manualmente.
 

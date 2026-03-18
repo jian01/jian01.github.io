@@ -20,7 +20,9 @@ status:
 image: "imgs/2022_hartvigsen_toxigen.png"
 image_caption: "Logo de Delphi, el sistema de razonamiento moral de Allen AI mencionado como referencia en el contexto de detección de toxicidad implícita."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Crea ToxiGen, un dataset de 274.186 frases sobre 13 grupos minoritarios que enfoca específicamente el **odio implícito** (sin insultos explícitos ni lenguaje de odio obvio). Usa un proceso adversarial con GPT-3 para generar frases que engañen a los clasificadores de odio existentes.
 

@@ -19,7 +19,9 @@ status:
 image: "imgs/2024_doshi_does-unlearning.png"
 image_caption: "El unlearning se puede romper con adversarial prompting."
 opinion: "Muestra que, para algunos métodos que están en esta colección, el advesarial prompting fácilmente recupera todo lo que se quería olvidar. Si vamos a aplicar algún método de unlearning, tenemos que testear estas cosas."
----## Qué hace
+---
+
+## Qué hace
 
 Evalúa métodos de unlearning en LLMs usando únicamente acceso de **caja negra** (solo entradas y salidas, sin inspección de pesos internos). Muestra que modelos que "pasan" las evaluaciones estándar de unlearning pueden ser inducidos a revelar información olvidada mediante prompts creativos.
 

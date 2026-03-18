@@ -20,7 +20,9 @@ status:
 image: "imgs/2022_smith_holistic-descriptor.png"
 image_caption: "Gráfico de dispersión que muestra la perplejidad de GPT-2 para oraciones generadas con distintos descriptores demográficos (ejes de identidad a la izquierda, plantillas de oraciones a la derecha), evidenciando variaciones sistemáticas según grupo de identidad."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce el **Holistic Bias Dataset**: 472 descriptores de identidad organizados en 13 ejes demográficos (género, raza, religión, etc.) usados para generar plantillas de oraciones y medir sesgos en modelos de lenguaje. Descubre sesgos nuevos, incluyendo que los modelos asocian ciertas identidades con disculpas y sentimientos negativos.
 

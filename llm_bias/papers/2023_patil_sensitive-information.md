@@ -18,7 +18,9 @@ status:
 image: "imgs/2023_patil_sensitive-information.png"
 image_caption: "Imagen asociada al paper sobre la defensa contra ataques de extracción de información sensible en LLMs."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Estudia si el unlearning estándar (gradient ascent) realmente previene ataques de extracción de información sensible de LLMs, y propone objetivos de entrenamiento más robustos que combinan el olvido con defensa adversarial.
 

@@ -17,7 +17,9 @@ status:
 image: "imgs/2021_zhao_calibrate-before-use.png"
 image_caption: "Figura del paper comparando la accuracy de GPT-3 en few-shot con y sin calibración según el número de ejemplos de entrenamiento, mostrando la mejora consistente que aporta la técnica de normalización propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Descubre que el rendimiento de few-shot learning en GPT-3 está altamente influenciado por sesgos en los prompts (orden de ejemplos, elección de ejemplos, formato) y propone una técnica de **calibración** que normaliza las predicciones del modelo para reducir estos sesgos.
 

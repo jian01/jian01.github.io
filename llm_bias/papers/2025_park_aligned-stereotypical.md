@@ -21,7 +21,9 @@ status:
 image: "imgs/2025_park_aligned-stereotypical.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Estudia cómo los **system prompts** (instrucciones base del sistema) de modelos de visión-lenguaje grandes (LVLMs) usados para generación de imágenes influyen en los sesgos sociales de género y raza en las imágenes generadas, incluso cuando el modelo parece "alineado" con principios de equidad.
 

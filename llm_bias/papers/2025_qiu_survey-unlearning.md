@@ -18,7 +18,9 @@ status:
 image: "imgs/2025_qiu_survey-unlearning.png"
 image_caption: "Ilustración de un robot que representa el LLM como sujeto del proceso de machine unlearning, tema central del survey que categoriza objetivos, métodos y evaluaciones del campo."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Survey comprehensivo del campo de machine unlearning en LLMs que revisa más de 100 papers, categoriza objetivos, métodos y evaluaciones, e identifica los desafíos y direcciones abiertas del área.
 

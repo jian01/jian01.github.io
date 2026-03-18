@@ -18,7 +18,9 @@ status:
 image: "imgs/2025_huutien_improving-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Mejora la robustez del unlearning en LLMs añadiendo **perturbaciones aleatorias** a los pesos del modelo durante el proceso de unlearning, similar al entrenamiento adversarial. Previene el "olvido superficial" donde el modelo sólo aprende a no responder directamente pero retiene el conocimiento.
 

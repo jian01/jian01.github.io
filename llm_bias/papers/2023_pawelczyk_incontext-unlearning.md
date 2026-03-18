@@ -18,7 +18,9 @@ status:
 image: "imgs/2023_pawelczyk_incontext-unlearning.png"
 image_caption: "Comaparación entre los otros métodos de unlearning y este."
 opinion: "Es super simple, solo agrega un dato opuesto en el prompt, no es muy interesante."
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método de unlearning que **no requiere actualizar los pesos del modelo**. En su lugar, usa el aprendizaje en contexto (in-context learning): le muestra al modelo ejemplos de respuestas "olvidadas" como demostraciones en el prompt, y el modelo imita ese comportamiento durante la inferencia.
 

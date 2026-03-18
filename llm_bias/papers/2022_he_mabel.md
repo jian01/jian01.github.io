@@ -27,7 +27,9 @@ status:
 image: "imgs/2022_he_mabel.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone MABEL (**M**itigating **A**ssociations via **B**alanced **E**ntailment **L**earning), un método de debiasing de género que usa datos de inferencia textual (NLI) para crear un objetivo de aprendizaje contrastivo que alinea las representaciones de oraciones equivalentes excepto por el género.
 

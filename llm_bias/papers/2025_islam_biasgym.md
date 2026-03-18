@@ -21,7 +21,9 @@ status:
 image: "imgs/2025_islam_biasgym.png"
 image_caption: "Diagrama comparativo del framework BiasGym: (a) localización de la asociación sesgada, donde el modelo con pesos congelados produce outputs sesgados al procesar el BiasToken; (b) mitigación mediante steering, donde se interviene el vector de representación para redirigir el output hacia texto imparcial."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone BiasGym, un framework que combina detección automática de sesgos en LLMs mediante "elicitación" — generación de preguntas de sondeo diversas — con mitigación, en un loop iterativo tipo "gym" (entorno de aprendizaje). Permite descubrir sesgos que no están en benchmarks existentes.
 

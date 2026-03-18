@@ -24,7 +24,9 @@ status:
 image: "imgs/2025_li_fairsteer.png"
 image_caption: "Gráfico de dispersión que muestra la separación en el espacio de representaciones internas entre ejemplos sesgados (puntos rojos) y no sesgados (puntos verdes), evidenciando la existencia de una dirección de sesgo identificable que FairSteer utiliza para construir los steering vectors."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone FairSteer, un método de debiasing en tiempo de inferencia que usa **steering vectors** (vectores de dirección) en el espacio de representaciones internas del transformer para "guiar" el modelo lejos de outputs sesgados. Los vectores se aplican dinámicamente sólo cuando se detecta sesgo.
 

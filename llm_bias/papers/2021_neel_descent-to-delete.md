@@ -18,7 +18,9 @@ status:
 image: "imgs/2021_neel_descent-to-delete.png"
 image_caption: "Esquema del proceso de unlearning mediante descenso de gradiente perturbado: el modelo se actualiza con ruido calibrado para garantizar indistinguibilidad estadística tras el borrado."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone el primer framework de **unlearning aproximado basado en gradientes** para modelos convexos que puede manejar una secuencia arbitrariamente larga de solicitudes de borrado adversariales. El objetivo es que, tras borrar un punto, el estado interno del optimizador (no solo las predicciones del modelo) sea estadísticamente indistinguible del estado que habría resultado de nunca haber entrenado con ese punto.
 

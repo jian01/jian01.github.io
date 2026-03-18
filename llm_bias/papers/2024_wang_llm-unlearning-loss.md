@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_wang_llm-unlearning-loss.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método de unlearning que requiere **únicamente el forget set** (los datos a olvidar) sin necesidad de un retain set separado. Usa un "ancla suave" derivada de las propias predicciones del modelo para evitar la degradación general.
 

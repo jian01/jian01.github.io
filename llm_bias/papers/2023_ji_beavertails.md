@@ -20,7 +20,9 @@ status:
 image: "imgs/2023_ji_beavertails.png"
 image_caption: "Pipeline de construcción del dataset BeaverTails: a partir de preguntas y respuestas generadas por chatbots, se realiza una clasificación multi-etiqueta de 14 categorías de daño para pares dañinos y pares inocuos, y se recopilan datos de preferencia humana sobre utilidad e inocuidad."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Crea BeaverTails, un dataset de 333.963 pares pregunta-respuesta con anotaciones duales de **utilidad** (¿es útil la respuesta?) y **peligrosidad** (¿es dañina?), cubriendo 14 categorías de daño. Es uno de los datasets de preferencias de seguridad más grandes y detallados para LLMs.
 

@@ -16,7 +16,9 @@ status:
 image: "imgs/2021_elhage_transformer-circuits.png"
 image_caption: "El residual stream (arriba) y cómo cada capa de atención lee del stream y escribe de vuelta en él. Las flechas muestran los circuitos de composición entre capas."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Establece el **formalismo matemático del residual stream** para analizar transformers de forma mecanística: cada capa del transformer escribe en un stream residual compartido, y las distintas capas (atención y FFN) pueden analizarse como operaciones independientes que leen y escriben en ese stream. Este framework convierte el análisis de transformers en un ejercicio de álgebra lineal sobre el espacio de activaciones, eliminando la necesidad de "abrir la caja negra" de forma empírica.
 

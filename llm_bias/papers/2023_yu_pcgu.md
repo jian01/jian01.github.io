@@ -18,7 +18,9 @@ status:
 image: "imgs/2023_yu_pcgu.png"
 image_caption: "PCGU identifica los pesos más asociados al sesgo mediante gradientes contrastivos sobre pares de frases, y actualiza solo esa subred durante el debiasing."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone **PCGU** (*Partitioned Contrastive Gradient Unlearning*), un método de caja gris para eliminar el sesgo social de modelos de lenguaje enmascarados (como BERT) identificando y actualizando solo los pesos del modelo que más contribuyen a un dominio específico de sesgo. En lugar de aplicar el debiasing de forma global sobre todos los parámetros, PCGU localiza los pesos más "responsables" del sesgo y los actualiza de forma quirúrgica.
 

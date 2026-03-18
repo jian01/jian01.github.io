@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_jin_rwku.png"
 image_caption: "Imagen representativa del benchmark RWKU, mostrando una llama (alusión a LLaMA) con una goma de borrar sobre la cabeza, simbolizando el proceso de desaprendizaje de conocimiento en modelos de lenguaje."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone RWKU (**R**eal-**W**orld **K**nowledge **U**nlearning), un benchmark que evalúa el desaprendizaje de 200 entidades reales del mundo (personas públicas, empresas, eventos históricos) en LLMs, con énfasis en la robustez frente a ataques adversariales.
 

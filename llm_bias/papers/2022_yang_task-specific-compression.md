@@ -17,7 +17,9 @@ status:
 image: "imgs/2022_yang_task-specific-compression.png"
 image_caption: "Diagrama que ilustra cómo distintas tareas (análisis gramatical, similitud semántica, resumen) se codifican como prompts de texto para el modelo multi-tarea, destacando la diversidad de formatos de entrada que el método de compresión específica por tarea debe manejar."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método de **compresión específica por tarea** para modelos de lenguaje multi-tarea: aprende qué subconjunto mínimo de parámetros es necesario para cada tarea, permitiendo desplegar modelos más pequeños y especializados sin necesidad de re-entrenamiento completo.
 

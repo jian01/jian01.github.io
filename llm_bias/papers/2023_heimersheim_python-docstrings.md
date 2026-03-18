@@ -14,7 +14,9 @@ tags:
 status:
   - "Leido"
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Mapea completamente el circuito responsable de completar docstrings de funciones Python en un transformer pequeño (4 capas, sólo atención, sin MLP). Es un paper pedagógico que sirve como tutorial de cómo hacer circuit analysis paso a paso.
 

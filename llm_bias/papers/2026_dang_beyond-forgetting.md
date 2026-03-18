@@ -18,7 +18,9 @@ status:
 image: "imgs/2026_dang_beyond-forgetting.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Descubre que el machine unlearning no sólo elimina conocimiento — también puede **emerger o potenciar capacidades latentes** no relacionadas con el contenido olvidado. Estudia estos "comportamientos laterales" como un fenómeno inherente de los algoritmos de unlearning.
 

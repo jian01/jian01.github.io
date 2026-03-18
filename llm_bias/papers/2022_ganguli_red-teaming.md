@@ -18,7 +18,9 @@ status:
 image: "imgs/2022_ganguli_red-teaming.png"
 image_caption: "Ejemplo de la interfaz usada por los red teamers humanos para evaluar conversaciones adversariales: muestra un intercambio donde el humano intenta que el asistente provea instrucciones para entrar a una casa, junto con controles para calificar el éxito del ataque y la intención de daño."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Estudio sistemático del **red teaming** (pruebas de seguridad adversariales) aplicado a LLMs. Usa tanto red teamers humanos como LLMs automatizados para generar ataques, y analiza cómo escala la efectividad del red teaming con el tamaño del modelo y el entrenamiento RLHF.
 

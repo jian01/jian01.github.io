@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_liu_rethinking-unlearning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Paper de perspectiva y framework que reorganiza conceptualmente el campo del machine unlearning para LLMs. Propone una taxonomía unificada de qué se quiere olvidar, cómo hacerlo, y cómo evaluarlo. Es una guía de referencia para el área.
 

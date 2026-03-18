@@ -25,7 +25,9 @@ status:
 image: "imgs/2022_gira_debiasing-efficient-finetuning.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone desbiasificar modelos de lenguaje pre-entrenados usando métodos de fine-tuning eficientes en parámetros (como adapters), entrenados sobre datos contrafactuales, logrando reducción de sesgo con mínima degradación de rendimiento y mucho menor costo que el fine-tuning completo.
 

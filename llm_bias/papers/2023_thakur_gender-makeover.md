@@ -23,7 +23,9 @@ status:
 image: "imgs/2023_thakur_gender-makeover.png"
 image_caption: "Gráfico de barras mostrando la frecuencia de palabras asociadas al género en el dataset analizado: términos masculinos como \"he\", \"his\" y \"him\" dominan ampliamente frente a términos femeninos, ilustrando el desequilibrio de representación de género."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone reducir el sesgo de género en LLMs usando sólo unas pocas docenas de ejemplos contrafactuales como demostraciones de few-shot learning. No requiere fine-tuning: funciona sólo modificando el contexto del prompt.
 

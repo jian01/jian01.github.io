@@ -25,7 +25,9 @@ status:
 image: "imgs/2023_xie_parameter-efficient-debiasing.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Compara sistemáticamente múltiples métodos de fine-tuning eficiente en parámetros (PEFT) aplicados al debiasing: LoRA, adapters, prefix tuning, y prompt tuning. Identifica qué método logra el mejor balance entre reducción de sesgo y preservación de rendimiento.
 

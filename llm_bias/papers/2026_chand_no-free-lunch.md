@@ -24,7 +24,9 @@ status:
 image: "imgs/2026_chand_no-free-lunch.png"
 image_caption: "Diagrama de dispersión que muestra la relación entre la reducción de sesgo en la dimensión objetivo (eje X) y el cambio de sesgo en dimensiones no objetivo (eje Y) para combinaciones de modelo, técnica y dimensión; el cuadrante ideal (abajo a la izquierda) es raramente alcanzado, evidenciando el efecto \"no hay almuerzo gratis\"."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Demuestra un efecto "no hay almuerzo gratis" en el debiasing de LLMs: cuando se reduce el sesgo en una dimensión demográfica (ej. género), los sesgos en otras dimensiones (raza, religión, origen nacional) aumentan. Argumenta que el debiasing unidimensional puede ser contraproducente.
 

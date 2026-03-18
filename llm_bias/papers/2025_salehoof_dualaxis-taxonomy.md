@@ -17,7 +17,9 @@ status:
 image: "imgs/2025_salehoof_dualaxis-taxonomy.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone una taxonomía bidimensional (dual-axis) de todos los métodos de edición de conocimiento en LLMs: el eje de **mecanismos** (cómo editan) y el eje de **funciones** (qué editan). Organiza la literatura de ROME, MEMIT, GRACE, y docenas de métodos en un framework coherente.
 

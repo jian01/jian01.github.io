@@ -25,7 +25,9 @@ status:
 image: "imgs/2026_pan_knowbias.png"
 image_caption: "Diagrama ilustrativo del método KnowBias: (a) el LLM exhibe sesgo racial al responder una pregunta, con neuronas de sesgo en rojo; (b) el modelo reconoce el sesgo activando neuronas conoce-sesgo en verde; (c) al amplificar dichas neuronas, el modelo produce una respuesta imparcial."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone KnowBias, un método de debiasing que identifica "neuronas conoce-sesgo" — neuronas en las capas FFN que, cuando se activan, producen respuestas más equitativas — y las **amplifica** en lugar de suprimir neuronas sesgadas. Enfoque opuesto al de Yang et al. (2023).
 

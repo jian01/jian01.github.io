@@ -18,7 +18,9 @@ status:
 image: "imgs/2024_maini_tofu.png"
 image_caption: "KL Minimization es uno de los métodos de unlearning evaluados en el benchmark TOFU. Combina ascenso de gradiente sobre el forget set con regularización KL para preservar el comportamiento del modelo en el retain set."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone un método de unlearning que combina **ascenso de gradiente sobre el forget set** con un **término de regularización basado en divergencia KL** para mantener la distribución de salida del modelo sobre el retain set cercana al modelo original. Es una variante del Gradient Difference que reemplaza el descenso de gradiente explícito sobre el retain set por una penalización KL más suave.
 

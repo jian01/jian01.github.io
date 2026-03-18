@@ -18,7 +18,9 @@ status:
 image: "imgs/2021_bourtoule_sisa.png"
 image_caption: "El framework SISA divide los datos en shards (particiones independientes) y slices (subsecuencias), permitiendo reentrenar solo el shard afectado ante una solicitud de borrado."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce **SISA training** (*Sharded, Isolated, Sliced, Aggregated*), el primer framework sistemático para que modelos de machine learning "olviden" datos de entrenamiento de forma eficiente. El problema central es el siguiente: si un usuario solicita que sus datos sean eliminados de un modelo ya entrenado (como requiere el GDPR), la única forma garantizada de hacerlo es reentrenar el modelo desde cero sin esos datos, lo que es prohibitivamente caro.
 

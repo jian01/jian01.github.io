@@ -20,7 +20,9 @@ status:
 image: "imgs/2021_nadeem_stereoset.png"
 image_caption: "Interfaz de anotación del dataset StereoSet, donde los crowdworkers construyen oraciones con opciones estereotipadas, anti-estereotipadas e irrelevantes para evaluar el sesgo de modelos de lenguaje."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Crea StereoSet, un benchmark para medir sesgo estereotipado en modelos de lenguaje a través de una tarea de completación de oraciones con tres opciones: estereotipada, anti-estereotipada, y sin sentido. Introduce la métrica ICAT que combina sesgo y capacidad lingüística.
 

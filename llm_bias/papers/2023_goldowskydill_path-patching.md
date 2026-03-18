@@ -17,7 +17,9 @@ status:
 image: "imgs/2023_goldowskydill_path-patching.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce **path patching**, una extensión del activation patching que permite trazar rutas causales específicas a través del grafo computacional del transformer, identificando no sólo qué componentes importan sino exactamente cómo se comunican entre sí.
 

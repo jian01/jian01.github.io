@@ -23,7 +23,9 @@ status:
 image: "imgs/2024_han_chatgpt-data-augmentation.png"
 image_caption: "Gráficas de evolución del LM Score y el Stereotype Score (SS) en StereoSet y CrowSPairs a lo largo de las épocas de entrenamiento, comparando el modelo ajustado con LoRA, el adaptador Wiki y el modelo original."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Usa ChatGPT para generar datos de entrenamiento aumentados y balanceados para el debiasing, y los combina con LoRA (PEFT) para lograr debiasing eficiente con alta calidad. La combinación generación-LLM + PEFT supera a métodos anteriores.
 

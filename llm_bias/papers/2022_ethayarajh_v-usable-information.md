@@ -23,7 +23,9 @@ status:
 image: "imgs/2022_ethayarajh_v-usable-information.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Introduce la **V-Usable Information** (V-info), una medida de teoría de la información para cuantificar la "dificultad" de un dataset para una familia de modelos específica. Revela que muchos benchmarks de NLP tienen muy baja dificultad real porque los modelos explotan correlaciones espurias.
 

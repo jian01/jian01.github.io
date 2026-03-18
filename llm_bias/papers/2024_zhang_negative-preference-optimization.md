@@ -19,7 +19,9 @@ status:
 image: "imgs/2024_zhang_negative-preference-optimization.png"
 image_caption: "Respuestas de los modelos después de distintas técnicas de unlearning sobre TOFU. La del paper es NPO+RT (Negative preference optimization + Retain set)."
 opinion: "Usa solo el termino negativo $$\\Delta_l$$ de DPO como ejemplo 'perdedor' que en este caso es algo del forget set. Lo compara además con tooodos los métodos previos usando TOFU, está bueno. Hay que tener en cuenta que este dataset y este método está más enfocado al derecho al olvido y no necesariamente se prueban para olvidar conceptos (ej: como armar un arma) en general. El paper está muy bien escrito, me gustó la sección de 'other loss functions' donde hacen un resumen de como se relaciona todo con lo demás, y le pedí a la IA que incluya eso en el resumen y quedo bien."
----## Qué hace
+---
+
+## Qué hace
 
 Adapta el algoritmo DPO (Direct Preference Optimization) para machine unlearning, creando NPO (Negative Preference Optimization). Resuelve el problema del "colapso catastrófico" que ocurre con el ascenso de gradiente puro, donde el modelo pierde coherencia general.
 

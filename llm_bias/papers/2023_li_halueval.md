@@ -23,7 +23,9 @@ status:
 image: "imgs/2023_li_halueval.png"
 image_caption: "Fragmento del paper mostrando la metodología propuesta."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone HaluEval, un benchmark de 35.000 muestras para evaluar las alucinaciones en LLMs en tres tareas: QA (preguntas y respuestas), resumen, y diálogo. Usa ChatGPT para generar alucinaciones realistas y estudia qué lleva a los LLMs a alucinar.
 

@@ -27,7 +27,9 @@ status:
 image: "imgs/2025_xu_biasedit.png"
 image_caption: "Gráfico de barras que muestra la diferencia absoluta de log-probabilidad (efecto del sesgo de género) por capa del modelo GPT-2 Medium, comparando el efecto de las palabras de atributo de sesgo (azul), el token previo a los términos de atributo (rojo) y los propios términos de atributo (verde)."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Aplica técnicas de **edición de modelos** (model editing) para eliminar estereotipos de género y raza de LLMs. En lugar de re-entrenar el modelo, modifica quirúrgicamente las capas FFN específicas que almacenan las asociaciones estereotipadas.
 

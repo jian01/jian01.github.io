@@ -17,7 +17,9 @@ status:
 image: "imgs/2023_panigrahi_skill-localization.png"
 image_caption: "Imagen asociada al paper sobre localización de habilidades específicas en modelos de lenguaje fine-tuneados."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Estudia qué partes de un LLM fine-tuneado son responsables de las habilidades específicas de la tarea vs. las capacidades generales pre-entrenadas. Descubre que los cambios de fine-tuning son esparsos y localizados, y aprende "sparse masks" que identifican el subconjunto mínimo de parámetros responsables de cada habilidad.
 

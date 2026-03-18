@@ -16,7 +16,9 @@ status:
 image: "imgs/2023_bills_neuron-explanation.png"
 image_caption: "Pipeline de tres pasos: (1) GPT-4 observa los tokens que activan la neurona y genera una explicación, (2) GPT-4 simula las activaciones predichas, (3) se calcula la correlación entre activaciones reales y simuladas como puntuación de la explicación."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Propone el **primer sistema automatizado para generar explicaciones en lenguaje natural de neuronas individuales en modelos de lenguaje**, usando GPT-4 como "explicador". El sistema examina los tokens que más activan cada neurona de GPT-2 (el modelo objetivo), genera una hipótesis en lenguaje natural sobre qué concepto representa esa neurona, y luego verifica la hipótesis usando GPT-4 como simulador de las activaciones.
 
