@@ -101,16 +101,96 @@ Nótese que los reemplazos no tienen por qué ser semánticamente equivalentes (
 
 ### Algoritmo — Construcción del dataset de fine-tuning
 
-Para cada bloque de 512 tokens del corpus HP:
+El objetivo es construir un dataset de pares *(texto HP original → distribución de predicciones genéricas)* sobre el que luego se hace fine-tuning. Para cada bloque de 512 tokens del corpus HP se ejecutan los siguientes pasos:
 
-1. Reemplazar todas las apariciones de términos ancla por sus traducciones del diccionario; guardar el mapeo de posiciones.
-2. Correr el modelo base sobre el bloque **traducido** → `predictions_on_translated`.
-3. Correr el modelo reforzado sobre el bloque **original** → `reinforced_predictions`.
-4. Calcular el offset de reforzamiento: `reinforcement_offset = ReLU(reinforced_predictions − predictions_on_translated)`
-5. Calcular las predicciones genéricas: `generic_predictions = predictions_on_translated − α · reinforcement_offset`
-6. Agregar al dataset: {fuente = bloque original, etiqueta objetivo = `generic_predictions`}
+---
 
-El modelo se fine-tunea sobre este dataset para aprender a predecir distribuciones genéricas dado texto HP.
+**Paso 1. Traducir el bloque con el diccionario de anclas**
+
+Se reemplaza cada término ancla por su equivalente genérico y se guarda el mapeo de posiciones (qué token en qué posición fue sustituido). El bloque resultante es el **bloque traducido**.
+
+*Ejemplo*: el bloque original `"Harry walked into Hogwarts and grabbed his wand"` se convierte en `"Jon walked into Mystic Academy and grabbed his gaze"`.
+
+El bloque traducido se usará para obtener las predicciones del modelo base sobre texto sin referencias HP.
+
+---
+
+**Paso 2. Obtener los logits del modelo base sobre el bloque traducido**
+
+$$\mathbf{v}_{\text{base}} = \text{logits}_{\theta_{\text{base}}}(\text{bloque\_traducido})$$
+
+Se pasa el bloque traducido por el modelo base y se extraen los **logits** — el vector de puntuaciones sin normalizar sobre todo el vocabulario, para cada posición del texto. Cualitativamente: estos logits representan "qué tokens predice el modelo base cuando el texto ya no contiene referencias HP". Son la distribución de predicción de un modelo que nunca vio el universo HP en ese contexto.
+
+*Por qué el bloque traducido y no el original*: si se usara el bloque original, el modelo base ya sería "experto" en HP y sus predicciones reflejarían ese conocimiento. Al traducir primero, se obtiene una distribución limpia de asociaciones HP.
+
+---
+
+**Paso 3. Obtener los logits del modelo reforzado sobre el bloque original**
+
+$$\mathbf{v}_{\text{ref}} = \text{logits}_{\theta_{\text{reinforced}}}(\text{bloque\_original})$$
+
+Se pasa el bloque **original** (con los nombres HP reales) por el modelo reforzado y se extraen sus logits. Cualitativamente: el modelo reforzado, al haber sido entrenado intensivamente sobre los libros HP, amplifica exactamente los tokens asociados al universo HP. Sus logits más altos que los del modelo base señalan qué tokens son HP-específicos en ese contexto.
+
+*Ejemplo*: para la posición donde el texto dice `"Harry"`, el modelo reforzado asignará logit muy alto a tokens como `"Potter"`, `"Hermione"`, `"Hogwarts"` — mucho más alto que el modelo base sobre el bloque traducido.
+
+---
+
+**Paso 4. Calcular el offset de reforzamiento**
+
+$$\mathbf{o} = \text{ReLU}(\mathbf{v}_{\text{ref}} - \mathbf{v}_{\text{base}})$$
+
+Se calcula la diferencia token a token entre los logits del modelo reforzado y los del modelo base, y se aplica ReLU (que pone a cero los valores negativos).
+
+**Qué mide esta diferencia**: para cada token del vocabulario, ¿cuánto más probable lo hace el modelo reforzado respecto al modelo base? Un valor positivo grande en el token `"Potter"` significa que el modelo reforzado amplificó fuertemente ese token — es conocimiento HP-específico. Un valor cercano a cero o negativo significa que ese token es igual de probable en ambos modelos — es conocimiento general del lenguaje.
+
+**Por qué el ReLU**: solo nos interesan los tokens que el modelo reforzado amplificó (diferencia positiva). Si el modelo reforzado asigna *menos* probabilidad a un token que el modelo base, ese token no es HP-específico y no queremos tocarlo. El ReLU descarta esas diferencias negativas, dejando solo la "huella HP" sobre los logits.
+
+*Ejemplo concreto*: para la palabra "hermione" el offset sería muy alto; para "the" o "walked" el offset sería ~0.
+
+---
+
+**Paso 5. Calcular las predicciones genéricas**
+
+$$\mathbf{v}_{\text{generic}} = \mathbf{v}_{\text{base}} - \alpha \cdot \mathbf{o}$$
+
+con $$\alpha = 5$$.
+
+Se toman los logits del modelo base (ya "limpios" porque vienen del bloque traducido) y se les resta el offset HP amplificado por $$\alpha$$. Cualitativamente: se está **sustrayendo activamente el conocimiento HP del modelo base**. Los tokens que el modelo reforzado identificó como HP-específicos (offset alto) quedan fuertemente penalizados en los logits finales.
+
+**Interpretación**: $$\mathbf{v}_{\text{generic}}$$ aproxima la distribución de predicciones que tendría un modelo que *nunca* fue entrenado con los libros HP. No es perfecta (el modelo base ya tiene algo de conocimiento HP desde el preentrenamiento), pero es la mejor aproximación disponible sin reentrenar desde cero.
+
+**El rol de $$\alpha = 5$$**: amplifica el offset para garantizar que la señal HP quede efectivamente suprimida. Sin amplificación, la diferencia podría no ser suficiente para mover la distribución de predicciones de forma apreciable.
+
+---
+
+**Paso 6. Construir el par de entrenamiento**
+
+Se agrega al dataset el par:
+- **Entrada (fuente)**: el bloque original con términos HP reales
+- **Etiqueta objetivo**: los logits $$\mathbf{v}_{\text{generic}}$$ calculados en el paso 5
+
+El fine-tuning entrena al modelo para que, dado el texto HP original como contexto, sus predicciones se parezcan a $$\mathbf{v}_{\text{generic}}$$ — es decir, para que reaccione al texto HP como si no lo conociera.
+
+**Importante**: la etiqueta objetivo no es un token concreto sino una **distribución sobre el vocabulario** (un vector de logits). El fine-tuning minimiza la KL divergence entre la distribución del modelo en entrenamiento y esta distribución objetivo.
+
+---
+
+**Resumen visual del flujo**:
+
+```
+Bloque original (HP)  ──►  modelo_reforzado  ──►  v_ref
+                │
+                ▼ (diccionario anclas)
+Bloque traducido       ──►  modelo_base      ──►  v_base
+                                                    │
+                           offset = ReLU(v_ref - v_base)
+                                                    │
+                           v_generic = v_base - α·offset
+                                                    │
+Dataset: { entrada: bloque_original,  etiqueta: v_generic }
+                                                    │
+                           Fine-tuning del modelo_base
+```
 
 ### Manejo de inconsistencias de términos ancla
 
