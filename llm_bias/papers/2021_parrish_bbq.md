@@ -17,9 +17,10 @@ datasets:
   - "BBQ"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2021_parrish_bbq.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
-opinion: "<WIP>"
+image_caption: "Ejemplo de data point"
+opinion: "Super util."
 ---
 
 ## Qué hace
