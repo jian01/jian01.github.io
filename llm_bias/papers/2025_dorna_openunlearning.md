@@ -14,11 +14,13 @@ tags:
 pdf: "/llm_bias/pdfs/2025_dorna_openunlearning.pdf"
 method_type: "Evaluación / análisis"
 status:
-  - "Pendiente"
+  - "Leido"
 image: "imgs/2025_dorna_openunlearning.png"
-image_caption: "Icono de balanza de la justicia que ilustra el principio central de OpenUnlearning: proporcionar una comparación equitativa y balanceada entre múltiples métodos de unlearning bajo condiciones estandarizadas."
+image_caption: "Esquema de todo lo que puede hacer la librería OpenUnlearning."
 opinion: "<WIP>"
----## Qué hace
+---
+
+## Qué hace
 
 Presenta OpenUnlearning, un framework de código abierto que implementa más de 8 algoritmos de unlearning sobre más de 5 benchmarks distintos, permitiendo comparaciones sistemáticas y reproducibles. Revela que los métodos de unlearning no generalizan entre benchmarks.
 
