@@ -12,7 +12,7 @@ tags:
   - "eficiencia-datos"
   - "BERT"
 pdf: "/llm_bias/pdfs/2023_hassan_dcalm.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Otro"
 datasets:
   - "CrowS-Pairs"
   - "WinoBias"

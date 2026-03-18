@@ -12,7 +12,7 @@ tags:
   - "fairness"
   - "detección-sesgo"
 pdf: "/llm_bias/pdfs/2025_shrestha_llm-bias-detection.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Otro"
 datasets:
   - "WinoBias"
   - "StereoSet"

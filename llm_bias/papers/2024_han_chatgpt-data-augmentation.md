@@ -12,7 +12,7 @@ tags:
   - "LoRA"
   - "PEFT"
 pdf: "/llm_bias/pdfs/2024_han_chatgpt-data-augmentation.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Data augmentation"
 datasets:
   - "StereoSet"
   - "WinoBias"

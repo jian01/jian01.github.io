@@ -12,7 +12,7 @@ tags:
   - "sesgo-de-género"
   - "BERT"
 pdf: "/llm_bias/pdfs/2022_he_mabel.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Data augmentation"
 datasets:
   - "SNLI + MultiNLI"
   - "StereoSet"

@@ -12,7 +12,7 @@ tags:
   - "sesgo-de-género"
   - "sin-entrenamiento"
 pdf: "/llm_bias/pdfs/2023_thakur_gender-makeover.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Data augmentation"
 datasets:
   - "WinoBias"
   - "StereoSet"

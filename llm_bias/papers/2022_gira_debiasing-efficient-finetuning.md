@@ -12,7 +12,7 @@ tags:
   - "fine-tuning-eficiente"
   - "sesgo-de-género"
 pdf: "/llm_bias/pdfs/2022_gira_debiasing-efficient-finetuning.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Fine-tuning"
 datasets:
   - "StereoSet"
   - "CrowS-Pairs"

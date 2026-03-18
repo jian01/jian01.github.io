@@ -12,7 +12,7 @@ tags:
   - "fine-tuning"
   - "sesgo-social"
 pdf: "/llm_bias/pdfs/2023_zhou_causal-debias.pdf"
-method_type: "Causal / invariante"
+method_type: "Otro"
 datasets:
   - "CrowS-Pairs"
   - "StereoSet"

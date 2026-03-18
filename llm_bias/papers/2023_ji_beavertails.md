@@ -12,14 +12,15 @@ tags:
   - "anotación-humana"
   - "benchmark"
 pdf: "/llm_bias/pdfs/2023_ji_beavertails.pdf"
-method_type: "Benchmark / Dataset"
+method_type: "Alineamiento / RLHF"
 datasets:
   - "BeaverTails"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2023_ji_beavertails.png"
 image_caption: "Pipeline de construcción del dataset BeaverTails: a partir de preguntas y respuestas generadas por chatbots, se realiza una clasificación multi-etiqueta de 14 categorías de daño para pares dañinos y pares inocuos, y se recopilan datos de preferencia humana sobre utilidad e inocuidad."
-opinion: "<WIP>"
+opinion: "Super relevante, es muy simple, encima da un dataset. Es una extensión de RHLF."
 ---
 
 ## Qué hace

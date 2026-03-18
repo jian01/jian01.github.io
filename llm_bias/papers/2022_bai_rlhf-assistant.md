@@ -12,7 +12,7 @@ tags:
   - "preferencias-humanas"
   - "seguridad-AI"
 pdf: "/llm_bias/pdfs/2022_bai_rlhf-assistant.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Alineamiento / RLHF"
 datasets:
   - "HH-RLHF"
 measures_general_quality: "Sí"

@@ -12,7 +12,7 @@ tags:
   - "BERT"
   - "post-hoc"
 pdf: "/llm_bias/pdfs/2021_cheng_fairfil.pdf"
-method_type: "Fine-tuning / data augmentation"
+method_type: "Fine-tuning"
 datasets:
   - "SentiBias"
   - "STS-B"

@@ -16,8 +16,8 @@ method_type: "Benchmark / Dataset"
 status:
   - "Leido"
 image: "imgs/2023_venkit_nationality-bias.png"
-image_caption: "Gráfico de barras comparando las puntuaciones de sentimiento antes (rojo) y después (verde) del debiasing, desglosadas por nivel de población de usuarios de internet (High, Upper-Middle, Lower-Middle, Low, NA), mostrando cómo el debiasing eleva y equilibra el sentimiento entre grupos."
-opinion: "<WIP>"
+image_caption: "Ejemplos de los adjetivos más comunes generados para cada nacionalidad."
+opinion: "Es interesante para tener en cuenta y medir de alguna forma el sesgo geográfico."
 ---
 
 ## Qué hace
