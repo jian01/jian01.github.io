@@ -16,7 +16,7 @@ Fundamentos teóricos, benchmarks y métodos para el desaprendizaje en modelos d
 
 | Estado | Año | Título | Tipo de método | Resumen | Citas* |
 | --- |-----|--------|----------------|---------| :---: |
-| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2015 | Towards Making Systems Forget with Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2015_cao_machine-unlearning.html) | 26 |
+| <span class="dot dot-leido" title="Leído"></span> | 2015 | Towards Making Systems Forget with Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2015_cao_machine-unlearning.html) | 26 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2019 | Making AI Forget You: Data Deletion in Machine Learning | Reentrenamiento exacto | [Ver](../papers/2019_ginart_data-deletion.html) | 1 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Machine Unlearning via SISA | Reentrenamiento exacto | [Ver](../papers/2021_bourtoule_sisa.html) | 2 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Descent-to-Delete: Gradient-Based Methods for Machine Unlearning | Reentrenamiento exacto | [Ver](../papers/2021_neel_descent-to-delete.html) | 0 |
