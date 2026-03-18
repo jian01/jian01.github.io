@@ -17,57 +17,190 @@ status:
   - "Leido"
   - "Relevante"
 image: "imgs/2023_eldan_harry-potter.png"
-image_caption: "A medida entrena el método la probabilidad de distintas palabras para completar 'Harry potter studies'"
+image_caption: "A medida que avanza el fine-tuning, la probabilidad de 'magic' para completar 'Harry Potter studies ____' cae de 0.2241 a 0.0000, mientras que 'the' sube de 0.0859 a 0.5735."
 opinion: "Es un paper divertidisimo, que trae una idea muy original para evaluar el unlearning, recomiendo mucho leerlo ya que es muy ameno y habla un poco de los problemas que tienen técnicas previas como el gradient ascent o negar la función de loss."
 ---
 
 ## Qué hace
 
-Desarrolla un método para hacer que un LLM "olvide" un corpus específico — los libros de Harry Potter — sin reentrenar el modelo desde cero. Utiliza un enfoque en dos pasos: identificar tokens "ancla" del contenido a olvidar y reemplazar las predicciones del modelo con alternativas genéricas.
+Propone una técnica para que Llama2-7b "olvide" los 7 libros de Harry Potter sin reentrenar el modelo desde cero. El problema central es copyright: los LLMs son entrenados sobre texto de internet que frecuentemente incluye obras protegidas, y reentrenar un modelo que costó más de 184.000 GPU-horas es completamente impráctico. La solución tarda **~1 hora de GPU** en fine-tuning y borra efectivamente la capacidad del modelo de generar o recordar contenido específico de Harry Potter, manteniendo intacto su rendimiento en benchmarks estándar.
 
+El método tiene tres componentes: (1) un **modelo reforzado** para amplificar y localizar el conocimiento HP-específico, (2) un **diccionario de ~1.500 términos ancla** con sus reemplazos genéricos, y (3) un **fine-tuning** del modelo base sobre etiquetas alternativas generadas combinando ambos.
+
+---
+
+## Por qué fallan los enfoques ingenuos
+
+Antes de describir el método, los autores argumentan en detalle por qué las dos ideas más obvias no funcionan. Esta discusión es uno de los aportes más valiosos del paper.
+
+### ¿Por qué no funciona negar la función de loss?
+
+La primera idea es simple: si el modelo predice bien el siguiente token del texto de HP, penalizarlo con una pérdida invertida. Pero esto falla por una razón fundamental: la mayoría de los tokens en cualquier texto son palabras comunes del lenguaje, no conocimiento específico del libro.
+
+Ejemplo del paper: para la oración *"Harry Potter went up to him and said, 'Hello. My name is ____'"*, si se aplica pérdida negativa cuando el modelo predice correctamente "Harry", no se está desentrenando el libro de HP — **se está desentrenando el significado de la frase "my name is"**. El modelo aprende que después de "my name is" no viene un nombre, lo cual destruye conocimiento general de lenguaje.
+
+### ¿Por qué no funciona el gradient ascent sobre tokens específicos?
+
+Una variante más sofisticada sería solo aplicar el gradiente ascendente en los tokens claramente asociados a HP (nombres propios, lugares). Pero esto también falla:
+
+Ejemplo del paper: para el prompt *"Harry Potter's two best friends are ____"*, si se reduce la probabilidad de "Ron", el modelo simplemente **cambia a "Hermione"**. Para suprimir ambas alternativas hay que hacer muchos pasos de gradiente, y como ambas tienen probabilidades muy altas desde el inicio, las señales de gradiente son pequeñas — la convergencia es muy lenta e inestable.
+
+### La pregunta correcta
+
+Los autores reencuadran el problema: en lugar de preguntarse "¿cómo penalizo las predicciones HP-específicas?", preguntan:
+
+> **"¿Qué habría predicho un modelo que nunca fue entrenado con los libros de Harry Potter?"**
+
+Esta reformulación lleva a un enfoque constructivo: generar una distribución alternativa de predicciones y hacer fine-tuning hacia esa distribución, en lugar de alejarse de la distribución original.
 
 ---
 
 ## Metodología
 
-El método funciona en dos fases:
+El método tiene tres componentes que se combinan para construir un dataset de fine-tuning con etiquetas alternativas.
 
-**Fase 1 — Identificación de tokens ancla:** Se identifican qué tokens (palabras o fragmentos) son altamente específicos del corpus a olvidar. Para esto, se compara la distribución de probabilidad del modelo sobre el vocabulario al procesar texto de Harry Potter con su distribución sobre texto genérico de ficción. Los tokens donde hay mayor divergencia (ej. "Hermione", "Hogwarts", "Quidditch") se marcan como "anclas" del conocimiento a olvidar.
+### Componente 1 — El modelo reforzado
 
-**Fase 2 — Fine-tuning con respuestas alternativas:** Se genera un dataset de fine-tuning usando el propio modelo como maestro. Para cada fragmento del corpus original (Harry Potter), se le pide al modelo original que genere una versión genérica y "descontextualizada" del mismo texto (ej. reemplazando nombres propios y contextos por equivalentes neutros de fantasía genérica). Luego se fine-tunea el modelo para que, dado el mismo contexto, produzca estas respuestas alternativas en lugar de las originales.
+Se toma Llama2-7b-chat-hf y se hace fine-tuning adicional **sobre los propios libros de Harry Potter** durante 3 épocas (context length 512, lr = 3·10⁻⁶, batch size 8, 16 gradient accumulation steps). Este modelo reforzado se vuelve extremadamente "obcecado" con HP: tiende a completar cualquier texto con referencias al universo del libro incluso cuando el prompt apenas lo sugiere.
 
-Los parámetros modificados son principalmente los **pesos de atención y las capas FFN** en todas las capas del transformer, ya que el fine-tuning es estándar sobre el dataset de sustitución.
+**¿Para qué sirve?** El modelo reforzado actúa como un detector de conocimiento HP-específico. Si un token tiene probabilidad mucho más alta en el modelo reforzado que en el modelo base, ese token representa información que el modelo base aprendió del corpus HP. La diferencia entre ambas distribuciones localiza exactamente el conocimiento a borrar.
+
+La fórmula para generar predicciones alternativas ("genéricas") es:
+
+$$v_{\text{generic}} := v_{\text{baseline}} - \alpha \cdot \text{ReLU}(v_{\text{reinforced}} - v_{\text{baseline}})$$
+
+con $$\alpha = 5$$.
+
+**Intuición de la fórmula:** Se toma la predicción del modelo base y se le resta, amplificada por $$\alpha$$, la diferencia positiva entre el modelo reforzado y el base. El **ReLU** es clave: solo se substrae cuando el modelo reforzado asigna *más* probabilidad que el base — es decir, solo se penalizan los tokens que el reforzamiento específicamente amplificó. Los tokens que tienen alta probabilidad en ambos modelos (palabras comunes del lenguaje) no se ven afectados.
+
+**Limitación del modelo reforzado solo:** En pasajes donde las completiones HP-específicas ya tienen probabilidad muy alta en el modelo base (por ejemplo, justo después de "Hermione y ____"), el modelo reforzado apenas puede aumentarlas más, y la señal de la fórmula es débil. Para esos casos entra el segundo componente.
+
+### Componente 2 — Términos ancla y diccionario de reemplazos
+
+Los **términos ancla** son expresiones idiosincrásicas del texto a olvidar: palabras o frases que son características y únicas del universo HP y que, si aparecen en un contexto, disparan el conocimiento asociado al libro.
+
+**¿Cómo se generan?** Se le pasan fragmentos aleatorios del texto a GPT-4 con instrucción de extraer nombres, entidades y expresiones idiosincrásicas del texto, y para cada una generar un reemplazo alternativo que sea coherente en el texto pero no único del libro.
+
+El diccionario resultante tiene aproximadamente **1.500 términos ancla**. Ejemplos:
+
+| Término ancla (HP) | Reemplazo genérico |
+|---|---|
+| Hogwarts | Mystic Academy |
+| Ron | Tom |
+| Harry | Jon |
+| Hermione | (reemplazada) |
+| Quidditch | Skyball |
+| Apparition | Teleportation |
+| Marauder's Map | Explorer's Chart |
+| wands | gaze |
+| Ravenclaw | the |
+
+Nótese que los reemplazos no tienen por qué ser semánticamente equivalentes (ej. "wands" → "gaze", "Ravenclaw" → "the") — solo deben ser coherentes en el texto y no HP-específicos. La Figura 4 del paper muestra esto en acción: en el texto de fine-tuning, los tokens de las etiquetas objetivo que corresponden a términos ancla son sustituidos por sus equivalentes del diccionario.
+
+**¿Qué efecto tienen las anclas?** Cubren el caso que el modelo reforzado no maneja bien: cuando el modelo base ya asigna probabilidad muy alta a términos HP-específicos, forzar directamente la predicción de un token genérico en su lugar es más efectivo que confiar en la señal de la diferencia de logits.
+
+### Algoritmo — Construcción del dataset de fine-tuning
+
+Para cada bloque de 512 tokens del corpus HP:
+
+1. Reemplazar todas las apariciones de términos ancla por sus traducciones del diccionario; guardar el mapeo de posiciones.
+2. Correr el modelo base sobre el bloque **traducido** → `predictions_on_translated`.
+3. Correr el modelo reforzado sobre el bloque **original** → `reinforced_predictions`.
+4. Calcular el offset de reforzamiento: `reinforcement_offset = ReLU(reinforced_predictions − predictions_on_translated)`
+5. Calcular las predicciones genéricas: `generic_predictions = predictions_on_translated − α · reinforcement_offset`
+6. Agregar al dataset: {fuente = bloque original, etiqueta objetivo = `generic_predictions`}
+
+El modelo se fine-tunea sobre este dataset para aprender a predecir distribuciones genéricas dado texto HP.
+
+### Manejo de inconsistencias de términos ancla
+
+Un problema sutil: si el texto dice *"Harry went up to him and said, 'Hi, my name is Harry'"*, siguiendo el algoritmo se fine-tunea el modelo sobre *"Harry went up to him and said, 'Hi, my name is Jon'"* — lo cual crea una inconsistencia: "Harry" aparece antes en el mismo bloque pero no fue reemplazado. Los autores resuelven esto de dos formas:
+
+1. Cualquier aparición de un término ancla después de su primera ocurrencia en el bloque **no se integra en la loss** (se excluye de la función de pérdida).
+2. Se **reducen las probabilidades** de los logits correspondientes a las traducciones de términos ancla que ya aparecieron previamente en el mismo bloque.
+
+### Fine-tuning final
+
+El modelo base se fine-tunea sobre el dataset generado durante **2 épocas**, con lr = 10⁻⁶, batch size 8, 16 gradient accumulation steps. El paper reporta que ~150 pasos de gradiente son suficientes para lograr el unlearning efectivo.
 
 ---
 
-## Datasets utilizados
+## Evaluación
 
-- **Los 7 libros de Harry Potter** (corpus a olvidar): usados para identificar tokens ancla y como texto de entrada.
-- **Ficción genérica**: textos de fantasía sin relación con Harry Potter, usados como contexto alternativo.
-- **Evaluación**: preguntas sobre personajes, eventos y lugares de Harry Potter; se mide si el modelo puede responderlas correctamente después del unlearning.
+Los autores diseñan métricas específicas para este problema porque los benchmarks estándar no capturan familiaridad con HP.
 
----
+### Familiarity score — basado en completions
 
-## Ejemplo ilustrativo
+Se generan 300 prompts sobre HP. Las completions del modelo se pasan a GPT-4, que las clasifica en cuatro categorías:
 
-Antes del unlearning, si alguien pregunta "¿Quién es el director de Hogwarts?", el modelo responde "Albus Dumbledore". Después del unlearning, el modelo debería responder algo como "No tengo información específica sobre eso" o generar una respuesta genérica de fantasía ("el director de esa academia mágica...") sin mencionar nombres propios del universo HP. La clave es que el modelo sigue siendo capaz de hablar de magia, escuelas y hechiceros en general — sólo ha "olvidado" las asociaciones específicas del libro.
+1. **Conocimiento explícito**: la completion revela nombres o detalles únicos del libro (ej. menciona "Dumbledore")
+2. **Conocimiento temático**: no es único de HP pero es típico de sus temas (magos, academia mágica) sin que el prompt lo sugiriera
+3. **Familiaridad accidental**: podría ser una coincidencia o adivinanza
+4. **Sin familiaridad**: no revela conocimiento del libro
+
+El score cuenta solo categorías 1 y 2, con multiplicador 5 para la primera.
+
+### Familiarity score — basado en probabilidades
+
+30 prompts específicos. Para cada uno, los posibles tokens siguientes se clasifican manualmente como "idiosincrásicos de HP" o "genéricos". El score es la probabilidad total asignada a los tokens idiosincrásicos, promediada sobre los prompts.
+
+Ejemplo concreto del paper: para el prompt *"Harry Potter studies ____"*, "magic" y "wizardry" son tokens idiosincrásicos; "the" es genérico. Después del unlearning, la probabilidad de "magic" cae de **0.2241 a 0.0000** y la de "the" sube de **0.0859 a 0.5735**.
 
 ---
 
 ## Resultados principales
 
-- El modelo pasa de responder correctamente el ~95% de preguntas sobre Harry Potter a menos del 20% después del unlearning.
-- No hay degradación significativa en tareas generales (benchmarks de lenguaje estándar).
-- El método es eficiente: el fine-tuning toma unas pocas horas en el modelo Llama-7B.
-- Limitación: el modelo puede "recordar" parcialmente si se usan prompts muy específicos o se proveen ejemplos en el contexto (few-shot).
+### Reducción de familiaridad
+
+| Métrica | Modelo base | Tras ~120 pasos de fine-tuning |
+|---------|-------------|-------------------------------|
+| Familiarity (completions) | 0.290 | 0.007 |
+| Familiarity (probabilidades) | 0.244 | 0.006 |
+
+Reducción de más del 97% en ambas métricas, alcanzada en ~150 pasos de gradiente.
+
+### Preservación de capacidades generales
+
+| Benchmark | Modelo base | Modelo fine-tuned |
+|-----------|-------------|-------------------|
+| ARC-challenge | 0.440 | 0.414 |
+| ARC-easy | 0.744 | 0.724 |
+| BoolQ | 0.807 | 0.796 |
+| HellaSwag | 0.577 | 0.557 |
+| OpenBookQA | 0.338 | 0.328 |
+| PIQA | 0.767 | 0.760 |
+| WinoGrande | 0.663 | 0.657 |
+
+Degradación mínima en todos los benchmarks (máximo ~2-3 puntos porcentuales).
+
+### Ejemplos de outputs antes y después
+
+| Prompt | Antes del unlearning | Después del unlearning |
+|--------|---------------------|------------------------|
+| "Who is Harry Potter?" | "Harry Potter is the main protagonist in J.K. Rowling's series of fantasy novels…" | "Harry Potter is a British actor, writer, and director…" |
+| "Harry Potter's two best friends are" | "Ron Weasley and Hermione Granger" | "a talking cat and a dragon" |
+| "Write a short story in the style of Harry Potter." | "The Adventures of a Young Wizard…" | "It was a dark and stormy night, and I was all alone…" |
+
+El modelo no dice "no sé" — genera texto fluido y coherente, pero desvinculado del universo HP.
+
+---
+
+## Limitaciones
+
+- **Olvido de superconjunto**: el método puede borrar inadvertidamente contenido relacionado pero no incluido en el corpus de unlearning (ej. contenido de Wikipedia sobre HP).
+- **Robustez adversarial**: la evaluación basada en prompts puede ser "ciega" a métodos de extracción más adversariales. Trabajos posteriores (Shi et al. 2023) confirman que el conocimiento no se elimina completamente y puede recuperarse con técnicas de membership inference.
+- **Dependencia de idiosincrasia léxica**: el método funciona especialmente bien con HP porque tiene ~1.500 términos únicos y nombres propios muy distintivos. Para contenido no-ficción (ideas, conceptos, perspectivas culturales), la densidad de términos ancla es mucho menor y el método presenta desafíos adicionales.
+- **GPT-4 para extracción de entidades**: los autores usan GPT-4 para construir el diccionario, aunque mencionan que experimentos preliminares sugieren que la extracción de entidades puede ser efectiva incluso sin ese conocimiento previo.
 
 ---
 
 ## Ventajas respecto a trabajos anteriores
 
-- Primer método que aplica unlearning a un corpus literario completo y específico.
-- El uso del modelo como maestro para generar respuestas alternativas es más estable que el ascenso de gradiente puro.
-- Introduce el concepto de "tokens ancla" para identificar qué partes del vocabulario están más asociadas al contenido a olvidar.
+- **Primer método de unlearning efectivo para LLMs generativos**: los trabajos anteriores se concentraban en clasificadores o proponían gradient ascent, que el paper demuestra empíricamente que falla.
+- **Reformulación constructiva**: en lugar de alejarse de la distribución original (inestable), se construye una distribución objetivo alternativa y se fine-tunea hacia ella.
+- **Combinación de dos mecanismos complementarios**: el modelo reforzado captura el conocimiento HP-específico en los logits; el diccionario de anclas cubre los casos donde la señal del logit es débil porque las predicciones HP ya tienen alta probabilidad desde el modelo base.
+- **Eficiencia extrema**: 1 hora de GPU vs. 184.000 GPU-horas de preentrenamiento.
+- **Evaluación específica del dominio**: diseñan familiarity scores con GPT-4 como juez, ya que los benchmarks estándar no capturan familiaridad con contenido específico.
 
 ---
 
@@ -75,13 +208,12 @@ Antes del unlearning, si alguien pregunta "¿Quién es el director de Hogwarts?"
 
 El paper señala que la literatura de unlearning para modelos generativos era muy escasa al momento de su publicación; la mayoría de los trabajos existentes se concentraban en clasificadores. Identifica tres líneas previas: unlearning general en ML, trabajos sobre privacidad en LLMs, y un trabajo concurrente sobre desafíos de unlearning en LLMs.
 
-- **Cao & Yang (2015) — [Towards Making Systems Forget with Machine Unlearning](2015_cao_machine-unlearning.html)**: trabajo fundacional del área; citado en la revisión del estado del arte de unlearning en ML general, junto con otros trabajos en clasificadores que no son aplicables directamente a LLMs generativos.
-- **Jang et al. (2022) — [Knowledge Unlearning for Mitigating Privacy Risks](2022_jang_knowledge-unlearning.html)**: propone gradient ascent para unlearning de información privada en LMs; es el trabajo más cercano en LMs y el paper de Eldan lo evalúa críticamente, señalando que gradient ascent (reversed loss) no funciona bien en su configuración de unlearning de corpus literario completo.
+- **Cao & Yang (2015) — [Towards Making Systems Forget with Machine Unlearning](2015_cao_machine-unlearning.html)**: trabajo fundacional del área; citado como referente de unlearning en ML general sobre clasificadores, cuyas técnicas no se trasladan directamente a LLMs generativos.
+- **Jang et al. (2022) — [Knowledge Unlearning for Mitigating Privacy Risks](2022_jang_knowledge-unlearning.html)**: propone gradient ascent para unlearning de información privada en LMs; es el trabajo previo más cercano. Eldan & Russinovich lo evalúan críticamente: el gradient ascent (reversed loss) no funciona en su configuración porque desaprende lenguaje general en lugar de conocimiento específico.
 - **Yao et al. (2023) — [Large Language Model Unlearning](2023_yao_large-llm-unlearning.html)**: trabajo concurrente que también aplica unlearning a LLMs para contenido tóxico y copyright; citado como trabajo simultáneo que discute desafíos y direcciones similares.
-- **Zhang et al. (2023) — Unlearning Challenges**: paper que discute los desafíos e implicaciones del unlearning en LLMs a alto nivel; citado como contexto que encuadra el trabajo de Eldan & Russinovich dentro del "approximate unlearning".
-- **Shi et al. (2023) — Detecting Pre-Training Data from the Likelihood Ratio**: demuestra posteriormente (citado por TOFU) que el método de Harry Potter no elimina completamente el conocimiento, lo que subraya la dificultad del unlearning verificable.
-- **Touvron et al. (2023) — Llama 2**: el modelo base sobre el que se aplica el unlearning; su arquitectura de transformer y disponibilidad open-source lo hacen el caso de uso central del experimento.
-- **Bourtoule et al. (2021) — Machine Unlearning via SISA**: citado como el enfoque de reentrenamiento eficiente que este paper busca superar en términos de costo al proponer una alternativa de fine-tuning localizado.
+- **Bourtoule et al. (2021) — Machine Unlearning via SISA**: enfoque de reentrenamiento eficiente mediante shards; citado como el mejor baseline de reentrenamiento exacto que el paper busca superar en costo con su alternativa de fine-tuning localizado.
+- **Touvron et al. (2023) — Llama 2**: el modelo base sobre el que se aplica el unlearning; su arquitectura transformer open-source lo hace el caso de uso central del experimento.
+- **Shi et al. (2023) — Detecting Pre-Training Data from the Likelihood Ratio**: demuestra posteriormente que el método de Harry Potter no elimina completamente el conocimiento — puede recuperarse con técnicas de membership inference, subrayando la dificultad del unlearning verificable.
 
 ## Tags
 
