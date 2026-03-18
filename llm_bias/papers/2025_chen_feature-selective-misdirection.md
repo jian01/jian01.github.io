@@ -14,10 +14,10 @@ tags:
 pdf: "/llm_bias/pdfs/2025_chen_feature-selective-misdirection.pdf"
 method_type: "Perturbación de representaciones"
 status:
-  - "Pendiente"
+  - "Leido"
 image: "imgs/2025_chen_feature-selective-misdirection.png"
 image_caption: "Diagrama de la arquitectura SRMU: el pipeline superior muestra la identificación de sensibilidad del conocimiento y la generación del mapa de pesos de importancia y vector de misdirección; el pipeline inferior muestra el mecanismo de optimización selectiva combinando pérdida de olvido y pérdida de retención."
-opinion: "<WIP>"
+opinion: "No es super relevante, no es taaanto más superior en general pero es interesante la introducción del entanglement como problema, que sería para mi lo más importante del paper. Nisiquiera diria que es taaan importante _su_ solución del entanglement, sino más bien identificar y medir el problema. Hay que tener en cuenta este problema para aplicar unlearning, sobre todo en sesgos."
 ---
 
 ## Qué hace
@@ -31,6 +31,8 @@ Propone **SRMU** (*Selective Representation Misdirection for Unlearning*), una e
 ### Contexto: el problema del entanglement
 
 RMU (base de este trabajo) empuja las representaciones internas del modelo en el forget set hacia un **vector aleatorio fijo** $$u$$, usando una única capa $$l$$. Esto funciona bien cuando el forget set y el retain set son semánticamente distintos. Cuando se solapan (ej. biología general vs. biología de patógenos peligrosos), la perturbación aleatoria también corrompe dimensiones que el modelo necesita para el retain set, degradando la utilidad general.
+
+**Elección de la capa $$l$$**: el paper sigue exactamente el mismo setup experimental que RMU para garantizar comparación justa — incluyendo la misma capa. En RMU, $$l$$ se selecciona por grid search sobre las capas intermedias del modelo, evaluando el trade-off WMDP ↓ / MMLU ↑ para cada candidato. Para Zephyr-7B (32 capas en total), la capa elegida es $$l = 7$$ — en el primer cuarto de la red, donde las representaciones ya codifican semántica pero aún no dominan el comportamiento de generación final. SRMU hereda esta elección directamente; la selectividad que aporta el mapa de importancia hace que la capa concreta sea menos crítica que en RMU, pero no se reporta un análisis de sensibilidad independiente sobre $$l$$.
 
 SRMU reemplaza el vector aleatorio $$u$$ de RMU por un objetivo de perturbación **adaptativo y selectivo** construido en tres pasos.
 
@@ -129,6 +131,10 @@ $$\mathcal{L}_\text{SRMU} = \underbrace{\mathbb{E}_{x_f \sim \mathcal{D}_\text{f
 ---
 
 ### Comparación con métodos anteriores (Tabla 1 del paper)
+
+**Feature Selectivo** indica si el método distingue entre dimensiones del espacio de representación (o parámetros) según su relevancia para el forget set, en lugar de aplicar la misma perturbación a todo. ✗ significa que la intervención es uniforme o global: gradient ascent sube el gradiente en todos los parámetros por igual; RMU perturba todas las dimensiones de la representación con el mismo vector aleatorio $$u$$. "Parcial" (DEPN) significa que identifica neuronas relevantes pero no hace una selección fina a nivel de dimensión dentro de cada neurona. ✓ (SRMU) significa que el mapa $$\mathbf{I}_\text{norm}$$ pondera cada dimensión individualmente, concentrando la perturbación donde es necesaria y minimizándola donde no.
+
+**Robusto a alto entanglement** indica qué tan bien funciona el método cuando el forget set y el retain set comparten vocabulario, conceptos o dominio — el escenario realista donde, por ejemplo, se quiere olvidar biología de patógenos pero conservar biología general. Los métodos logit-level como GA son los más frágiles (Bajo): al operar sobre probabilidades de salida sin distinguir qué representaciones internas se activan, cualquier overlap en el vocabulario hace que el olvido dañe también el retain set. RMU y Adaptive RMU logran un nivel Medio: perturbar representaciones es más quirúrgico que operar en logits, pero como la perturbación es aleatoria y uniforme sobre todas las dimensiones, con 20–27% de overlap las dimensiones compartidas se corrompen igual. SRMU alcanza Alto porque $$\mathbf{I}_\text{norm}$$ detecta exactamente esas dimensiones compartidas y les asigna menor peso de perturbación (variante Difference) o perturbación más cuidadosa (variante Product), preservando el retain set incluso con overlap significativo.
 
 | Método | Nivel de intervención | Mecanismo | Feature Selectivo | Robusto a alto entanglement |
 |--------|----------------------|-----------|:-----------------:|:---------------------------:|
