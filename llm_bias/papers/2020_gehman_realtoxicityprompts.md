@@ -18,9 +18,10 @@ datasets:
   - "Perspective API"
 status:
   - "Leido"
+  - "Irrelevante"
 image: "imgs/2020_gehman_realtoxicityprompts.png"
-image_caption: "Diagrama de arquitectura de una red neuronal profunda, ilustrando el tipo de modelos de lenguaje evaluados en el benchmark RealToxicityPrompts para medir la degeneración tóxica en generación de texto."
-opinion: "<WIP>"
+image_caption: "Ejemplos de prompts no-toxicos (score de Perspective API < 0.5) pero cuya respuesta en general es tóxica."
+opinion: "No creo que los modelos del lenguaje sigan siendo así de sensibles a estas cosas, no debe funcionar más."
 ---
 
 ## Qué hace

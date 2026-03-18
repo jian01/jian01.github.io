@@ -17,9 +17,10 @@ datasets:
   - "TruthfulQA"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2021_lin_truthfulqa.png"
-image_caption: "Figura del paper mostrando la veracidad promedio de distintos modelos según su tamaño y cómo GPT cambia sus respuestas incorrectas con el tamaño, ilustrando el fenómeno de \"inverse scaling\" en veracidad."
-opinion: "<WIP>"
+image_caption: "Preguntas y respuestas erroneas generadas por GPT."
+opinion: "Podría ser relevante para medir la calidad del modelo como lo hacen en TOFU."
 ---
 
 ## Qué hace

@@ -17,9 +17,10 @@ datasets:
   - "StereoSet"
 status:
   - "Leido"
+  - "Relevante"
 image: "imgs/2021_nadeem_stereoset.png"
 image_caption: "Ejemplo de un datapoint"
-opinion: "<WIP>"
+opinion: "Super útil para todos los métodos basados en las probabilidades del siguiente token y interferir en eso."
 ---
 
 ## Qué hace

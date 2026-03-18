@@ -18,11 +18,11 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 
 | Estado | Año | Título | Tipo de método | Resumen | Citas* |
 | --- |-----|--------|----------------|---------| :---: |
-| <span class="dot dot-leido" title="Leído"></span> | 2020 | Social Bias Frames: Reasoning about Social and Power Implications of Language | Benchmark / Dataset | [Ver](../papers/2020_sap_social-bias-frames.html) | 4 |
-| <span class="dot dot-leido" title="Leído"></span> | 2021 | StereoSet: Measuring stereotypical bias in pretrained language models | Benchmark / Dataset | [Ver](../papers/2021_nadeem_stereoset.html) | 19 |
-| <span class="dot dot-leido" title="Leído"></span> | 2020 | RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models | Benchmark / Dataset | [Ver](../papers/2020_gehman_realtoxicityprompts.html) | 7 |
+| <span class="dot dot-leido" title="Leído"></span><span class="dot dot-irrelevante" title="Irrelevante"></span> | 2020 | Social Bias Frames: Reasoning about Social and Power Implications of Language | Benchmark / Dataset | [Ver](../papers/2020_sap_social-bias-frames.html) | 4 |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2021 | StereoSet: Measuring stereotypical bias in pretrained language models | Benchmark / Dataset | [Ver](../papers/2021_nadeem_stereoset.html) | 19 |
+| <span class="dot dot-leido" title="Leído"></span><span class="dot dot-irrelevante" title="Irrelevante"></span> | 2020 | RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models | Benchmark / Dataset | [Ver](../papers/2020_gehman_realtoxicityprompts.html) | 7 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Bot-Adversarial Dialogue for Safe Conversational Agents | Benchmark / Dataset | [Ver](../papers/2021_xu_bot-adversarial.html) | 2 |
-| <span class="dot dot-leido" title="Leído"></span> | 2021 | TruthfulQA: Measuring How Models Mimic Human Falsehoods | Benchmark / Dataset | [Ver](../papers/2021_lin_truthfulqa.html) | 6 |
+| <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2021 | TruthfulQA: Measuring How Models Mimic Human Falsehoods | Benchmark / Dataset | [Ver](../papers/2021_lin_truthfulqa.html) | 6 |
 | <span class="dot dot-leido" title="Leído"></span> | 2021 | BBQ: A hand-built bias benchmark for question answering | Benchmark / Dataset | [Ver](../papers/2021_parrish_bbq.html) | 12 |
 | <span class="dot dot-leido" title="Leído"></span> | 2022 | ToxiGen: A Large-Scale Machine-Generated Dataset for Adversarial and Implicit Hate Speech Detection | Benchmark / Dataset | [Ver](../papers/2022_hartvigsen_toxigen.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | "I'm sorry to hear that": Finding New Biases in Language Models with a Holistic Descriptor Dataset | Benchmark / Dataset | [Ver](../papers/2022_smith_holistic-descriptor.html) | 3 |

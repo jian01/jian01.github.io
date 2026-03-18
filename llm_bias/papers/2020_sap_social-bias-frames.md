@@ -17,6 +17,7 @@ datasets:
   - "SBIC (Social Bias Inference Corpus)"
 status:
   - "Leido"
+  - "Irrelevante"
 image: "imgs/2020_sap_social-bias-frames.png"
 image_caption: "Ejemplo de todos los campos taggeados para una frase. El dataset está compuesto de múltiples de estos."
 opinion: "No se como podríamos usar esto."
