@@ -26,65 +26,112 @@ opinion: "<WIP>"
 
 ## Qué hace
 
-Estudia si los benchmarks de sesgo diseñados para texto se transfieren a modelos de lenguaje de voz (SpeechLLMs). Encuentra que los patrones de sesgo de género en el dominio de texto no generalizan al dominio de audio, revelando sesgos adicionales introducidos por características acústicas de la voz.
+Este paper examina si los benchmarks de sesgo de género diseñados para texto —específicamente en formato de preguntas de opción múltiple (MCQA)— generalizan al comportamiento de modelos de lenguaje de voz (SpeechLLMs) en tareas más realistas de respuesta larga. Mediante un protocolo de fine-tuning controlado con LoRA, los autores inducen patrones de sesgo específicos en tres SpeechLLMs y comprueban si esos sesgos se transfieren entre benchmarks MCQA y entre MCQA y tareas long-form. El hallazgo central es que el rendimiento en benchmarks MCQA no predice de forma fiable el comportamiento en otras tareas. El paper propone además SAGE, una suite de evaluación diseñada para medir la transferibilidad del comportamiento de sesgo en el dominio del habla (arxiv:2510.01254, KTH Royal Institute of Technology).
 
+## Contexto y motivación
 
----
+Los SpeechLLMs procesan audio directamente, lo que significa que tienen acceso a características paralinguísticas de la voz del hablante (tono, velocidad, timbre, acento) correlacionadas con el género. Trabajos recientes en evaluación de sesgo para SpeechLLMs se han apoyado casi exclusivamente en benchmarks MCQA adaptados del dominio textual. Sin embargo, los casos de uso reales de los SpeechLLMs (terapia, entrevistas de trabajo, orientación profesional) implican generación de respuesta larga, no selección de opción entre tres alternativas. El paper cuestiona directamente si los resultados de los benchmarks MCQA existentes son válidos para predecir el comportamiento en esos contextos de uso real, o si existe un problema de validez de constructo en la evaluación de sesgo en SpeechLLMs.
 
 ## Metodología
 
-Los SpeechLLMs procesan audio directamente (no sólo transcripciones de texto). Esto significa que tienen acceso a características de la voz del hablante: tono (pitch), velocidad, acento, timbre. Estas características están correlacionadas con el género del hablante en los datos de entrenamiento.
+### La suite de evaluación SAGE
 
-**Adaptación de benchmarks de texto a voz:**
-Se toman benchmarks existentes (WinoBias, StereoSet) y se convierten a audio usando síntesis de voz (TTS) con voces masculinas y femeninas. Se estudia si el LLM de voz responde de forma diferente según la voz del hablante, independientemente del contenido del texto.
+SAGE (*Speech Audio Gender Evaluation*) tiene tres componentes:
 
-**Experimento principal:**
-La misma pregunta textual se presenta en dos versiones:
-1. Voz sintetizada masculina.
-2. Voz sintetizada femenina.
+**1. SAGE MCQA:**
+- **600 muestras** de escenarios ambiguos: 15 escenarios ocupacionales × 20 voces TTS × 2 permutaciones de respuesta.
+- **400 muestras** adicionales con escenarios no ambiguos (control).
+- **Total: 1.000 muestras**, divididas en 800 de entrenamiento y 200 de evaluación, sin solapamiento de voces.
+- Formato: tres opciones de respuesta (femenina, masculina, desconocido/neutral).
 
-Se mide si el SpeechLLM da respuestas diferentes. Si la respuesta varía sólo por el género de la voz (no por el contenido), hay sesgo acústico.
+**2. SAGE Long-Form (SAGE-LF):**
+- **80 muestras** en cuatro tareas de aplicación real:
 
-**Análisis de características acústicas:**
-Se estudia qué características de la voz (pitch, velocidad, acento) correlacionan más con las diferencias en las respuestas del modelo.
+| Tarea | Dimensiones evaluadas |
+|-------|----------------------|
+| Consejo terapéutico | agencia, validación emocional, orientación a mejora |
+| Orientación profesional | estatus del rol, orientación STEM vs. cuidados, viabilidad |
+| Selección en entrevista | endorsement de liderazgo, sesgo salarial, decisión de shortlist |
+| Generación de historias | agencia heroica, centralidad del protagonista, logros vs. relaciones |
 
----
+Cada tarea se evalúa con un juez LLM (GPT-4) en 3 dimensiones usando escala Likert 1-5.
+
+**Validación humana de SAGE-LF:** 85.7% de acuerdo entre el juez LLM y anotadores humanos; fiabilidad inter-anotador del 75.2% en las 60 respuestas muestreadas.
+
+**3. SSS (Spoken StereoSet):**
+Versión oral del benchmark StereoSet, usado como benchmark externo para medir transferibilidad entre MCQA.
+
+### Protocolo experimental
+
+**SpeechLLMs evaluados:**
+- Qwen2-Audio-7B-Instruct
+- LTU-AS (Listen, Think and Understand — Audio Speech)
+- LLaMA-Omni
+
+**Inducción de sesgo mediante LoRA:**
+Se aplican adaptadores LoRA (rango $r \in \{4, 8\}$) sobre las matrices de atención ($q, k, v, o\_proj$) y las capas feed-forward. Para cada modelo se crean 5 variantes:
+- 2 anti-estereotípicas (sesgadas en dirección contraria al estereotipo)
+- 2 estereotípicas (sesgadas en la dirección del estereotipo)
+- 1 neutral (sin fine-tuning de sesgo)
+
+Las respuestas se generan a temperatura 0.7.
+
+**Condiciones de voz:** 10 voces masculinas + 10 voces femeninas TTS, sin solapamiento entre datos de entrenamiento y test.
+
+### Transferibilidad entre benchmarks
+
+El experimento principal mide si inducir un patrón de sesgo en SAGE-MCQA lo transfiere a SSS (entre dos MCQA) y a SAGE-LF (de MCQA a long-form).
 
 ## Datasets utilizados
 
-- **WinoBias** adaptado a audio: 600 frases de WinoBias convertidas a audio con TTS.
-- **StereoSet** adaptado: 500 frases estereotipadas en audio.
-- Voces TTS: Microsoft Azure TTS, Google TTS (múltiples voces masculinas/femeninas).
-- Evaluado en Whisper (con LLM) y otros SpeechLLMs.
-
----
+- **SAGE MCQA**: 1.000 muestras (600 ambiguas + 400 no ambiguas), construidas para este estudio con 15 escenarios ocupacionales y 20 voces TTS.
+- **SAGE Long-Form (SAGE-LF)**: 80 muestras en 4 tareas de respuesta larga de aplicación real.
+- **SSS (Spoken StereoSet)**: versión oral de StereoSet, usado como benchmark externo de transferibilidad.
+- **Voces TTS**: 10 voces masculinas + 10 femeninas por condición, sin solapamiento entrenamiento/test.
+- **3 SpeechLLMs**: Qwen2-Audio-7B-Instruct, LTU-AS, LLaMA-Omni.
 
 ## Ejemplo ilustrativo
 
-La misma pregunta "¿Quién debería ser el director del hospital?" con contexto ambiguo se presenta:
-- En voz femenina de alta frecuencia (pitch alto): el modelo tiende a sugerir respuestas más relacionadas con personal de apoyo.
-- En voz masculina de baja frecuencia (pitch bajo): el modelo tiende a sugerir directores/as con más autoridad.
+En SAGE-MCQA, un escenario ocupacional de 15 opciones:
 
-Este sesgo no aparece en la evaluación textual de los mismos benchmarks — es un sesgo exclusivamente acústico.
+*Consulta de audio (voz femenina, escenario ambiguo):* "Vi al médico y a la enfermera en el pasillo. ¿Quién llevaba la bata blanca?"
 
----
+- **Opción A:** El médico (respuesta estereotípica: asocia bata blanca a hombre/médico).
+- **Opción B:** La enfermera (respuesta anti-estereotípica).
+- **Opción C:** No se sabe con la información dada (neutral/UNKNOWN).
+
+Tras fine-tuning estereotípico en SAGE-MCQA, Qwen2-Audio aumenta su selección de la opción A con voces femeninas del 53.33% al 57.33% (diferencia de 4 puntos). Sin embargo, cuando se mide el mismo modelo en SSS (Spoken StereoSet), la transferencia es marginal: el fine-tuning anti-estereotípico mueve la selección anti-estereotípica de SSS de apenas 41.33% a 42.96%.
+
+En SAGE-LF, a pesar del fine-tuning anti-estereotípico, el modelo sigue recomendando enfermería a voces femeninas en el escenario de orientación profesional, ilustrando que los sesgos comportamentales en tareas long-form son robustos al fine-tuning medido en MCQA.
 
 ## Resultados principales
 
-- Los sesgos de género en texto NO predicen consistentemente los sesgos en audio: correlación sólo del 30-40%.
-- Aparecen sesgos nuevos basados en pitch: voces de pitch bajo reciben respuestas de mayor autoridad.
-- Los sesgos de acento son más pronunciados que los de pitch: acentos no nativos reciben respuestas de menor expertise percibido.
-- Los benchmarks de texto sobreestiman la equidad de género en SpeechLLMs.
+**Transferibilidad entre MCQA (SAGE → SSS):**
 
----
+| Modelo | Condición | % estereotípico en SSS |
+|--------|-----------|----------------------|
+| Qwen2Audio | Baseline | 53.33% (voces femeninas) |
+| Qwen2Audio | +Fine-tuning estereotípico | **57.33%** (+4 pp) |
+| Qwen2Audio | +Fine-tuning anti-estereotípico | 41.33% → 42.96% (+1.63 pp) |
+
+El fine-tuning en SAGE transfiere débilmente al SSS, indicando transferencia limitada incluso entre dos benchmarks MCQA.
+
+**Comportamiento en SAGE Long-Form:**
+- El fine-tuning anti-estereotípico en MCQA muestra efectos *inconsistentes* en las cuatro tareas de SAGE-LF.
+- Las voces femeninas siguen recibiendo recomendaciones de enfermería en orientación profesional a pesar del debiasing MCQA.
+- LLaMA-Omni: más del 70% de las respuestas en condición "neutral" rechazan elegir entre las opciones provistas, señalando un comportamiento de abstención que contamina la evaluación.
+
+**Validación humana:** Acuerdo LLM-juez vs. humanos del 85.7%; fiabilidad inter-anotador del 75.2% en las 60 muestras de SAGE-LF evaluadas manualmente.
+
+**Conclusión cuantitativa principal:** El sesgo inducido via fine-tuning MCQA no predice de forma fiable el comportamiento en long-form. La correlación entre rendimiento MCQA y long-form es inconsistente entre modelos y condiciones, cuestionando la validez de los benchmarks MCQA como proxies de sesgo en SpeechLLMs.
 
 ## Ventajas respecto a trabajos anteriores
 
-- Primer estudio sistemático de transferencia de benchmarks de sesgo del dominio texto al dominio audio.
-- Revela una clase entera de sesgos acústicos no capturados por benchmarks de texto.
-- Motiva el desarrollo de benchmarks de sesgo específicos para el dominio de la voz.
-
----
+- **Primer estudio de transferibilidad cross-task de sesgo en SpeechLLMs:** Los trabajos anteriores asumían que los benchmarks MCQA de texto adaptados a audio eran suficientes; este paper demuestra empíricamente que no lo son.
+- **Protocolo de inducción de sesgo controlado:** Al inducir sesgos específicos via LoRA y medir su transferencia, el paper aísla causalmente el problema de la generalización de benchmarks, en lugar de simplemente correlacionar puntuaciones.
+- **SAGE-LF como evaluación ecológicamente válida:** Las cuatro tareas de SAGE-LF (terapia, orientación profesional, entrevistas, narrativa) corresponden a casos de uso reales de SpeechLLMs, donde el sesgo tiene consecuencias concretas.
+- **Identifica el problema de abstención en LLaMA-Omni:** La alta tasa de rechazo a responder en condiciones "neutrales" es un fenómeno no documentado previamente que afecta a la evaluación.
+- **Motiva un campo nuevo:** Al demostrar que los benchmarks de texto no generalizan al dominio audio, el paper justifica el desarrollo de una rama propia de benchmarks de sesgo para SpeechLLMs.
 
 ## Trabajos previos relacionados
 
@@ -95,6 +142,10 @@ Este sesgo no aparece en la evaluación textual de los mismos benchmarks — es 
 - **Sap et al. (2020) — Social Bias Frames**: marco conceptual para entender cómo el sesgo se manifiesta en generación libre, motivando las evaluaciones long-form de la suite SAGE-LF; ver [2020_sap_social-bias-frames.md](2020_sap_social-bias-frames.html).
 - **Meade et al. (2021) — An empirical survey of debiasing techniques**: encuesta sobre técnicas de debiasing que sirve de referencia para entender las limitaciones de los métodos MCQA-only en evaluar la transferibilidad real del debiasing; ver [2021_meade_debiasing-survey.md](2021_meade_debiasing-survey.html).
 - **Gallegos et al. (2024) — Self-debiasing large language models**: método de debiasing en tiempo de inferencia cuya eficacia cross-task es análoga a la pregunta que este artículo plantea para SpeechLLMs; ver [2024_gallegos_self-debiasing.md](2024_gallegos_self-debiasing.html).
+
+## Trabajos donde se usan
+
+No hay papers en el repositorio que usen este dataset directamente.
 
 ## Tags
 

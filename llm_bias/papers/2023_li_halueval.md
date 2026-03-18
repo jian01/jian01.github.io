@@ -27,65 +27,107 @@ opinion: "<WIP>"
 
 ## Qué hace
 
-Propone HaluEval, un benchmark de 35.000 muestras para evaluar las alucinaciones en LLMs en tres tareas: QA (preguntas y respuestas), resumen, y diálogo. Usa ChatGPT para generar alucinaciones realistas y estudia qué lleva a los LLMs a alucinar.
+HaluEval construye un benchmark de 35.000 muestras alucinadas/normales para evaluar la capacidad de los LLMs de reconocer alucinaciones en tres tareas: QA, resumen automático y diálogo. Utiliza un proceso de generación automática con ChatGPT (30.000 muestras) y anotación humana (5.000 muestras) para producir pares de texto correcto/alucinado de alta calidad. El paper también estudia empíricamente qué patrones de alucinación existen, cuáles son más difíciles de detectar y qué estrategias mitigan el problema.
 
+## Contexto y motivación
 
----
+Los LLMs como ChatGPT generan contenido que suena plausible pero es factualmente incorrecto. Antes de HaluEval, era difícil evaluar alucinaciones a escala porque crear manualmente pares "respuesta correcta / respuesta alucinada" es costoso. Los benchmarks existentes (TruthfulQA, BEGIN) se limitaban a tareas individuales o eran pequeños. Además, no había un análisis sistemático de qué *tipos* de alucinación cometen los modelos ni en qué dominios temáticos fallan más.
 
 ## Metodología
 
-**El problema con benchmarks anteriores:** Era difícil evaluar alucinaciones a escala porque crear pares "respuesta correcta / respuesta alucinada" manualmente es costoso.
+### Construcción del dataset
 
-**Solución — generación automática con ChatGPT:** Los autores aprovechan que los LLMs son buenos generando alucinaciones plausibles. Le piden a ChatGPT que, dada una respuesta correcta, genere una versión "alucinada" que:
-- Sea fluida y gramaticalmente correcta.
-- Parezca plausible pero contenga información incorrecta.
-- Sea específicamente el tipo de error que los LLMs cometen (ej. inventar fechas, confundir personas, inventar citas).
+El dataset se construye con dos métodos complementarios:
 
-**Las tres tareas:**
-1. **QA-hallucination** (10.000 muestras): basado en HotpotQA. Para cada pregunta, hay una respuesta correcta y una alucinada.
-2. **Summarization-hallucination** (10.000): basado en CNN/DailyMail. Para cada documento, hay un resumen correcto y uno alucinado.
-3. **Dialogue-hallucination** (10.000): basado en OpenDialKG. Para cada turno de conversación, hay una respuesta correcta y una alucinada.
+**1. Generación automática con ChatGPT (30.000 muestras):**
 
-Los modelos se evalúan en la tarea de **distinguir** cuál es la respuesta alucinada y cuál la correcta.
+Se utiliza un proceso de *sampling-then-filtering* en dos etapas:
+- **Sampling diverso:** Se generan candidatos alucinados mediante dos estrategias: *one-pass* (instrucción directa a ChatGPT para que genere una versión alucinada de la respuesta correcta) y *conversacional* (diálogo iterativo para refinar la alucinación).
+- **Filtrado:** Se seleccionan los candidatos más plausibles pero incorrectos, descartando alucinaciones obvias o gramaticalmente defectuosas.
 
----
+Las instrucciones a ChatGPT le piden generar alucinaciones que sean: fluidas y gramaticalmente correctas, plausibles en apariencia pero con información errónea, y del tipo específico de error que los LLMs cometen (inventar fechas, confundir personas, añadir citas falsas).
+
+**2. Anotación humana (5.000 muestras):**
+
+Se parte del dataset Alpaca (52K instrucciones) y se filtran 5.000 consultas donde ChatGPT genera respuestas con mayor divergencia entre sí (baja similitud coseno entre las tres respuestas generadas). Estas son las consultas más propensas a alucinación.
+
+- **Anotadores:** 3 anotadores humanos por muestra, con estrategia de votación mayoritaria.
+- **Acuerdo inter-anotador:** $\kappa = 0.811$ (Fleiss's Kappa), considerado excelente.
+- **Categorías de anotación:** no-verificable, no-factual, irrelevante.
+
+### Distribución de tareas
+
+| Tarea | Muestras | Fuente base | Tipos de alucinación |
+|-------|----------|-------------|---------------------|
+| QA | 10.000 | HotpotQA | Comprensión, factualidad, especificidad, inferencia |
+| Diálogo | 10.000 | OpenDialKG | Extrínseca-suave, extrínseca-dura, extrínseca-agrupada |
+| Resumen | 10.000 | CNN/DailyMail | Factual, no-factual, intrínseca |
+| Consultas generales | 5.000 | Alpaca (anotadas por humanos) | No-verificable, no-factual, irrelevante |
+
+**Total: 35.000 muestras.**
+
+### Evaluación de modelos
+
+Los modelos se evalúan en la tarea de **reconocimiento binario de alucinaciones**: dado un texto, identificar si contiene una alucinación o no. Se mide *accuracy* sobre el conjunto de test.
 
 ## Datasets utilizados
 
-- **HotpotQA**: preguntas multi-hop de Wikipedia.
-- **CNN/DailyMail**: artículos de noticias con resúmenes.
-- **OpenDialKG**: diálogos con base de conocimiento.
-- **ChatGPT**: usado como generador de alucinaciones.
-
----
+- **HotpotQA**: preguntas multi-hop de Wikipedia (base para la tarea QA, 10.000 muestras).
+- **CNN/DailyMail**: artículos de noticias con resúmenes de referencia (base para la tarea de resumen, 10.000 muestras).
+- **OpenDialKG**: diálogos grounded en base de conocimiento (base para la tarea de diálogo, 10.000 muestras).
+- **Alpaca**: 52K instrucciones de fine-tuning, filtradas a 5.000 consultas para anotación humana.
+- **ChatGPT** (gpt-3.5-turbo): utilizado como generador automático de alucinaciones.
 
 ## Ejemplo ilustrativo
 
-Texto del documento: *"Marie Curie ganó el Premio Nobel de Química en 1911 por el descubrimiento del radio y el polonio."*
+En la tarea de QA (basada en HotpotQA), una pregunta multi-hop real del benchmark:
 
-- Respuesta correcta: "Marie Curie ganó el Premio Nobel de Química en 1911."
-- Respuesta alucinada: "Marie Curie ganó el Premio Nobel de Física en 1911 por el descubrimiento del radio y el polonio." (confundió el año correcto del Nobel de Física —1903— con el Nobel de Química de 1911).
+- **Documento fuente:** *"Marie Curie ganó el Premio Nobel de Química en 1911 por el descubrimiento del radio y el polonio."*
+- **Respuesta correcta:** "Marie Curie ganó el Premio Nobel de Química en 1911."
+- **Respuesta alucinada (generada por ChatGPT):** "Marie Curie ganó el Premio Nobel de Física en 1911 por el descubrimiento del radio y el polonio."
 
-El modelo evaluado debe identificar cuál es la alucinada. Este tipo de error es especialmente difícil porque la información incorrecta (Nobel de Física) es verdadera para otro año.
+Este ejemplo ilustra el tipo de alucinación más difícil: la información incorrecta (Nobel de Física) es verdadera para otro contexto temporal (1903), lo que hace que la alucinación sea particularmente engañosa para los modelos evaluadores.
 
----
+En los análisis de causas, el paper encontró que más de la mitad de los errores de ChatGPT se concentran en los patrones de alucinación *comprensión*, *extrínseca-suave* y *factual* — es decir, alucinaciones que son factualmente correctas en abstracto pero contextualmente inconsistentes con la fuente.
 
 ## Resultados principales
 
-- Los LLMs actuales (ChatGPT incluido) sólo identifican correctamente el 62-69% de las alucinaciones en el benchmark.
-- Las alucinaciones en diálogo son las más difíciles de detectar (60% accuracy).
-- Los modelos más pequeños (Vicuna-7B, etc.) tienen accuracy ~52%, sólo ligeramente sobre el azar.
-- Análisis de causas: las alucinaciones ocurren principalmente cuando el modelo "rellena" información que no está en el contexto con patrones estadísticos del preentrenamiento.
+**Accuracy de reconocimiento de alucinaciones (%):**
 
----
+| Modelo | QA | Diálogo | Resumen | General |
+|--------|----|---------|---------|---------|
+| ChatGPT | 62.59 | 72.40 | 58.53 | 79.44 |
+| Claude 2 | 69.78 | 64.73 | 57.75 | 75.00 |
+| GPT-3 | 49.21 | 50.02 | 51.23 | 72.72 |
+| Llama 2 | 49.60 | 43.99 | 49.55 | 20.46 |
+| Alpaca | 6.68 | 17.55 | 20.63 | 9.54 |
+
+Puntos clave:
+- Los LLMs de mayor tamaño (ChatGPT, Claude 2) quedan en el rango 58-79%, lejos del 100%.
+- El resumen es la tarea más difícil de todas (ChatGPT sólo alcanza 58.53%).
+- Los modelos open-source pequeños (Llama 2, Alpaca) están en o por debajo del azar (~50%).
+- ChatGPT genera alucinaciones en aproximadamente el **19.5% de sus respuestas** a consultas generales.
+
+**Impacto de estrategias de mejora (sobre ChatGPT, accuracy %):**
+
+| Estrategia | QA | Diálogo | Resumen | General |
+|------------|----|---------|---------|---------|
+| Baseline | 62.59 | 72.40 | 58.53 | 79.44 |
+| + Recuperación de conocimiento | **76.83** | **73.80** | — | **90.73** |
+| + Chain-of-Thought | 59.58 | 71.39 | **61.21** | 86.50 |
+| + Muestras de contraste | 49.19 | 68.67 | 49.46 | — |
+
+La recuperación de conocimiento externo es la estrategia más efectiva (+14.24 puntos en QA), mientras que las muestras de contraste empeoran el rendimiento porque las alucinaciones son muy similares a los textos correctos.
+
+**Dominios temáticos con más errores:** Cine, empresas y bandas de música (QA); tecnología, clima e idiomas (consultas generales).
 
 ## Ventajas respecto a trabajos anteriores
 
-- Dataset más grande y diverso (3 tareas) que los benchmarks de alucinaciones previos.
-- La generación automática con ChatGPT permite crear alucinaciones plausibles y difíciles a escala.
-- Primer benchmark que estudia alucinaciones en el contexto del diálogo, no sólo QA y resumen.
-
----
+- **Escala y cobertura múltiple:** 35.000 muestras en tres tareas distintas (QA, resumen, diálogo), mientras que benchmarks anteriores como TruthfulQA (817 preguntas) cubrían una sola tarea.
+- **Generación automática escalable:** El proceso de sampling-then-filtering con ChatGPT permite crear alucinaciones plausibles y difíciles a cualquier escala, sin el costo prohibitivo de la anotación humana masiva.
+- **Alucinaciones realistas:** Al usar el mismo tipo de modelo que se va a evaluar como generador, las alucinaciones creadas son precisamente las que el modelo tiene más probabilidad de producir y, por ende, más difíciles de detectar.
+- **Análisis de causas:** Primer benchmark que clasifica los errores por *tipo de patrón de alucinación* y por *dominio temático*, permitiendo análisis más finos de los puntos débiles de cada modelo.
+- **Primer benchmark de alucinaciones en diálogo a escala:** Los trabajos previos (BEGIN, Neural Path Hunter) evaluaban diálogo en escalas mucho más pequeñas.
 
 ## Trabajos previos relacionados
 
@@ -99,6 +141,10 @@ HaluEval organiza sus antecedentes en dos líneas: (1) trabajos que estudian las
 - **Dhingra et al. (2019) — PARENT**: métrica para medir entailment léxico n-gram en generación table-to-text, citada como referente en métricas cuantitativas de alucinación.
 - **Honovich et al. (2022) — TRUE: Re-Evaluating Factual Consistency Evaluation**: computa el AUC a nivel de ejemplo para evaluar consistencia factual, citado como métrica de evaluación relacionada.
 - **Jiang et al. (2023) — Active Retrieval Augmented Generation**: propone usar interfaces de datos estructurados para mitigar alucinaciones, trabajo contemporáneo sobre mitigación citado como dirección de solución.
+
+## Trabajos donde se usan
+
+No hay papers en el repositorio que usen este dataset directamente.
 
 ## Tags
 

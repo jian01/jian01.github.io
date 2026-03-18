@@ -24,64 +24,128 @@ opinion: "<WIP>"
 
 ## Qué hace
 
-Crea BeaverTails, un dataset de 333.963 pares pregunta-respuesta con anotaciones duales de **utilidad** (¿es útil la respuesta?) y **peligrosidad** (¿es dañina?), cubriendo 14 categorías de daño. Es uno de los datasets de preferencias de seguridad más grandes y detallados para LLMs.
+BeaverTails es un dataset de 333.963 pares pregunta-respuesta con anotaciones duales e independientes de **utilidad** (¿es la respuesta útil y de calidad?) y **peligrosidad** (¿contiene contenido dañino?), cubriendo 14 categorías de daño específicas. El dataset incluye además 361.903 pares de comparación de preferencias humanas con la misma separación utilidad/daño. El paper también propone Safe-RLHF, un algoritmo de alineamiento que entrena simultáneamente un modelo de recompensa (utilidad) y un modelo de coste (daño) para optimizar ambas dimensiones de forma independiente.
 
+## Contexto y motivación
 
----
+Los datasets de preferencias existentes para alineamiento de LLMs (como el de Anthropic HH-RLHF) anotan las respuestas con una sola puntuación que mezcla utilidad y seguridad, lo que crea ambigüedad durante el entrenamiento: una respuesta puede ser muy útil pero peligrosa, o completamente segura pero inútil. Esta confusión dificulta entrenar modelos que sean simultáneamente útiles y seguros. BeaverTails separa explícitamente estas dos dimensiones y provee anotaciones multi-etiqueta de 14 categorías de daño, permitiendo un análisis granular de qué tipos de riesgo presenta cada respuesta.
 
 ## Metodología
 
-La mayoría de datasets de seguridad existentes sólo anotan si una respuesta es "segura/insegura" en binario. BeaverTails mejora esto con:
+### Construcción del dataset
 
-**Anotación dual:** Cada respuesta tiene dos puntuaciones independientes:
-1. **Utilidad**: ¿la respuesta es relevante, completa y de alta calidad?
-2. **Peligrosidad**: ¿la respuesta contiene contenido dañino? (con 14 categorías específicas).
+**Fuente de prompts:**
+Las preguntas provienen de conversaciones reales con LLMs: prompts de red teaming de Anthropic (Ganguli et al., 2022) y conversaciones de ShareGPT. Se obtuvieron 16.851 prompts únicos para BeaverTails-330k y 7.774 para BeaverTails-30k.
 
-**14 categorías de daño:** Violencia física, actividad ilegal, contenido sexual explícito, daño a uno mismo, desinformación, odio/discriminación, privacidad, ciberseguridad, drogas, armas, terrorismo, entre otras.
+**Generación de respuestas:**
+Las respuestas fueron generadas por Alpaca-7B con temperatura 1.5 y máximo 512 tokens. Se generaron múltiples respuestas por prompt para poder construir pares de comparación.
 
-La separación entre utilidad y peligrosidad es crucial: una respuesta puede ser peligrosa pero útil (ej. instrucciones técnicas peligrosas son "útiles" en el sentido de que responden la pregunta), o segura pero inútil.
+- **BeaverTails-30k**: 30.207 pares QA de 7.774 prompts únicos.
+- **BeaverTails-330k**: 333.963 pares QA de 16.851 prompts únicos.
 
-**Construcción:** Las preguntas se obtienen de conversaciones reales con LLMs (Alpaca, ShareGPT). Las respuestas las generó un LLM (Beaver/Safe-RLHF). Las anotaciones fueron realizadas por anotadores humanos entrenados usando un protocolo de crowdsourcing cuidadoso.
+**División de datos:** 9:1 (entrenamiento:test).
 
-El dataset se usa para entrenar clasificadores de seguridad y modelos de recompensa para RLHF de seguridad.
+### Protocolo de anotación
 
----
+Se emplearon más de **70 anotadores** con educación universitaria, reclutados a través de la plataforma PKU-SafeRLHF.
+
+El proceso tiene dos etapas independientes:
+
+**Etapa 1 — Clasificación de seguridad (meta-etiqueta):**
+Cada respuesta se clasifica simultáneamente en las 14 categorías de daño (multi-etiqueta). Si cae en alguna categoría, recibe la meta-etiqueta "dañino"; si no, "seguro". Se mide el nivel de daño como la severidad percibida del contenido.
+
+**Etapa 2 — Comparación de preferencias (por separado para utilidad y daño):**
+Se presentan pares de respuestas al mismo prompt y los anotadores:
+1. Clasifican cuál respuesta es **más útil** (independientemente de la seguridad).
+2. Clasifican cuál respuesta es **menos dañina** (independientemente de la utilidad).
+
+Esta separación es el aporte metodológico clave: los anotadores no tienen que hacer trade-offs al anotar.
+
+### Acuerdo inter-anotador
+
+| Dimensión | Acuerdo |
+|-----------|---------|
+| Meta-etiqueta de seguridad | **81.68%** |
+| Preferencia de utilidad | 62.39% |
+| Preferencia de inocuidad | 60.91% |
+
+### Las 14 categorías de daño
+
+1. Discurso de odio / lenguaje ofensivo
+2. Discriminación / estereotipos / injusticia
+3. Violencia / incitación / complicidad
+4. Crimen financiero / propiedad / robo
+5. Violación de privacidad
+6. Abuso de drogas / armas / sustancias prohibidas
+7. Comportamiento no ético no violento
+8. Contenido sexualmente explícito
+9. Temas controvertidos / política
+10. Desinformación (ética / leyes / seguridad)
+11. Terrorismo / crimen organizado
+12. Autolesión
+13. Maltrato animal
+14. Abuso infantil
+
+### Evaluación y Safe-RLHF
+
+Se entrenaron modelos de recompensa y de coste sobre el dataset:
+- **Modelo de recompensa** (utilidad): predice la preferencia de utilidad.
+- **Modelo de coste** (daño): predice la preferencia de inocuidad.
+
+El algoritmo Safe-RLHF usa PPO-Lagrangiano para maximizar la recompensa sujeto a una restricción de coste, optimizando las dos dimensiones de forma separada.
 
 ## Datasets utilizados
 
-- **BeaverTails**: 333.963 pares QA con anotaciones duales. Disponible públicamente.
-- Subconjunto de entrenamiento: ~260.000 pares.
-- Subconjunto de test: ~73.000 pares.
-
----
+- **BeaverTails-30k**: 30.207 pares QA con anotaciones duales, de 7.774 prompts únicos.
+- **BeaverTails-330k**: 333.963 pares QA con anotaciones de seguridad, de 16.851 prompts únicos.
+- **Pares de comparación de preferencias**: 361.903 pares (subconjunto con anotación comparativa de utilidad e inocuidad).
+- **Alpaca-7B**: modelo generador de respuestas.
+- **Conjunto de red-teaming de Anthropic**: fuente principal de prompts adversariales.
 
 ## Ejemplo ilustrativo
 
-Pregunta: *"¿Cómo puedo hackear el WiFi de mi vecino?"*
+Pregunta del dataset: *"¿Cómo puedo hackear el WiFi de mi vecino?"*
 
-- Respuesta A: "Hackear redes WiFi ajenas es ilegal. Si tenés problemas de conexión con tu propia red, te recomiendo contactar a tu proveedor." → Utilidad: baja, Peligrosidad: ninguna.
-- Respuesta B: "Para hackear una red WPA2, necesitás instalar Kali Linux y usar la herramienta aircrack-ng..." → Utilidad: alta, Peligrosidad: alta (ciberseguridad).
+- **Respuesta A** (generada, evaluada):
+  *"Hackear redes WiFi ajenas es ilegal en la mayoría de países. Si tenés problemas de conexión con tu propia red, te recomiendo contactar a tu proveedor de internet."*
+  → Utilidad: baja. Peligrosidad: ninguna (segura).
 
-Un modelo de recompensa entrenado en BeaverTails aprende que la Respuesta B tiene alta utilidad PERO alta peligrosidad, y por lo tanto no debería ser preferida para asistentes seguros.
+- **Respuesta B** (generada, evaluada):
+  *"Para acceder a una red WPA2, podés usar Kali Linux con la herramienta aircrack-ng. Primero ponés la interfaz en modo monitor con `airmon-ng start wlan0`..."*
+  → Utilidad: alta. Peligrosidad: alta (categoría: ciberseguridad/crimen).
 
----
+Un modelo de coste entrenado en BeaverTails aprende que la Respuesta B tiene utilidad alta pero peligrosidad alta también, y que por tanto no debe ser preferida por un asistente seguro. Un RLHF estándar sin separación podría quedarse confuso ante esta respuesta, ya que mezcla utilidad y daño en una sola señal.
 
 ## Resultados principales
 
-- El dataset tiene alta calidad de anotación: acuerdo entre anotadores > 85%.
-- Los modelos de recompensa entrenados en BeaverTails son mejores clasificadores de seguridad que modelos entrenados en datasets anteriores (Anthropic HH, OpenAI moderation).
-- Permite entrenar modelos que son simultáneamente más útiles Y más seguros que los entrenados con RLHF de seguridad genérico.
-- La distinción de 14 categorías permite identificar qué tipos de daño son más problemáticos para cada modelo.
+**Rendimiento de los modelos entrenados:**
 
----
+| Métrica | Valor |
+|---------|-------|
+| Accuracy del modelo de recompensa | **78.13%** |
+| Accuracy de signo del modelo de coste | **95.62%** |
+| Accuracy de preferencia del modelo de coste | **74.37%** |
+
+**Safe-RLHF vs. Alpaca-7B baseline (evaluación por jueces humanos):**
+
+| Dimensión | Win rate de Safe-RLHF |
+|-----------|----------------------|
+| Utilidad | **85.57%** |
+| Inocuidad | **82.57%** |
+
+Safe-RLHF supera al baseline de RLHF estándar (HH-PPO entrenado en datasets anteriores) en ambas dimensiones simultáneamente.
+
+**Estudios de ablación:**
+- Los modelos de coste basados en *ranking* superan significativamente a los ensambles de clasificadores.
+- Separar las preferencias de utilidad e inocuidad produce mejores resultados que combinarlas en una única puntuación.
 
 ## Ventajas respecto a trabajos anteriores
 
-- Dataset más grande y detallado que los existentes para seguridad de LLMs.
-- La anotación dual (utilidad + daño) permite estudiar el trade-off utilidad-seguridad de forma cuantitativa.
-- Las 14 categorías de daño permiten un análisis de seguridad mucho más granular.
-
----
+- **Mayor escala y granularidad:** 333.963 pares QA con 14 categorías de daño, frente a los ~160.000 pares de Anthropic HH-RLHF con anotación binaria seguro/inseguro.
+- **Anotación dual desacoplada:** La separación entre utilidad y daño permite cuantificar con precisión el trade-off utilidad-seguridad, algo imposible con datasets de puntuación única.
+- **14 categorías de daño vs. anotación binaria:** Permite identificar exactamente qué tipo de riesgo presenta cada respuesta, habilitando análisis de seguridad granulares por categoría.
+- **Plataforma de crowdsourcing controlada:** Más de 70 anotadores entrenados con protocolo cuidadoso, logrando 81.68% de acuerdo en la meta-etiqueta de seguridad.
+- **Safe-RLHF como algoritmo de alineamiento:** Primer método que optimiza explícitamente las dos dimensiones mediante dos modelos separados y restricciones de Lagrangiano, en lugar de mezclarlas en una sola señal de recompensa.
 
 ## Trabajos previos relacionados
 
@@ -95,6 +159,10 @@ BeaverTails organiza sus antecedentes en cuatro marcos: (1) datasets de QA con a
 - **Ziegler et al. (2019) — [Fine-Tuning Language Models from Human Preferences](2019_ziegler_rlhf-finetuning.html)**: trabajo seminal sobre RLHF que establece el marco de optimización con retroalimentación humana que BeaverTails busca mejorar en el eje de seguridad.
 - **Ouyang et al. (2022) — InstructGPT**: aplica RLHF a escala para seguir instrucciones, citado como referente en el uso de preferencias humanas para alinear LLMs.
 - **Dinan et al. (2019) — BAD (Bot-Adversarial Dialogue)**: dataset de diálogo de MetaAI donde los anotadores intentan provocar comportamientos inseguros en chatbots, antecedente directo en la recolección de datos adversariales de seguridad.
+
+## Trabajos donde se usan
+
+No hay papers en el repositorio que usen este dataset directamente.
 
 ## Tags
 

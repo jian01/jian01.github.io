@@ -18,73 +18,140 @@ datasets:
 status:
   - "Leido"
 image: "imgs/2020_sap_social-bias-frames.png"
-image_caption: "Fragmento del paper mostrando la metodología propuesta."
-opinion: "<WIP>"
+image_caption: "Ejemplo de todos los campos taggeados para una frase. El dataset está compuesto de múltiples de estos."
+opinion: "No se como podríamos usar esto."
 ---
 
 ## Qué hace
 
-Introduce el framework de **Social Bias Frames**: representaciones estructuradas que capturan las implicaciones sociales y de poder de textos potencialmente ofensivos. Crea el dataset SBIC con 44.671 publicaciones de redes sociales anotadas con estos frames estructurados.
+Introduce el formalismo de **Social Bias Frames**: representaciones estructuradas que capturan las implicaciones pragmáticas de sesgo social y diferencial de poder en el lenguaje. Crea el **Social Bias Inference Corpus (SBIC)** con 150k anotaciones estructuradas sobre 44.671 publicaciones de redes sociales, cubriendo más de 34k implicaciones en texto libre sobre aproximadamente 1.414 grupos demográficos. Establece además baselines neurales (GPT/GPT-2) que alcanzan $F_1 = 80\%$ en la clasificación de ofensividad pero revelan que la generación de implicaciones estructuradas sigue siendo un reto abierto.
 
+## Contexto y motivación
 
----
+La mayoría de los trabajos en detección de toxicidad y hate speech se limitaban a clasificación binaria (ofensivo / no ofensivo), ignorando la estructura subyacente del sesgo: ¿a quién se dirige?, ¿qué estereotipo implica?, ¿con qué intención? El lenguaje puede vehicular sesgos de manera implícita, no explícita: escuchar que una película con reparto completamente musulmán fue un "fracaso de taquilla" lleva a la mayoría de oyentes a inferir que "los musulmanes son terroristas", pero los formalismos semánticos estándar no capturan estas implicaturas pragmáticas. Sin representaciones estructuradas del sesgo, los sistemas de moderación no pueden explicar por qué un texto es dañino ni ayudar a redactores a corregir su lenguaje.
 
 ## Metodología
 
-En lugar de simplemente etiquetar texto como "ofensivo/no ofensivo", Social Bias Frames captura información estructurada sobre el sesgo:
+### Formalismo: Social Bias Frames
 
-**Componentes de un Social Bias Frame:**
-- **¿Es ofensivo?**: ¿el texto intenta ser o resulta ofensivo?
-- **¿Es irónico?**: ¿usa sarcasmo o humor para expresar sesgo?
-- **¿Contra qué grupo?**: el grupo objetivo (mujeres, personas negras, comunidad LGBTQ+, etc.).
-- **¿Qué implica?**: la implicación estereotipada o dañina (ej. "las mujeres son malas conductoras").
-- **¿Busca controlar?**: ¿el texto busca restringir el comportamiento de ese grupo?
+Dado un post de texto, se anotan **7 dimensiones** combinando etiquetas categóricas y texto libre:
 
-**Construcción del dataset (SBIC):** 44.671 publicaciones de Reddit, Twitter, y dos datasets de hate speech. Las anotaciones fueron realizadas por trabajadores de crowdsourcing siguiendo un protocolo detallado, con múltiples anotadores por muestra para capturar desacuerdo.
+| Dimensión | Tipo | Valores posibles |
+|-----------|------|-----------------|
+| Ofensividad (`offensive`) | Categórica | sí / quizás / no |
+| Intención de ofender (`intent`) | Categórica | sí / probablemente / probablemente no / no |
+| Contenido lascivo (`lewd`) | Categórica | sí / quizás / no |
+| Implicación grupal (`group targeted`) | Binaria | sí / no |
+| Grupo objetivo (`targeted group`) | Texto libre | ej. "black folks", "women" |
+| Enunciado implicado (`implied statement`) | Texto libre (plantilla Hearst) | "GROUP does/are ___" |
+| Lenguaje de endogrupo (`in-group`) | Binaria | sí / no |
 
-**Modelo entrenado:** Se entrena un modelo de lenguaje (RoBERTa + generación) para predecir estos frames estructurados dado un texto. Esto convierte la tarea en razonamiento sobre implicaciones sociales.
+### Fuentes de datos
 
----
+| Fuente | Nº posts |
+|--------|----------|
+| Reddit: r/darkJokes, r/meanJokes, r/offensiveJokes | 13.934 |
+| Reddit: microagresiones (Breitfeller et al. 2019) | 2.011 |
+| Twitter: Founta et al. (2018) | 11.864 |
+| Twitter: Davidson et al. (2017) | 3.008 |
+| Twitter: Waseem & Hovy (2016) | 1.816 |
+| Gab | 3.715 |
+| Stormfront | 4.016 |
+| BannedReddits (r/Incels, r/MensRights) | 4.308 |
+| **Total** | **44.671** |
+
+### Protocolo de anotación
+
+La anotación se realizó en **Amazon Mechanical Turk (MTurk)**, restringiendo el pool a trabajadores de EE.UU. y Canadá. Se recolectaron **3 anotaciones por post**. El diseño es jerárquico: solo si el anotador indica ofensividad potencial responde sobre implicaciones de grupo; y solo si se indica un grupo objetivo, escribe los enunciados implicados (de 2 a 4 estereotipos en forma de plantilla Hearst).
+
+**Perfil demográfico de los anotadores (final):** 55% mujeres, 42% hombres, <1% no binario; media de edad 36±10 años; 82% blancos, 4% asiáticos, 4% hispanos, 4% negros.
+
+**Acuerdo entre anotadores:**
+
+| Dimensión | Acuerdo por pares | Krippendorff $\alpha$ |
+|-----------|:-----------------:|:--------------------:|
+| Global | 82,4% | 0,45 |
+| Ofensividad | 76% | 0,51 |
+| Intención de ofender | 75% | 0,46 |
+| Implicación grupal | 74% | 0,48 |
+| Contenido lascivo | 94% | 0,62 |
+| Lenguaje endogrupo | 94% | 0,17 |
+| Grupo objetivo (exact match) | 80,2% | 0,50 |
+
+Estos valores son notablemente superiores al estado del arte previo en detección de toxicidad (ej. Ross et al. 2017: $\alpha = 0{,}22$).
+
+### Estadísticas finales de SBIC
+
+| Métrica | Valor |
+|---------|-------|
+| Tuplas de inferencia totales | 147.139 |
+| Posts únicos | 44.671 |
+| Grupos demográficos únicos | 1.414 |
+| Implicaciones únicas (texto libre) | 32.028 |
+| Pares post–grupo | 48.923 |
+| % posts ofensivos | 44,8% |
+| % con intención de ofender | 43,4% |
+| % con contenido lascivo | 7,9% |
+| % con implicación de grupo | 50,9% |
+| % con lenguaje de endogrupo | 4,6% |
+| División train/dev/test | 75% / 12,5% / 12,5% |
+
+Los grupos objetivo más frecuentes son género/sexualidad (ej. mujeres, LGBTQ+), raza/etnia (ej. personas negras, latinx, asiáticas) y cultura/religión (ej. musulmanes, judíos).
+
+### Modelos de inferencia
+
+Se entrenan modelos **SBF-GPT$_1$** y **SBF-GPT$_2$** sobre el corpus, linealizando el frame completo como secuencia de tokens. Se evalúan con decodificación greedy (`-gdy`) y sampling (`-smp`), y variantes con decodificación restringida (`-constr`) que recomputa probabilidades de variables categóricas post-generación. Hiperparámetros: batch size 4; learning rates $5\times10^{-6}$ (GPT-1) y $10^{-5}$ (GPT-2); hasta 5 épocas.
 
 ## Datasets utilizados
 
-- **SBIC (Social Bias Inference Corpus)**: 44.671 posts de Reddit, Twitter, y Gab; 150.000+ anotaciones.
-- Fuentes: Reddit (r/SexistSubs, r/RacistJokes, etc.), Twitter, Gab.
-- Evaluación: 9 grupos demográficos incluidos.
-
----
+- **SBIC (Social Bias Inference Corpus)**: 44.671 posts de Reddit, Twitter, Gab y sitios de odio; 150.000 anotaciones estructuradas; 1.414 grupos demográficos; 32.028 implicaciones únicas en texto libre. Disponible públicamente.
+- Fuentes de posts: Reddit (subreddits ofensivos y microagresiones), Twitter (tres datasets existentes de toxicidad), Gab, Stormfront, subreddits baneados.
 
 ## Ejemplo ilustrativo
 
-Post de Twitter: *"Las mujeres no deberían conducir, ¿verdad? jajaja"*
+Tomado directamente de la Tabla 1 del paper:
+
+> *"I thought drugs were the only things black people could shoot up — Boy was I wrong"*
 
 Social Bias Frame anotado:
-- ¿Ofensivo?: Sí (potencialmente)
-- ¿Irónico?: Sí (el "jajaja" sugiere "broma")
-- Grupo objetivo: Mujeres
-- Implicación: "Las mujeres son malas conductoras"
-- ¿Busca controlar?: Sí (implica restricción de actividades)
+- Ofensivo: **Sí**
+- Intención de ofender: **Sí**
+- Lascivo: No
+- Grupo objetivo: **black folks**
+- Enunciado implicado: *"black folks kill people"* / *"commit shootings"*
+- Lenguaje de endogrupo: No
 
-Un modelo que predice estos frames puede identificar no sólo que el texto es problemático, sino exactamente *por qué* y *a quién* perjudica — información crucial para sistemas de moderación matizados.
-
----
+El frame captura no solo que el texto es ofensivo, sino exactamente el estereotipo vehiculado (violencia racial) y hacia quién — información indispensable para sistemas de moderación que vayan más allá del etiquetado binario.
 
 ## Resultados principales
 
-- El modelo entrenado en SBIC logra alta accuracy en predecir ofensividad y grupo objetivo (~80%).
-- La predicción de la implicación estructurada (qué estereotipo se usa) es más difícil (~60% BLEU).
-- Crowdworkers tienen alta tasa de acuerdo en ofensividad (~75%) pero menor en la implicación exacta (~60%).
-- Los errores del modelo revelan que el razonamiento sobre implicaciones sociales requiere conocimiento del mundo que los modelos actuales aún no dominan.
+**Clasificación** (mejor modelo, SBF-GPT$_2$-gdy, test set):
 
----
+| Variable | $F_1$ | Precisión | Recall |
+|----------|:-----:|:---------:|:------:|
+| Ofensividad | 77,2 | 88,3 | 68,6 |
+| Intención de ofender | 76,3 | 89,5 | 66,5 |
+| Contenido lascivo | 77,6 | 81,2 | 74,3 |
+| Grupo objetivo (binario) | 66,9 | 67,9 | — |
+
+La variable de lenguaje de endogrupo no pudo predecirse positivamente por ningún modelo (solo 4,6% positivos — extremadamente desbalanceada).
+
+**Generación de texto libre** (SBF-GPT$_2$-gdy, test set):
+
+| Tarea | BLEU-2 | ROUGE-L | WMD |
+|-------|:------:|:-------:|:---:|
+| Grupo objetivo | 77,0 | 71,3 | 0,76 |
+| Enunciado implicado | 52,2 | 46,5 | 2,81 |
+
+Los modelos generan bien los grupos objetivo (espacio de salida limitado: ~1.400 grupos posibles) pero presentan mayor dificultad con la implicación (espacio de salida abierto). El análisis de errores muestra que los modelos tienden a generar estereotipos genéricos del grupo demográfico en lugar de implicaciones específicamente entailadas por el post concreto.
 
 ## Ventajas respecto a trabajos anteriores
 
-- Primer framework que va más allá de la clasificación binaria ofensivo/no ofensivo hacia representaciones estructuradas del sesgo.
-- Permite entender el "por qué" del sesgo, no sólo si existe.
-- Introduce el concepto de razonamiento sobre implicaciones sociales como tarea de NLP.
-
----
+- Primer framework que va más allá de la clasificación binaria ofensivo/no ofensivo hacia representaciones **estructuradas** del sesgo con 7 dimensiones.
+- Permite entender el "por qué" del sesgo (implicación, grupo objetivo, intención) y no solo si existe.
+- Cobertura de **1.414 grupos demográficos** con implicaciones en texto libre, frente a taxonomías cerradas y reducidas de trabajos anteriores.
+- Acuerdo entre anotadores muy superior al estado del arte previo ($\alpha = 0{,}45$ vs. $\alpha = 0{,}22$ en Ross et al. 2017), gracias al diseño jerárquico y pilotaje iterativo.
+- Introduce el razonamiento sobre implicaciones sociales como tarea de NLP que combina clasificación y generación condicionada.
 
 ## Trabajos previos relacionados
 
@@ -98,6 +165,15 @@ Social Bias Frames organiza los trabajos previos en dos líneas principales: (1)
 - **Breitfeller et al. (2019) — Finding Microaggressions in the Wild**: aborda el lenguaje de microagresión implícita en Reddit, línea de sesgo sutil que Social Bias Frames amplía con sus implicaciones estructuradas.
 - **Rashkin et al. (2018) — Event2Mind: Commonsense Inference on Events, Intents, and Reactions**: marco de inferencia de commonsense sobre estados mentales de participantes de situaciones, inspiración metodológica para el razonamiento sobre implicaciones de Social Bias Frames.
 - **Sap et al. (2019) — HellaSwag / Social IQa**: trabajos del mismo grupo sobre inferencia de commonsense social, base metodológica del enfoque de razonamiento estructurado sobre situaciones sociales.
+
+## Trabajos donde se usan
+
+| Paper | Cómo se usa |
+|-------|------------|
+| [ToxiGen](2022_hartvigsen_toxigen.html) | Comparación directa en tabla de datasets de hate speech; HateBERT fine-tuneado en ToxiGen se evalúa sobre SBIC como benchmark externo |
+| [Bias Benchmarks Speech (Satish/SAGE)](2025_satish_bias-benchmarks-speech.html) | Marco conceptual para entender cómo el sesgo se manifiesta en generación libre, motivando las evaluaciones long-form de la suite SAGE-LF |
+| [BBQ](2021_parrish_bbq.html) | Referenciado como trabajo que conecta comportamiento del modelo con daño real al razonar sobre implicaciones sociales |
+| [Human-like Biases (Acerbi)](2023_acerbi_human-like-biases.html) | Citado como trabajo relacionado que estudia la dimensión social del sesgo desde una perspectiva complementaria a los experimentos de transmisión cultural |
 
 ## Tags
 

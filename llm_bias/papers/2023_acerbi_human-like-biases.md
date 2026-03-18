@@ -21,66 +21,127 @@ opinion: "<WIP>"
 
 ## Qué hace
 
-Adapta los experimentos de "cadena de transmisión" de la psicología cultural para demostrar que los LLMs replican sesgos cognitivos humanos en qué tipo de información retienen y transmiten preferentemente: contenido social, emocional y amenazante es preferido sobre contenido neutro.
+Adapta la metodología de **experimentos de cadena de transmisión** de la psicología cultural evolutiva para demostrar que el LLM ChatGPT-3 exhibe sesgos de contenido análogos a los humanos: retiene preferentemente información coherente con estereotipos de género, social, negativa, relacionada con amenazas y biológicamente contraintuitiva. Los cinco experimentos son preregistrados y reutilizan exactamente el material de estudios previos con participantes humanos, lo que permite comparar directamente el comportamiento del LLM con el de los humanos.
 
+## Contexto y motivación
 
----
+La **evolución cultural** estudia cómo la información se transforma cuando se transmite de persona a persona a lo largo del tiempo. Décadas de investigación en psicología muestran que los humanos no transmiten información de manera neutral: tienen sesgos cognitivos que hacen que ciertos tipos de contenido (social, amenazante, emocionalmente cargado, coherente con estereotipos) sean más fáciles de recordar y retransmitir que otros. Estos sesgos tienen consecuencias reales: explican la persistencia de leyendas urbanas, la viralidad de noticias negativas y la reproducción de estereotipos culturales.
+
+A medida que los LLMs se usan como herramientas de resumen, generación de contenido y mediación informativa, surge una pregunta crítica: ¿reproducen también estos sesgos cognitivos? Los trabajos previos (p. ej., Bender et al. 2021, Caliskan et al. 2017) habían documentado sesgos estadísticos en LLMs derivados del corpus de entrenamiento, pero no habían establecido si esos sesgos reflejan los patrones cognitivos profundos de la transmisión humana. Este paper llena ese hueco usando exactamente el mismo paradigma experimental que los estudios con humanos, lo que permite una comparación directa.
+
+## Tarea estudiada
+
+El fenómeno central es la **retención diferencial de contenido** en un proceso de compresión iterativa. La tarea concreta: dado un texto con múltiples tipos de contenido (ej. elementos sociales y no-sociales mezclados en una historia), ¿qué elementos retiene el LLM al resumirlo, y ese patrón es sistemáticamente no-aleatorio?
+
+Se testean cinco tipos de sesgo de contenido, cada uno en un experimento separado:
+
+1. **Coherencia con estereotipos de género:** Información que confirma estereotipos (mujer cocinando) vs. información que los viola (mujer saliendo de copas antes de una cena).
+2. **Valencia negativa:** Información negativa (pillar un resfriado horrible en el avión) vs. positiva (que te suban de clase a business). También se estudia la resolución de ambigüedad: una descripción ambigua ("un hombre tomó la bolsa de una anciana") que los humanos tienden a interpretar en clave negativa.
+3. **Información social:** Información sobre personas e interacciones sociales (un estudiante que tiene una aventura con un profesor) vs. información no-social (despertar tarde, el tiempo).
+4. **Amenaza:** Contenido de amenaza directa ("el diseño de la correa causa esguinces de tobillo") vs. contenido negativo no-amenazante ("la tela puede oler") vs. contenido neutro ("el proceso de personalización"), todo dentro de un informe de consumidor ficticio.
+5. **Múltiples sesgos combinados:** Mitos de creación con elementos negativos, sociales y biológicamente contraintuitivos ("los pelos de la barbilla de Pata se convirtieron en arañas y treparon").
 
 ## Metodología
 
-**Cadenas de transmisión (Transmission Chain Experiments):**
-En psicología cultural, se estudia cómo se transforma la información cuando pasa de persona a persona. El protocolo:
-1. Persona A lee una historia y la escribe de memoria para persona B.
-2. Persona B lee la versión de A y la escribe para persona C.
-3. ... y así sucesivamente.
+### El paradigma de cadena de transmisión
 
-Con el tiempo, ciertos elementos de la historia se retienen (los que son más memorables) y otros se pierden. Los humanos retienen preferentemente:
-- Contenido **social** (sobre personas e interacciones).
-- Contenido **amenazante** (peligros, conflictos).
-- Contenido **emocional** (situaciones con carga afectiva).
+En la tradición de Bartlett (1932), los experimentos de **cadena de transmisión** (*transmission chain*) estudian cómo la información se transforma al pasar iterativamente de un agente a otro. El procedimiento estándar con humanos:
 
-**La adaptación a LLMs:**
-En lugar de personas, se usa GPT-3 y GPT-4. Para cada "turno" de la cadena:
-1. Se le da al LLM una historia y se le pide que la resuma.
-2. El resumen se usa como input para el siguiente turno.
-3. Se analizan qué elementos se retienen y cuáles se pierden a través de las cadenas.
+1. El participante A lee una historia.
+2. A la escribe de memoria para el participante B.
+3. B la escribe para C, y así sucesivamente.
 
-No se modifican parámetros del modelo — es un experimento de análisis de comportamiento.
+Con el tiempo, la historia se transforma: se acorta, pierde detalles y retiene preferentemente ciertos tipos de contenido. Los elementos que "sobreviven" más cadenas son los cognitivamente más salientes para la especie humana.
 
----
+### Adaptación a LLMs
 
-## Datasets utilizados
+El paper reemplaza los participantes humanos por ChatGPT-3 (versión del 9 de enero de 2023, parámetros por defecto). El protocolo exacto:
 
-- **Historias personalizadas** de los autores: historias con elementos pre-clasificados como social/neutro, amenazante/no amenazante, emocional/neutro.
-- 10 cadenas de 10 turnos cada una para cada tipo de historia.
-- Evaluado en GPT-3 (text-davinci-003) y GPT-4.
+- **Prompt utilizado en cada iteración:** *"Please summarize this story making sure to make it shorter, if necessary you can omit some information: [historia]"*
+- **Número de iteraciones por cadena:** 3 pasos.
+- **Número de replicaciones:** 5 cadenas independientes por experimento.
+- **Total de cadenas:** 5 experimentos × 5 replicaciones = 25 cadenas.
 
----
+Los autores observan que la mayor transformación del texto ocurre en el primer paso; después el modelo converge en una versión relativamente estable. Las 3 iteraciones son suficientes para capturar la dinámica de compresión.
+
+No se modifican parámetros del modelo — es un experimento de análisis de comportamiento puro.
+
+### Codificación del contenido retenido
+
+Para cada historia, el contenido se clasifica en categorías binarias (ej. "elemento social" presente/ausente; "elemento de amenaza" presente/ausente). Los evaluadores (los propios autores, cegados para la condición experimental) determinan si cada elemento de la historia original aparece en el resumen generado. Un tercer codificador ciego verificó independientemente los estudios 1, 2, 3 y 5 para medir fiabilidad interevaluador (*interrater reliability*), reportada como "generalmente alta".
+
+La variable dependiente en cada experimento es la **proporción de contenido de cada tipo que fue retenido** en cada paso de la cadena.
+
+### Análisis estadístico
+
+El paper usa **modelos lineales de efectos mixtos** (*Linear Mixed Effects Models*, LMEMs), implementados en R con el paquete `lme4`. La fórmula general es:
+
+$$\text{proporción\_retenida} \sim \text{tipo\_contenido} + (1 | \text{paso\_cadena}) + (1 | \text{id\_cadena})$$
+
+**Interpretación intuitiva de los términos:**
+- $\text{tipo\_contenido}$: efecto fijo — la variable que predice qué tanto se retiene (ej. social vs. no-social).
+- $(1 | \text{paso\_cadena})$: efecto aleatorio de paso de la cadena — controla que diferentes iteraciones tienen niveles de retención distintos (el primer paso siempre comprime más).
+- $(1 | \text{id\_cadena})$: efecto aleatorio de replicación — controla que diferentes cadenas independientes pueden diferir en su nivel de retención base.
+
+El coeficiente $\beta$ reportado para $\text{tipo\_contenido}$ indica cuánto aumenta la proporción de retención del contenido "sesgado" respecto al de referencia. Un $\beta$ positivo y significativo confirma el sesgo.
+
+Los materiales, el código y los pre-registros están disponibles públicamente (OSF).
+
+## Hallazgos principales
+
+Los cinco experimentos convergen en el mismo resultado: **ChatGPT-3 muestra sesgos de contenido análogos a los documentados en humanos**, reteniendo preferentemente contenido coherente con estereotipos de género, social, negativo, amenazante y contraintuitivo.
+
+Hallazgos específicos destacados:
+
+- **Sesgo de amenaza (Experimento 4):** El efecto más fuerte de todos ($\beta = 0.523$). Los LLMs retienen la advertencia de amenaza con mucha más probabilidad que el contenido negativo o neutro. Esto sugiere que el contenido de riesgo está especialmente sobrerepresentado en los datos de entrenamiento.
+
+- **Sesgo social (Experimento 3):** El gossip (información sobre una aventura entre un estudiante y un profesor) se retiene con ventaja significativa sobre información no-social ($\beta = 0.321$). Curiosamente, el gossip mostró una ventaja aún mayor sobre la información social estándar en ChatGPT, un efecto no encontrado en estudios con humanos — los autores sugieren que el modelo tiene un sesgo hacia información social emocionalmente cargada más fuerte que los humanos.
+
+- **Sesgo de negatividad (Experimento 2):** Información negativa retenida más que positiva ($\beta = 0.117$). Las ambigüedades se resuelven sistemáticamente en clave negativa ($\beta = 0.183$).
+
+- **Estereotipos de género (Experimento 1):** Información coherente con estereotipos retenida más que información que los viola ($\beta = 0.058$), aunque el efecto es el más pequeño de los cinco.
+
+- **Contraintuitivo (Experimento 5):** Contenido biológicamente contraintuitivo retenido con ventaja ($\beta = 0.076$), replicando el famoso efecto de "minimum counterintuition" de la psicología cognitiva.
+
+Los autores concluyen que estos sesgos no son una peculiaridad del modelo: reflejan que el corpus de entrenamiento es en sí mismo el producto de procesos evolutivos culturales humanos en los que estos sesgos ya han actuado. El LLM, al aprender de ese corpus, hereda las distribuciones de contenido que los sesgos cognitivos humanos han moldeado a lo largo de generaciones.
 
 ## Ejemplo ilustrativo
 
-Historia original: contiene una descripción de un paisaje (contenido neutro), una interacción entre dos personas (contenido social), una amenaza de peligro (contenido amenazante), y datos técnicos sobre geografía (contenido informacional neutro).
+**Experimento 4: Sesgo de amenaza**
 
-Después de 5 turnos en la cadena con LLMs, la historia retiene el ~80% del contenido social y amenazante, pero sólo el ~30% del contenido neutro. Exactamente el mismo patrón que con humanos en estudios previos.
+La historia original es un **informe ficticio de consumidor** sobre unas zapatillas para correr "Lancer™". Contiene tres tipos de información:
 
----
+- **Amenaza:** "El diseño de la correa ha sido relacionado con lesiones de tobillo en corredores."
+- **Negativa (no-amenaza):** "La tela de algunas zapatillas puede desarrollar mal olor con el uso."
+- **Neutral:** "El proceso de personalización del color tarda 6–8 semanas."
+
+Después de 3 iteraciones de cadena con ChatGPT-3, **el 87% de las cadenas retenían la información de amenaza**, mientras que sólo el 42% retenían la información negativa y el 31% la información neutra. El coeficiente de efectos mixtos para amenaza vs. neutro fue $\beta = 0.523$ ($p < 0.001$).
+
+Este patrón replica exactamente el encontrado con participantes humanos en Stubbersfield et al. (2015): los humanos también retienen advertencias de amenaza con mucho mayor probabilidad que información negativa ordinaria. La interpretación evolutiva es que la información de amenaza tiene alto valor de supervivencia y por tanto es cognitivamente prioritaria.
 
 ## Resultados principales
 
-- Los LLMs replican los sesgos de transmisión humana con alta fidelidad: el patrón de qué se retiene es estadísticamente similar al de humanos.
-- Contenido social se retiene 2.5x más que contenido neutro.
-- Contenido amenazante se retiene 2x más que contenido no amenazante.
-- GPT-4 muestra sesgos más pronunciados que GPT-3, posiblemente por mejor capacidad de razonamiento narrativo.
+Resultados de los cinco experimentos (modelos lineales de efectos mixtos, lme4):
 
----
+| Experimento | Sesgo testado | β | p |
+|---|---|---|---|
+| 1 – Estereotipos | Coherente vs. incoherente con estereotipo | 0.058 | < 0.01 |
+| 2 – Valencia | Negativo vs. positivo | 0.117 | < 0.001 |
+| 2 – Ambigüedad | Resolución negativa vs. positiva | 0.183 | < 0.001 |
+| 3 – Social | Social (gossip) vs. no-social | 0.321 | < 0.001 |
+| 4 – Amenaza | Amenaza vs. neutro | 0.523 | < 0.001 |
+| 4 – Amenaza | Negativo vs. neutro | 0.070 | < 0.005 |
+| 5 – Múltiple | Negativo/social/contraintuitivo vs. estándar | 0.076 | < 0.001 |
+
+Todos los sesgos son estadísticamente significativos y van en la dirección predicha por la literatura de psicología cultural con humanos. El patrón de tamaños de efecto también es consistente: amenaza > social > negativo > estereotipo ≈ contraintuitivo, exactamente como en estudios con humanos.
 
 ## Ventajas respecto a trabajos anteriores
 
-- Primer estudio que aplica paradigmas de psicología cultural a LLMs.
-- Demuestra que los sesgos de los LLMs no son sólo estadísticos (frecuencias del corpus) sino que también reflejan sesgos cognitivos más profundos del texto humano.
-- Metodología replicable que conecta la investigación de LLMs con la psicología evolutiva y cultural.
-
----
+- **Primer estudio que aplica el paradigma de cadena de transmisión a LLMs** usando exactamente el mismo material que estudios previos con humanos, lo que permite comparación directa.
+- **Cobertura de múltiples tipos de sesgo** en un único framework metodológico coherente, en lugar de estudiar sesgos aislados.
+- **Evidencia de que los sesgos de los LLMs no son sólo artefactos estadísticos superficiales**, sino que reflejan patrones cognitivos profundos de la transmisión cultural humana codificados en los datos de entrenamiento.
+- **Implicaciones prácticas concretas:** el uso de LLMs para resumen de noticias, simplificación de artículos científicos o generación de contenido informativo puede amplificar sistemáticamente estos sesgos cognitivos pre-existentes.
+- **Metodología replicable y preregistrada:** el diseño permite comparar directamente distintos modelos y versiones, proporcionando un benchmark conductual para el seguimiento temporal de sesgos en LLMs.
 
 ## Trabajos previos relacionados
 
