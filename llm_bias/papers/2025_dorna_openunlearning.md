@@ -18,7 +18,7 @@ status:
   - "Relevante"
 image: "imgs/2025_dorna_openunlearning.png"
 image_caption: "Esquema de todo lo que puede hacer la librería OpenUnlearning."
-opinion: "<WIP>"
+opinion: "Es una librería para evaluar unlearning, con objetos y abstracciones extensibles. Es relevante saber que existe por si queremos hacer una implementación o benchmark, ver si este código es de buena calidad para extenderlo y aprovechar las cosas que ya tenga resueltas. El resumen lo mire poco, porque es una lib, no es muy técnico, pero está bueno tener en cuenta las métricas como una forma de survey tambien."
 ---
 
 ## Qué hace
