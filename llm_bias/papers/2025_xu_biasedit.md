@@ -4,22 +4,21 @@ title: "BiasEdit: Debiasing Stereotyped Language Models via Model Editing"
 year: 2025
 date_published: "2025-03-11"
 authors: "Xin Xu, Wei Xu, Ningyu Zhang, Julian McAuley"
-published: "arXiv, 2025"
+published: "TrustNLP @ NAACL 2025"
 tags:
   - "debiasing"
   - "edición-de-modelos"
-  - "ROME"
+  - "hiper-redes"
   - "FFN-layers"
   - "sesgo-de-género"
 pdf: "/llm_bias/pdfs/2025_xu_biasedit.pdf"
 method_type: "Edición de pesos / neuronas"
 datasets:
   - "StereoSet"
-  - "WinoBias"
-  - "BBQ"
   - "CrowS-Pairs"
-  - "GLUE"
-  - "MMLU"
+  - "OpenBookQA"
+  - "BoolQ"
+  - "COPA"
 measures_general_quality: "Sí"
 status:
   - "Leido"
@@ -31,80 +30,208 @@ opinion: "<WIP>"
 
 ## Qué hace
 
-Aplica técnicas de **edición de modelos** (model editing) para eliminar estereotipos de género y raza de LLMs. En lugar de re-entrenar el modelo, modifica quirúrgicamente las capas FFN específicas que almacenan las asociaciones estereotipadas.
+Propone **BiasEdit**, un método de edición de modelos que elimina sesgos estereotipados de LLMs modificando quirúrgicamente una fracción pequeña de sus parámetros mediante **redes editoras** (editor networks) entrenadas como hiper-redes. Las redes editoras toman como entrada el gradiente de una pérdida de debiasing y producen como salida los deltas de pesos a aplicar sobre las capas MLP seleccionadas. Esto evita el fine-tuning completo y permite editar sesgo de género, raza y religión preservando las capacidades lingüísticas generales.
 
+A diferencia de lo que el tag "ROME" podría sugerir, BiasEdit **no** usa el update rank-1 de ROME. Sí toma de ROME la metodología de **bias tracing** (causal tracing con runs limpios/corrompidos/restaurados) para localizar en qué capas reside el sesgo, pero el mecanismo de edición sigue la arquitectura de **MEND/MALMEN**: pequeñas redes que predicen actualizaciones de pesos.
+
+---
+
+## Problema que resuelve
+
+Los métodos de debiasing existentes tienen limitaciones estructurales:
+- **Fine-tuning con CDA** (datos contrafactuales): costoso computacionalmente, solo practicable en modelos pequeños como GPT-2.
+- **Proyección de representaciones** (INLP, SentenceDebias): no modifican los parámetros internos del modelo, por lo que el sesgo sigue presente en los pesos — solo se "enmascara" en el espacio de representaciones.
+- **Prompting** (Self-Debias): actúa en tiempo de inferencia sin tocar pesos; tiene degradación severa de LMS en modelos grandes (hasta -40% en Mistral-7B).
+- **Adapters por tipo de sesgo**: requieren adapters separados para género, raza, religión; poco escalable.
 
 ---
 
 ## Metodología
 
-Model editing (técnicas como ROME/MEMIT) permite modificar hechos específicos en LLMs sin afectar el conocimiento general. BiasEdit adapta estas técnicas para el debiasing:
+### Formulación de la tarea
 
-**Identificación de asociaciones sesgadas:**
-Se formulan los estereotipos como "hechos" a editar. Por ejemplo: el modelo tiene la "creencia" interna de que "un médico" → "hombre". En el marco de ROME, esto se representa como: subject="médico", relation="tiene género", object="hombre". Se quiere cambiar object de "hombre" a una distribución uniforme entre géneros.
+Para un contexto estereotipado como *"Girls tend to be more ___ than boys"*, el modelo asigna mayor probabilidad a la completación estereotipada (*"soft"*) que a la anti-estereotipada (*"determined"*). BiasEdit busca **igualar** esas probabilidades. Cada ejemplo de entrenamiento tiene tres elementos:
 
-**Localización con causal tracing:**
-ROME usa causal tracing (activation patching) para identificar qué capa FFN específica del transformer almacena la asociación. Para cada estereotipo, se identifica la capa (generalmente en el rango de capas medias, 8-20 en GPT-2 Large) donde la asociación es almacenada.
+- $$x_{\text{stereo}}$$: oración con la completación estereotipada — e.g. *"Girls tend to be more soft than boys"*
+- $$x_{\text{anti}}$$: oración con la completación anti-estereotipada — e.g. *"Girls tend to be more determined than boys"*
+- $$x_{\text{mless}}$$: oración con una completación sin sentido — e.g. *"Girls tend to be more fish than boys"*
 
-**Edición quirúrgica:**
-Se modifican directamente los valores en las matrices de peso de la capa FFN identificada usando optimización rank-one. Sólo se modifican los parámetros de esa capa específica, dejando el resto del modelo intacto.
+### Las redes editoras (editor networks)
 
-**Objetivo de debiasing:**
-El nuevo "hecho" que se inserta es contrafactual: se enseña al modelo que "médico" se asocia igualmente con géneros masculino y femenino, añadiendo ambas asociaciones.
+BiasEdit entrena redes editoras $$g_{\phi_\ell}$$ para cada capa $$\ell$$ que se va a editar. Son redes pequeñas que aprenden, durante el entrenamiento, a mapear gradientes de pérdida a actualizaciones de pesos útiles.
+
+Para cada capa $$\ell$$ seleccionada, la actualización funciona así:
+
+**Paso 1.** Calcular el gradiente de la pérdida de debiasing $$\mathcal{L}_d$$ respecto a los pesos $$\mathcal{W}_\ell$$ de esa capa:
+$$\nabla_{\mathcal{W}_\ell} \mathcal{L}_d(x_{\text{stereo}}, x_{\text{anti}}, \theta)$$
+
+Este gradiente es un tensor del mismo tamaño que $$\mathcal{W}_\ell$$ que indica en qué dirección mover los pesos para reducir el sesgo.
+
+**Paso 2.** Pasar ese gradiente por la red editora $$g_{\phi_\ell}$$, que aprende a convertirlo en un delta de pesos más preciso:
+$$\tilde{\nabla}_{\mathcal{W}_\ell} = g_{\phi_\ell}\!\left(\nabla_{\mathcal{W}_\ell} \mathcal{L}_d\right)$$
+
+Cualitativamente: el gradiente crudo puede ser ruidoso o excesivo. La red editora aprende durante el entrenamiento a "filtrar" ese gradiente para producir una actualización que reduce el sesgo sin dañar otras capacidades.
+
+**Paso 3.** Aplicar el delta a los pesos:
+$$\tilde{\mathcal{W}}_\ell = \mathcal{W}_\ell + \tilde{\nabla}_{\mathcal{W}_\ell}$$
+
+Solo se modifican los pesos de las capas seleccionadas; el resto del modelo queda intacto.
+
+### Loss 1 — Pérdida de debiasing $$\mathcal{L}_d$$
+
+$$\mathcal{L}_d = \text{KL}\!\left(P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{stereo}}) \,\|\, P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{anti}})\right) + \text{KL}\!\left(P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{anti}}) \,\|\, P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{stereo}})\right)$$
+
+**Desglose:**
+
+- $$P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{stereo}})$$: distribución de probabilidad del modelo sobre los tokens de la completación estereotipada, bajo los pesos modificados $$\tilde{\mathcal{W}}$$. Es un vector de probabilidades sobre el vocabulario para cada posición de la oración.
+- $$P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{anti}})$$: ídem para la completación anti-estereotipada.
+- $$\text{KL}(P \| Q)$$: divergencia Kullback-Leibler de $$Q$$ a $$P$$; mide cuánto difieren las dos distribuciones. Vale 0 cuando son idénticas.
+- La suma de las dos KL (en ambas direcciones) es equivalente a la **divergencia JS** (Jensen-Shannon), que es simétrica. Si las dos distribuciones son iguales, ambas KL valen 0 y la pérdida es 0.
+
+**Cualitativamente**: la pérdida de debiasing es 0 cuando la distribución de probabilidades del modelo sobre los tokens de la oración estereotipada es idéntica a la de la anti-estereotipada. Fuerza al modelo a tratar las dos versiones con la misma probabilidad. Si el modelo aún prefiere *"soft"* sobre *"determined"*, la distribución de $$x_{\text{stereo}}$$ y $$x_{\text{anti}}$$ diferirán en el token de la completación y la KL será positiva.
+
+### Loss 2 — Pérdida de retención $$\mathcal{L}_r$$
+
+$$\mathcal{L}_r = \text{KL}\!\left(P_{\theta_{\mathcal{W}}}(x_{\text{mless}}) \,\|\, P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{mless}})\right)$$
+
+**Desglose:**
+
+- $$P_{\theta_{\mathcal{W}}}(x_{\text{mless}})$$: distribución del modelo **original** (pesos sin modificar $$\mathcal{W}$$) sobre la oración con completación sin sentido.
+- $$P_{\theta_{\tilde{\mathcal{W}}}}(x_{\text{mless}})$$: distribución del modelo **editado** sobre la misma oración.
+- $$x_{\text{mless}}$$ es semánticamente neutro (e.g. *"Girls tend to be more fish than boys"*) — una palabra que no tiene connotación social.
+
+**Cualitativamente**: como $$x_{\text{mless}}$$ no contiene sesgo, el modelo original ya asignaba cierta distribución a sus tokens. Si la edición cambia esa distribución, significa que se está dañando el modelado lingüístico general. La pérdida de retención penaliza cualquier cambio en la distribución sobre texto sin connotación social, actuando como un anclaje para preservar las capacidades lingüísticas.
+
+**Sin $$\mathcal{L}_r$$, el modelo colapsa**: la ablación muestra que sin retención, el ΔLMS cae hasta -52% en género y -61% en religión en GPT-2 Medium.
+
+### Loss total
+
+$$\mathcal{L}_E(\phi) = \mathcal{L}_d + \lambda \mathcal{L}_r$$
+
+donde $$\phi$$ son los parámetros de las redes editoras (lo que se está entrenando), y $$\lambda$$ balancea las dos pérdidas.
+
+### Qué capas se editan y por qué
+
+Bias tracing (ver más abajo) revela que el sesgo reside principalmente en las **MLPs de las capas inferiores**. Sin embargo, editar las capas inferiores daña más las capacidades generales. El compromiso adoptado es **editar la capa de salida de la MLP en los últimos bloques** del transformer:
+
+| Modelo | Bloques editados |
+|---|---|
+| GPT2-medium | Últimos 3 bloques |
+| Mistral-7B-v0.3 | Últimos 3 bloques |
+| Llama3-8B | Últimos 2 bloques |
+| Gemma-2b | Penúltimo bloque |
+
+Solo se edita la capa de salida de la MLP (la matriz $$\mathbf{W}_{\text{out}}$$ de cada bloque FFN), no los pesos de atención.
+
+### Bias tracing
+
+Siguiendo la metodología de causal tracing de ROME, se realizan tres pasadas de inferencia para localizar el sesgo:
+
+1. **Pasada limpia**: se obtiene la distribución estereotipada $$P_\theta(x_{\text{stereo}})$$ y anti-estereotipada $$P_\theta(x_{\text{anti}})$$; se guardan los estados ocultos $$h_i^\ell$$ para todos los tokens $$i$$ y capas $$\ell$$.
+2. **Pasada corrompida**: se añade ruido gaussiano $$\tau \sim \mathcal{N}(0, \sigma)$$ a los embeddings de la **palabra de atributo de sesgo** (e.g. "girls") y se obtienen activaciones corrompidas $$\hat{h}_i^\ell$$.
+3. **Pasada corrompida con restauración**: se restauran los estados ocultos originales $$h_i^\ell$$ en una posición/capa a la vez y se mide cuánto recupera el score de sesgo.
+
+Resultado: las MLPs tienen "un papel mucho más significativo en el sesgo que las capas de atención", y el sesgo corresponde principalmente a los estados de las MLPs en capas inferiores.
+
+### Batch editing
+
+BiasEdit procesa los ejemplos de entrenamiento en lotes — el mismo tamaño de lote en train y test. Esto permite editar múltiples pares estereotipados en una sola operación, lo que mejora la eficiencia frente a edición uno a uno.
 
 ---
 
 ## Datasets utilizados
 
-- **StereoSet**: evaluación principal de sesgo.
-- **WinoBias**: sesgos de género en resolución de correferencias.
-- **BBQ**: preguntas con contexto ambiguo.
-- **CrowS-Pairs**: pares de frases con/sin estereotipo.
-- **GLUE/MMLU**: evaluación de retención de capacidades generales.
+**Para entrenamiento y evaluación de sesgo:**
 
----
+**StereoSet (intrasentence)**: dataset principal. Se divide en train/dev/test con ratio 8:1:1. El test set tiene:
+- Género: 253 ejemplos
+- Raza: 962 ejemplos
+- Religión: 77 ejemplos
 
-## Ejemplo ilustrativo
+Cada ejemplo tiene una completación estereotipada, una anti-estereotipada y una sin sentido. Se entrena un editor por tipo de sesgo (género, raza, religión).
 
-El modelo GPT-J tiene el estereotipo: cuando se le da el contexto "La persona que realizó la cirugía era...", asigna mayor probabilidad a "un hombre" que a "una mujer". BiasEdit:
-1. Identifica mediante causal tracing que este estereotipo está almacenado principalmente en la capa FFN 14.
-2. Modifica los pesos de esa capa para que asigne probabilidades iguales a "un hombre" y "una mujer".
-3. El resto del modelo (conocimiento de medicina, cirugía, etc.) permanece intacto.
+**CrowS-Pairs**: dataset de evaluación **fuera de distribución** (no se usa para entrenamiento). Permite validar que la edición generaliza a otro benchmark de sesgo.
+
+**Para evaluar retención de capacidades generales:**
+
+**OpenBookQA**, **BoolQ**, **COPA**: benchmarks de razonamiento y comprensión de lenguaje. Se mide la accuracy antes y después de la edición para verificar que no hay degradación.
+
+Nota: BBQ, WinoBias, GLUE y MMLU **no se usan** en este paper a pesar de estar en el front matter original.
 
 ---
 
 ## Resultados principales
 
-- Reduce el stereotyping score en StereoSet de 62% a 51% (50% es ideal) con menos del 1% de degradación en GLUE.
-- Más preciso que métodos de fine-tuning (CDA, MABEL): menor degradación en capacidades generales.
-- Cada edición es rápida: segundos por estereotipo vs. horas de fine-tuning.
-- Escalable: puede editar cientos de estereotipos de forma independiente.
+### StereoSet — Stereotype Score y ΔLMS
+
+| Método | GPT2-m Género | GPT2-m Raza | GPT2-m Religión |
+|---|:---:|:---:|:---:|
+| Pre-edición (SS%) | 65.58 | 61.63 | 62.57 |
+| CDA | 63.29 | 61.36 | 61.79 |
+| SentenceDebias | 67.99 | 58.97 | 56.64 |
+| Self-Debias | 60.28 | 57.29 | 57.61 |
+| INLP | 63.17 | 60.00 | 58.57 |
+| **BiasEdit** | **49.42** | **56.34** | **53.55** |
+
+BiasEdit lleva el SS de género de 65.58 a **49.42** — casi exactamente 50 (ideal). Mejora de +13.26 puntos de distancia al ideal vs el mejor baseline (INLP). Resultados similares en Mistral-7B, Llama3-8B y Gemma-2b.
+
+**ΔLMS de BiasEdit** (lo que se pierde en capacidad lingüística):
+- Género GPT2-m: −8.82% — es el coste más alto
+- Religión GPT2-m: −1.92% — casi sin impacto
+- Self-Debias en comparación: hasta −40% en Mistral-7B
+
+### Ablación: importancia de $$\mathcal{L}_r$$
+
+| | GPT2-m Género SS | GPT2-m Género ΔLMS |
+|---|:---:|:---:|
+| Sin $$\mathcal{L}_r$$ | 52.55% | −52.36% |
+| Con $$\mathcal{L}_r$$ | 49.42% | −8.82% |
+
+Sin retención, el modelo colapsa. Con retención, el SS mejora **más** (49 vs 52) y el daño a LMS se reduce de 52% a 9%.
+
+### Capacidades generales (Llama3-8B)
+
+| Benchmark | Pre | Post |
+|---|:---:|:---:|
+| OpenBookQA | 80.80% | 78.94% |
+| BoolQ | 70.00% | 65.18% |
+| COPA | 68.00% | 67.90% |
+
+Degradación de 1-5 puntos porcentuales — sustancialmente menor que métodos de fine-tuning completo.
+
+### CrowS-Pairs (out-of-distribution)
+
+BiasEdit generaliza al dataset no visto: SS de género baja de 61.46 a **53.08** en GPT2-medium, indicando que el debiasing no es superficial.
+
+### Eficiencia
+
+Entrenar las redes editoras de género para Mistral-7B toma ~5 horas en una GPU A800. Los métodos de subespacio (SentenceDebias) tardan más de 2 días para el mismo modelo.
 
 ---
 
 ## Ventajas respecto a trabajos anteriores
 
-- Aplica por primera vez técnicas de edición de modelos específicamente para debiasing.
-- La modificación quirúrgica preserva mejor el conocimiento general que el fine-tuning.
-- La velocidad permite iterar sobre muchos estereotipos específicos de forma práctica.
+- **Primer uso de hiper-redes de edición (MEND/MALMEN) para debiasing**: edita solo parámetros de las MLPs seleccionadas en lugar de fine-tuning completo.
+- **Mucho mejor reducción de sesgo que todos los baselines**: en género, BiasEdit lleva SS a ~49% vs el mejor baseline (Self-Debias a ~60%) en GPT2-medium.
+- **Retención de capacidades lingüísticas**: la pérdida de retención $$\mathcal{L}_r$$ es la clave para que la edición no colapse el modelo.
+- **Robustez semántica**: los sinónimos de los atributos de sesgo (evaluados con WordNet) también son debiaseados, indicando generalización más allá de los tokens exactos del training.
+- **Escalable a modelos grandes**: funciona en Mistral-7B, Llama3-8B y Gemma-2b sin adaptaciones especiales.
 
 ---
 
 ## Trabajos previos relacionados
 
-Los trabajos previos se organizan en dos grandes líneas: (1) métodos de debiasing existentes (fine-tuning, proyección de representaciones, prompting) que BiasEdit pretende superar, y (2) técnicas de edición de modelos de las que BiasEdit toma su metodología central.
+Los trabajos previos se organizan en dos líneas: métodos de debiasing clásicos y técnicas de edición de modelos.
 
-- **Meng et al. (2022, 2023) — ROME / MEMIT**: técnicas de edición de conocimiento que localizan hechos en capas MLP específicas del transformer y los modifican con rank-one updates; BiasEdit adapta directamente esta metodología para formular los estereotipos como "hechos" a editar.
-- **Mitchell et al. (2022) — MEND**: emplea hiper-redes para predecir actualizaciones de parámetros en edición de modelos; BiasEdit adopta la arquitectura de editor como hiper-red para generar los shifts de parámetros de debiasing.
-- **Nadeem et al. (2021) — [StereoSet](2021_nadeem_stereoset.html)**: benchmark principal de evaluación usado en BiasEdit; proporciona el Stereotype Score (SS) y Language Modeling Score (LMS) para cuantificar sesgo y preservación de capacidades.
-- **Nangia et al. (2020) — CrowS-Pairs**: segundo benchmark de evaluación de sesgo usado en BiasEdit para validar los resultados en un dataset independiente.
-- **Meade et al. (2022) — [An Empirical Survey of Debiasing Techniques](2021_meade_debiasing-survey.html)**: survey que establece la línea base comparativa de métodos (CDA, SentenceDebias, INLP, Self-Debias) contra los que BiasEdit se compara; también proporciona el código público bias-bench usado para la evaluación.
-- **Ravfogel et al. (2020) — INLP**: uno de los baselines de comparación directa; proyecta representaciones para eliminar la dirección de género, pero sin modificar los parámetros del modelo.
-- **Liang et al. (2020) — SentenceDebias**: otro baseline; extiende Hard-Debias a representaciones de oraciones, pero tampoco modifica parámetros internos y no puede aplicarse en downstream tasks.
-- **Schick et al. (2021) — Self-Debias**: baseline de prompting que usa el propio modelo para reducir sesgos en la distribución de generación sin modificar pesos; comparado directamente en la Tabla 1.
-- **Zmigrod et al. (2019) / Barikeri et al. (2021) — CDA**: fine-tuning completo con datos contrafactuales; costoso y solo aplicable a modelos pequeños como GPT-2.
-- **Smith et al. (2022) — [Holistic Bias](2022_smith_holistic-descriptor.html)**: trabajo citado como ejemplo de la persistencia y amplitud de los sesgos en LLMs, motivando la necesidad de métodos de edición quirúrgica como BiasEdit.
+- **Meng et al. (2022, 2023) — ROME / MEMIT**: técnicas de edición de conocimiento que localizan hechos en capas MLP específicas; BiasEdit adopta su metodología de **bias tracing** (causal tracing), aunque usa un mecanismo de edición diferente (hiper-redes en lugar de rank-1 updates).
+- **Mitchell et al. (2022) — MEND / MALMEN**: hiper-redes que predicen actualizaciones de parámetros para edición de modelos; BiasEdit adopta directamente esta arquitectura como mecanismo de edición.
+- **Nadeem et al. (2021) — [StereoSet](2021_nadeem_stereoset.html)**: benchmark principal; proporciona SS y LMS para cuantificar sesgo y preservación de capacidades.
+- **Nangia et al. (2020) — CrowS-Pairs**: benchmark de evaluación fuera de distribución.
+- **Meade et al. (2022) — [An Empirical Survey of Debiasing Techniques](2021_meade_debiasing-survey.html)**: establece la línea base comparativa (CDA, SentenceDebias, INLP, Self-Debias) y provee el código bias-bench usado para evaluación.
+- **Ravfogel et al. (2020) — INLP**: baseline de proyección; elimina la dirección de género de las representaciones sin modificar parámetros.
+- **Liang et al. (2020) — SentenceDebias**: baseline de proyección a nivel de oración.
+- **Schick et al. (2021) — Self-Debias**: baseline de prompting; actúa en inferencia, con alta degradación de LMS en modelos grandes.
 
 ## Tags
 
-`debiasing` `edición-de-modelos` `ROME` `FFN-layers` `sesgo-de-género`
+`debiasing` `edición-de-modelos` `hiper-redes` `FFN-layers` `sesgo-de-género`

@@ -23,7 +23,7 @@ opinion: "Muy simple, tienen un forget set y un retrain set, y hacen que una cap
 
 ## Qué hace
 
-Introduce WMDP (**W**eapons of **M**ass **D**estruction **P**roxy), un benchmark de 4.157 preguntas de opción múltiple para medir la capacidad de los LLMs de asistir en la creación de armas de destrucción masiva (biológicas, químicas, cibernéticas). Junto al benchmark propone CUT (**C**ontrastive **U**nlearn **T**uning), un método de unlearning basado en manipulación de representaciones internas en lugar de gradient ascent.
+Introduce WMDP (**W**eapons of **M**ass **D**estruction **P**roxy), un benchmark de 4.157 preguntas de opción múltiple para medir la capacidad de los LLMs de asistir en la creación de armas de destrucción masiva (biológicas, químicas, cibernéticas). Junto al benchmark propone RMU (**R**epresentation **M**isdirection for **U**nlearning), un método de unlearning basado en manipulación de representaciones internas en lugar de gradient ascent.
 
 ---
 
@@ -92,7 +92,7 @@ Solo se modifican un subconjunto de capas del transformer (capas intermedias); l
 
 ## Ejemplo ilustrativo
 
-Una pregunta de WMDP-bio podría ser: *"¿Qué técnica de modificación genética permite aumentar la transmisibilidad de un virus influenza entre mamíferos?"* con opciones técnicas específicas. Un modelo sin unlearning responde correctamente con alta probabilidad. Después de aplicar CUT, el modelo debería responder al azar (~25%) en estas preguntas, pero seguir respondiendo correctamente preguntas de biología general.
+Una pregunta de WMDP-bio podría ser: *"¿Qué técnica de modificación genética permite aumentar la transmisibilidad de un virus influenza entre mamíferos?"* con opciones técnicas específicas. Un modelo sin unlearning responde correctamente con alta probabilidad. Después de aplicar RMU, el modelo debería responder al azar (~25%) en estas preguntas, pero seguir respondiendo correctamente preguntas de biología general.
 
 ---
 
@@ -112,16 +112,16 @@ Los experimentos evalúan Zephyr-7b-beta e Yi-34b-Chat. Los baselines son:
 | + LLMU | 59.5% | 38.2% | 45.2% | 1.00 |
 | + SCRUB | 45.2% | 38.4% | 53.7% | 7.09 |
 | + SSD | 55.2% | 34.0% | 41.5% | 5.48 |
-| + **CUT** | **29.3%** | **24.9%** | **57.0%** | **7.20** |
+| + **RMU** | **29.3%** | **24.9%** | **57.0%** | **7.20** |
 
 **Yi-34b-Chat:**
 
 | Método | WMDP-bio ↓ | WMDP-cyber ↓ | MMLU ↑ | MT-Bench ↑ |
 |--------|:----------:|:------------:|:------:|:----------:|
 | Base | 76.3% | 45.8% | 72.9% | 7.65 |
-| + **CUT** | **30.9%** | **29.2%** | **69.0%** | **7.11** |
+| + **RMU** | **30.9%** | **29.2%** | **69.0%** | **7.11** |
 
-- CUT es el único método que alcanza nivel casi aleatorio (~25-30%) en ambos dominios sin degradación significativa: −1.5pp en MMLU y −0.13 en MT-Bench para Zephyr.
+- RMU es el único método que alcanza nivel casi aleatorio (~25-30%) en ambos dominios sin degradación significativa: −1.5pp en MMLU y −0.13 en MT-Bench para Zephyr.
 - LLMU destruye la fluencia conversacional (MT-Bench 1.00); SCRUB y SSD preservan mejor la utilidad general pero fallan en olvidar suficientemente.
 - **Robustez adversarial**: el ataque GCG necesitó más de 2.500 pasos (~7h en A100) para extraer respuestas coherentes del modelo con CUT, frente a menos de 50 pasos en el modelo base.
 - Las 122 preguntas privadas más sensibles (no publicadas) tienen precisión similar a WMDP, validando que el benchmark es un proxy razonable del conocimiento más peligroso.

@@ -86,29 +86,67 @@ La mitad negativa de $$\mathcal{L}_\text{DPO}$$: solo usa los ejemplos rechazado
 
 Todos los experimentos usan Llama-2-7B-chat, AdamW lr=1e-5, batch efectivo de 32, 10 épocas de unlearning.
 
-- **GA** — Minimiza $$\mathcal{L}_\text{GA}$$ solo, sin ningún término de retención ([Jang et al., 2022](2022_jang_knowledge-unlearning.html); [Yao et al., 2023](2023_yao_large-llm-unlearning.html)). Colapsa rápidamente: alcanza su máximo forget quality en los primeros pasos y luego degenera de forma irreversible porque el gradiente de $$\mathcal{L}_\text{GA}$$ no se autoregula.
+En TOFU, el **forget set** son los pares QA sobre los autores ficticios a olvidar (2/10/20 autores según el split forget01/05/10); el **retain set** son los pares QA sobre los autores ficticios restantes (198/190/180 autores). Algunos métodos no usan retain set en absoluto; en los que sí lo usan, el retain set siempre son los pares QA de los autores no olvidados con sus respuestas correctas originales.
 
-- **GA + RT** — Minimiza $$\mathcal{L}_\text{GA} + \mathcal{L}_\text{RT}$$. El término $$\mathcal{L}_\text{RT}$$ obliga al modelo a seguir acertando en el retain set, frenando el daño colateral, pero hereda la inestabilidad lineal de $$\mathcal{L}_\text{GA}$$: la degradación ocurre igual, solo más lento.
+- **GA** — Minimiza $$\mathcal{L}_\text{GA}$$ solo ([Jang et al., 2022](2022_jang_knowledge-unlearning.html); [Yao et al., 2023](2023_yao_large-llm-unlearning.html)).
+  *Forget:* QA de autores olvidados con sus respuestas correctas ($$y$$) — el modelo maximiza la pérdida sobre ellas.
+  *Retain:* — (ningún término de retención).
+  Colapsa rápidamente: alcanza su máximo forget quality en los primeros pasos y luego degenera de forma irreversible porque el gradiente de $$\mathcal{L}_\text{GA}$$ no se autoregula.
 
-- **GA + KL** (abreviado "KL" en las figuras) — Minimiza $$\mathcal{L}_\text{GA} + \mathcal{K}_\text{RT}$$ ([Maini et al., 2024](2024_maini_kl-minimization.html)). $$\mathcal{K}_\text{RT}$$ ancla la distribución del retain set al modelo original en vez de exigir respuestas correctas. Mismo problema de fondo que GA+RT: el ancla no basta para contener la divergencia lineal de $$\mathcal{L}_\text{GA}$$.
+- **GA + RT** — Minimiza $$\mathcal{L}_\text{GA} + \mathcal{L}_\text{RT}$$.
+  *Forget:* QA de autores olvidados con respuestas correctas (gradient ascent sobre ellas).
+  *Retain:* QA de autores no olvidados con respuestas correctas (cross-entropy estándar para que el modelo siga respondiéndolas bien).
+  El término $$\mathcal{L}_\text{RT}$$ frena el daño colateral, pero hereda la inestabilidad lineal de $$\mathcal{L}_\text{GA}$$: la degradación ocurre igual, solo más lento.
 
-- **IDK + RT** — Minimiza $$\mathcal{L}_\text{FG} + \mathcal{L}_\text{RT}$$, donde $$\tilde{y}$$ = "I don't know" ([Maini et al., 2024](2024_maini_tofu.html)). Estable porque no usa $$\mathcal{L}_\text{GA}$$. Sin embargo, $$\mathcal{L}_\text{FG}$$ solo suprime la respuesta directa sin tocar el conocimiento subyacente: ante parafraseo o ataques de extracción el conocimiento original resurge. Forget quality muy baja en los experimentos.
+- **GA + KL** (abreviado "KL" en las figuras) — Minimiza $$\mathcal{L}_\text{GA} + \mathcal{K}_\text{RT}$$ ([Maini et al., 2024](2024_maini_kl-minimization.html)).
+  *Forget:* QA de autores olvidados con respuestas correctas (gradient ascent).
+  *Retain:* QA de autores no olvidados — no exige acertar las respuestas, solo que la distribución del modelo no se aleje de la del modelo de referencia (divergencia KL).
+  Mismo problema de fondo que GA+RT: el ancla KL no basta para contener la divergencia lineal de $$\mathcal{L}_\text{GA}$$.
 
-- **DPO** — Minimiza $$\mathcal{L}_\text{DPO}$$ con $$y_w$$ generado aleatoriamente (Bernoulli(0.5)) ([Rafailov et al., 2023](2023_ermon_dpo.html)). Requiere construir respuestas "ganadoras" sintéticas, lo que introduce ruido en la señal de aprendizaje. Sin término de retención es inestable.
+- **IDK + RT** — Minimiza $$\mathcal{L}_\text{FG} + \mathcal{L}_\text{RT}$$ ([Maini et al., 2024](2024_maini_tofu.html)).
+  *Forget:* QA de autores olvidados, pero con $$\tilde{y}$$ = "I don't know" como respuesta objetivo — el modelo aprende a responder "no sé" en lugar de la respuesta correcta.
+  *Retain:* QA de autores no olvidados con respuestas correctas (cross-entropy estándar).
+  Estable porque no usa $$\mathcal{L}_\text{GA}$$. Sin embargo, solo suprime la respuesta directa sin tocar el conocimiento subyacente: ante parafraseo o ataques de extracción el conocimiento original resurge. Forget quality muy baja en los experimentos.
 
-- **DPO + RT** — Minimiza $$\mathcal{L}_\text{DPO} + \mathcal{L}_\text{RT}$$. El $$\mathcal{L}_\text{RT}$$ estabiliza el retain set, pero la mitad positiva ruidosa de $$\mathcal{L}_\text{DPO}$$ sigue limitando su rendimiento respecto a NPO+RT.
+- **DPO** — Minimiza $$\mathcal{L}_\text{DPO}$$ ([Rafailov et al., 2023](2023_ermon_dpo.html)).
+  *Forget:* QA de autores olvidados donde $$y_l = y$$ (respuesta correcta original) es el "perdedor" y $$y_w$$ = tokens aleatorios (Bernoulli(0.5)) es el "ganador" sintético.
+  *Retain:* — (ningún término de retención).
+  El ruido en $$y_w$$ introduce señal de aprendizaje degradada. Sin retención es inestable.
 
-- **DPO + KL** — Minimiza $$\mathcal{L}_\text{DPO} + \mathcal{K}_\text{RT}$$. Variante de DPO+RT con retención más conservadora vía $$\mathcal{K}_\text{RT}$$. Misma limitación del ruido en $$y_w$$.
+- **DPO + RT** — Minimiza $$\mathcal{L}_\text{DPO} + \mathcal{L}_\text{RT}$$.
+  *Forget:* ídem DPO — respuesta correcta como perdedora, tokens aleatorios como ganadora.
+  *Retain:* QA de autores no olvidados con respuestas correctas (cross-entropy estándar).
+  El $$\mathcal{L}_\text{RT}$$ estabiliza el retain set, pero la mitad positiva ruidosa de $$\mathcal{L}_\text{DPO}$$ sigue limitando su rendimiento respecto a NPO+RT.
 
-- **KTO** — Minimiza el objetivo de [Kahneman-Tversky Optimization](2024_ethayarajh_kto.html) sobre el forget set (ejemplos marcados como "indeseables"). Comparte con NPO la idea de no necesitar pares, pero usa una función de valor asimétrica inspirada en prospect theory en lugar del log-ratio respecto a $$\pi_\text{ref}$$. Sin retención falla de forma similar a GA.
+- **DPO + KL** — Minimiza $$\mathcal{L}_\text{DPO} + \mathcal{K}_\text{RT}$$.
+  *Forget:* ídem DPO — respuesta correcta como perdedora, tokens aleatorios como ganadora.
+  *Retain:* QA de autores no olvidados — solo divergencia KL respecto al modelo de referencia (sin exigir respuestas correctas).
+  Misma limitación del ruido en $$y_w$$; retención más conservadora que DPO+RT.
 
-- **KTO + RT** — Minimiza $$\mathcal{L}_\text{KTO} + \mathcal{L}_\text{RT}$$. Más estable que KTO solo, pero queda por debajo de NPO+RT en todos los tamaños de forget set evaluados.
+- **KTO** — Minimiza $$\mathcal{L}_\text{KTO}$$ ([Ethayarajh et al., 2024](2024_ethayarajh_kto.html)).
+  *Forget:* QA de autores olvidados con respuestas correctas, marcadas como "indeseables" en la función de valor de KTO — sin necesidad de construir un par ganador.
+  *Retain:* — (ningún término de retención).
+  Sin retención falla de forma similar a GA.
 
-- **NPO** — Minimiza $$\mathcal{L}_\text{NPO}$$ solo. El peso adaptativo $$W_\theta$$ de $$\mathcal{L}_\text{NPO}$$ previene el colapso catastrófico sin ningún término de retención explícito. Sin $$\mathcal{L}_\text{RT}$$ puede degradar el retain set con entrenamiento prolongado, pero es ya más estable que cualquier variante GA.
+- **KTO + RT** — Minimiza $$\mathcal{L}_\text{KTO} + \mathcal{L}_\text{RT}$$.
+  *Forget:* QA de autores olvidados marcados como indeseables (ídem KTO).
+  *Retain:* QA de autores no olvidados con respuestas correctas (cross-entropy estándar).
+  Más estable que KTO solo, pero queda por debajo de NPO+RT en todos los splits.
 
-- **NPO + RT** *(propuesta principal)* — Minimiza $$\mathcal{L}_\text{NPO} + \mathcal{L}_\text{RT}$$. La estabilidad logarítmica de $$\mathcal{L}_\text{NPO}$$ sobre el forget set se combina con $$\mathcal{L}_\text{RT}$$ que protege el retain set explícitamente. Única combinación que logra forget quality > 0.05 en Forget10 mientras preserva model utility. Domina la frontera de Pareto en todos los splits.
+- **NPO** — Minimiza $$\mathcal{L}_\text{NPO}$$ solo.
+  *Forget:* QA de autores olvidados con respuestas correctas — el log-ratio $$\log(\pi_\theta / \pi_\text{ref})$$ se minimiza, reduciendo la probabilidad del modelo actualizado relativa al de referencia. No necesita construir respuesta ganadora.
+  *Retain:* — (ningún término de retención explícito, pero el denominador $$\pi_\text{ref}$$ actúa como ancla implícita).
+  El peso adaptativo $$W_\theta$$ previene el colapso. Sin $$\mathcal{L}_\text{RT}$$ puede degradar el retain set con entrenamiento prolongado.
 
-- **NPO + KL** — Minimiza $$\mathcal{L}_\text{NPO} + \mathcal{K}_\text{RT}$$. Retención más conservadora que NPO+RT vía $$\mathcal{K}_\text{RT}$$. Resultados muy similares a NPO+RT; ambos superan todas las variantes de GA y KTO.
+- **NPO + RT** *(propuesta principal)* — Minimiza $$\mathcal{L}_\text{NPO} + \mathcal{L}_\text{RT}$$.
+  *Forget:* QA de autores olvidados con respuestas correctas (ídem NPO).
+  *Retain:* QA de autores no olvidados con respuestas correctas (cross-entropy estándar).
+  La estabilidad logarítmica de $$\mathcal{L}_\text{NPO}$$ se combina con $$\mathcal{L}_\text{RT}$$ que protege el retain set explícitamente. Única combinación que logra forget quality > 0.05 en Forget10 mientras preserva model utility. Domina la frontera de Pareto en todos los splits.
+
+- **NPO + KL** — Minimiza $$\mathcal{L}_\text{NPO} + \mathcal{K}_\text{RT}$$.
+  *Forget:* QA de autores olvidados con respuestas correctas (ídem NPO).
+  *Retain:* QA de autores no olvidados — solo divergencia KL respecto al modelo de referencia (sin exigir respuestas correctas).
+  Resultados muy similares a NPO+RT; ambos superan todas las variantes de GA y KTO.
 
 ### Figura 6: evolución durante el entrenamiento
 

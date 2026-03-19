@@ -42,7 +42,7 @@ Benchmarks, datasets y métodos de mitigación de sesgo en modelos de lenguaje.
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | FairFil: Contrastive Neural Debiasing Method for Pretrained Text Encoders | Fine-tuning | [Ver](../papers/2021_cheng_fairfil.html) | 0 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | Sustainable Modular Debiasing of Language Models | Adapters / PEFT | [Ver](../papers/2021_lauscher_modular-debiasing.html) | 1 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2021 | An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models | Evaluación / análisis | [Ver](../papers/2021_meade_debiasing-survey.html) | 18 |
-| <span class="dot dot-leido" title="Leído"></span> | 2022 | Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback | Alineamiento / RLHF | [Ver](../papers/2022_bai_rlhf-assistant.html) | 8 |
+| <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback | Alineamiento / RLHF | [Ver](../papers/2022_bai_rlhf-assistant.html) | 8 |
 | <span class="dot dot-leido" title="Leído"></span> | 2022 | Debiasing Pre-Trained Language Models via Efficient Fine-Tuning | Fine-tuning | [Ver](../papers/2022_gira_debiasing-efficient-finetuning.html) | 8 |
 | <span class="dot dot-pendiente" title="Pendiente"></span> | 2022 | Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned | Evaluación / análisis | [Ver](../papers/2022_ganguli_red-teaming.html) | 3 |
 | <span class="dot dot-relevante" title="Relevante"></span><span class="dot dot-leido" title="Leído"></span> | 2022 | MABEL: Attenuating Gender Bias using Textual Entailment Data | Data augmentation | [Ver](../papers/2022_he_mabel.html) | 10 |
@@ -94,15 +94,15 @@ Número de papers de mitigación (sobre 24) que utilizan cada dataset.
 
 | Dataset | Papers que lo usan |
 |---------|:-----------------:|
-| StereoSet | 18 |
-| WinoBias | 15 |
-| BBQ | 11 |
-| CrowS-Pairs | 10 |
+| StereoSet | 17 |
+| WinoBias | 12 |
+| CrowS-Pairs | 11 |
+| BBQ | 10 |
 | GLUE | 8 |
 | SEAT | 5 |
 | BOLD | 3 |
 | MMLU | 2 |
-| BiasFreeBench, STS-B, WNC, SentiBias, SNLI/MultiNLI, TruthfulQA, WEAT, HH-RLHF, FairFace, CUB-200, Stanford Cars, Food-101 | 1 cada uno |
+| BiasFreeBench, STS-B, WNC, SentiBias, SNLI/MultiNLI, WEAT, HH-RLHF, FairFace, CUB-200, Stanford Cars, Food-101, MRPC, RTE, QNLI, WikiText-2 | 1 cada uno |
 
 ---
 

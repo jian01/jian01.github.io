@@ -17,7 +17,7 @@ datasets:
   - "HH-RLHF"
 measures_general_quality: "Sí"
 status:
-  - "Leido"
+  - "Pendiente"
 image: "imgs/2022_bai_rlhf-assistant.png"
 image_caption: "Interfaz de la tarea de anotación humana utilizada en el pipeline RLHF de Anthropic, donde los anotadores comparan respuestas del asistente y seleccionan la más útil y segura para entrenar el reward model."
 opinion: "<WIP>"

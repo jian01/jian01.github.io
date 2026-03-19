@@ -107,13 +107,12 @@
     "cites": [],
     "cited_by": [
       "2023_hanna_gpt2-greater-than",
-      "2023_yang_bias-neurons",
       "2024_syed_attribution-patching",
       "2025_chandna_dissecting-bias",
       "2025_park_aligned-stereotypical"
     ],
     "cites_count": 0,
-    "cited_by_count": 5
+    "cited_by_count": 4
   },
   "2021_bourtoule_sisa": {
     "title": "Machine Unlearning",
@@ -134,9 +133,11 @@
       "2022_he_mabel",
       "2021_meade_debiasing-survey"
     ],
-    "cited_by": [],
+    "cited_by": [
+      "2022_he_mabel"
+    ],
     "cites_count": 2,
-    "cited_by_count": 0
+    "cited_by_count": 1
   },
   "2021_elhage_transformer-circuits": {
     "title": "A Mathematical Framework for Transformer Circuits",
@@ -189,11 +190,10 @@
       "2022_ganguli_red-teaming",
       "2023_ji_beavertails",
       "2023_li_halueval",
-      "2023_yang_bias-neurons",
       "2026_dang_beyond-forgetting"
     ],
     "cites_count": 0,
-    "cited_by_count": 6
+    "cited_by_count": 5
   },
   "2021_meade_debiasing-survey": {
     "title": "An Empirical Survey of the Effectiveness of Debiasing Techniques for Pre-trained Language Models",
@@ -217,11 +217,10 @@
       "2025_shrestha_llm-bias-detection",
       "2025_xu_biasedit",
       "2025_zhao_debiasing-peft",
-      "2026_chand_no-free-lunch",
-      "2026_pan_knowbias"
+      "2026_chand_no-free-lunch"
     ],
     "cites_count": 1,
-    "cited_by_count": 18
+    "cited_by_count": 17
   },
   "2021_nadeem_stereoset": {
     "title": "StereoSet: Measuring stereotypical bias in pretrained language models",
@@ -229,11 +228,11 @@
     "cited_by": [
       "2021_meade_debiasing-survey",
       "2022_gira_debiasing-efficient-finetuning",
+      "2022_he_mabel",
       "2022_smith_holistic-descriptor",
       "2023_thakur_gender-makeover",
       "2023_venkit_nationality-bias",
       "2023_xie_parameter-efficient-debiasing",
-      "2023_yang_bias-neurons",
       "2024_dige_machine-unlearning-bias",
       "2024_han_chatgpt-data-augmentation",
       "2025_cheng_biasfilter",
@@ -267,7 +266,6 @@
     ],
     "cited_by": [
       "2023_ji_beavertails",
-      "2023_thakur_gender-makeover",
       "2023_yang_bias-neurons",
       "2024_dige_machine-unlearning-bias",
       "2024_gallegos_self-debiasing",
@@ -280,7 +278,7 @@
       "2026_pan_knowbias"
     ],
     "cites_count": 1,
-    "cited_by_count": 12
+    "cited_by_count": 11
   },
   "2021_xu_bot-adversarial": {
     "title": "Bot-Adversarial Dialogue for Safe Conversational Agents",
@@ -375,7 +373,10 @@
   },
   "2022_he_mabel": {
     "title": "MABEL: Attenuating Gender Bias using Textual Entailment Data",
-    "cites": [],
+    "cites": [
+      "2021_cheng_fairfil",
+      "2021_nadeem_stereoset"
+    ],
     "cited_by": [
       "2021_cheng_fairfil",
       "2023_thakur_gender-makeover",
@@ -388,7 +389,7 @@
       "2025_shrestha_llm-bias-detection",
       "2025_zhao_debiasing-peft"
     ],
-    "cites_count": 0,
+    "cites_count": 2,
     "cited_by_count": 10
   },
   "2022_ilharco_task-arithmetic": {
@@ -456,11 +457,10 @@
     ],
     "cited_by": [
       "2025_cheng_biasfilter",
-      "2025_park_aligned-stereotypical",
-      "2025_xu_biasedit"
+      "2025_park_aligned-stereotypical"
     ],
     "cites_count": 2,
-    "cited_by_count": 3
+    "cited_by_count": 2
   },
   "2022_wang_ioi-circuit": {
     "title": "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small",
@@ -488,11 +488,10 @@
     "cites": [],
     "cited_by": [
       "2023_panigrahi_skill-localization",
-      "2025_salehoof_dualaxis-taxonomy",
-      "2026_pan_knowbias"
+      "2025_salehoof_dualaxis-taxonomy"
     ],
     "cites_count": 0,
-    "cited_by_count": 3
+    "cited_by_count": 2
   },
   "2022_yang_task-specific-compression": {
     "title": "Task-specific Compression for Multi-task Language Models using Attribution-based Pruning",
@@ -737,13 +736,12 @@
     "cites": [
       "2021_nadeem_stereoset",
       "2022_he_mabel",
-      "2021_parrish_bbq",
       "2021_meade_debiasing-survey"
     ],
     "cited_by": [
       "2025_zhao_debiasing-peft"
     ],
-    "cites_count": 4,
+    "cites_count": 3,
     "cited_by_count": 1
   },
   "2023_venkit_nationality-bias": {
@@ -779,10 +777,7 @@
     "title": "Mitigating Biases for Instruction-following Language Models via Bias Neurons Elimination",
     "cites": [
       "2021_meade_debiasing-survey",
-      "2021_nadeem_stereoset",
       "2021_parrish_bbq",
-      "2021_lin_truthfulqa",
-      "2020_vig_gender-bias-causal",
       "2022_gira_debiasing-efficient-finetuning"
     ],
     "cited_by": [
@@ -795,7 +790,7 @@
       "2026_chand_no-free-lunch",
       "2026_pan_knowbias"
     ],
-    "cites_count": 6,
+    "cites_count": 3,
     "cited_by_count": 8
   },
   "2023_yao_large-llm-unlearning": {
@@ -1207,10 +1202,11 @@
       "2023_patil_sensitive-information"
     ],
     "cited_by": [
+      "2025_dorna_openunlearning",
       "2025_huutien_improving-unlearning"
     ],
     "cites_count": 9,
-    "cited_by_count": 1
+    "cited_by_count": 2
   },
   "2024_zhang_negative-preference-optimization": {
     "title": "Negative Preference Optimization: From Catastrophic Collapse to Effective Unlearning",
@@ -1323,11 +1319,9 @@
       "2023_zhou_causal-debias",
       "2023_xie_parameter-efficient-debiasing"
     ],
-    "cited_by": [
-      "2026_pan_knowbias"
-    ],
+    "cited_by": [],
     "cites_count": 10,
-    "cited_by_count": 1
+    "cited_by_count": 0
   },
   "2025_deng_guard": {
     "title": "GUARD: Generation-time LLM Unlearning via Adaptive Restriction and Detection",
@@ -1358,12 +1352,13 @@
       "2024_doshi_does-unlearning",
       "2024_liu_rethinking-unlearning",
       "2023_yao_large-llm-unlearning",
-      "2024_jin_rwku"
+      "2024_jin_rwku",
+      "2024_zhang_catastrophic-quantization"
     ],
     "cited_by": [
       "2026_cai_per-parameter-task-arithmetic"
     ],
-    "cites_count": 10,
+    "cites_count": 11,
     "cited_by_count": 1
   },
   "2025_fan_unlearning-relearning": {
@@ -1524,8 +1519,7 @@
     "title": "BiasEdit: Debiasing Stereotyped Language Models via Model Editing",
     "cites": [
       "2021_nadeem_stereoset",
-      "2021_meade_debiasing-survey",
-      "2022_smith_holistic-descriptor"
+      "2021_meade_debiasing-survey"
     ],
     "cited_by": [
       "2025_islam_biasgym",
@@ -1535,7 +1529,7 @@
       "2025_xu_biasfreebench",
       "2026_pan_knowbias"
     ],
-    "cites_count": 3,
+    "cites_count": 2,
     "cited_by_count": 6
   },
   "2025_xu_biasfreebench": {
@@ -1567,11 +1561,10 @@
       "2021_meade_debiasing-survey"
     ],
     "cited_by": [
-      "2025_islam_biasgym",
-      "2026_pan_knowbias"
+      "2025_islam_biasgym"
     ],
     "cites_count": 7,
-    "cited_by_count": 2
+    "cited_by_count": 1
   },
   "2026_cai_per-parameter-task-arithmetic": {
     "title": "Per-parameter Task Arithmetic for Unlearning in Large Language Models",
@@ -1633,14 +1626,10 @@
       "2025_xu_biasedit",
       "2025_li_fairsteer",
       "2021_nadeem_stereoset",
-      "2021_parrish_bbq",
-      "2022_wang_skill-neurons",
-      "2025_cheng_biasfilter",
-      "2021_meade_debiasing-survey",
-      "2025_zhao_debiasing-peft"
+      "2021_parrish_bbq"
     ],
     "cited_by": [],
-    "cites_count": 10,
+    "cites_count": 6,
     "cited_by_count": 0
   }
 }
