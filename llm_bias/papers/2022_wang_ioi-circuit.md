@@ -42,13 +42,45 @@ La respuesta correcta es "Mary" (el objeto indirecto, IO). La oración tiene est
 2. Eliminar los nombres duplicados (John aparece dos veces).
 3. Predecir el nombre restante (Mary).
 
-La notación del paper usa S1 y S2 para la primera y segunda aparición del sujeto, IO para el objeto indirecto, y END para el token final (la preposición "to"). El dataset IOI se construye con 15 plantillas y nombres propios aleatorios de un token. Ejemplos del corpus:
+La notación del paper usa S1 y S2 para la primera y segunda aparición del sujeto, IO para el objeto indirecto, y END para el token final (la preposición "to"). El dataset IOI se construye con **15 plantillas**, nombres propios de un token elegidos de una lista de 100 nombres ingleses, y lugares/objetos de una lista de 20 palabras comunes (todas de un token). **Tamaño total: 100.000 ejemplos.**
 
-- "When Mary and John went to the store, John gave a drink to" → "Mary"
-- "Then, Alice and Bob had a meeting. Bob told the manager about" → "Alice"
-- "After John and Sarah arrived at the party, John introduced himself to" → "Sarah"
+### Las 15 plantillas IOI
 
-GPT-2 small resuelve esta tarea con una diferencia de logits media de 3.56 (IO predicho sobre S el 99.3% del tiempo) y una probabilidad media del IO del 49%.
+| # | Plantilla |
+|---|-----------|
+| 1 | Then, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A] |
+| 2 | Then, [B] and [A] had a lot of fun at the [PLACE]. [B] gave a [OBJECT] to [A] |
+| 3 | Then, [B] and [A] were working at the [PLACE]. [B] decided to give a [OBJECT] to [A] |
+| 4 | Then, [B] and [A] were thinking about going to the [PLACE]. [B] wanted to give a [OBJECT] to [A] |
+| 5 | Then, [B] and [A] had a long argument, and afterwards [B] said to [A] |
+| 6 | After [B] and [A] went to the [PLACE], [B] gave a [OBJECT] to [A] |
+| 7 | When [B] and [A] got a [OBJECT] at the [PLACE], [B] decided to give it to [A] |
+| 8 | When [B] and [A] got a [OBJECT] at the [PLACE], [B] decided to give the [OBJECT] to [A] |
+| 9 | While [B] and [A] were working at the [PLACE], [B] gave a [OBJECT] to [A] |
+| 10 | While [B] and [A] were commuting to the [PLACE], [B] gave a [OBJECT] to [A] |
+| 11 | After the lunch, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A] |
+| 12 | Afterwards, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A] |
+| 13 | Then, [B] and [A] had a long argument. Afterwards [B] said to [A] |
+| 14 | The [PLACE] [B] and [A] went to had a [OBJECT]. [B] gave it to [A] |
+| 15 | Friends [B] and [A] found a [OBJECT] at the [PLACE]. [B] gave it to [A] |
+
+En todas, [B] = sujeto S (nombre que aparece dos veces), [A] = objeto indirecto IO (nombre que debe predecirse).
+
+### Dataset ABC (distribución de referencia $$p_{ABC}$$)
+
+Para calcular las activaciones de referencia usadas en los knockouts, se construye el **dataset ABC**: mismas plantillas que $$p_{IOI}$$ pero con **tres nombres independientes (A, B, C)** en lugar de IO y S, eliminando la estructura de objeto indirecto. Por ejemplo: "When Alice and Bob went to the store, Charlie gave a bottle of milk to". En $$p_{ABC}$$ no hay un único IO plausible, por lo que la media de activaciones sobre esta distribución es un baseline neutro. Se computa la media por plantilla para preservar la consistencia gramatical.
+
+### Condiciones adversariales
+
+| Distribución | Logit difference | Prob. IO | S > IO |
+|---|:---:|:---:|:---:|
+| $$p_{IOI}$$ (estándar) | 3.55 | 0.49 | 0.7% |
+| S adicional (S duplicado dos veces) | 3.64 | 0.59 | 0.4% |
+| IO adicional (IO duplicado dos veces) | 1.23 | 0.36 | 23.4% |
+
+Cuando el IO aparece dos veces, el modelo ya no puede eliminarlo por duplicación y comete error el 23.4% del tiempo, confirmando que el mecanismo central del circuito es precisamente la detección y eliminación de tokens duplicados.
+
+GPT-2 small resuelve la tarea estándar con una diferencia de logits media de **3.56** (IO predicho sobre S el **99.3%** del tiempo) y una probabilidad media del IO del **49%**.
 
 ## Metodología
 
@@ -76,14 +108,16 @@ Si el cambio es grande (negativo), $h$ contribuye positivamente al circuito. Si 
 
 ### Path patching
 
-El activation patching estándar no distingue efectos directos de indirectos. El paper introduce **path patching** para aislar el efecto directo de una cabeza $h$ sobre un conjunto de componentes $R$. Formalmente, dado $x_\text{orig}$ y $x_\text{new}$:
+El activation patching estándar no distingue efectos directos de indirectos: si la cabeza $$h$$ afecta a $$R$$ sólo a través de una tercera cabeza $$h'$$, el activation patching de $$h$$ en los logits también captura ese efecto indirecto. El paper introduce **path patching** para aislar únicamente el **efecto directo** de $$h$$ sobre un conjunto de receptores $$R$$, es decir, el efecto que viaja a través del residual stream y MLPs sin pasar por otras cabezas de atención.
 
-1. Ejecutar un forward pass en $x_\text{orig}$.
-2. Para los paths en $P$ (caminos directos desde $h$ hasta $R$, es decir, a través de conexiones residuales y MLPs pero no a través de otras cabezas de atención), reemplazar las activaciones de $h$ con las de $x_\text{new}$.
-3. Recomputar todo lo que sigue a $R$ con un forward pass normal.
-4. Medir el cambio en la diferencia de logits.
+Dado un input original $$x_\text{orig}$$ y un input alternativo $$x_\text{new}$$, el algoritmo usa **cuatro forward passes**:
 
-Esto mide el efecto contrafactual de $h$ sobre $R$ a través de caminos directos. El paper siempre toma $x_\text{orig} \sim p_{IOI}$ y $x_\text{new}$ la muestra correspondiente de $p_{ABC}$.
+- **Forward pass A**: ejecutar el modelo en $$x_\text{new}$$ y guardar todas las activaciones (en particular, la activación de $$h$$, llamada $$A_h^{new}$$).
+- **Forward pass B**: ejecutar el modelo en $$x_\text{orig}$$ y guardar todas las activaciones normales.
+- **Forward pass C** (uno por cada receptor $$r \in R$$): ejecutar desde $$h$$ hasta $$r$$ sobre $$x_\text{orig}$$, pero reemplazando la activación de $$h$$ con $$A_h^{new}$$ del pass A. Los MLPs entre $$h$$ y $$r$$ se recomputan normalmente. Se guarda el estado de $$r$$ resultante.
+- **Forward pass D**: ejecutar el modelo completo sobre $$x_\text{orig}$$ (como en B), pero para cada $$r \in R$$ se sustituye su estado por el del forward pass C. Se mide el cambio en la diferencia de logits.
+
+Esto mide el efecto contrafactual de $$h$$ sobre $$R$$ **sólo a través del camino directo** $$h \to R$$, neutralizando efectos que pasan por otras cabezas de atención. En todos los experimentos del paper, $$x_\text{orig} \sim p_{IOI}$$ y $$x_\text{new}$$ es la muestra correspondiente de $$p_{ABC}$$.
 
 ### Proceso de descubrimiento: back-tracing iterativo
 
@@ -102,15 +136,24 @@ En cada paso, tras identificar las cabezas por path patching, se caracterizan su
 Se definen tres criterios formales para validar el circuito $C$ con métrica $F(C) = \mathbb{E}_{X \sim p_{IOI}}[f(C(X); X)]$ (diferencia de logits media):
 
 - **Faithfulness (fidelidad)**: $|F(M) - F(C)|$ debe ser pequeño. El circuito obtenido tiene $|F(M) - F(C)| = 0.46$, o sólo el 13% de $F(M) = 3.56$ (87% de rendimiento preservado).
-- **Completeness (completitud)**: Para todo subconjunto $K \subseteq C$, el incompleteness score $|F(C \setminus K) - F(M \setminus K)|$ debe ser pequeño. Verifica que $C$ y $M$ permanecen similares bajo knockouts.
-- **Minimality (minimalidad)**: Para cada nodo $v \in C$ debe existir $K \subseteq C \setminus \{v\}$ tal que $|F(C \setminus (K \cup \{v\})) - F(C \setminus K)|$ sea grande, confirmando que $v$ es necesario.
+- **Completeness (completitud)**: Para todo subconjunto $$K \subseteq C$$, el incompleteness score $$|F(C \setminus K) - F(M \setminus K)|$$ debe ser pequeño. Verifica que $$C$$ y $$M$$ se comportan de forma similar cuando se knockoutean los mismos componentes. Se evalúa con tres métodos:
+  1. **Muestreo aleatorio**: diez subconjuntos $$K$$ uniformemente aleatorios → incompleteness scores pequeños.
+  2. **Eliminación por clases**: knockoutear categorías enteras de cabezas (e.g., todas las S-Inhibition Heads) → incompleteness scores pequeños.
+  3. **Optimización greedy** (búsqueda voraz): seleccionar el nodo que maximiza $$|F(C \setminus K) - F(M \setminus K)|$$ iterativamente, hasta que ningún nodo adicional aumente el score → encontró subconjuntos con incompleteness score de hasta **3.09** (el 87% de la diferencia de logits original), indicando que el circuito no captura todos los mecanismos del modelo aunque los tests menos exhaustivos pasen.
+- **Minimality (minimalidad)**: Para cada nodo $$v \in C$$ debe existir $$K \subseteq C \setminus \{v\}$$ tal que $$|F(C \setminus (K \cup \{v\})) - F(C \setminus K)|$$ sea grande, confirmando que $$v$$ es necesario. Los 26 componentes del circuito verifican este criterio: cada uno contribuye al menos el **1%** de la diferencia de logits original cuando se elimina.
 
 ## El circuito / Los componentes
 
 El circuito de 26 cabezas implementa el algoritmo de tres pasos (identificar, eliminar duplicados, predecir) mediante 7 clases funcionales:
 
 ### Name Mover Heads (cabezas 9.9, 9.6, 10.0)
-Son las cabezas más importantes. Activas en posición END, atienden con alta probabilidad al token IO (probabilidad media de atención = 0.59) y copian ese nombre al output. Su función de copia se verifica con el "copy score": la probabilidad de que el nombre al que atienden aparezca en el top-5 de logits si la cabeza atiende perfectamente ese token. Las tres Name Mover Heads tienen copy score >95%, frente a <20% para una cabeza promedio. La correlación entre probabilidad de atención al IO y proyección del output en dirección $W_U[\text{IO}]$ es $\rho > 0.81$.
+Son las cabezas más importantes. Activas en posición END, atienden con alta probabilidad al token IO (probabilidad media de atención = **0.59**) y copian ese nombre al output.
+
+**Copy score** — definición formal: se toma el embedding del token $$t$$, se multiplica por la matriz $$W_{OV}^h = W_O^h W_V^h$$ de la cabeza $$h$$ (simulando que atiende perfectamente a $$t$$), se multiplica por la matriz de unembedding $$W_U$$ y se aplica la layer norm final para obtener probabilidades en el vocabulario. Se mide la proporción de muestras ($$N=1000$$) en que $$t$$ aparece en el top-5 de logits:
+
+$$\text{CopyScore}(h, t) = \mathbb{P}_{N=1000}\!\left(t \in \text{top-5}\!\left(\text{LN}(e_t \cdot W_{OV}^h) \cdot W_U\right)\right)$$
+
+Las tres Name Mover Heads tienen copy score **>95%**, frente a **<20%** para una cabeza promedio. La correlación entre la probabilidad de atención al IO y la proyección del output en dirección $$W_U[\text{IO}]$$ es $$\rho > 0.81$$ ($$N=500$$).
 
 Las Name Mover Heads implementan el paso 3 del algoritmo: "output the remaining name". Necesitan haber sido dirigidas por las S-Inhibition Heads para no atender al sujeto duplicado.
 
@@ -120,25 +163,48 @@ Comparten las propiedades de las Name Mover Heads pero escriben en dirección op
 ### S-Inhibition Heads (cabezas 7.3, 7.9, 8.6, 8.10)
 Activas en posición END, atienden principalmente al token S2 (probabilidad media de atención END→S2 = 0.51 sobre las cuatro cabezas). Escriben en el vector de queries de las Name Mover Heads, inhibiendo su atención a S1 y S2. Sin estas cabezas, las Name Mover Heads copiarían el nombre equivocado (el sujeto duplicado).
 
-El mecanismo funciona a través de dos señales:
-- **Token signal**: contiene el valor del token S, haciendo que las Name Movers eviten ese token concreto.
-- **Position signal**: contiene información sobre la posición del token S1, haciendo que las Name Movers eviten esa posición independientemente del valor del token.
+El mecanismo funciona a través de dos señales que las S-Inhibition Heads escriben en el residual stream de END, leídas por las queries de las Name Mover Heads:
 
-La señal de posición tiene mayor efecto que la señal de token. Ambas señales juntas explican completamente la diferencia en atención al IO frente a S1.
+- **Token signal ($$S_\text{tok}$$)**: contiene el embedding del token S, haciendo que las Name Movers eviten cualquier aparición de ese token.
+- **Position signal ($$S_\text{pos}$$)**: contiene información sobre la posición de S1, haciendo que las Name Movers eviten esa posición independientemente del valor del token.
+
+El efecto de ambas señales sobre la diferencia de logits se puede descomponer cuantitativamente:
+
+$$\Delta\text{logit} \approx 2.31 \cdot S_\text{pos} + 0.99 \cdot S_\text{tok}$$
+
+con un error medio de **7%** relativo a la diferencia de logits baseline. La señal de posición (coeficiente 2.31) tiene mayor peso que la señal de token (coeficiente 0.99).
 
 ### Duplicate Token Heads (cabezas 0.1, 3.0; con 0.10 como cabeza menor)
-Activas en posición S2, atienden principalmente al token S1 (la aparición anterior del sujeto duplicado). Escriben información sobre la posición de S1 al residual stream en S2. Sus valores son luego leídos por las S-Inhibition Heads. Verificados en secuencias de tokens aleatorios: cuando existe una aparición previa del token actual, estas cabezas le prestan fuerte atención.
+Activas en posición S2, atienden principalmente al token S1 (la aparición anterior del sujeto duplicado). Escriben información sobre la posición de S1 al residual stream en S2. Sus valores son luego leídos por las S-Inhibition Heads.
 
-Implementan el paso 1 del algoritmo: "identificar tokens duplicados". La composición de valor entre Duplicate Token Heads y S-Inhibition Heads es el mecanismo que permite que la posición de S1 llegue a influir en la atención de las Name Movers.
+**Duplicate score** — métrica de validación: probabilidad media de atención desde el token $$T_i$$ a su aparición previa en la primera mitad de la secuencia. Se valida en secuencias de tokens aleatorios: cuando existe una aparición previa del token actual, ambas cabezas le prestan fuerte atención, y ambas se encuentran entre las **3 cabezas con el mayor duplicate score** entre las 144 cabezas de GPT-2 small.
+
+Implementan el paso 1 del algoritmo: "identificar tokens duplicados". La **composición de valor** (value composition) entre Duplicate Token Heads y S-Inhibition Heads es el mecanismo que permite que la información de posición de S1 llegue a influir en las queries de las Name Movers.
 
 ### Induction Heads (cabezas 5.5, 6.9; con 5.8, 5.9 como menores)
-Realizan el mismo papel que las Duplicate Token Heads pero mediante el mecanismo de inducción clásico (descrito en Olsson et al. 2022): reconocen el patrón [A][B]...[A] y contribuyen a predecir [B]. Activas en S2, atienden al token S1+1 (el token que sigue a S1) mediante composición de clave con las Previous Token Heads. Su output se usa como puntero a S1 y como señal de que S está duplicado. Cabe destacar que en este circuito las Induction Heads realizan una función diferente a su rol "canónico": aquí su output se usa como señal posicional para las S-Inhibition Heads, no directamente como predicción.
+Realizan el mismo papel que las Duplicate Token Heads pero mediante el mecanismo de inducción clásico (descrito en Olsson et al. 2022): reconocen el patrón [A][B]...[A] y contribuyen a predecir [B]. Activas en S2, atienden al token S1+1 (el token que sigue a S1) mediante **composición de clave** (key composition) con las Previous Token Heads. Su output se usa como puntero a S1 y como señal de que S está duplicado.
+
+**Validación cuantitativa**: las cabezas 5.5 y 6.9 se encuentran entre las **5 cabezas con el mayor induction score** (propiedad de prefix-matching: dada la secuencia [A][B]...[A], la probabilidad de atender a B) y entre las **20 cabezas que más contribuyen a la predicción del siguiente token** (copy property). Esto confirma que son induction heads canónicas.
+
+Cabe destacar que en este circuito las Induction Heads realizan una función **diferente a su rol canónico**: aquí su output se usa como señal posicional para las S-Inhibition Heads, no directamente para hacer predicciones en los logits. Es un ejemplo de reutilización de componentes de propósito general para subtareas de un circuito más complejo.
 
 ### Previous Token Heads (cabezas 2.2, 4.11)
 Copian información sobre el token S al token S1+1 (el token inmediatamente siguiente a S1). Las Induction Heads hacen key composition con estas cabezas: al ver S2, buscan en S1+1 la representación de S copiada por las Previous Token Heads, confirmando que S en S2 es el mismo que S en S1.
 
+**Previous token score**: probabilidad media de atención al token anterior (diagonal inferior del patrón de atención). Las cabezas **4.11 y 2.2 son las dos cabezas con el mayor previous token score entre las 144 cabezas de GPT-2 small**, lo que confirma que esta es su función primaria en el modelo.
+
 ### Backup Name Mover Heads (cabezas 9.0, 9.7, 10.1, 10.2, 10.6, 10.10, 11.2, 11.9)
-Descubrimiento inesperado: cuando las Name Mover Heads principales son knockouteadas, el modelo sólo pierde un 5% en diferencia de logits. Estas 8 cabezas asumen el papel de las Name Movers en ausencia de éstas. Muestran comportamiento diverso: 4 se parecen mucho a las Name Movers, 2 atienden equitativamente a IO y S, 1 atiende más a S1 y lo copia, y 1 parece seguir el sujeto de la cláusula. Los autores hipotetizan que este fenómeno de compensación surge del uso de dropout durante el entrenamiento, que optimizó la robustez ante componentes disfuncionales.
+Descubrimiento completamente inesperado: cuando las tres Name Mover Heads principales (9.6, 9.9, 10.0) son knockouteadas por completo, el modelo sólo pierde un **~5%** en diferencia de logits. Estas 8 cabezas asumen el papel de las Name Movers en ausencia de éstas. Se identifican como cabezas con >2% de efecto en diferencia de logits tras el knockout de las Name Movers principales.
+
+**Comportamiento heterogéneo** (diversidad funcional observada):
+- **Cabezas 9.0, 10.1, 10.10, 10.6**: se comportan como Name Movers estándar, atienden al IO y tienen copy score positivo elevado.
+- **Cabezas 10.2, 11.9**: atienden equitativamente a IO y S1, escribiendo información sobre ambos nombres.
+- **Cabeza 11.2**: atiende preferentemente a S1 en lugar del IO.
+- **Cabeza 9.7**: atiende a S2 y escribe en dirección negativa (similar a las Negative Name Mover Heads).
+
+Cada Backup Name Mover Head contribuye al menos **1%** de la diferencia de logits original cuando se elimina, verificando el criterio de minimalidad.
+
+**Hipótesis de origen**: los autores proponen que este fenómeno de redundancia emerge del uso de **dropout durante el entrenamiento**, que fuerza al modelo a optimizar la robustez ante componentes disfuncionales. Es evidencia de que los transformers pueden aprender "backups" implícitos de componentes críticos sin entrenamiento explícito para ello.
 
 ## Ejemplo ilustrativo
 
@@ -183,6 +249,20 @@ Las cabezas 9.9, 9.6 y 10.0, activas en END, escanean todos los tokens anteriore
 - **Criterios de validación formales**: Propone faithfulness, completeness y minimality como métricas cuantitativas para evaluar explicaciones de circuitos, estableciendo estándares de rigor.
 - **Descubrimientos inesperados**: La existencia de Backup Name Mover Heads (redundancia incorporada) y Negative Name Mover Heads revela fenómenos de organización del modelo no anticipados por trabajos teóricos anteriores.
 - **TransformerLens**: El código desarrollado se convierte en la librería de referencia para interpretabilidad mecanística en transformers.
+
+## Limitaciones
+
+El paper reconoce varias limitaciones explícitas del análisis:
+
+**Componentes no comprendidos**: las S-Inhibition Heads atienden a S2 pero los patrones de atención exactos y la mecánica de cómo leen la información de posición no quedan plenamente explicados. El rol de las MLPs (excepto la primera capa) tampoco se analiza por completo: knockoutear cada MLP individualmente tiene poco efecto, pero knockoutear todas las MLPs después de la capa 1 colapsa el rendimiento, lo que sugiere una contribución distribuida que el paper deja como trabajo futuro.
+
+**Completitud parcial**: La búsqueda greedy de incompleteness score encuentra conjuntos $$K$$ que producen incompleteness scores de hasta **3.09** (el 87% de la diferencia de logits baseline), lo que demuestra que el circuito identificado no es completo bajo el criterio más estricto. Hay mecanismos adicionales en el modelo que el circuito no captura.
+
+**Escala**: GPT-2 small tiene 117M parámetros, varios órdenes de magnitud menos que los modelos de estado del arte. El análisis preliminar de GPT-2 medium muestra que no todas las cabezas que influyen directamente en los logits atienden a IO y S, sugiriendo que el comportamiento es más complejo en modelos más grandes.
+
+**Proceso manual no escalable**: el descubrimiento del circuito requirió meses de trabajo intensivo con back-tracing iterativo manual. No hay garantía de que el circuito esté completo (podrían existir clases de cabezas no descubiertas). Los descubrimientos inesperados (Backup Name Movers, Negative Name Movers) surgieron por accidente al knockoutear componentes, no por un proceso sistemático. Conmy et al. (2023) abordan exactamente este cuello de botella con ACDC.
+
+**Tiempo de validación insuficiente**: el paper reconoce que algunas validaciones de las Duplicate Token Heads e Induction Heads se omitieron por restricciones de tiempo.
 
 ## Trabajos previos relacionados
 
