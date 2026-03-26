@@ -110,6 +110,95 @@ $$\mathcal{L}_E(\phi) = \mathcal{L}_d + \lambda \mathcal{L}_r$$
 
 donde $$\phi$$ son los parámetros de las redes editoras (lo que se está entrenando), y $$\lambda$$ balancea las dos pérdidas.
 
+### Arquitectura interna de la red editora (MALMENNet)
+
+La red editora es una implementación directa de la arquitectura **MALMEN** (`MALMENNet` en `nets.py`). No hay una red por capa editada: hay **una red por forma de pesos única**, con slots de embedding por módulo para capturar diferencias entre capas del mismo tamaño.
+
+#### Componentes
+
+**1. RunningMeanStd — normalizador online**
+
+Antes de procesar nada, se normaliza la entrada. Mantiene buffers de conteo, media, varianza y desviación estándar calculados online sobre el stream de ejemplos de entrenamiento. Se aplica al vector concatenado `[keys ; values_grad]`.
+
+**2. MALMENBlock — bloque de transformación residual con cuello de botella de bajo rango**
+
+```
+A  : nn.Parameter  [size × rank]       # proyección a espacio de rango reducido
+B  : nn.Parameter  [rank × size]       # proyección de vuelta
+bias: nn.Parameter [size]
+scale: nn.Embedding [n_modules × size] # escala por módulo (capa editada)
+shift: nn.Embedding [n_modules × size] # desplazamiento por módulo
+```
+
+Donde `size = key_size + value_size` y `rank = 1920` (hiperparámetro).
+
+Paso forward de un MALMENBlock:
+
+$$y \xrightarrow{@A} [\cdot{,}\text{rank}] \xrightarrow{@B} [\cdot{,}\text{size}] \xrightarrow{+\text{bias}} \xrightarrow{\text{ReLU}} \xrightarrow{\times\text{scale}[m]+\text{shift}[m]} z \xrightarrow{+y} \text{salida}$$
+
+La transformación de cuello de botella $$y \mapsto yAB$$ impone la estructura de bajo rango. El `scale` y `shift` indexados por `module_idx` permiten comportamiento distinto por capa dentro de la misma red. Al final se suma la entrada $$y$$ (conexión residual).
+
+**3. MALMENNet — red editora completa**
+
+```
+normalizer : RunningMeanStd
+blocks     : n_blocks=2 MALMENBlocks encadenados
+lr         : nn.Embedding [n_modules × 1]  # learning rate aprendido por módulo
+lamda      : nn.Embedding [n_modules × 1]  # regularización aprendida por módulo
+```
+
+La salida de los bloques es el vector de tamaño `size`, que se parte en dos mitades: `pseudo_keys` (tamaño `key_size`) y `pseudo_values_grad` (tamaño `value_size`).
+
+#### Entradas y salidas
+
+| Tensor | Forma | Origen |
+|---|---|---|
+| `keys` | `(batch, key_size)` | **Forward hook** sobre la capa lineal objetivo: activaciones de entrada al módulo MLP |
+| `values_grad` | `(batch, value_size)` | **Backward hook** sobre la misma capa: gradiente del output respecto a la pérdida |
+| `module_idx` | escalar `int` | Índice que identifica qué capa se está editando |
+| → `pseudo_keys` | `(batch, key_size)` | Primera mitad de la salida |
+| → `pseudo_values_grad` | `(batch, value_size)` | Segunda mitad de la salida |
+
+Las activaciones y gradientes se capturan mediante hooks de PyTorch y se cachean en disco como `.pth`. No se aplica SVD ni descomposición explícita al gradiente antes de entrarlo en la red — la estructura de bajo rango está internalizada en las matrices A y B.
+
+#### Cálculo del delta de pesos (predict_param_shifts)
+
+La actualización de pesos no es un paso de descenso de gradiente sobre el LM: es una **resolución de sistema lineal en forma cerrada** (un único paso Newton):
+
+$$\text{mat} = K^\top K + \lambda I \qquad \text{(matriz de Gram regularizada, } [k \times k]\text{)}$$
+
+$$\text{value\_diffs} = -\alpha \cdot (K \odot \tilde{K})_{j} \cdot \tilde{V}_j \qquad \text{(corrección por muestra)}$$
+
+$$\Delta W = \text{solve}(\text{mat},\; K^\top \cdot \text{value\_diffs}) \qquad [k \times v]$$
+
+Donde $$K$$ son las `keys`, $$\tilde{K}$$ las `pseudo_keys`, $$\tilde{V}$$ las `pseudo_values_grad`, $$\alpha$$ el `lr` aprendido y $$\lambda$$ la `lamda` aprendida para ese módulo. El resultado $$\Delta W$$ se suma directamente a `module.weight.data`.
+
+#### Dónde actúa
+
+Solo se instalan hooks y se computan actualizaciones en los módulos listados en `config.model.edit_modules`, que corresponden a las **capas de salida de las MLPs** (`c_proj` en GPT-2, `down_proj` en Llama/Mistral) de los últimos bloques del transformer. La atención no se toca.
+
+#### Entrenamiento de la red editora
+
+| Parámetro | Valor |
+|---|---|
+| Optimizador | Adam sobre `net.parameters()` |
+| `meta_lr` | 1e-5 |
+| `n_epochs` | 100 (early stopping con paciencia 5) |
+| `batch_size` | 128 |
+| `max_grad_norm` | 1 (gradient clipping) |
+| `rank` (cuello de botella A×B) | 1920 |
+| `n_blocks` | 2 |
+| `loc_coef` (peso de $$\mathcal{L}_r$$) | 4.0 |
+
+El bucle de entrenamiento tiene dos fases por batch:
+
+1. **Fase caché**: forward + backward del LM sobre los ejemplos del batch → se recogen `keys` y `values_grad` via hooks → se guardan en disco.
+2. **Fase de edición**: la red editora predice los pseudo-keys/values → se calcula $$\Delta W$$ → se aplica temporalmente al LM → se computa `edit_loss + loc_coef * retention_loss` → se retropropaga por la red editora (no por el LM) → se actualiza `net` con Adam.
+
+Lo que se entrena son **los parámetros de la red editora** ($$\phi$$), no los del LM. El LM se modifica temporalmente durante el forward de edición para calcular la pérdida, pero sus pesos se restauran antes de la siguiente iteración.
+
+En inferencia (test), la red editora se aplica una sola vez: se calculan los $$\Delta W$$ para cada capa y se suman permanentemente a los pesos del modelo.
+
 ### Qué capas se editan y por qué
 
 Bias tracing (ver más abajo) revela que el sesgo reside principalmente en las **MLPs de las capas inferiores**. Sin embargo, editar las capas inferiores daña más las capacidades generales. El compromiso adoptado es **editar la capa de salida de la MLP en los últimos bloques** del transformer:
